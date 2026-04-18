@@ -685,7 +685,7 @@
           </div>
         </div>
         <div class="reveal">
-          <form class="contact-form" action="https://formspree.io/f/xkokbjby" method="POST">
+          <form class="contact-form" id="contact-form" action="https://formspree.io/f/xkokbjby" method="POST">
             <div class="form-row">
               <div class="form-group"><label class="form-label" for="first-name">First Name</label><input id="first-name" name="first_name" type="text" placeholder="First name" required /></div>
               <div class="form-group"><label class="form-label" for="last-name">Last Name</label><input id="last-name" name="last_name" type="text" placeholder="Last name" required /></div>
@@ -705,7 +705,13 @@
               </select>
             </div>
             <div class="form-group"><label class="form-label" for="message">Message</label><textarea id="message" name="message" placeholder="Your message…" required></textarea></div>
-            <button type="submit" class="btn btn-blue" style="align-self:flex-start;">Send Message →</button>
+            <button type="submit" id="contact-submit" class="btn btn-blue" style="align-self:flex-start;">Send Message →</button>
+            <div id="contact-success" style="display:none; margin-top:1rem; padding:1rem 1.25rem; background:rgba(26,61,143,0.08); border-left:3px solid var(--blue); font-size:0.9rem; color:var(--rtext);">
+              Thanks for your message — we'll get back to you as soon as we can.
+            </div>
+            <div id="contact-error" style="display:none; margin-top:1rem; padding:1rem 1.25rem; background:rgba(192,32,32,0.06); border-left:3px solid var(--red); font-size:0.9rem; color:#c02020;">
+              Something went wrong. Please try again or email us at <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>.
+            </div>
           </form>
         </div>
       </div>
@@ -811,6 +817,40 @@
       sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
       navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${cur}`));
     }, { passive: true });
+
+    // Contact form — AJAX submission via Formspree
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('contact-submit');
+        const success = document.getElementById('contact-success');
+        const error = document.getElementById('contact-error');
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+        success.style.display = 'none';
+        error.style.display = 'none';
+        try {
+          const res = await fetch(contactForm.action, {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            contactForm.reset();
+            success.style.display = 'block';
+            btn.textContent = 'Send Message →';
+            btn.disabled = false;
+          } else {
+            throw new Error('Server error');
+          }
+        } catch {
+          error.style.display = 'block';
+          btn.textContent = 'Send Message →';
+          btn.disabled = false;
+        }
+      });
+    }
   </script>
 </body>
 </html>
