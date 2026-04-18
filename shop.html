@@ -184,7 +184,9 @@
     @media (max-width: 860px) { .how-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 500px) { .how-grid { grid-template-columns: 1fr; } }
 
-    /* FOOTER */
+    /* TOAST */
+    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(120%); background: #1e8a4a; color: #fff; font-family: var(--fd); font-size: 0.95rem; letter-spacing: 0.08em; padding: 0.8rem 1.75rem; z-index: 3000; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); white-space: nowrap; pointer-events: none; }
+    .toast.show { transform: translateX(-50%) translateY(0); }
     footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
     .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }
     .footer-logo img { height: 44px; width: auto; display: block; margin-bottom: 0.75rem; }
@@ -226,6 +228,8 @@
     </ul>
   </nav>
 
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
   <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="kicker">Official Kit</div>
@@ -239,14 +243,14 @@
   <div class="info-banners">
     <div class="container">
       <div class="info-banner reveal">
-        <div class="info-banner-icon">📏</div>
+        <div class="info-banner-icon" aria-hidden="true">📏</div>
         <div>
           <h4>Jersey Sizing Advice</h4>
           <p>We recommend sizing up to account for body armour worn underneath. If your rider is between sizes, go larger.</p>
         </div>
       </div>
       <div class="info-banner reveal">
-        <div class="info-banner-icon">📦</div>
+        <div class="info-banner-icon" aria-hidden="true">📦</div>
         <div>
           <h4>Monthly Bulk Orders</h4>
           <p>All orders are placed with our supplier once a month. Payment is taken at the time of ordering to secure your place in the next batch.</p>
@@ -349,7 +353,7 @@
   <section id="success-section">
     <div class="container">
       <div class="success-box">
-        <div class="icon">✅</div>
+        <div class="icon" aria-hidden="true">✅</div>
         <h2>ORDER CONFIRMED!</h2>
         <p>Thanks for your order. You'll receive a confirmation email shortly. Your items will be included in the next monthly bulk order — we'll be in touch when they're ready to collect.</p>
       </div>
@@ -427,6 +431,7 @@
           <li><a href="index.html#sessions">Club Sessions</a></li>
           <li><a href="index.html#join">Join the Club</a></li>
           <li><a href="index.html#coaches">Our Coaches</a></li>
+          <li><a href="coaching.html">Coaching Pathway</a></li>
           <li><a href="index.html#riders">The Riders</a></li>
         </ul>
       </div>
@@ -479,7 +484,7 @@
             <button class="size-btn" onclick="selectSize('youth','11-12',this)">11–12</button>
             <button class="size-btn" onclick="selectSize('youth','13-14',this)">13–14</button>
           </div>
-          <div class="field-note highlight">📏 Size up to account for body armour worn underneath.</div>
+          <div class="field-note highlight"><span aria-hidden="true">📏</span> Size up to account for body armour worn underneath.</div>
         </div>
         <div class="field">
           <label>Rider Name — printed on back <span style="color:var(--red)">*</span></label>
@@ -522,7 +527,7 @@
             <button class="size-btn" onclick="selectSize('adult','XL',this)">XL</button>
             <button class="size-btn" onclick="selectSize('adult','XXL',this)">XXL</button>
           </div>
-          <div class="field-note highlight">📏 Size up to account for body armour worn underneath.</div>
+          <div class="field-note highlight"><span aria-hidden="true">📏</span> Size up to account for body armour worn underneath.</div>
         </div>
         <div class="field">
           <label>Rider Name — printed on back <span style="color:var(--red)">*</span></label>
@@ -681,6 +686,7 @@
       }
       closeModal(type);
       renderBasket();
+      showToast('Added to basket ↓');
       setTimeout(() => document.getElementById('order-section').scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
     }
 
@@ -706,6 +712,16 @@
       document.getElementById('basket-total-amount').textContent = '£' + basket.reduce((s, i) => s + i.price, 0);
     }
     function removeItem(id) { basket = basket.filter(i => i.id !== id); renderBasket(); }
+
+    // TOAST
+    let toastTimer;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+    }
 
     // CHECKOUT
     async function startCheckout() {
