@@ -685,7 +685,11 @@
           </div>
         </div>
         <div class="reveal">
-          <form class="contact-form" id="contact-form" action="https://formspree.io/f/xkokbjby" method="POST">
+          <form class="contact-form" id="contact-form">
+            <input type="hidden" name="access_key" value="bb2db04e-8482-4dfa-b4fb-bd3d6afdbf6d" />
+            <input type="hidden" name="subject" value="New message — Merseyside BMX Club website" />
+            <input type="hidden" name="to" value="merseysidebmx@gmail.com" />
+            <input type="hidden" name="from_name" value="Merseyside BMX Website" />
             <div class="form-row">
               <div class="form-group"><label class="form-label" for="first-name">First Name</label><input id="first-name" name="first_name" type="text" placeholder="First name" required /></div>
               <div class="form-group"><label class="form-label" for="last-name">Last Name</label><input id="last-name" name="last_name" type="text" placeholder="Last name" required /></div>
@@ -818,7 +822,7 @@
       navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${cur}`));
     }, { passive: true });
 
-    // Contact form — AJAX submission via Formspree
+    // Contact form — AJAX submission via Web3Forms
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
       contactForm.addEventListener('submit', async function(e) {
@@ -831,24 +835,23 @@
         success.style.display = 'none';
         error.style.display = 'none';
         try {
-          const res = await fetch(contactForm.action, {
+          const res = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
             body: new FormData(contactForm),
             headers: { 'Accept': 'application/json' }
           });
-          if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
             contactForm.reset();
             success.style.display = 'block';
-            btn.textContent = 'Send Message →';
-            btn.disabled = false;
           } else {
-            throw new Error('Server error');
+            throw new Error('Submission failed');
           }
         } catch {
           error.style.display = 'block';
-          btn.textContent = 'Send Message →';
-          btn.disabled = false;
         }
+        btn.textContent = 'Send Message →';
+        btn.disabled = false;
       });
     }
   </script>
