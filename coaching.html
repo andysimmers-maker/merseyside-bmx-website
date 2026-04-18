@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coaching Pathway — Merseyside BMX Club</title>
+  <meta name="description" content="Merseyside BMX Club coaching pathway — understand the levels, how riders progress, and what to expect at each stage." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #d42b2b; --red2: #b52020;
+      --black: #0f0f0f; --dark: #191919; --mid: #2a2a2a;
+      --border: #383838; --text: #e2e2e2; --muted: #aaa;
+      --blue: #1a3d8f; --blue2: #0d2660;
+      --white: #f6f6f6; --offwhite: #ececec;
+      --rtext: #181818; --rmuted: #444;
+      --fd: 'Bebas Neue', sans-serif; --fb: 'DM Sans', sans-serif;
+      --mw: 1100px; --pad: 5vw;
+      --l2: #1a3d8f;
+      --l3: #c07a00;
+      --l4: #d42b2b;
+      --nr: #2a7a4a;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--fb); font-size: 16px; line-height: 1.65; overflow-x: hidden; background: var(--black); color: var(--text); }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 60px; background: var(--black); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 var(--pad); gap: 1rem; }
+    .nav-stripe { width: 4px; height: 26px; flex-shrink: 0; background: linear-gradient(to bottom, var(--red) 50%, var(--blue) 50%); }
+    .nav-logo img { height: 48px; width: auto; display: block; }
+    .nav-links { display: flex; list-style: none; margin-left: auto; }
+    .nav-links a { display: flex; align-items: center; height: 60px; padding: 0 0.85rem; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.06em; color: var(--text); text-decoration: none; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+    .nav-links a:hover { color: #fff; border-bottom-color: var(--red); }
+    .nav-links a.nav-shop { color: var(--red); background: transparent; border: 1px solid var(--red); border-bottom: 1px solid var(--red); padding: 0 1.1rem; }
+    .nav-links a.nav-shop:hover { background: var(--red); color: #fff; }
+    .nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 0; flex-direction: column; gap: 5px; margin-left: auto; }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: #fff; }
+    @media (max-width: 900px) {
+      .nav-links { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--dark); flex-direction: column; border-top: 1px solid var(--border); }
+      .nav-links.open { display: flex; }
+      .nav-links a { height: 50px; border-bottom: 1px solid var(--border); padding: 0 1.5rem; }
+      .nav-links a.nav-shop { background: none; color: var(--red); border: none; border-bottom: 1px solid var(--border); }
+      .nav-burger { display: flex; }
+    }
+
+    /* PAGE HEADER */
+    .page-header { padding: 7rem var(--pad) 3.5rem; background: var(--dark); border-bottom: 3px solid var(--red); }
+    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: var(--red); margin-bottom: 0.4rem; }
+    .page-header h1 { font-family: var(--fd); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 0.95; color: #fff; letter-spacing: 0.02em; }
+    .page-header p { font-size: 0.95rem; color: var(--muted); max-width: 600px; margin-top: 0.9rem; line-height: 1.75; }
+
+    /* DUAL DIVIDER */
+    .dd { height: 5px; background: linear-gradient(to right, var(--red) 25%, var(--black) 25% 50%, var(--blue) 50% 75%, #e0e0e0 75%); }
+
+    /* SHARED */
+    .container { max-width: var(--mw); margin: 0 auto; }
+    .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; margin-bottom: 0.4rem; }
+    .sec-title { font-family: var(--fd); font-size: clamp(2rem, 4vw, 3.2rem); line-height: 0.95; letter-spacing: 0.02em; }
+    .btn { display: inline-block; font-family: var(--fd); font-size: 1rem; letter-spacing: 0.08em; text-decoration: none; padding: 0.75rem 2rem; cursor: pointer; border: none; transition: all 0.2s; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red2); transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { color: #fff; border-color: #666; }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── VIEW TOGGLE ── */
+    .view-toggle-bar { background: var(--dark); border-bottom: 1px solid var(--border); padding: 1rem var(--pad); display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .view-toggle-bar span { font-size: 0.82rem; color: var(--muted); font-family: var(--fd); letter-spacing: 0.1em; }
+    .toggle-btns { display: flex; gap: 1px; background: var(--border); }
+    .toggle-btn { font-family: var(--fd); font-size: 0.82rem; letter-spacing: 0.1em; padding: 0.5rem 1.25rem; border: none; cursor: pointer; transition: all 0.2s; background: var(--mid); color: var(--muted); }
+    .toggle-btn.active { background: var(--red); color: #fff; }
+    .toggle-btn:hover:not(.active) { background: #333; color: #fff; }
+
+    /* ── INTRO ── */
+    #intro { background: var(--dark); padding: 4rem var(--pad); }
+    .intro-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); margin-top: 2.5rem; }
+    .intro-card { background: var(--black); padding: 1.75rem; }
+    .intro-card-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .intro-card h3 { font-family: var(--fd); font-size: 1.1rem; letter-spacing: 0.06em; color: #fff; margin-bottom: 0.5rem; }
+    .intro-card p { font-size: 0.88rem; color: #999; line-height: 1.7; }
+    @media (max-width: 680px) { .intro-grid { grid-template-columns: 1fr; } }
+
+    /* ── PATHWAY LEVELS ── */
+    #pathway { background: var(--black); padding: 5rem var(--pad); border-top: 3px solid var(--red); }
+    #pathway .kicker { color: var(--red); }
+    #pathway .sec-title { color: #fff; }
+    .pathway-intro { font-size: 0.95rem; color: #999; max-width: 640px; margin-top: 0.9rem; line-height: 1.75; }
+
+    .levels-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-top: 3rem; }
+
+    .level-card { background: var(--dark); display: flex; flex-direction: column; border-top: 4px solid transparent; transition: background 0.2s; }
+    .level-card.l2 { border-top-color: var(--l2); }
+    .level-card.l3 { border-top-color: var(--l3); }
+    .level-card.l4 { border-top-color: var(--l4); }
+    .level-card.nr { border-top-color: var(--nr); }
+    .level-card:hover { background: var(--mid); }
+
+    .level-header { padding: 1.75rem 1.75rem 1.25rem; border-bottom: 1px solid var(--border); }
+    .level-badge { display: inline-block; font-family: var(--fd); font-size: 0.72rem; letter-spacing: 0.2em; padding: 0.2rem 0.6rem; margin-bottom: 0.75rem; }
+    .level-card.l2 .level-badge { background: rgba(26,61,143,0.15); color: #7a9de8; }
+    .level-card.l3 .level-badge { background: rgba(192,122,0,0.15); color: #e8a840; }
+    .level-card.l4 .level-badge { background: rgba(212,43,43,0.15); color: #e87a7a; }
+    .level-card.nr .level-badge { background: rgba(42,122,74,0.15); color: #6abf8a; }
+    .level-title { font-family: var(--fd); font-size: 1.6rem; letter-spacing: 0.04em; color: #fff; line-height: 1; }
+    .level-subtitle { font-size: 0.82rem; color: var(--muted); margin-top: 0.3rem; }
+
+    .level-body { padding: 1.5rem 1.75rem; flex: 1; display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .level-section h4 { font-family: var(--fd); font-size: 0.75rem; letter-spacing: 0.18em; margin-bottom: 0.6rem; }
+    .level-card.l2 .level-section h4 { color: #7a9de8; }
+    .level-card.l3 .level-section h4 { color: #e8a840; }
+    .level-card.l4 .level-section h4 { color: #e87a7a; }
+    .level-card.nr .level-section h4 { color: #6abf8a; }
+
+    .level-section p { font-size: 0.88rem; color: #999; line-height: 1.7; }
+
+    .level-list { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+    .level-list li { font-size: 0.85rem; color: #aaa; display: flex; gap: 0.6rem; line-height: 1.5; }
+    .level-list li::before { content: '→'; flex-shrink: 0; }
+    .level-card.l2 .level-list li::before { color: var(--l2); }
+    .level-card.l3 .level-list li::before { color: var(--l3); }
+    .level-card.l4 .level-list li::before { color: var(--l4); }
+    .level-card.nr .level-list li::before { color: var(--nr); }
+
+    @media (max-width: 680px) { .levels-grid { grid-template-columns: 1fr; } }
+
+    /* ── PROGRESSION ── */
+    #progression { background: var(--dark); padding: 5rem var(--pad); border-top: 1px solid var(--border); }
+    #progression .kicker { color: var(--blue); }
+    #progression .sec-title { color: #fff; }
+
+    .progression-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-top: 3rem; }
+    .prog-step { background: var(--black); padding: 2rem; }
+    .prog-from-to { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .prog-level-tag { font-family: var(--fd); font-size: 0.85rem; letter-spacing: 0.1em; padding: 0.3rem 0.75rem; }
+    .prog-arrow { color: #444; font-size: 1.2rem; }
+    .tag-l2 { background: rgba(26,61,143,0.2); color: #7a9de8; }
+    .tag-l3 { background: rgba(192,122,0,0.2); color: #e8a840; }
+    .tag-l4 { background: rgba(212,43,43,0.2); color: #e87a7a; }
+
+    .prog-criteria { display: flex; flex-direction: column; gap: 0.85rem; }
+    .prog-criterion { display: flex; gap: 0.75rem; align-items: flex-start; }
+    .prog-icon { width: 20px; height: 20px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; margin-top: 2px; }
+    .prog-icon.required { background: rgba(26,61,143,0.3); color: #7a9de8; }
+    .prog-criterion-text { font-size: 0.85rem; color: #aaa; line-height: 1.5; }
+    .prog-criterion-text strong { color: #ddd; display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.1rem; }
+
+    @media (max-width: 680px) { .progression-steps { grid-template-columns: 1fr; } }
+
+    /* ── REVIEWS ── */
+    #reviews { background: var(--black); padding: 5rem var(--pad); border-top: 1px solid var(--border); }
+    #reviews .kicker { color: var(--red); }
+    #reviews .sec-title { color: #fff; }
+
+    .reviews-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; align-items: start; }
+    .reviews-intro { font-size: 0.95rem; color: #999; line-height: 1.75; }
+
+    .pillars { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 1.5rem; }
+    .pillar { background: var(--dark); padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem; }
+    .pillar-pct { font-family: var(--fd); font-size: 1.4rem; color: var(--red); opacity: 0.7; width: 52px; flex-shrink: 0; }
+    .pillar-name { font-family: var(--fd); font-size: 0.95rem; letter-spacing: 0.06em; color: #fff; }
+    .pillar-desc { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+
+    .cycle-box { background: var(--dark); border: 1px solid var(--border); border-left: 3px solid var(--blue); padding: 1.75rem; }
+    .cycle-box h3 { font-family: var(--fd); font-size: 1.1rem; letter-spacing: 0.06em; color: #fff; margin-bottom: 1rem; }
+    .cycle-weeks { display: flex; flex-direction: column; gap: 0.5rem; }
+    .cycle-week { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.85rem; }
+    .week-label { font-family: var(--fd); font-size: 0.75rem; letter-spacing: 0.1em; color: var(--blue); width: 60px; flex-shrink: 0; padding-top: 0.1rem; }
+    .week-desc { color: #aaa; line-height: 1.5; }
+
+    .review-note { background: var(--mid); border-left: 3px solid var(--red); padding: 1.25rem 1.5rem; margin-top: 1.5rem; font-size: 0.85rem; color: #999; line-height: 1.6; }
+    .review-note strong { color: var(--text); }
+
+    @media (max-width: 720px) { .reviews-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    /* ── KID VIEW OVERRIDES ── */
+    body.kid-view .page-header p { font-size: 1rem; }
+    body.kid-view .level-title { font-size: 1.8rem; }
+    body.kid-view .level-section p,
+    body.kid-view .level-list li,
+    body.kid-view .prog-criterion-text,
+    body.kid-view .week-desc,
+    body.kid-view .reviews-intro { font-size: 0.95rem; color: #bbb; }
+    body.kid-view .intro-card p { font-size: 0.95rem; color: #bbb; }
+
+    /* FOOTER */
+    footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
+    .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }
+    .footer-logo img { height: 44px; width: auto; display: block; margin-bottom: 0.75rem; }
+    .footer-stripe { display: flex; gap: 4px; margin-bottom: 0.75rem; }
+    .footer-stripe span { height: 3px; width: 22px; border-radius: 1px; }
+    .footer-brand p { font-size: 0.82rem; color: #aaa; line-height: 1.6; margin-bottom: 0.35rem; }
+    .footer-brand a { color: #aaa; text-decoration: none; font-size: 0.82rem; }
+    .footer-brand a:hover { color: var(--red); }
+    .footer-social { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+    .footer-social a { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--mid); border: 1px solid var(--border); color: var(--text); text-decoration: none; transition: all 0.2s; }
+    .footer-social a:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    .footer-col h4 { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.2em; color: var(--red); margin-bottom: 0.75rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.35rem; }
+    .footer-col ul li a { font-size: 0.82rem; color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { max-width: var(--mw); margin: 2rem auto 0; padding-top: 1.25rem; border-top: 1px solid var(--border); font-size: 0.75rem; color: #888; }
+    @media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-stripe"></div>
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="Merseyside BMX Club" /></a>
+    <button class="nav-burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#sessions">Sessions</a></li>
+      <li><a href="shop.html" class="nav-shop">Shop</a></li>
+      <li><a href="index.html#join">Join</a></li>
+      <li><a href="index.html#coaches">Coaches</a></li>
+      <li><a href="index.html#riders">Riders</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="kicker">Development</div>
+    <h1>COACHING PATHWAY</h1>
+    <p id="header-desc">Every rider is different. Our pathway is designed to support everyone — whether you're just finding your feet on the track or chasing a national title. Progress is about development, not just speed.</p>
+  </div>
+
+  <div class="dd"></div>
+
+  <!-- VIEW TOGGLE -->
+  <div class="view-toggle-bar">
+    <span>VIEWING AS</span>
+    <div class="toggle-btns">
+      <button class="toggle-btn active" id="btn-parent" onclick="setView('parent')">Parent</button>
+      <button class="toggle-btn" id="btn-rider" onclick="setView('rider')">Rider</button>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section id="intro">
+    <div class="container">
+      <div class="intro-grid reveal">
+        <div class="intro-card">
+          <div class="intro-card-icon" aria-hidden="true">🏁</div>
+          <h3 id="ic1-title">DEVELOPMENT FIRST</h3>
+          <p id="ic1-desc">We focus on long-term rider development, not short-term results. Every rider progresses at their own pace — what matters is improvement, effort and enjoyment.</p>
+        </div>
+        <div class="intro-card">
+          <div class="intro-card-icon" aria-hidden="true">🚲</div>
+          <h3 id="ic2-title">RACING ISN'T EVERYTHING</h3>
+          <p id="ic2-desc">Not every rider needs to race to progress and succeed. We have a clear non-racing pathway for riders who want to develop skills and confidence without the pressure of competition.</p>
+        </div>
+        <div class="intro-card">
+          <div class="intro-card-icon" aria-hidden="true">⭐</div>
+          <h3 id="ic3-title">MORE THAN SPEED</h3>
+          <p id="ic3-desc">Attitude, effort and coachability matter just as much as lap times. Riders who work hard, listen well and support their teammates will always progress here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dd"></div>
+
+  <!-- PATHWAY LEVELS -->
+  <section id="pathway">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">The Levels</div>
+        <h2 class="sec-title">THE PATHWAY</h2>
+        <p class="pathway-intro" id="pathway-intro">Four levels, each with a clear purpose. Riders move through them based on skill, race readiness and attitude — not age or how long they've been at the club.</p>
+      </div>
+
+      <div class="levels-grid reveal">
+
+        <!-- LEVEL 2 -->
+        <div class="level-card l2">
+          <div class="level-header">
+            <div class="level-badge">LEVEL 2</div>
+            <div class="level-title">CLUB DEVELOPMENT</div>
+            <div class="level-subtitle" id="l2-sub">Building foundations and confidence</div>
+          </div>
+          <div class="level-body">
+            <div class="level-section">
+              <h4>WHO THIS IS FOR</h4>
+              <p id="l2-who">New and developing riders finding their feet. Club racers, first-time or occasional racers, and riders who aren't yet ready for regional competition.</p>
+            </div>
+            <div class="level-section">
+              <h4>WHAT YOU'LL WORK ON</h4>
+              <ul class="level-list" id="l2-focus">
+                <li>Gate start basics</li>
+                <li>Cornering, pumping and pedalling</li>
+                <li>Track awareness and riding safely with others</li>
+                <li>Building confidence across the full track</li>
+              </ul>
+            </div>
+            <div class="level-section">
+              <h4>WHAT SUCCESS LOOKS LIKE</h4>
+              <p id="l2-success">Consistent participation, growing confidence, clear skill improvement, and competing in at least one club race series.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEVEL 3 -->
+        <div class="level-card l3">
+          <div class="level-header">
+            <div class="level-badge">LEVEL 3</div>
+            <div class="level-title">REGIONAL PREPARATION</div>
+            <div class="level-subtitle" id="l3-sub">Getting race-ready at regional level</div>
+          </div>
+          <div class="level-body">
+            <div class="level-section">
+              <h4>WHO THIS IS FOR</h4>
+              <p id="l3-who">Strong club racers confident at Expert level who are ready to take on regional competition, or early-stage regional riders building their race experience.</p>
+            </div>
+            <div class="level-section">
+              <h4>WHAT YOU'LL WORK ON</h4>
+              <ul class="level-list" id="l3-focus">
+                <li>Race craft and positioning</li>
+                <li>Riding under pressure with other riders</li>
+                <li>Consistency at race speed</li>
+                <li>Tactical awareness on the track</li>
+              </ul>
+            </div>
+            <div class="level-section">
+              <h4>WHAT SUCCESS LOOKS LIKE</h4>
+              <p id="l3-success">Consistent race execution at regional level, competing in at least 5 regional events (Novice or Expert).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEVEL 4 -->
+        <div class="level-card l4">
+          <div class="level-header">
+            <div class="level-badge">LEVEL 4</div>
+            <div class="level-title">NATIONAL PATHWAY</div>
+            <div class="level-subtitle" id="l4-sub">Competing and developing at the highest level</div>
+          </div>
+          <div class="level-body">
+            <div class="level-section">
+              <h4>WHO THIS IS FOR</h4>
+              <p id="l4-who">Riders consistently performing at regional level with the potential or ambition to compete nationally. This level also includes development riders who show clear potential even if they haven't yet hit all performance benchmarks.</p>
+            </div>
+            <div class="level-section">
+              <h4>WHAT YOU'LL WORK ON</h4>
+              <ul class="level-list" id="l4-focus">
+                <li>Advanced technical execution under pressure</li>
+                <li>Gate starts and first straight dominance</li>
+                <li>Race tactics and in-race decision making</li>
+                <li>Physical conditioning and mental preparation</li>
+              </ul>
+            </div>
+            <div class="level-section">
+              <h4>WHAT SUCCESS LOOKS LIKE</h4>
+              <p id="l4-success">Competing at national level with consistency. Progress measured by improvement as much as by results — development riders are supported with individual focus areas.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- NON-RACING -->
+        <div class="level-card nr">
+          <div class="level-header">
+            <div class="level-badge">NON-RACING PATHWAY</div>
+            <div class="level-title">DEVELOPMENT PATHWAY</div>
+            <div class="level-subtitle" id="nr-sub">Skills, confidence and enjoyment — no racing required</div>
+          </div>
+          <div class="level-body">
+            <div class="level-section">
+              <h4>WHO THIS IS FOR</h4>
+              <p id="nr-who">Riders who aren't ready to race yet, or who simply choose not to. This is a fully supported pathway — not a waiting room. Riders here are progressing, developing and an important part of the club.</p>
+            </div>
+            <div class="level-section">
+              <h4>WHAT YOU'LL WORK ON</h4>
+              <ul class="level-list" id="nr-focus">
+                <li>Skill development at your own pace</li>
+                <li>Building confidence on the track</li>
+                <li>Enjoyment and engagement with the sport</li>
+                <li>Transitioning to Level 2 when you're ready</li>
+              </ul>
+            </div>
+            <div class="level-section">
+              <h4>WHAT SUCCESS LOOKS LIKE</h4>
+              <p id="nr-success">Growth in skills and confidence. There's no pressure to race — riders move into the racing pathway when they feel ready, completely at their own pace.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="dd"></div>
+
+  <!-- PROGRESSION CRITERIA -->
+  <section id="progression">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">Moving Up</div>
+        <h2 class="sec-title">HOW YOU PROGRESS</h2>
+        <p style="font-size:0.95rem; color:#999; max-width:640px; margin-top:0.9rem; line-height:1.75;" id="prog-intro">Progression isn't automatic. Coaches assess riders across several areas before recommending a move to the next level. It's about being ready — not just being fast.</p>
+      </div>
+
+      <div class="progression-steps reveal">
+
+        <!-- L2 → L3 -->
+        <div class="prog-step">
+          <div class="prog-from-to">
+            <span class="prog-level-tag tag-l2">LEVEL 2</span>
+            <span class="prog-arrow">→</span>
+            <span class="prog-level-tag tag-l3">LEVEL 3</span>
+          </div>
+          <div class="prog-criteria">
+            <div class="prog-criterion">
+              <div class="prog-icon required">✓</div>
+              <div class="prog-criterion-text">
+                <strong>SKILL COMPETENCY</strong>
+                Confident on the full track. Controlled cornering and pedalling. Safe and consistent riding with a group.
+              </div>
+            </div>
+            <div class="prog-criterion">
+              <div class="prog-icon required">✓</div>
+              <div class="prog-criterion-text">
+                <strong>RACE READINESS</strong>
+                Can complete a full lap under pressure. Comfortable riding alongside multiple riders. Basic gate start execution.
+              </div>
+            </div>
+            <div class="prog-criterion">
+              <div class="prog-icon required">✓</div>
+              <div class="prog-criterion-text">
+                <strong>COACH ASSESSMENT</strong>
+                Positive attitude and effort. Receptive to coaching. Consistent performance across sessions.
+              </div>
+            </div>
+            <div class="prog-criterion">
+              <div class="prog-icon required">✓</div>
+              <div class="prog-criterion-text">
+                <strong>KIT REQUIREMENTS</strong>
+                Own race BMX in good condition. Full-face helmet and body armour. Race jersey, pants or shorts. Transponder for timing.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- L3 → L4 -->
+        <div class="prog-step">
+          <div class="prog-from-to">
+            <span class="prog-level-tag tag-l3">LEVEL 3</span>
+            <span class="prog-arrow">→</span>
+            <span class="prog-level-tag tag-l4">LEVEL 4</span>
+          </div>
+          <div class="prog-criteria">
+            <div class="prog-criterion">
+              <div class="prog-icon required">✓</div>
+              <div class="prog-criterion-text">
+                <strong>SKILL COMPETENCY</strong>
+                Maintain speed through corners. Manual through rollers consistently. Jump confidently under pressure. Controlled, effective gate starts.
+              </div>
+            </div>
+            <div class="prog-criterion">
+              <div class="prog-icon required">✓</div>
+              <div class="prog-criterion-text">
+                <strong>RACE PERFORMANCE</strong>
+                Consistent top-half finishes. Strong first straight positioning. Ability to ride effectively in a pack.
+              </div>
+            </div>
+            <div class="prog-criterion">
+              <div class="prog-icon required">✓</div>
+              <div class="prog-criterion-text">
+                <strong>COACH ASSESSMENT</strong>
+                Attitude, effort and coachability. Consistent across sessions. Readiness for higher intensity coaching and expectations.
+              </div>
+            </div>
+            <div class="prog-criterion">
+              <div class="prog-icon required">✓</div>
+              <div class="prog-criterion-text">
+                <strong>PERFORMANCE BENCHMARKS</strong>
+                Assessed against sprint, start, lap time and skill benchmarks. Minimum 4 of 6 benchmarks required — improvement is tracked alongside absolute scores.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="dd"></div>
+
+  <!-- REVIEWS & ASSESSMENT -->
+  <section id="reviews">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">Assessment</div>
+        <h2 class="sec-title">HOW WE ASSESS RIDERS</h2>
+      </div>
+
+      <div class="reviews-grid reveal">
+        <div>
+          <p class="reviews-intro" id="reviews-intro">Every rider is reviewed every 6 weeks. We look at four equal areas — it's not just about how fast you are. A rider who works hard, listens and supports others will always progress.</p>
+
+          <div class="pillars">
+            <div class="pillar">
+              <div class="pillar-pct">25%</div>
+              <div>
+                <div class="pillar-name">PHYSICAL</div>
+                <div class="pillar-desc" id="p1-desc">Sprint speed and fitness</div>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-pct">25%</div>
+              <div>
+                <div class="pillar-name">TECHNICAL</div>
+                <div class="pillar-desc" id="p2-desc">Manuals, jumps and cornering</div>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-pct">25%</div>
+              <div>
+                <div class="pillar-name">TACTICAL</div>
+                <div class="pillar-desc" id="p3-desc">Starts, first straight position, race decisions</div>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-pct">25%</div>
+              <div>
+                <div class="pillar-name">BEHAVIOUR & MINDSET</div>
+                <div class="pillar-desc" id="p4-desc">Effort, attitude, listening and team behaviour</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-note" id="review-note">
+            <strong>Important:</strong> We track improvement as well as raw scores. A rider who improves consistently will always be recognised, even if they're not the fastest in the group.
+          </div>
+        </div>
+
+        <div>
+          <div class="cycle-box">
+            <h3>THE 6-WEEK CYCLE</h3>
+            <div class="cycle-weeks">
+              <div class="cycle-week">
+                <div class="week-label">WKS 1–4</div>
+                <div class="week-desc" id="wk14-desc">Development — skill drills, race simulations and strength work appropriate to each level.</div>
+              </div>
+              <div class="cycle-week">
+                <div class="week-label">WEEK 5</div>
+                <div class="week-desc" id="wk5-desc">Competitive simulation — full gate racing, timed motos and head-to-head racing.</div>
+              </div>
+              <div class="cycle-week">
+                <div class="week-label">WEEK 6</div>
+                <div class="week-desc" id="wk6-desc">Testing week — sprint times, start times, lap times and skill tests. Results feed into the rider review.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-note" style="margin-top:1rem; border-left-color: var(--blue);" id="contact-note">
+            <strong>Questions about your rider's progress?</strong> Speak to their coach after a session, or <a href="index.html#contact" style="color:var(--blue);">get in touch</a> and we'll be happy to talk it through.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dd"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="logo.png" alt="Merseyside BMX Club" /></div>
+        <div class="footer-stripe">
+          <span style="background:var(--red);"></span>
+          <span style="background:rgba(255,255,255,0.2);"></span>
+          <span style="background:var(--blue);"></span>
+          <span style="background:var(--border);"></span>
+        </div>
+        <p>Knowsley Leisure and Culture Park<br>Longview Drive, Huyton, L36 6EG</p>
+        <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank" title="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/merseysidebmxclub?igsh=MWo2d2ZvcGZtc2pvNA==" target="_blank" title="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="mailto:merseysidebmx@gmail.com" title="Email">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>The Club</h4>
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#sessions">Club Sessions</a></li>
+          <li><a href="index.html#join">Join the Club</a></li>
+          <li><a href="index.html#coaches">Our Coaches</a></li>
+          <li><a href="index.html#riders">The Riders</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="shop.html">Club Shop</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+          <li><a href="sponsors.html">Our Sponsors</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="conduct.html">Code of Conduct</a></li>
+          <li><a href="https://www.britishcycling.org.uk/club/profile/6660/knowsley-bmx-club" target="_blank">British Cycling</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Merseyside BMX Club. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    // NAV
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('nav-links');
+    burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+    // REVEAL
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 3) * 0.1}s`;
+      obs.observe(el);
+    });
+
+    // VIEW TOGGLE
+    const parentContent = {
+      'header-desc': 'Every rider is different. Our pathway is designed to support everyone — whether your child is just finding their feet on the track or chasing a national title. Progress is about development, not just speed.',
+      'ic1-title': 'DEVELOPMENT FIRST',
+      'ic1-desc': 'We focus on long-term rider development, not short-term results. Every child progresses at their own pace — what matters is improvement, effort and enjoyment.',
+      'ic2-title': 'RACING ISN\'T EVERYTHING',
+      'ic2-desc': 'Not every rider needs to race to progress and succeed. We have a clear non-racing pathway for riders who want to develop skills and confidence without the pressure of competition.',
+      'ic3-title': 'MORE THAN SPEED',
+      'ic3-desc': 'Attitude, effort and coachability matter just as much as lap times. Riders who work hard, listen well and support their teammates will always progress here.',
+      'pathway-intro': 'Four levels, each with a clear purpose. Riders move through them based on skill, race readiness and attitude — not age or how long they\'ve been at the club.',
+      'l2-sub': 'Building foundations and confidence',
+      'l2-who': 'New and developing riders finding their feet. Club racers, first-time or occasional racers, and riders who aren\'t yet ready for regional competition.',
+      'l2-success': 'Consistent participation, growing confidence, clear skill improvement, and competing in at least one club race series.',
+      'l3-sub': 'Getting race-ready at regional level',
+      'l3-who': 'Strong club racers confident at Expert level who are ready to take on regional competition, or early-stage regional riders building their race experience.',
+      'l3-success': 'Consistent race execution at regional level, competing in at least 5 regional events (Novice or Expert).',
+      'l4-sub': 'Competing and developing at the highest level',
+      'l4-who': 'Riders consistently performing at regional level with the potential or ambition to compete nationally. This level also includes development riders who show clear potential even if they haven\'t yet hit all performance benchmarks.',
+      'l4-success': 'Competing at national level with consistency. Progress measured by improvement as much as by results — development riders are supported with individual focus areas.',
+      'nr-sub': 'Skills, confidence and enjoyment — no racing required',
+      'nr-who': 'Riders who aren\'t ready to race yet, or who simply choose not to. This is a fully supported pathway — not a waiting room. Riders here are progressing, developing and an important part of the club.',
+      'nr-success': 'Growth in skills and confidence. There\'s no pressure to race — riders move into the racing pathway when they feel ready, completely at their own pace.',
+      'prog-intro': 'Progression isn\'t automatic. Coaches assess riders across several areas before recommending a move to the next level. It\'s about being ready — not just being fast.',
+      'reviews-intro': 'Every rider is reviewed every 6 weeks. We look at four equal areas — it\'s not just about how fast your child is. A rider who works hard, listens and supports others will always progress.',
+      'p1-desc': 'Sprint speed and fitness',
+      'p2-desc': 'Manuals, jumps and cornering',
+      'p3-desc': 'Starts, first straight position, race decisions',
+      'p4-desc': 'Effort, attitude, listening and team behaviour',
+      'review-note': '<strong>Important:</strong> We track improvement as well as raw scores. A rider who improves consistently will always be recognised, even if they\'re not the fastest in the group.',
+      'wk14-desc': 'Development — skill drills, race simulations and strength work appropriate to each level.',
+      'wk5-desc': 'Competitive simulation — full gate racing, timed motos and head-to-head racing.',
+      'wk6-desc': 'Testing week — sprint times, start times, lap times and skill tests. Results feed into the rider review.',
+      'contact-note': '<strong>Questions about your child\'s progress?</strong> Speak to their coach after a session, or <a href="index.html#contact" style="color:var(--blue);">get in touch</a> and we\'ll be happy to talk it through.'
+    };
+
+    const riderContent = {
+      'header-desc': 'Every rider has their own journey. The pathway is here to help you know where you are, what you\'re working on, and where you\'re heading. It\'s not just about being fast — it\'s about getting better.',
+      'ic1-title': 'GET BETTER EVERY SESSION',
+      'ic1-desc': 'We don\'t just care about winning. We care about you improving. Show up, work hard, and you\'ll progress — whatever level you\'re at.',
+      'ic2-title': 'YOU DON\'T HAVE TO RACE',
+      'ic2-desc': 'Racing is brilliant, but it\'s not for everyone right away. If you\'re not ready to race yet — or just don\'t want to — that\'s completely fine. You still have a pathway here.',
+      'ic3-title': 'ATTITUDE COUNTS',
+      'ic3-desc': 'Your attitude and effort are just as important as your speed. Riders who listen, work hard and support their teammates always progress here.',
+      'pathway-intro': 'Four levels, each with a clear focus. You move up based on your skills, your racing (if you race) and your attitude — not your age.',
+      'l2-sub': 'Learning the basics, building confidence',
+      'l2-who': 'New riders or riders who are still building their skills. If you\'re just starting out or not yet racing regionally, this is where you begin.',
+      'l2-success': 'Turning up consistently, growing in confidence and skill, and having a go at a club race series.',
+      'l3-sub': 'Getting ready to race regionally',
+      'l3-who': 'Riders who are comfortable at Expert level and ready to step up to regional racing — or who are already racing regionally and building experience.',
+      'l3-success': 'Racing consistently at regional level and competing in at least 5 regional events.',
+      'l4-sub': 'The top level — national racing and beyond',
+      'l4-who': 'Riders who are consistently performing at regional level and have the potential or ambition to race nationally. Some riders are in Level 4 as development riders — working towards the full benchmarks.',
+      'l4-success': 'Racing at national level with consistency. Your improvement matters as much as your results — if you\'re getting better, that will always be recognised.',
+      'nr-sub': 'Skills and fun — no racing pressure',
+      'nr-who': 'Riders who aren\'t ready to race yet, or who don\'t want to. This isn\'t a waiting room — you\'re progressing and developing just as much as anyone else at the club.',
+      'nr-success': 'Getting better on the bike, building confidence, and having fun. You move into racing when you feel ready — no pressure.',
+      'prog-intro': 'Moving up isn\'t automatic. Your coaches will look at your skills, your racing and your attitude before recommending you for the next level. It\'s about being genuinely ready.',
+      'reviews-intro': 'You\'re reviewed every 6 weeks across four areas. It\'s not just about speed — your effort, attitude and how you ride with others all count equally.',
+      'p1-desc': 'How fast and fit you are',
+      'p2-desc': 'Manuals, jumps and cornering',
+      'p3-desc': 'Gate starts, first straight, race decisions',
+      'p4-desc': 'Your effort, attitude and how you work with others',
+      'review-note': '<strong>Remember:</strong> Getting better matters as much as being fast. If you\'re improving every cycle, your coaches will always notice.',
+      'wk14-desc': 'Skills, drills and race practice — building your game.',
+      'wk5-desc': 'Race simulation — full gate starts, timed motos, head-to-head.',
+      'wk6-desc': 'Testing week — sprint, lap times and skill tests. This is how your progress is measured.',
+      'contact-note': '<strong>Want to know how you\'re doing?</strong> Ask your coach after a session — they\'ll always be happy to give you feedback.'
+    };
+
+    function setView(view) {
+      document.getElementById('btn-parent').classList.toggle('active', view === 'parent');
+      document.getElementById('btn-rider').classList.toggle('active', view === 'rider');
+      document.body.classList.toggle('kid-view', view === 'rider');
+
+      const content = view === 'rider' ? riderContent : parentContent;
+      for (const [id, text] of Object.entries(content)) {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = text;
+      }
+    }
+  </script>
+</body>
+</html>
