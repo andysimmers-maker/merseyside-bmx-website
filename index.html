@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merseyside BMX Club — Huyton, Liverpool</title>
+  <meta name="description" content="Merseyside BMX Club — based at Knowsley Leisure and Culture Park, Huyton. Sessions, coaching, racing and club kit for all ages and abilities." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #d42b2b; --red2: #b52020;
+      --black: #0f0f0f; --dark: #191919; --mid: #2a2a2a;
+      --border: #383838; --text: #e2e2e2; --muted: #aaa;
+      --blue: #1a3d8f; --blue2: #0d2660;
+      --white: #f6f6f6; --offwhite: #ececec;
+      --rtext: #181818; --rmuted: #444;
+      --fd: 'Bebas Neue', sans-serif; --fb: 'DM Sans', sans-serif;
+      --mw: 1100px; --pad: 5vw;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--fb); font-size: 16px; line-height: 1.65; overflow-x: hidden; background: var(--black); color: var(--text); }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 60px; background: var(--black); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 var(--pad); gap: 1rem; }
+    .nav-stripe { width: 4px; height: 26px; flex-shrink: 0; background: linear-gradient(to bottom, var(--red) 50%, var(--blue) 50%); }
+    /* FIX 1: Logo height increased */
+    .nav-logo img { height: 48px; width: auto; display: block; }
+    .nav-links { display: flex; list-style: none; margin-left: auto; }
+    .nav-links a { display: flex; align-items: center; height: 60px; padding: 0 0.85rem; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.06em; color: var(--text); text-decoration: none; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; border-bottom-color: var(--red); }
+    .nav-links a.nav-shop { color: var(--red); background: transparent; border: 1px solid var(--red); border-bottom: 1px solid var(--red); padding: 0 1.1rem; }
+    .nav-links a.nav-shop:hover { background: var(--red); color: #fff; }
+    .nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 0; flex-direction: column; gap: 5px; margin-left: auto; }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: #fff; }
+    @media (max-width: 900px) {
+      .nav-links { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--dark); flex-direction: column; border-top: 1px solid var(--border); }
+      .nav-links.open { display: flex; }
+      .nav-links a { height: 50px; border-bottom: 1px solid var(--border); padding: 0 1.5rem; border-left: none; }
+      .nav-links a.nav-shop { background: none; color: var(--red); border-bottom: 1px solid var(--nat-border); border-left: none; border-top: none; border-right: none; }
+      .nav-burger { display: flex; }
+    }
+
+    /* ── BUTTONS ── */
+    .btn { display: inline-block; font-family: var(--fd); font-size: 1rem; letter-spacing: 0.08em; text-decoration: none; padding: 0.75rem 2rem; border-radius: 2px; cursor: pointer; border: none; transition: all 0.2s; text-align: center; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red2); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,43,43,0.3); }
+    .btn-ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.3); }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.05); }
+    .btn-blue { background: var(--blue); color: #fff; }
+    .btn-blue:hover { background: var(--blue2); transform: translateY(-2px); }
+    .btn-outline-blue { background: transparent; color: var(--blue); border: 1.5px solid var(--blue); font-family: var(--fd); font-size: 1rem; letter-spacing: 0.08em; text-decoration: none; padding: 0.75rem 2rem; border-radius: 2px; display: inline-block; transition: all 0.2s; text-align: center; }
+    .btn-outline-blue:hover { background: var(--blue); color: #fff; }
+
+    /* ── DIVIDER ── */
+    .dd { height: 5px; background: linear-gradient(to right, var(--red) 25%, var(--black) 25% 50%, var(--blue) 50% 75%, #e0e0e0 75%); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── SHARED ── */
+    .container { max-width: var(--mw); margin: 0 auto; }
+    .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; margin-bottom: 0.4rem; }
+    .sec-title { font-family: var(--fd); font-size: clamp(2.2rem, 4.5vw, 3.8rem); line-height: 0.95; letter-spacing: 0.02em; }
+    .sec-lead { max-width: 640px; font-size: 0.95rem; line-height: 1.75; margin-top: 0.9rem; }
+
+    /* ══ HERO ══ */
+    #home { min-height: 100vh; padding-top: 60px; position: relative; overflow: hidden; display: flex; align-items: flex-end; }
+    .hero-bg { position: absolute; inset: 0; background-image: url('hero.jpg'); background-size: cover; background-position: center 30%; }
+    .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.15) 100%); }
+    .hero-content { position: relative; z-index: 2; width: 100%; padding: 4rem var(--pad) 5rem; max-width: calc(var(--mw) + 2 * var(--pad)); margin: 0 auto; }
+    .hero-eyebrow { font-family: var(--fd); font-size: 0.82rem; letter-spacing: 0.3em; color: rgba(255,255,255,0.55); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.75rem; }
+    .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 2px; background: var(--red); }
+    h1.hero-title { font-family: var(--fd); font-size: clamp(4rem, 9vw, 8rem); line-height: 0.88; color: #fff; letter-spacing: 0.02em; margin-bottom: 1.25rem; }
+    h1.hero-title em { font-style: normal; color: var(--red); display: block; }
+    .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.75); max-width: 480px; line-height: 1.75; }
+
+    /* ══ ABOUT ══ */
+    #about { background: var(--dark); padding: 5rem var(--pad); border-top: 3px solid var(--red); }
+    #about .kicker { color: var(--red); }
+    #about .sec-title { color: #fff; }
+    #about .sec-lead { color: #ccc; }
+
+    /* FIX 2: About grid alignment and photo gap */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+    .about-body { display: flex; flex-direction: column; gap: 1rem; }
+    .about-body p { color: #ccc; font-size: 0.95rem; line-height: 1.75; margin: 0; }
+    .about-body p strong { color: var(--text); }
+    .about-photos { display: flex; flex-direction: column; gap: 0; }
+    .about-photos img { width: 100%; display: block; }
+
+    .about-ctas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 3rem; }
+    .cta-card { background: var(--mid); padding: 1.75rem 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; text-decoration: none; transition: background 0.2s; border-bottom: 3px solid transparent; }
+    .cta-card:hover { background: #333; }
+    .cta-card.blue:hover { border-bottom-color: var(--blue); }
+    .cta-card.red:hover { border-bottom-color: var(--red); }
+    .cta-icon { font-size: 1.5rem; }
+    .cta-title { font-family: var(--fd); font-size: 1.3rem; letter-spacing: 0.06em; color: #fff; }
+    .cta-desc { font-size: 0.83rem; color: #bbb; line-height: 1.5; }
+    .cta-arrow { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.1em; color: var(--red); margin-top: auto; padding-top: 0.75rem; }
+    @media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; gap: 2.5rem; } .about-ctas { grid-template-columns: 1fr; } }
+
+    /* ══ SESSIONS ══ */
+    #sessions { background: var(--white); padding: 5rem var(--pad); color: var(--rtext); border-top: 3px solid var(--blue); }
+    #sessions .kicker { color: var(--blue); }
+    #sessions .sec-title { color: var(--rtext); }
+    #sessions .sec-lead { color: var(--rmuted); }
+    .sessions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+    .col-label { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.2em; padding-bottom: 0.6rem; border-bottom: 2px solid; margin-bottom: 1rem; }
+    .col-label.blue { color: var(--blue); border-color: var(--blue); }
+    .col-label.red { color: #c02020; border-color: #c02020; }
+    .s-card { background: #fff; border: 1px solid #ddd; margin-bottom: 0.85rem; transition: box-shadow 0.2s, transform 0.2s; }
+    .s-card:last-child { margin-bottom: 0; }
+    .s-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.09); transform: translateY(-2px); }
+    .s-head { display: flex; align-items: center; gap: 0.85rem; padding: 0.9rem 1.15rem; border-bottom: 1px solid #eee; }
+    .s-day { font-family: var(--fd); font-size: 1.6rem; letter-spacing: 0.04em; line-height: 1; min-width: 44px; }
+    .s-day.blue { color: var(--blue); }
+    .s-day.red { color: #c02020; }
+    .s-day.dark { color: #555; }
+    .s-name { font-family: var(--fd); font-size: 0.95rem; letter-spacing: 0.05em; color: var(--rtext); flex: 1; }
+    .s-chip { font-size: 0.72rem; font-weight: 600; padding: 0.2rem 0.55rem; border-radius: 2px; white-space: nowrap; }
+    .chip-blue { background: rgba(26,61,143,0.08); color: var(--blue); }
+    .chip-red { background: rgba(192,32,32,0.07); color: #c02020; }
+    .chip-dark { background: #f0f0f0; color: #777; }
+    .s-body { padding: 0.85rem 1.15rem; font-size: 0.87rem; color: #555; line-height: 1.65; }
+    .s-body a { color: var(--blue); text-decoration: none; }
+    .s-body a:hover { text-decoration: underline; }
+    .price-row { display: flex; gap: 0.5rem; margin-top: 0.6rem; flex-wrap: wrap; }
+    .price-chip { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.65rem; border-radius: 2px; }
+    .pc-member { background: rgba(26,61,143,0.08); color: var(--blue); border: 1px solid rgba(26,61,143,0.15); }
+    .pc-non { background: rgba(192,32,32,0.06); color: #c02020; border: 1px solid rgba(192,32,32,0.12); }
+    .coaching-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; }
+    .coaching-table th { font-family: var(--fd); font-size: 0.7rem; letter-spacing: 0.12em; color: #aaa; padding: 0.4rem 0.5rem; text-align: left; border-bottom: 1px solid #eee; }
+    .coaching-table td { font-size: 0.84rem; color: #444; padding: 0.55rem 0.5rem; border-bottom: 1px solid #f5f5f5; }
+    .coaching-table tr:last-child td { border-bottom: none; }
+    .coaching-table td:first-child { font-family: var(--fd); font-size: 1rem; color: var(--blue); width: 36px; }
+    .coaching-table td:nth-child(2) { font-weight: 600; color: var(--rtext); }
+    .coaching-table.sat td:first-child { width: auto; font-family: var(--fb); font-size: 0.84rem; color: #444; }
+    .coaching-table.sat td:nth-child(2) { font-weight: normal; white-space: nowrap; width: 110px; }
+
+    /* FIX 3: Hire banner — removed duplicate £3, no CTA */
+    .hire-banner { grid-column: 1 / -1; background: var(--blue); color: #fff; padding: 1.5rem 1.75rem; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+    .hire-banner h3 { font-family: var(--fd); font-size: 1.4rem; letter-spacing: 0.06em; }
+    .hire-banner p { font-size: 0.87rem; opacity: 0.85; flex: 1; min-width: 200px; }
+
+    @media (max-width: 680px) { .sessions-grid { grid-template-columns: 1fr; } .hire-banner { flex-direction: column; gap: 1rem; } }
+
+    /* ══ SHOP TEASER ══ */
+    #shop-teaser { background: var(--black); border-top: 3px solid var(--red); overflow: hidden; }
+    .shop-teaser-inner { display: grid; grid-template-columns: 1fr 1fr; }
+    .shop-left { background: var(--dark); padding: 3.5rem var(--pad); display: flex; flex-direction: column; justify-content: center; gap: 1rem; }
+    .shop-left .kicker { color: var(--blue); }
+    .shop-left h2 { font-family: var(--fd); font-size: clamp(2rem, 4vw, 3.2rem); line-height: 0.95; color: #fff; letter-spacing: 0.02em; }
+    .shop-left p { font-size: 0.92rem; color: var(--muted); max-width: 420px; line-height: 1.7; }
+    /* FIX 4: Shop teaser image — constrained height, not massive */
+    .shop-right { position: relative; overflow: hidden; background: #e8e8e8; display: flex; align-items: center; justify-content: center; min-height: 320px; }
+    .shop-right img { width: auto; height: 100%; max-height: 380px; object-fit: contain; display: block; padding: 1.5rem; }
+    @media (max-width: 680px) { .shop-teaser-inner { grid-template-columns: 1fr; } .shop-right { min-height: 260px; } }
+
+    /* ══ JOIN ══ */
+    #join { background: var(--offwhite); padding: 5rem var(--pad); color: var(--rtext); border-top: 3px solid var(--blue); }
+    #join .kicker { color: var(--blue); }
+    #join .sec-title { color: var(--rtext); }
+    #join .sec-lead { color: var(--rmuted); }
+    .join-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; margin-top: 3rem; align-items: start; }
+    .join-body { display: flex; flex-direction: column; gap: 1rem; }
+    .join-body p { font-size: 0.93rem; color: #555; line-height: 1.75; margin: 0; }
+    .join-body p strong { color: var(--rtext); }
+    .membership-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #ccc; margin-top: 1.75rem; }
+    .mem-card { background: #fff; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.3rem; transition: box-shadow 0.2s; }
+    .mem-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .mem-type { font-family: var(--fd); font-size: 0.7rem; letter-spacing: 0.2em; color: var(--blue); }
+    .mem-name { font-family: var(--fd); font-size: 1.3rem; letter-spacing: 0.04em; color: var(--rtext); }
+    .mem-age { font-size: 0.78rem; color: #999; }
+    .mem-price { font-family: var(--fd); font-size: 2rem; color: var(--rtext); line-height: 1; margin: 0.5rem 0 0.2rem; }
+    .mem-price small { font-size: 0.72rem; color: #bbb; font-family: var(--fb); font-weight: 400; }
+    .mem-dur { font-size: 0.77rem; color: #aaa; margin-bottom: 0.75rem; }
+    .mem-card a { display: block; background: var(--blue); color: #fff; text-decoration: none; padding: 0.6rem 1rem; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.08em; text-align: center; border-radius: 2px; margin-top: auto; transition: background 0.2s; }
+    .mem-card a:hover { background: var(--blue2); }
+    /* FIX 5: Join image — riders only, no duplicate */
+    .join-photo img { width: 100%; display: block; }
+    @media (max-width: 720px) { .join-grid { grid-template-columns: 1fr; } .membership-cards { grid-template-columns: 1fr; } }
+
+    /* ══ COACHES ══ */
+    #coaches { background: var(--dark); padding: 5rem var(--pad); border-top: 3px solid var(--red); }
+    #coaches .kicker { color: var(--red); }
+    #coaches .sec-title { color: #fff; }
+    #coaches .sec-lead { color: var(--muted); }
+    .coaches-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-top: 3rem; }
+    .coach-card { background: var(--black); padding: 2rem; transition: background 0.2s; }
+    .coach-card:hover { background: var(--mid); }
+    .coach-photo { width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: top; display: block; margin-bottom: 1.25rem; }
+    .coach-photo-placeholder { width: 100%; aspect-ratio: 4/3; background: var(--mid); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--fd); font-size: 0.7rem; letter-spacing: 0.18em; color: #444; margin-bottom: 1.25rem; }
+    .coach-level { font-family: var(--fd); font-size: 0.7rem; letter-spacing: 0.22em; color: var(--red); margin-bottom: 0.2rem; }
+    .coach-name { font-family: var(--fd); font-size: 1.5rem; color: #fff; letter-spacing: 0.04em; }
+    .coach-desc { font-size: 0.88rem; color: #999; margin-top: 0.6rem; line-height: 1.6; }
+    .coach-featured { grid-column: span 2; background: rgba(212,43,43,0.05); border: 1px solid rgba(212,43,43,0.15); }
+    .coach-featured .coach-level { color: #f88; }
+    .coach-featured-inner { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; align-items: start; }
+    .coach-featured-inner .coach-photo { margin-bottom: 0; aspect-ratio: 3/4; }
+    @media (max-width: 720px) { .coaches-grid { grid-template-columns: 1fr; } .coach-featured { grid-column: span 1; } .coach-featured-inner { grid-template-columns: 1fr; } }
+
+    /* ══ RIDERS ══ */
+    #riders { background: var(--black); padding: 5rem var(--pad); border-top: 3px solid var(--red); }
+    #riders .kicker { color: var(--red); }
+    #riders .sec-title { color: #fff; }
+    #riders .sec-lead { color: #999; }
+    .riders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
+    .riders-col-title { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.2em; padding-bottom: 0.6rem; border-bottom: 2px solid var(--border); margin-bottom: 1.5rem; color: var(--muted); }
+    .riders-intro { font-size: 0.9rem; color: #999; margin-bottom: 1.75rem; line-height: 1.7; }
+    /* Card grid */
+    .rider-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 1px; background: var(--border); }
+    .rider-card { background: var(--dark); display: flex; flex-direction: column; transition: background 0.2s; }
+    .rider-card:hover { background: var(--mid); }
+    .rider-photo { width: 100%; aspect-ratio: 1/1; overflow: hidden; flex-shrink: 0; }
+    .rider-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .rider-meta { padding: 0.6rem 0.65rem 0.75rem; }
+    .rider-number { font-family: var(--fd); font-size: 1.1rem; letter-spacing: 0.04em; color: var(--red); line-height: 1; }
+    .rider-category { font-size: 0.72rem; color: #aaa; margin-top: 0.2rem; line-height: 1.3; }
+    .rider-placeholder-card { background: var(--dark); border: 1px dashed #2a2a2a; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; }
+    .rider-placeholder-card svg { width: 40%; opacity: 0.2; }
+    @media (max-width: 720px) { .riders-grid { grid-template-columns: 1fr; } }
+
+    /* ══ CONTACT ══ */
+    #contact { background: var(--white); padding: 5rem var(--pad); color: var(--rtext); border-top: 3px solid var(--blue); }
+    #contact .kicker { color: var(--blue); }
+    #contact .sec-title { color: var(--rtext); }
+    #contact .sec-lead { color: var(--rmuted); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; margin-top: 3rem; }
+    .contact-info h3 { font-family: var(--fd); font-size: 0.95rem; letter-spacing: 0.12em; color: var(--rtext); margin: 1.25rem 0 0.35rem; }
+    .contact-info h3:first-child { margin-top: 0; }
+    .contact-info p { font-size: 0.88rem; color: #555; line-height: 1.65; }
+    .contact-info a { color: var(--blue); text-decoration: none; }
+    .contact-info a:hover { text-decoration: underline; }
+
+    /* FIX 6: Social icons — transparent background, icon visible on light bg */
+    .social-icons { display: flex; gap: 0.6rem; margin-top: 0.4rem; }
+    .social-icon { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; background: var(--blue); color: #fff; border-radius: 2px; text-decoration: none; transition: background 0.2s; }
+    .social-icon:hover { background: var(--blue2); }
+
+    .map-embed { width: 100%; aspect-ratio: 16/9; overflow: hidden; margin-top: 1.25rem; border: 1px solid #ccc; }
+    .map-embed iframe { width: 100%; height: 100%; border: none; filter: grayscale(20%); }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-label { font-family: var(--fd); font-size: 0.72rem; letter-spacing: 0.15em; color: #999; }
+    .form-group input, .form-group select, .form-group textarea { background: #fff; border: 1px solid #ccc; color: var(--rtext); font-family: var(--fb); font-size: 0.92rem; padding: 0.7rem 0.9rem; border-radius: 2px; outline: none; transition: border-color 0.2s; width: 100%; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blue); }
+    .form-group select { appearance: none; cursor: pointer; }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    @media (max-width: 720px) { .contact-grid { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
+
+    /* ══ SPONSORS STRIP ══ */
+    #sponsors { background: var(--dark); padding: 3rem var(--pad); border-top: 1px solid var(--border); }
+    .sponsors-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.75rem; flex-wrap: wrap; }
+    .sponsors-header .kicker { color: var(--muted); margin-bottom: 0; }
+    .sponsors-header a { font-family: var(--fd); font-size: 0.82rem; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .sponsors-header a:hover { color: #fff; }
+    .sponsors-logos { display: grid; grid-template-columns: repeat(9, 1fr); gap: 1px; background: #ccc; }
+    .sponsor-tile { background: #f0f0f0; display: flex; align-items: center; justify-content: center; padding: 1rem; aspect-ratio: 3/2; transition: background 0.2s; }
+    .sponsor-tile:hover { background: #fff; }
+    .sponsor-tile a { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+    .sponsor-tile img { max-height: 40px; max-width: 90%; width: auto; object-fit: contain; opacity: 0.85; transition: opacity 0.2s; }
+    .sponsor-tile:hover img { opacity: 1; }
+    @media (max-width: 860px) { .sponsors-logos { grid-template-columns: repeat(5, 1fr); } }
+    @media (max-width: 500px) { .sponsors-logos { grid-template-columns: repeat(3, 1fr); } }
+
+    /* ══ FOOTER ══ */
+    footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
+    .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }
+    .footer-logo img { height: 44px; width: auto; display: block; margin-bottom: 0.75rem; }
+    .footer-stripe { display: flex; gap: 4px; margin-bottom: 0.75rem; }
+    .footer-stripe span { height: 3px; width: 22px; border-radius: 1px; }
+    .footer-brand p { font-size: 0.82rem; color: #aaa; line-height: 1.6; margin-bottom: 0.35rem; }
+    .footer-brand a { color: #aaa; text-decoration: none; font-size: 0.82rem; }
+    .footer-brand a:hover { color: var(--red); }
+    .footer-social { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+    .footer-social a { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--mid); border: 1px solid var(--border); color: var(--text); text-decoration: none; transition: all 0.2s; }
+    .footer-social a:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    .footer-col h4 { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.2em; color: var(--red); margin-bottom: 0.75rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.35rem; }
+    .footer-col ul li a { font-size: 0.82rem; color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { max-width: var(--mw); margin: 2rem auto 0; padding-top: 1.25rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; color: #888; }
+    .footer-bottom a { color: #999; text-decoration: none; }
+    .footer-bottom a:hover { color: #fff; }
+    @media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-stripe"></div>
+    <a href="#home" class="nav-logo"><img src="logo.png" alt="Merseyside BMX Club" /></a>
+    <button class="nav-burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#sessions">Sessions</a></li>
+      <li><a href="shop.html" class="nav-shop">Shop</a></li>
+      <li><a href="#join">Join</a></li>
+      <li><a href="#coaches">Coaches</a></li>
+      <li><a href="#riders">Riders</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content reveal">
+      <div class="hero-eyebrow">Huyton, Liverpool · Est. 2012</div>
+      <h1 class="hero-title">MERSEYSIDE<br><em>BMX</em>CLUB</h1>
+      <p class="hero-sub">Racing, coaching and community for riders of all ages and abilities. Come and ride with us.</p>
+    </div>
+  </section>
+
+  <div class="dd"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">Who We Are</div>
+        <h2 class="sec-title">ABOUT THE CLUB</h2>
+        <p class="sec-lead">A welcoming, inclusive BMX club based at Knowsley Leisure and Culture Park in Huyton, Liverpool. Run entirely by volunteers who are passionate about the sport and their community.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-body reveal">
+          <p>Merseyside BMX Club has been a cornerstone of BMX racing in the North Region since 2012. We provide weekly coaching sessions, race events, and a structured pathway for riders of every age and ability — from complete beginners to national-level competitors.</p>
+          <p>Whether you're looking to try BMX for the first time or develop your race craft, we have sessions to suit you. Our team of experienced coaches and volunteers is committed to the highest standards of safety and inclusivity.</p>
+          <p>We look forward to seeing you at the track.</p>
+          <p><a href="https://maps.google.com/?q=Merseyside+BMX+Club+Longview+Drive+Huyton+L36+6EG" target="_blank" class="btn btn-ghost" style="font-size:0.85rem; padding:0.55rem 1.3rem; display:inline-block; margin-top:0.5rem;">📍 Find us on Google Maps →</a></p>
+        </div>
+        <div class="about-photos reveal">
+          <img src="gate.jpg" alt="Merseyside BMX Club starting gate" />
+        </div>
+      </div>
+      <div class="about-ctas reveal">
+        <a href="#sessions" class="cta-card blue">
+          <div class="cta-icon" aria-hidden="true">🏁</div>
+          <div class="cta-title">Club Sessions</div>
+          <div class="cta-desc">Gates and coaching sessions. All ages, all abilities.</div>
+          <div class="cta-arrow">View Sessions →</div>
+        </a>
+        <a href="#contact" class="cta-card red">
+          <div class="cta-icon" aria-hidden="true">✉️</div>
+          <div class="cta-title">Contact Us</div>
+          <div class="cta-desc">Have a question? Drop us a message and we'll get back to you as soon as we can.</div>
+          <div class="cta-arrow">Get In Touch →</div>
+        </a>
+        <a href="#join" class="cta-card blue">
+          <div class="cta-icon" aria-hidden="true">🚲</div>
+          <div class="cta-title">Join the Club</div>
+          <div class="cta-desc">Become an official member through British Cycling. Open to all riders, all ages.</div>
+          <div class="cta-arrow">Join Now →</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="dd"></div>
+
+  <!-- SESSIONS -->
+  <section id="sessions">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">Get On Track</div>
+        <h2 class="sec-title">CLUB SESSIONS</h2>
+        <p class="sec-lead">Fun, friendly and welcoming to riders of all ages. Bring your own BMX, or hire everything from us on the night.</p>
+      </div>
+      <div class="sessions-grid">
+        <div class="reveal">
+          <div class="col-label blue">Open Sessions</div>
+          <div class="s-card">
+            <div class="s-head">
+              <div class="s-day blue">TUE</div>
+              <div class="s-name">Open Gates</div>
+              <span class="s-chip chip-blue">18:15 – 20:00</span>
+            </div>
+            <div class="s-body">
+              Everybody is welcome. Please <a href="#contact">get in touch</a> if you haven't been before.
+              <div class="price-row">
+                <span class="price-chip pc-member">Members £3</span>
+                <span class="price-chip pc-non">Non-members £5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="col-label red">Coaching Sessions</div>
+          <div class="s-card">
+            <div class="s-head">
+              <div class="s-day dark">WED</div>
+              <div class="s-name">Race Development</div>
+              <span class="s-chip chip-dark">Invite Only</span>
+            </div>
+            <div class="s-body">Advanced race development session with Quillan Isidore. Invite only — if you think your rider is ready, <a href="#contact">get in touch</a> to express interest.</div>
+          </div>
+          <div class="s-card">
+            <div class="s-head">
+              <div class="s-day red">THU</div>
+              <div class="s-name">Coaching — All Levels</div>
+            </div>
+            <div class="s-body">
+              Everyone is welcome. All sessions are conducted by British Cycling BMX-qualified coaches. New riders must join Level 1 for assessment. Please <a href="#contact">get in touch</a> to attend.
+              <table class="coaching-table">
+                <thead><tr><th></th><th>Level</th><th>Time</th></tr></thead>
+                <tbody>
+                  <tr><td>L1</td><td>Foundations</td><td>17:15 – 18:15</td></tr>
+                  <tr><td>L2</td><td>Development</td><td>18:30 – 19:30</td></tr>
+                  <tr><td>L3</td><td>Regional</td><td>18:00 – 19:30</td></tr>
+                  <tr><td>L4</td><td>National</td><td>19:15 – 20:45</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="s-card">
+            <div class="s-head">
+              <div class="s-day blue">SAT</div>
+              <div class="s-name">Saturday Coaching with Quillan</div>
+            </div>
+            <div class="s-body">
+              Open to all riders. Sessions are booked via Spond — use group code <strong>CPZDS</strong> to join.
+              <table class="coaching-table sat">
+                <tbody>
+                  <tr><td>Club &amp; Regional (age 12 &amp; under)</td><td>09:00 – 10:30</td></tr>
+                  <tr><td>National level (age 13 &amp; over)</td><td>11:00 – 13:00</td></tr>
+                </tbody>
+              </table>
+              <p style="margin-top:0.6rem;font-size:0.82rem;color:#666;">121 sessions also available 13:00 – 17:00. <a href="#contact">Contact Quillan</a> to book.</p>
+            </div>
+          </div>
+        </div>
+        <!-- FIX 3: Hire banner — single mention of £3, no CTA -->
+        <div class="hire-banner reveal">
+          <div>
+            <h3><span aria-hidden="true">🚲</span> Bike &amp; Kit Hire</h3>
+            <p>Includes bike, helmet, pads and gloves for <strong>£3 per session</strong>. Full size range from micro minis to cruisers. Limited availability — first-come, first-served.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dd"></div>
+
+  <!-- SHOP TEASER -->
+  <section id="shop-teaser">
+    <div class="shop-teaser-inner">
+      <div class="shop-left reveal">
+        <div class="kicker">Club Kit</div>
+        <h2>OFFICIAL<br>CLUB SHOP</h2>
+        <p>Jerseys, race plate stickers and club kit — all available to order. Jerseys made to order, personalised with your rider's name.</p>
+        <div style="margin-top:0.5rem;">
+          <a href="shop.html" class="btn btn-red">Visit the Shop →</a>
+        </div>
+      </div>
+      <!-- FIX 4: Constrained height image -->
+      <div class="shop-right">
+        <img src="jersey_regional.jpg" alt="Merseyside BMX Club official kit" />
+      </div>
+    </div>
+  </section>
+
+  <div class="dd"></div>
+
+  <!-- JOIN -->
+  <section id="join">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">Become a Member</div>
+        <h2 class="sec-title">JOIN THE CLUB</h2>
+        <p class="sec-lead">Whether you're brand new to BMX or looking to race at national level, becoming a club member is the first step to getting the most out of Merseyside BMX.</p>
+      </div>
+      <div class="join-grid">
+        <div class="reveal">
+          <div class="join-body">
+            <p>Membership is handled through <strong>British Cycling</strong>. Please note there is a non-refundable £1.00 application fee. By joining you also agree to our Code of Conduct.</p>
+            <p>Sessions are supervised by first aid qualified volunteers and track marshals. Bike hire, full-face helmets and all necessary safety equipment are available so you can get going straight away.</p>
+          </div>
+          <div class="membership-cards">
+            <div class="mem-card">
+              <div class="mem-type">12 Month Membership</div>
+              <div class="mem-name">Junior</div>
+              <div class="mem-age">Age 4 – 16</div>
+              <div class="mem-price">£10 <small>+ £1.00 application fee</small></div>
+              <div class="mem-dur">12 months</div>
+              <a href="https://www.britishcycling.org.uk/club/subscriptions/buy?club_id=6660&subscription_id=1078" target="_blank">Buy Membership →</a>
+            </div>
+            <div class="mem-card">
+              <div class="mem-type">12 Month Membership</div>
+              <div class="mem-name">Adult</div>
+              <div class="mem-age">Age 16+</div>
+              <div class="mem-price">£15 <small>+ £1.00 application fee</small></div>
+              <div class="mem-dur">12 months</div>
+              <a href="https://www.britishcycling.org.uk/club/subscriptions/buy?club_id=6660&subscription_id=1277" target="_blank">Buy Membership →</a>
+            </div>
+          </div>
+          <p style="margin-top:1.25rem;"><a href="conduct.html" class="btn-outline-blue" style="font-size:0.88rem; padding:0.6rem 1.5rem;">Read our Code of Conduct</a></p>
+        </div>
+        <!-- FIX 5: riders_on_gate only in join -->
+        <div class="join-photo reveal">
+          <img src="riders_on_gate.jpg" alt="Riders at Merseyside BMX Club" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dd"></div>
+
+  <!-- COACHES -->
+  <section id="coaches">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">Expert Guidance</div>
+        <h2 class="sec-title">OUR COACHES</h2>
+        <p class="sec-lead">All sessions are led by British Cycling BMX-qualified coaches. Our main coaching night is Thursday with other sessions available across the week and weekend.</p>
+      </div>
+      <div class="coaches-grid">
+        <div class="coach-card coach-featured reveal">
+          <div class="coach-featured-inner">
+            <img src="quillan.webp" alt="Quillan Isidore" class="coach-photo" />
+            <div>
+              <div class="coach-level">Level 3 &amp; 4 Coach</div>
+              <div class="coach-name">QUILLAN ISIDORE</div>
+              <div class="coach-desc">One of Britain's most decorated BMX racers — 2012 UCI World Champion (U16), multiple-time British National Champion and Team GB athlete. Now retired from elite competition, Quillan brings that wealth of experience to our club, providing coaching for our regional and national level riders. His focus is on building self-belief, consistency and the technical tools needed to compete at the very highest level.</div>
+            </div>
+          </div>
+        </div>
+        <div class="coach-card reveal">
+          <img src="coach_placeholder.svg" alt="Coach Michael" class="coach-photo" />
+          <div class="coach-level">Level 2 Coach</div>
+          <div class="coach-name">COACH MICHAEL</div>
+          <div class="coach-desc">Passionate about introducing newcomers to the sport. Excels at teaching foundational skills and building confidence in young and inexperienced riders.</div>
+        </div>
+        <div class="coach-card reveal">
+          <img src="coach_placeholder.svg" alt="Coach Karl" class="coach-photo" />
+          <div class="coach-level">Level 1 Coach</div>
+          <div class="coach-name">COACH KARL</div>
+          <div class="coach-desc">Brings years of BMX racing experience from competitions across the country. Passionate about inspiring the next generation of riders.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dd"></div>
+
+  <!-- RIDERS -->
+  <section id="riders">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">Our Athletes</div>
+        <h2 class="sec-title">THE RIDERS</h2>
+        <p class="sec-lead">From first-time novices to national competitors, our riders are the heart of everything we do. Meet the people who represent Merseyside BMX on the track.</p>
+      </div>
+      <div class="riders-grid">
+
+        <!-- NATIONAL -->
+        <div class="reveal">
+          <div class="riders-col-title">National Team</div>
+          <p class="riders-intro">Our national riders compete at British Championship level and beyond, representing the club at the highest level of domestic BMX racing.</p>
+          <div class="rider-cards">
+
+            <!-- Jaxon -->
+            <div class="rider-card">
+              <div class="rider-photo"><img src="rider_jaxon.jpg" alt="Jaxon" /></div>
+              <div class="rider-meta">
+                <div class="rider-number">#39</div>
+                <div class="rider-category">Male 11s</div>
+              </div>
+            </div>
+
+            <!-- Blanks -->
+            <div class="rider-card">
+              <div class="rider-photo"><img src="rider_placeholder.svg" alt="Rider" /></div>
+              <div class="rider-meta">
+                <div class="rider-number">#—</div>
+                <div class="rider-category">TBC</div>
+              </div>
+            </div>
+            <div class="rider-card">
+              <div class="rider-photo"><img src="rider_placeholder.svg" alt="Rider" /></div>
+              <div class="rider-meta">
+                <div class="rider-number">#—</div>
+                <div class="rider-category">TBC</div>
+              </div>
+            </div>
+            <div class="rider-card">
+              <div class="rider-photo"><img src="rider_placeholder.svg" alt="Rider" /></div>
+              <div class="rider-meta">
+                <div class="rider-number">#—</div>
+                <div class="rider-category">TBC</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- REGIONAL -->
+        <div class="reveal">
+          <div class="riders-col-title">Regional Team</div>
+          <p class="riders-intro">Our regional riders compete across the North Region series — dedicated athletes achieving outstanding results and inspiring the next generation at the club.</p>
+          <div class="rider-cards">
+
+            <!-- Otis -->
+            <div class="rider-card">
+              <div class="rider-photo"><img src="rider_placeholder.svg" alt="Otis" /></div>
+              <div class="rider-meta">
+                <div class="rider-number">#954</div>
+                <div class="rider-category">Male 8s</div>
+              </div>
+            </div>
+
+            <!-- Blanks -->
+            <div class="rider-card">
+              <div class="rider-photo"><img src="rider_placeholder.svg" alt="Rider" /></div>
+              <div class="rider-meta">
+                <div class="rider-number">#—</div>
+                <div class="rider-category">TBC</div>
+              </div>
+            </div>
+            <div class="rider-card">
+              <div class="rider-photo"><img src="rider_placeholder.svg" alt="Rider" /></div>
+              <div class="rider-meta">
+                <div class="rider-number">#—</div>
+                <div class="rider-category">TBC</div>
+              </div>
+            </div>
+            <div class="rider-card">
+              <div class="rider-photo"><img src="rider_placeholder.svg" alt="Rider" /></div>
+              <div class="rider-meta">
+                <div class="rider-number">#—</div>
+                <div class="rider-category">TBC</div>
+              </div>
+            </div>
+            <div class="rider-card">
+              <div class="rider-photo"><img src="rider_placeholder.svg" alt="Rider" /></div>
+              <div class="rider-meta">
+                <div class="rider-number">#—</div>
+                <div class="rider-category">TBC</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="dd"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">Get In Touch</div>
+        <h2 class="sec-title">CONTACT US</h2>
+        <p class="sec-lead">Have a question not covered in our <a href="faq.html" style="color:var(--blue);">FAQs</a>? Drop us a message and we'll get back to you as soon as we can.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <h3>Email</h3>
+          <p><a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a></p>
+          <h3>Social Media</h3>
+          <!-- FIX 6: Dark background icons, white SVGs -->
+          <div class="social-icons">
+            <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank" class="social-icon" title="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/merseysidebmxclub?igsh=MWo2d2ZvcGZtc2pvNA==" target="_blank" class="social-icon" title="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+          </div>
+          <h3>Location</h3>
+          <p>Knowsley Leisure and Culture Park<br>Longview Drive, Huyton<br>Liverpool, L36 6EG</p>
+          <div class="map-embed">
+            <iframe src="https://maps.google.com/maps?q=Knowsley+Leisure+and+Culture+Park,+Longview+Drive,+Huyton,+L36+6EG&t=&z=17&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="contact-form">
+            <div class="form-row">
+              <div class="form-group"><label class="form-label" for="first-name">First Name</label><input id="first-name" type="text" placeholder="First name" /></div>
+              <div class="form-group"><label class="form-label" for="last-name">Last Name</label><input id="last-name" type="text" placeholder="Last name" /></div>
+            </div>
+            <div class="form-group"><label class="form-label" for="email">Email</label><input id="email" type="email" placeholder="your@email.com" /></div>
+            <div class="form-group">
+              <label class="form-label" for="enquiry">I'm enquiring about…</label>
+              <select id="enquiry">
+                <option value="">Select a topic</option>
+                <option>Trying a session for the first time</option>
+                <option>Club membership</option>
+                <option>Coaching sessions</option>
+                <option>Club racing &amp; events</option>
+                <option>Club kit &amp; shop</option>
+                <option>Sponsorship</option>
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label" for="message">Message</label><textarea id="message" placeholder="Your message…"></textarea></div>
+            <button type="button" class="btn btn-blue" style="align-self:flex-start;" onclick="alert('To activate: set up a free Formspree account — see code comments.')">Send Message →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPONSORS -->
+  <section id="sponsors">
+    <div class="container">
+      <div class="sponsors-header">
+        <div class="kicker">Our Sponsors &amp; Partners</div>
+        <a href="sponsors.html">View all sponsors →</a>
+      </div>
+      <div class="sponsors-logos">
+        <div class="sponsor-tile"><a href="https://cravedigital.co.uk" target="_blank" title="Crave Digital"><img src="sponsor_crave.avif" alt="Crave Digital" /></a></div>
+        <div class="sponsor-tile"><a href="http://www.dccycles.co.uk" target="_blank" title="DC Cycles"><img src="sponsor_dc_cycles.avif" alt="DC Cycles" /></a></div>
+        <div class="sponsor-tile"><a href="http://www.kirkbysigns.com" target="_blank" title="Kirkby Signs"><img src="sponsor_kirkby.avif" alt="Kirkby Signs" /></a></div>
+        <div class="sponsor-tile"><a href="mailto:Sales@maximelplastering.com" title="Maximel Plastering"><img src="sponsor_maximel.avif" alt="Maximel Plastering Limited" /></a></div>
+        <div class="sponsor-tile"><a href="http://pwgfabrications.co.uk" target="_blank" title="PWG Fabrications"><img src="sponsor_pwg.avif" alt="PWG Fabrications" /></a></div>
+        <div class="sponsor-tile"><a href="https://equistables.com" target="_blank" title="Equistables"><img src="sponsor_equistables.avif" alt="Equistables" /></a></div>
+        <div class="sponsor-tile"><a href="https://theburm.com" target="_blank" title="The Burm"><img src="sponsor_theburm.avif" alt="The Burm" /></a></div>
+        <div class="sponsor-tile"><a href="https://www.facebook.com/profile.php?id=61573648823243" target="_blank" title="e.parr photography"><img src="sponsor_eparr.png" alt="e.parr photography" /></a></div>
+        <div class="sponsor-tile"><a href="https://www.fueldoctoruk.co.uk" target="_blank" title="Fuel Doctor"><img src="sponsor_fueldoctor.avif" alt="Fuel Doctor" /></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="logo.png" alt="Merseyside BMX Club" /></div>
+        <div class="footer-stripe">
+          <span style="background:var(--red);"></span>
+          <span style="background:rgba(255,255,255,0.2);"></span>
+          <span style="background:var(--blue);"></span>
+          <span style="background:var(--border);"></span>
+        </div>
+        <p>Knowsley Leisure and Culture Park<br>Longview Drive, Huyton, L36 6EG</p>
+        <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank" title="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/merseysidebmxclub?igsh=MWo2d2ZvcGZtc2pvNA==" target="_blank" title="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="mailto:merseysidebmx@gmail.com" title="Email">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>The Club</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#sessions">Club Sessions</a></li>
+          <li><a href="#join">Join the Club</a></li>
+          <li><a href="#coaches">Our Coaches</a></li>
+          <li><a href="#riders">The Riders</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="shop.html">Club Shop</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="sponsors.html">Our Sponsors</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="conduct.html">Code of Conduct</a></li>
+          <li><a href="https://www.britishcycling.org.uk/club/profile/6660/knowsley-bmx-club" target="_blank">British Cycling</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Merseyside BMX Club. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('nav-links');
+    burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+      observer.observe(el);
+    });
+
+    const sections = document.querySelectorAll('section[id]');
+    const navAs = document.querySelectorAll('.nav-links a:not(.nav-shop)');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+      navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${cur}`));
+    }, { passive: true });
+  </script>
+</body>
+</html>

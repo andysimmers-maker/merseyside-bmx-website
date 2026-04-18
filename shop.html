@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Club Shop — Merseyside BMX Club</title>
+  <meta name="description" content="Official Merseyside BMX Club shop — jerseys, race plate stickers and club kit. Made to order, personalised with your rider's name." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #d42b2b; --red2: #b52020;
+      --black: #0f0f0f; --dark: #191919; --mid: #2a2a2a;
+      --border: #383838; --text: #e2e2e2; --muted: #aaa;
+      --blue: #1a3d8f; --blue2: #0d2660;
+      --white: #f6f6f6;
+      --fd: 'Bebas Neue', sans-serif; --fb: 'DM Sans', sans-serif;
+      --mw: 1100px; --pad: 5vw;
+      --green: #1e8a4a;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--fb); font-size: 16px; line-height: 1.65; overflow-x: hidden; background: var(--black); color: var(--text); }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 60px; background: var(--black); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 var(--pad); gap: 1rem; }
+    .nav-stripe { width: 4px; height: 26px; flex-shrink: 0; background: linear-gradient(to bottom, var(--red) 50%, var(--blue) 50%); }
+    .nav-logo img { height: 48px; width: auto; display: block; }
+    .nav-links { display: flex; list-style: none; margin-left: auto; }
+    .nav-links a { display: flex; align-items: center; height: 60px; padding: 0 0.85rem; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.06em; color: var(--text); text-decoration: none; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+    .nav-links a:hover { color: #fff; border-bottom-color: var(--red); }
+    .nav-links a.nav-shop { color: var(--red); background: transparent; border: 1px solid var(--red); border-bottom: 1px solid var(--red); padding: 0 1.1rem; }
+    .nav-links a.nav-shop:hover { background: var(--red); color: #fff; }
+    .nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 0; flex-direction: column; gap: 5px; margin-left: auto; }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: #fff; }
+    @media (max-width: 900px) {
+      .nav-links { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--dark); flex-direction: column; border-top: 1px solid var(--border); }
+      .nav-links.open { display: flex; }
+      .nav-links a { height: 50px; border-bottom: 1px solid var(--border); padding: 0 1.5rem; border-left: none; }
+      .nav-links a.nav-shop { background: none; color: var(--red); border: none; border-bottom: 1px solid var(--border); }
+      .nav-burger { display: flex; }
+    }
+
+    /* PAGE HEADER */
+    .page-header { padding: 7rem var(--pad) 3.5rem; background: var(--dark); border-bottom: 3px solid var(--red); }
+    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: var(--red); margin-bottom: 0.4rem; }
+    .page-header h1 { font-family: var(--fd); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 0.95; color: #fff; letter-spacing: 0.02em; }
+    .page-header p { font-size: 0.95rem; color: var(--muted); max-width: 560px; margin-top: 0.9rem; line-height: 1.75; }
+
+    /* DUAL DIVIDER */
+    .dd { height: 5px; background: linear-gradient(to right, var(--red) 25%, var(--black) 25% 50%, var(--blue) 50% 75%, #e0e0e0 75%); }
+
+    /* SHARED */
+    .container { max-width: var(--mw); margin: 0 auto; }
+    .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; margin-bottom: 0.4rem; }
+    .sec-title { font-family: var(--fd); font-size: clamp(2rem, 4vw, 3.2rem); line-height: 0.95; letter-spacing: 0.02em; }
+    .btn { display: inline-block; font-family: var(--fd); font-size: 1rem; letter-spacing: 0.08em; text-decoration: none; padding: 0.75rem 2rem; border-radius: 2px; cursor: pointer; border: none; transition: all 0.2s; text-align: center; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red2); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,43,43,0.3); }
+    .btn-blue { background: var(--blue); color: #fff; }
+    .btn-blue:hover { background: var(--blue2); transform: translateY(-2px); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* INFO BANNERS */
+    .info-banners { background: var(--dark); padding: 2.5rem var(--pad); border-top: 1px solid var(--border); }
+    .info-banners .container { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .info-banner { background: var(--black); border: 1px solid var(--border); padding: 1.25rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .info-banner-icon { font-size: 1.4rem; flex-shrink: 0; line-height: 1; margin-top: 0.1rem; }
+    .info-banner h4 { font-family: var(--fd); font-size: 0.85rem; letter-spacing: 0.15em; color: #fff; margin-bottom: 0.3rem; }
+    .info-banner p { font-size: 0.82rem; color: #bbb; line-height: 1.6; }
+    @media (max-width: 680px) { .info-banners .container { grid-template-columns: 1fr; } }
+
+    /* PRODUCTS */
+    #products { background: var(--black); padding: 5rem var(--pad); }
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 3rem; }
+    .product-card { background: var(--dark); display: flex; flex-direction: column; transition: background 0.2s; }
+    .product-card:hover { background: var(--mid); }
+    .product-img { background: #e8e8e8; display: flex; align-items: center; justify-content: center; padding: 2rem; min-height: 280px; }
+    .product-img img { max-height: 240px; max-width: 100%; width: auto; object-fit: contain; display: block; margin: 0 auto; }
+    .product-info { padding: 1.75rem; flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
+    .product-tag { font-family: var(--fd); font-size: 0.72rem; letter-spacing: 0.2em; }
+    .product-tag.youth { color: #7a9de8; }
+    .product-tag.adult { color: var(--red); }
+    .product-tag.plates { color: #aaa; }
+    .product-name { font-family: var(--fd); font-size: 1.5rem; letter-spacing: 0.04em; color: #fff; line-height: 1; }
+    .product-price { font-family: var(--fd); font-size: 1.8rem; color: var(--red); letter-spacing: 0.02em; margin-top: 0.25rem; }
+    .product-desc { font-size: 0.85rem; color: #bbb; line-height: 1.6; margin-top: 0.25rem; }
+    .product-cta { margin-top: auto; padding-top: 1.25rem; }
+    .product-cta button { width: 100%; display: block; font-family: var(--fd); font-size: 1rem; letter-spacing: 0.08em; padding: 0.75rem 2rem; cursor: pointer; border: none; transition: all 0.2s; }
+    .product-cta .btn-red { background: var(--red); color: #fff; }
+    .product-cta .btn-red:hover { background: var(--red2); transform: translateY(-2px); }
+    .product-cta .btn-blue { background: var(--blue); color: #fff; }
+    .product-cta .btn-blue:hover { background: var(--blue2); transform: translateY(-2px); }
+    @media (max-width: 860px) { .products-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .products-grid { grid-template-columns: 1fr; } }
+
+    /* BASKET */
+    #order-section { background: var(--dark); padding: 5rem var(--pad); border-top: 3px solid var(--red); }
+    #order-section .kicker { color: var(--red); }
+    #order-section .sec-title { color: #fff; }
+    .basket-empty { background: var(--black); border: 2px dashed var(--border); padding: 3rem 2rem; text-align: center; margin-top: 3rem; }
+    .basket-empty p { color: #bbb; font-size: 0.9rem; }
+    .basket-empty strong { display: block; font-family: var(--fd); font-size: 1.2rem; letter-spacing: 0.06em; color: #ddd; margin-bottom: 0.5rem; }
+    .basket-items { margin-top: 2rem; display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+    .basket-item { background: var(--black); padding: 1.25rem 1.5rem; display: flex; align-items: flex-start; gap: 1.5rem; }
+    .basket-item-info { flex: 1; }
+    .basket-item-name { font-family: var(--fd); font-size: 1rem; letter-spacing: 0.06em; color: #fff; }
+    .basket-item-details { font-size: 0.82rem; color: #bbb; margin-top: 0.25rem; }
+    .basket-item-price { font-family: var(--fd); font-size: 1.1rem; color: var(--red); white-space: nowrap; }
+    .basket-item-remove { background: none; border: 1px solid #333; color: #555; cursor: pointer; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.2s; flex-shrink: 0; margin-top: 2px; }
+    .basket-item-remove:hover { background: var(--red); border-color: var(--red); color: #fff; }
+    .basket-footer { background: var(--mid); padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1px; }
+    .basket-total { font-family: var(--fd); font-size: 1.4rem; color: #fff; letter-spacing: 0.04em; }
+    .basket-total span { color: var(--red); }
+    .checkout-btn { font-family: var(--fd); font-size: 1.1rem; letter-spacing: 0.1em; background: var(--red); color: #fff; border: none; padding: 0.85rem 2.5rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem; }
+    .checkout-btn:hover:not(:disabled) { background: var(--red2); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,43,43,0.3); }
+    .checkout-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .error-msg { background: #2a1010; border: 1px solid #6b1c1c; color: #e88; padding: 0.85rem 1rem; font-size: 0.85rem; margin-top: 1rem; display: none; line-height: 1.5; }
+    .error-msg.show { display: block; }
+
+    /* SUCCESS */
+    #success-section { display: none; background: var(--dark); padding: 5rem var(--pad); border-top: 3px solid var(--green); }
+    #success-section.show { display: block; }
+    .success-box { background: var(--black); border: 1px solid #1e8a4a55; padding: 3rem 2rem; text-align: center; max-width: 560px; margin: 0 auto; }
+    .success-box .icon { font-size: 3rem; margin-bottom: 1rem; }
+    .success-box h2 { font-family: var(--fd); font-size: 2rem; letter-spacing: 0.06em; color: #fff; margin-bottom: 0.75rem; }
+    .success-box p { font-size: 0.9rem; color: #666; line-height: 1.7; }
+
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 2000; align-items: center; justify-content: center; padding: 1rem; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--dark); border: 1px solid var(--border); width: 100%; max-width: 540px; max-height: 90vh; overflow-y: auto; position: relative; }
+    .modal-header { background: var(--black); padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1; }
+    .modal-title { font-family: var(--fd); font-size: 1.4rem; letter-spacing: 0.06em; color: #fff; }
+    .modal-close { background: none; border: 1px solid #333; color: #666; cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all 0.2s; }
+    .modal-close:hover { background: var(--red); border-color: var(--red); color: #fff; }
+    .modal-body { padding: 1.75rem; }
+    .modal-product-info { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem; padding-bottom: 1.75rem; border-bottom: 1px solid var(--border); }
+    .modal-product-img { width: 80px; height: 80px; background: #e8e8e8; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .modal-product-img img { max-width: 70px; max-height: 70px; object-fit: contain; }
+    .modal-product-name { font-family: var(--fd); font-size: 1.1rem; letter-spacing: 0.04em; color: #fff; }
+    .modal-product-price { font-family: var(--fd); font-size: 1.3rem; color: var(--red); margin-top: 0.2rem; }
+
+    /* FORM */
+    .field { margin-bottom: 1.25rem; }
+    .field label { display: block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; color: #aaa; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .field input, .field select { width: 100%; background: var(--black); border: 1px solid var(--border); color: var(--text); font-family: var(--fb); font-size: 0.95rem; padding: 0.7rem 0.9rem; outline: none; transition: border-color 0.2s; appearance: none; -webkit-appearance: none; border-radius: 0; }
+    .field input:focus, .field select:focus { border-color: var(--red); }
+    .field input::placeholder { color: #444; }
+    .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.5rem; }
+    .field select option { background: var(--dark); }
+    .field-note { font-size: 0.78rem; color: #555; margin-top: 0.35rem; line-height: 1.5; }
+    .field-note.highlight { color: #7a9de8; }
+
+    .size-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 0.5rem; }
+    .size-btn { background: var(--black); border: 1px solid var(--border); color: #888; font-family: var(--fb); font-size: 0.82rem; padding: 0.5rem 0.25rem; cursor: pointer; text-align: center; transition: all 0.2s; }
+    .size-btn:hover { border-color: #666; color: #fff; }
+    .size-btn.selected { background: var(--red); border-color: var(--red); color: #fff; font-weight: 600; }
+
+    .colour-grid { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .colour-btn { display: flex; align-items: center; gap: 0.5rem; background: var(--black); border: 1px solid var(--border); color: #888; font-family: var(--fb); font-size: 0.82rem; padding: 0.5rem 0.85rem; cursor: pointer; transition: all 0.2s; }
+    .colour-btn:hover { border-color: #666; color: #fff; }
+    .colour-btn.selected { border-color: #fff; color: #fff; background: var(--mid); }
+    .colour-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+
+    .modal-add-btn { width: 100%; font-family: var(--fd); font-size: 1.1rem; letter-spacing: 0.1em; background: var(--red); color: #fff; border: none; padding: 0.9rem; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem; }
+    .modal-add-btn:hover { background: var(--red2); }
+
+    /* HOW IT WORKS */
+    #how { background: var(--black); padding: 5rem var(--pad); border-top: 3px solid var(--blue); }
+    #how .kicker { color: var(--blue); }
+    #how .sec-title { color: #fff; }
+    .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-top: 3rem; }
+    .how-step { background: var(--dark); padding: 2rem; }
+    .how-num { font-family: var(--fd); font-size: 3rem; color: var(--blue); line-height: 1; opacity: 0.8; margin-bottom: 0.75rem; }
+    .how-title { font-family: var(--fd); font-size: 1.1rem; letter-spacing: 0.06em; color: #fff; margin-bottom: 0.5rem; }
+    .how-desc { font-size: 0.85rem; color: #bbb; line-height: 1.65; }
+    .order-note { background: var(--mid); border-left: 3px solid var(--blue); padding: 1.25rem 1.5rem; margin-top: 3rem; font-size: 0.9rem; color: #999; line-height: 1.65; }
+    .order-note strong { color: var(--text); }
+    @media (max-width: 860px) { .how-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .how-grid { grid-template-columns: 1fr; } }
+
+    /* FOOTER */
+    footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
+    .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }
+    .footer-logo img { height: 44px; width: auto; display: block; margin-bottom: 0.75rem; }
+    .footer-stripe { display: flex; gap: 4px; margin-bottom: 0.75rem; }
+    .footer-stripe span { height: 3px; width: 22px; border-radius: 1px; }
+    .footer-brand p { font-size: 0.82rem; color: #aaa; line-height: 1.6; margin-bottom: 0.35rem; }
+    .footer-brand a { color: #aaa; text-decoration: none; font-size: 0.82rem; }
+    .footer-brand a:hover { color: var(--red); }
+    .footer-social { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+    .footer-social a { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--mid); border: 1px solid var(--border); color: var(--text); text-decoration: none; transition: all 0.2s; }
+    .footer-social a:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    .footer-col h4 { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.2em; color: var(--red); margin-bottom: 0.75rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.35rem; }
+    .footer-col ul li a { font-size: 0.82rem; color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { max-width: var(--mw); margin: 2rem auto 0; padding-top: 1.25rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; color: #888; }
+    .footer-bottom a { color: #999; text-decoration: none; }
+    .footer-bottom a:hover { color: #fff; }
+    @media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-stripe"></div>
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="Merseyside BMX Club" /></a>
+    <button class="nav-burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#sessions">Sessions</a></li>
+      <li><a href="shop.html" class="nav-shop">Shop</a></li>
+      <li><a href="index.html#join">Join</a></li>
+      <li><a href="index.html#coaches">Coaches</a></li>
+      <li><a href="index.html#riders">Riders</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="kicker">Official Kit</div>
+    <h1>CLUB SHOP</h1>
+    <p>Official Merseyside BMX Club jerseys and race plate stickers. Made to order and personalised with your rider's details. Orders are placed with our supplier monthly.</p>
+  </div>
+
+  <div class="dd"></div>
+
+  <!-- INFO BANNERS -->
+  <div class="info-banners">
+    <div class="container">
+      <div class="info-banner reveal">
+        <div class="info-banner-icon">📏</div>
+        <div>
+          <h4>Jersey Sizing Advice</h4>
+          <p>We recommend sizing up to account for body armour worn underneath. If your rider is between sizes, go larger.</p>
+        </div>
+      </div>
+      <div class="info-banner reveal">
+        <div class="info-banner-icon">📦</div>
+        <div>
+          <h4>Monthly Bulk Orders</h4>
+          <p>All orders are placed with our supplier once a month. Payment is taken at the time of ordering to secure your place in the next batch.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dd"></div>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker" style="color:var(--red)">Race Kit</div>
+        <h2 class="sec-title" style="color:#fff">AVAILABLE PRODUCTS</h2>
+      </div>
+      <div class="products-grid reveal">
+
+        <div class="product-card">
+          <div class="product-img">
+            <img src="jersey_regional.jpg" alt="Merseyside BMX Youth Race Jersey" />
+          </div>
+          <div class="product-info">
+            <div class="product-tag youth">Youth</div>
+            <div class="product-name">YOUTH RACE JERSEY</div>
+            <div class="product-price">£32</div>
+            <p class="product-desc">Personalised with rider's name on the back. Sizes 5–6 up to 13–14. Size up to fit over body armour.</p>
+            <div class="product-cta">
+              <button class="btn-red" onclick="openModal('youth')">Add to Order →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img">
+            <img src="national_jersey_front.png" alt="Merseyside BMX Adult Race Jersey" />
+          </div>
+          <div class="product-info">
+            <div class="product-tag adult">Adult</div>
+            <div class="product-name">ADULT RACE JERSEY</div>
+            <div class="product-price">£35</div>
+            <p class="product-desc">Personalised with rider's name on the back. Sizes XS through to XXL. Size up to fit over body armour.</p>
+            <div class="product-cta">
+              <button class="btn-red" onclick="openModal('adult')">Add to Order →</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img" style="background:#fff;">
+            <img src="stickers.jpg" alt="Merseyside BMX Race Plate Stickers" />
+          </div>
+          <div class="product-info">
+            <div class="product-tag plates">Race Plates</div>
+            <div class="product-name">RACE PLATE STICKERS</div>
+            <div class="product-price">£25</div>
+            <p class="product-desc">Includes front plate and side plate numbers. Personalised with rider name, race number and age category.</p>
+            <div class="product-cta">
+              <button class="btn-blue" onclick="openModal('stickers')">Add to Order →</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="dd"></div>
+
+  <!-- BASKET -->
+  <section id="order-section">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">Your Order</div>
+        <h2 class="sec-title">ORDER BASKET</h2>
+      </div>
+
+      <div id="basket-empty" class="basket-empty reveal">
+        <strong>YOUR BASKET IS EMPTY</strong>
+        <p>Select a product above to add it to your order.</p>
+      </div>
+
+      <div id="basket-items" class="basket-items" style="display:none;"></div>
+
+      <div id="basket-footer" class="basket-footer" style="display:none;">
+        <div class="basket-total">TOTAL: <span id="basket-total-amount">£0</span></div>
+        <div>
+          <div id="checkout-error" class="error-msg"></div>
+          <button class="checkout-btn" id="checkout-btn" onclick="startCheckout()">
+            <span>Pay Securely with Stripe</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUCCESS -->
+  <section id="success-section">
+    <div class="container">
+      <div class="success-box">
+        <div class="icon">✅</div>
+        <h2>ORDER CONFIRMED!</h2>
+        <p>Thanks for your order. You'll receive a confirmation email shortly. Your items will be included in the next monthly bulk order — we'll be in touch when they're ready to collect.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="dd"></div>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">Process</div>
+        <h2 class="sec-title">HOW IT WORKS</h2>
+      </div>
+      <div class="how-grid reveal">
+        <div class="how-step">
+          <div class="how-num">1</div>
+          <div class="how-title">ADD TO BASKET</div>
+          <div class="how-desc">Select your products, choose sizes and enter your rider's personalisation details — name, race number and age.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">2</div>
+          <div class="how-title">PAY SECURELY</div>
+          <div class="how-desc">Checkout via Stripe. Payment is taken immediately and you'll receive an email confirmation of your order.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">3</div>
+          <div class="how-title">BULK ORDER</div>
+          <div class="how-desc">Your order is added to the club's monthly bulk order with our supplier. All personalisation is handled by us.</div>
+        </div>
+        <div class="how-step">
+          <div class="how-num">4</div>
+          <div class="how-title">COLLECTION</div>
+          <div class="how-desc">We'll let you know when your items arrive and arrange collection at the track. Allow a few weeks after the order date.</div>
+        </div>
+      </div>
+      <div class="order-note reveal">
+        <strong>Please note:</strong> Orders are placed monthly. Once your payment is made, your spot in the next order is confirmed. Allow 3–5 weeks from the order date for delivery to the club.
+      </div>
+    </div>
+  </section>
+
+  <div class="dd"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="logo.png" alt="Merseyside BMX Club" /></div>
+        <div class="footer-stripe">
+          <span style="background:var(--red);"></span>
+          <span style="background:rgba(255,255,255,0.2);"></span>
+          <span style="background:var(--blue);"></span>
+          <span style="background:var(--border);"></span>
+        </div>
+        <p>Knowsley Leisure and Culture Park<br>Longview Drive, Huyton, L36 6EG</p>
+        <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank" title="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/merseysidebmxclub?igsh=MWo2d2ZvcGZtc2pvNA==" target="_blank" title="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="mailto:merseysidebmx@gmail.com" title="Email">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>The Club</h4>
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#sessions">Club Sessions</a></li>
+          <li><a href="index.html#join">Join the Club</a></li>
+          <li><a href="index.html#coaches">Our Coaches</a></li>
+          <li><a href="index.html#riders">The Riders</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="shop.html">Club Shop</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+          <li><a href="sponsors.html">Our Sponsors</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="conduct.html">Code of Conduct</a></li>
+          <li><a href="https://www.britishcycling.org.uk/club/profile/6660/knowsley-bmx-club" target="_blank">British Cycling</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Merseyside BMX Club. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+
+  <!-- Youth Jersey -->
+  <div class="modal-overlay" id="modal-youth">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">YOUTH RACE JERSEY</div>
+        <button class="modal-close" onclick="closeModal('youth')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-product-info">
+          <div class="modal-product-img"><img src="jersey_regional.jpg" alt="Youth Jersey" /></div>
+          <div>
+            <div class="modal-product-name">Youth Race Jersey</div>
+            <div class="modal-product-price">£32 each</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Size <span style="color:var(--red)">*</span></label>
+          <div class="size-grid">
+            <button class="size-btn" onclick="selectSize('youth','5-6',this)">5–6</button>
+            <button class="size-btn" onclick="selectSize('youth','7-8',this)">7–8</button>
+            <button class="size-btn" onclick="selectSize('youth','9-10',this)">9–10</button>
+            <button class="size-btn" onclick="selectSize('youth','11-12',this)">11–12</button>
+            <button class="size-btn" onclick="selectSize('youth','13-14',this)">13–14</button>
+          </div>
+          <div class="field-note highlight">📏 Size up to account for body armour worn underneath.</div>
+        </div>
+        <div class="field">
+          <label>Rider Name — printed on back <span style="color:var(--red)">*</span></label>
+          <input type="text" id="youth-name" placeholder="e.g. SMITH" maxlength="20" />
+          <div class="field-note">Use capitals. This is exactly how it will be printed.</div>
+        </div>
+        <div class="field">
+          <label>Quantity</label>
+          <select id="youth-qty">
+            <option>1</option><option>2</option><option>3</option>
+          </select>
+        </div>
+        <button class="modal-add-btn" onclick="addToBasket('youth')">ADD TO ORDER — £32</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Adult Jersey -->
+  <div class="modal-overlay" id="modal-adult">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">ADULT RACE JERSEY</div>
+        <button class="modal-close" onclick="closeModal('adult')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-product-info">
+          <div class="modal-product-img"><img src="national_jersey_front.png" alt="Adult Jersey" /></div>
+          <div>
+            <div class="modal-product-name">Adult Race Jersey</div>
+            <div class="modal-product-price">£35 each</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Size <span style="color:var(--red)">*</span></label>
+          <div class="size-grid">
+            <button class="size-btn" onclick="selectSize('adult','XS',this)">XS</button>
+            <button class="size-btn" onclick="selectSize('adult','S',this)">S</button>
+            <button class="size-btn" onclick="selectSize('adult','M',this)">M</button>
+            <button class="size-btn" onclick="selectSize('adult','L',this)">L</button>
+            <button class="size-btn" onclick="selectSize('adult','XL',this)">XL</button>
+            <button class="size-btn" onclick="selectSize('adult','XXL',this)">XXL</button>
+          </div>
+          <div class="field-note highlight">📏 Size up to account for body armour worn underneath.</div>
+        </div>
+        <div class="field">
+          <label>Rider Name — printed on back <span style="color:var(--red)">*</span></label>
+          <input type="text" id="adult-name" placeholder="e.g. SMITH" maxlength="20" />
+          <div class="field-note">Use capitals. This is exactly how it will be printed.</div>
+        </div>
+        <div class="field">
+          <label>Quantity</label>
+          <select id="adult-qty">
+            <option>1</option><option>2</option><option>3</option>
+          </select>
+        </div>
+        <button class="modal-add-btn" onclick="addToBasket('adult')">ADD TO ORDER — £35</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stickers -->
+  <div class="modal-overlay" id="modal-stickers">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">RACE PLATE STICKERS</div>
+        <button class="modal-close" onclick="closeModal('stickers')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-product-info">
+          <div class="modal-product-img" style="background:#fff;"><img src="stickers.jpg" alt="Race Plate Stickers" /></div>
+          <div>
+            <div class="modal-product-name">Race Plate Stickers</div>
+            <div class="modal-product-price">£25 — includes side plate numbers</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Colour <span style="color:var(--red)">*</span></label>
+          <div class="colour-grid" id="sticker-colours">
+            <button class="colour-btn" onclick="selectColour('Red',this)"><span class="colour-dot" style="background:#d42b2b;"></span> Red</button>
+            <button class="colour-btn" onclick="selectColour('Yellow',this)"><span class="colour-dot" style="background:#e8c000;"></span> Yellow</button>
+            <button class="colour-btn" onclick="selectColour('Blue',this)"><span class="colour-dot" style="background:#1a3d8f;"></span> Blue</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Size <span style="color:var(--red)">*</span></label>
+          <div class="size-grid">
+            <button class="size-btn" onclick="selectSize('stickers','Small',this)">Small</button>
+            <button class="size-btn" onclick="selectSize('stickers','Large',this)">Large</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Rider Name <span style="color:var(--red)">*</span></label>
+          <input type="text" id="stickers-name" placeholder="e.g. SMITH" maxlength="20" />
+        </div>
+        <div class="field">
+          <label>Race Number <span style="color:var(--red)">*</span></label>
+          <input type="text" id="stickers-number" placeholder="e.g. 00" maxlength="6" />
+        </div>
+        <div class="field">
+          <label>Age Category <span style="color:var(--red)">*</span></label>
+          <input type="text" id="stickers-age" placeholder="e.g. 10" maxlength="4" />
+          <div class="field-note">Enter your rider's age as of <strong style="color:var(--text)">31st December of the racing year</strong>. If ordering in November or December for the following season, use the age they will turn in the new year.</div>
+        </div>
+        <div class="field">
+          <label>Quantity</label>
+          <select id="stickers-qty">
+            <option>1</option><option>2</option><option>3</option>
+          </select>
+        </div>
+        <button class="modal-add-btn" onclick="addToBasket('stickers')">ADD TO ORDER — £25</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // NAV
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('nav-links');
+    burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+    // REVEAL
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+      obs.observe(el);
+    });
+
+    // SUCCESS / CANCEL
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('success') === '1') {
+      document.getElementById('success-section').classList.add('show');
+      document.getElementById('order-section').style.display = 'none';
+    }
+
+    // STATE
+    let basket = [];
+    const selectedSizes = { youth: null, adult: null, stickers: null };
+    let selectedColour = null;
+    const PRICES = { youth: 32, adult: 35, stickers: 25 };
+    const NAMES  = { youth: 'Youth Race Jersey', adult: 'Adult Race Jersey', stickers: 'Race Plate Stickers' };
+
+    // MODAL
+    function openModal(type) {
+      document.getElementById('modal-' + type).classList.add('open');
+      document.body.style.overflow = 'hidden';
+      selectedSizes[type] = null;
+      if (type === 'stickers') selectedColour = null;
+      document.querySelectorAll('#modal-' + type + ' .size-btn, #modal-' + type + ' .colour-btn')
+        .forEach(b => b.classList.remove('selected'));
+      ['youth-name','adult-name','stickers-name','stickers-number','stickers-age'].forEach(id => {
+        const el = document.getElementById(id); if (el) el.value = '';
+      });
+      const qty = document.getElementById(type + '-qty'); if (qty) qty.value = '1';
+    }
+    function closeModal(type) {
+      document.getElementById('modal-' + type).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.modal-overlay').forEach(o => {
+      o.addEventListener('click', e => { if (e.target === o) { o.classList.remove('open'); document.body.style.overflow = ''; }});
+    });
+
+    function selectSize(type, size, btn) {
+      selectedSizes[type] = size;
+      btn.closest('.size-grid').querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    }
+    function selectColour(colour, btn) {
+      selectedColour = colour;
+      document.querySelectorAll('#sticker-colours .colour-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    }
+
+    // ADD TO BASKET
+    function addToBasket(type) {
+      const qty = parseInt(document.getElementById(type + '-qty').value);
+      if (!selectedSizes[type]) { alert('Please select a size.'); return; }
+
+      let details;
+      if (type === 'stickers') {
+        if (!selectedColour) { alert('Please select a colour.'); return; }
+        const name   = document.getElementById('stickers-name').value.trim();
+        const number = document.getElementById('stickers-number').value.trim();
+        const age    = document.getElementById('stickers-age').value.trim();
+        if (!name || !number || !age) { alert('Please fill in all rider details.'); return; }
+        details = `Size: ${selectedSizes.stickers} · Colour: ${selectedColour} · Name: ${name} · Number: ${number} · Age: ${age}`;
+      } else {
+        const riderName = document.getElementById(type + '-name').value.trim();
+        if (!riderName) { alert('Please enter the rider name.'); return; }
+        details = `Size: ${selectedSizes[type]} · Name: ${riderName}`;
+      }
+
+      for (let i = 0; i < qty; i++) {
+        basket.push({ id: Date.now() + i, type, name: NAMES[type], price: PRICES[type], details });
+      }
+      closeModal(type);
+      renderBasket();
+      setTimeout(() => document.getElementById('order-section').scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+    }
+
+    // RENDER BASKET
+    function renderBasket() {
+      const empty  = document.getElementById('basket-empty');
+      const items  = document.getElementById('basket-items');
+      const footer = document.getElementById('basket-footer');
+      if (basket.length === 0) {
+        empty.style.display = 'block'; items.style.display = 'none'; footer.style.display = 'none';
+        return;
+      }
+      empty.style.display = 'none'; items.style.display = 'flex'; footer.style.display = 'flex';
+      items.innerHTML = basket.map(item => `
+        <div class="basket-item">
+          <div class="basket-item-info">
+            <div class="basket-item-name">${item.name}</div>
+            <div class="basket-item-details">${item.details}</div>
+          </div>
+          <div class="basket-item-price">£${item.price}</div>
+          <button class="basket-item-remove" onclick="removeItem(${item.id})" title="Remove">✕</button>
+        </div>`).join('');
+      document.getElementById('basket-total-amount').textContent = '£' + basket.reduce((s, i) => s + i.price, 0);
+    }
+    function removeItem(id) { basket = basket.filter(i => i.id !== id); renderBasket(); }
+
+    // CHECKOUT
+    async function startCheckout() {
+      if (!basket.length) return;
+      const btn = document.getElementById('checkout-btn');
+      const err = document.getElementById('checkout-error');
+      btn.disabled = true;
+      btn.querySelector('span').textContent = 'Redirecting to payment…';
+      err.classList.remove('show');
+      try {
+        const res  = await fetch('/.netlify/functions/create-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items: basket })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Something went wrong');
+        window.location.href = data.url;
+      } catch (e) {
+        err.textContent = 'Payment could not be started: ' + e.message + '. Please try again or contact us.';
+        err.classList.add('show');
+        btn.disabled = false;
+        btn.querySelector('span').textContent = 'Pay Securely with Stripe';
+      }
+    }
+  </script>
+</body>
+</html>

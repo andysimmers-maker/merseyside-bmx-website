@@ -1,0 +1,8 @@
+{
+  "name": "merseyside-bmx-functions",
+  "version": "1.0.0",
+  "description": "Netlify functions for Merseyside BMX Club shop",
+  "dependencies": {
+    "stripe": "^14.0.0"
+  }
+}

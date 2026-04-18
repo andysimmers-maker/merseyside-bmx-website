@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code of Conduct — Merseyside BMX Club</title>
+  <meta name="description" content="The Code of Conduct for Merseyside BMX Club — standards expected of all riders, parents, coaches and volunteers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #d42b2b; --red2: #b52020;
+      --black: #0f0f0f; --dark: #191919; --mid: #2a2a2a;
+      --border: #383838; --text: #e2e2e2; --muted: #aaa;
+      --blue: #1a3d8f; --blue2: #0d2660;
+      --white: #f6f6f6; --rtext: #181818; --rmuted: #666;
+      --fd: 'Bebas Neue', sans-serif; --fb: 'DM Sans', sans-serif;
+      --mw: 860px; --pad: 5vw;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--fb); font-size: 16px; line-height: 1.65; overflow-x: hidden; background: var(--white); color: var(--rtext); }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 60px; background: var(--black); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 var(--pad); gap: 1rem; }
+    .nav-stripe { width: 4px; height: 26px; flex-shrink: 0; background: linear-gradient(to bottom, var(--red) 50%, var(--blue) 50%); }
+    .nav-logo img { height: 38px; width: auto; display: block; }
+    .nav-back { margin-left: auto; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.08em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: #fff; }
+
+    /* PAGE HEADER */
+    .page-header { padding: 7rem var(--pad) 3.5rem; background: var(--dark); border-bottom: 3px solid var(--blue); }
+    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: #7a9de8; margin-bottom: 0.4rem; }
+    .page-header h1 { font-family: var(--fd); font-size: clamp(2.5rem, 5vw, 4rem); line-height: 0.95; color: #fff; }
+    .page-header p { font-size: 0.95rem; color: var(--muted); max-width: 580px; margin-top: 0.9rem; line-height: 1.75; }
+
+    /* CONTENT */
+    .conduct-page { max-width: var(--mw); margin: 0 auto; padding: 4rem var(--pad) 5rem; }
+
+    .note { font-size: 0.83rem; color: #999; font-style: italic; margin-bottom: 2rem; padding: 0.75rem 1rem; background: #f0f0f0; border-left: 3px solid #ccc; }
+
+    /* Section */
+    .conduct-section { margin-bottom: 3rem; }
+
+    .conduct-section-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.5rem; padding-bottom: 0.75rem;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    .section-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .section-title { font-family: var(--fd); font-size: 1.6rem; letter-spacing: 0.04em; color: var(--rtext); }
+
+    /* Intro para */
+    .conduct-intro { font-size: 0.93rem; color: var(--rmuted); line-height: 1.75; margin-bottom: 1.5rem; }
+    .conduct-intro strong { color: var(--rtext); }
+
+    /* Conduct lists */
+    .conduct-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .conduct-list li {
+      font-size: 0.91rem; color: #444; line-height: 1.6;
+      padding: 0.7rem 1rem 0.7rem 1rem;
+      background: #fff; border: 1px solid #e8e8e8;
+      border-left: 3px solid; display: flex; gap: 0.75rem; align-items: flex-start;
+    }
+    .conduct-list li::before { font-weight: bold; flex-shrink: 0; margin-top: 0.05rem; }
+
+    .conduct-list.blue li { border-left-color: var(--blue); }
+    .conduct-list.blue li::before { content: '✓'; color: var(--blue); }
+
+    .conduct-list.red li { border-left-color: var(--red); }
+    .conduct-list.red li::before { content: '✓'; color: var(--red); }
+
+    .conduct-list.green li { border-left-color: #2a7a3e; }
+    .conduct-list.green li::before { content: '✓'; color: #2a7a3e; }
+
+    .conduct-list li strong { color: var(--rtext); }
+
+    /* Rights box */
+    .rights-box { background: #f0f4ff; border: 1px solid #c8d5f5; border-left: 3px solid var(--blue); padding: 1.4rem 1.5rem; margin-bottom: 1.5rem; }
+    .rights-box h4 { font-family: var(--fd); font-size: 1rem; letter-spacing: 0.1em; color: var(--blue); margin-bottom: 0.75rem; }
+    .rights-box ul { list-style: none; }
+    .rights-box ul li { font-size: 0.88rem; color: #444; padding: 0.22rem 0; display: flex; gap: 0.5rem; line-height: 1.55; }
+    .rights-box ul li::before { content: '→'; color: var(--blue); flex-shrink: 0; }
+
+    /* Consequences box */
+    .consequences-box { background: #fff5f5; border: 1px solid #f5c5c5; border-left: 3px solid var(--red); padding: 1.25rem 1.5rem; margin-top: 1rem; }
+    .consequences-box h4 { font-family: var(--fd); font-size: 0.95rem; letter-spacing: 0.1em; color: var(--red); margin-bottom: 0.5rem; }
+    .consequences-box p { font-size: 0.88rem; color: #444; line-height: 1.65; }
+
+    /* Online safety box */
+    .online-box { background: #f0f4ff; border: 1px solid #c8d5f5; padding: 1.5rem; margin-top: 1.5rem; }
+    .online-box h4 { font-family: var(--fd); font-size: 1.1rem; letter-spacing: 0.06em; color: var(--blue); margin-bottom: 0.85rem; }
+    .online-box p { font-size: 0.88rem; color: var(--rmuted); line-height: 1.7; margin-bottom: 0.75rem; }
+    .online-box p:last-child { margin-bottom: 0; }
+    .online-commitments { list-style: none; margin-top: 0.75rem; }
+    .online-commitments li { font-size: 0.88rem; color: #444; padding: 0.3rem 0; display: flex; gap: 0.5rem; line-height: 1.55; border-bottom: 1px solid #dde8ff; }
+    .online-commitments li:last-child { border-bottom: none; }
+    .online-commitments li::before { content: '→'; color: var(--blue); flex-shrink: 0; }
+
+    /* Childline callout */
+    .childline-box { background: var(--blue); color: #fff; padding: 1.25rem 1.5rem; margin-top: 1rem; display: flex; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+    .childline-box strong { font-family: var(--fd); font-size: 1rem; letter-spacing: 0.06em; display: block; margin-bottom: 0.25rem; }
+    .childline-box p { font-size: 0.88rem; opacity: 0.88; }
+    .childline-box a { color: #fff; font-weight: 600; }
+
+    /* Welfare officer box */
+    .welfare-box { background: #fff; border: 1px solid #e0e0e0; border-left: 3px solid var(--red); padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
+    .welfare-box h4 { font-family: var(--fd); font-size: 0.95rem; letter-spacing: 0.1em; color: var(--red); margin-bottom: 0.4rem; }
+    .welfare-box p { font-size: 0.88rem; color: #555; line-height: 1.65; }
+    .welfare-box a { color: var(--blue); text-decoration: none; }
+    .welfare-box a:hover { text-decoration: underline; }
+
+    /* Waiver CTA */
+    .waiver-cta { background: var(--dark); border: 1px solid var(--border); padding: 2rem; margin-top: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+    .waiver-cta h3 { font-family: var(--fd); font-size: 1.3rem; letter-spacing: 0.06em; color: #fff; }
+    .waiver-cta p { font-size: 0.88rem; color: #aaa; margin-top: 0.25rem; max-width: 440px; }
+    .btn { display: inline-block; font-family: var(--fd); font-size: 1rem; letter-spacing: 0.08em; text-decoration: none; padding: 0.75rem 2rem; border-radius: 2px; cursor: pointer; border: none; transition: all 0.2s; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red2); transform: translateY(-2px); }
+
+    /* Footer */
+    footer { background: #080808; border-top: 1px solid var(--border); padding: 1.5rem var(--pad); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.78rem; color: #333; }
+    footer a { color: #444; text-decoration: none; }
+    footer a:hover { color: #fff; }
+
+    @media (max-width: 600px) { .waiver-cta { flex-direction: column; align-items: flex-start; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-stripe"></div>
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="Merseyside BMX Club" /></a>
+    <a href="index.html" class="nav-back">← Back to site</a>
+  </nav>
+
+  <div class="page-header">
+    <div class="kicker">Club Standards</div>
+    <h1>CODE OF CONDUCT</h1>
+    <p>At Merseyside BMX Club we are proud to foster a respectful, inclusive and supportive environment on and off the track. This code sets out what we expect from everyone involved — and what you can expect from us in return.</p>
+  </div>
+
+  <div class="conduct-page">
+
+    <p class="note">Note: Where we refer to 'parents' we mean parents and carers inclusively. This code applies to all riders, parents, coaches, volunteers and spectators.</p>
+
+    <!-- ── YOUNG RIDERS ── -->
+    <div class="conduct-section">
+      <div class="conduct-section-header">
+        <span class="section-icon">🚲</span>
+        <div class="section-title">YOUNG RIDERS</div>
+      </div>
+      <p class="conduct-intro">We expect all young riders to respect their coaches, fellow riders and our facilities. These standards help keep sessions safe, fun and fair for everyone.</p>
+
+      <ul class="conduct-list blue">
+        <li>Keep yourself safe — listen to your coach, behave responsibly, and speak up if something isn't right.</li>
+        <li>Stay in the areas you're supposed to be in. Don't wander off or leave without telling a coach.</li>
+        <li>Arrive on time. If you're running late, let a member of staff know.</li>
+        <li>Bring the right kit and wear it — including appropriate clothing for the weather.</li>
+        <li>Take care of club equipment and facilities as if they were your own.</li>
+        <li>Don't smoke or consume alcohol on our premises, during sessions or when representing the club.</li>
+        <li>Respect and celebrate difference — do not discriminate against anyone on the grounds of gender, race, sexual orientation or ability.</li>
+        <li>Treat other riders with respect. Everyone has different skill levels — encourage each other rather than put each other down.</li>
+        <li>Make the club a welcoming and friendly place. Support and encourage your teammates.</li>
+        <li>Respect coaches, the management team, and riders from other clubs.</li>
+        <li>Report any incidents of bullying to a coach or the Welfare Officer — even if you're just a witness.</li>
+        <li>Follow our online safety and internet use policies (see below).</li>
+      </ul>
+
+      <div class="rights-box">
+        <h4>YOUR RIGHTS AS A YOUNG RIDER</h4>
+        <ul>
+          <li>To enjoy your time with us and know that you are safe.</li>
+          <li>To be told who you can talk to if something isn't right.</li>
+          <li>To be included, listened to and involved in club decisions.</li>
+          <li>To be respected by us and other members, and treated fairly.</li>
+          <li>To feel welcomed and valued — regardless of your race, gender, sexuality or ability.</li>
+          <li>To be encouraged and supported to develop your skills.</li>
+          <li>To be looked after if there's an accident or injury, with your parents informed.</li>
+        </ul>
+      </div>
+
+      <div class="consequences-box">
+        <h4>BREACH OF THIS CODE</h4>
+        <p>If any young person's behaviour contradicts this code, we will address it straight away with the involvement of parents and aim to resolve the issue. Persistent or serious breaches may ultimately result in the rider being asked to leave the club — something we never want to happen, but must reserve the right to do.</p>
+      </div>
+    </div>
+
+    <!-- ── PARENTS & CARERS ── -->
+    <div class="conduct-section">
+      <div class="conduct-section-header">
+        <span class="section-icon">👨‍👩‍👧</span>
+        <div class="section-title">PARENTS &amp; CARERS</div>
+      </div>
+      <p class="conduct-intro">Parents and carers play a vital role in making our club a positive place. Your attitude and behaviour on the sidelines shapes the experience not just for your child, but for every rider at the club.</p>
+
+      <ul class="conduct-list red">
+        <li>Behave positively on the sidelines — your reactions affect all children, not just your own.</li>
+        <li>Encourage your child to enjoy the full benefits of BMX — making friends, learning skills, staying active — not just results.</li>
+        <li>Listen when your child says they don't want to do something.</li>
+        <li>Maintain a respectful relationship with your child's coach. Raise any concerns with us directly and calmly.</li>
+        <li>Talk to your child about good sportsmanship and make sure they understand their own Code of Conduct.</li>
+        <li>Ensure your child arrives on time and with the correct kit.</li>
+        <li>Use social media responsibly — behave online as you would in person at the club.</li>
+        <li>Remain on-site during sessions — a parent or guardian must be present at all times.</li>
+      </ul>
+
+      <div class="rights-box">
+        <h4>YOUR RIGHTS AS A PARENT OR CARER</h4>
+        <ul>
+          <li>To be assured that your child is safeguarded during their time with us.</li>
+          <li>To see any of our policies and procedures at any time.</li>
+          <li>To know who the Welfare Officer is and have their contact details.</li>
+          <li>To know what training and qualifications our coaches hold.</li>
+          <li>To be informed of any problems or concerns relating to your child.</li>
+          <li>To know what happens in the event of an accident or injury, and to be informed promptly if your child is injured.</li>
+          <li>To have any concerns about your child's welfare listened to and responded to.</li>
+        </ul>
+      </div>
+
+      <div class="consequences-box">
+        <h4>PERSISTENT CONCERNS</h4>
+        <p>If a parent's behaviour is considered a risk to the welfare and enjoyment of other participants, we may ask them not to attend sessions. In serious or repeated cases, this may ultimately affect a child's place at the club.</p>
+      </div>
+    </div>
+
+    <!-- ── SAFEGUARDING & ONLINE SAFETY ── -->
+    <div class="conduct-section">
+      <div class="conduct-section-header">
+        <span class="section-icon">🛡️</span>
+        <div class="section-title">SAFEGUARDING &amp; ONLINE SAFETY</div>
+      </div>
+      <p class="conduct-intro">The safety and welfare of our young members is our highest priority. We are committed to upholding British Cycling safeguarding standards and ensuring all children feel safe and protected in our care.</p>
+
+      <div class="online-box">
+        <h4>ONLINE SAFETY</h4>
+        <p>Merseyside BMX Club recognises the importance of online communication and equally recognises the need to keep children safe online. We ask all parents and carers to read and discuss the following commitments with their child before participating.</p>
+        <p><strong>As a young person, I agree to:</strong></p>
+        <ul class="online-commitments">
+          <li>Be responsible for my behaviour when using my phone at the club, including the content I access and how I conduct myself.</li>
+          <li>Not deliberately create, browse or access material that could be considered offensive or illegal.</li>
+          <li>Not use social media or the internet to send anyone material that could be considered threatening, offensive, upsetting or bullying.</li>
+          <li>Only use the club's official social media or website channels to contact us — I will not seek out individual members' personal profiles or contact details.</li>
+          <li>Report any online bullying or abuse related to the club to a coach or the Welfare Officer.</li>
+        </ul>
+      </div>
+
+      <div class="childline-box">
+        <div>
+          <strong>Childline</strong>
+          <p>Young people can contact Childline for free, confidential support at any time.<br>
+          Call <a href="tel:08001111"><strong>0800 1111</strong></a> (free, 24/7) or visit <a href="https://www.childline.org.uk" target="_blank"><strong>childline.org.uk</strong></a></p>
+        </div>
+      </div>
+
+      <div class="welfare-box">
+        <h4>WELFARE OFFICER</h4>
+        <p>Merseyside BMX Club has a designated Welfare Officer who is responsible for safeguarding matters at the club. If you have any concerns about the welfare of a young person, please contact us at <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a> and we will put you in touch with the right person.</p>
+      </div>
+    </div>
+
+    <!-- ── COACHES & VOLUNTEERS ── -->
+    <div class="conduct-section">
+      <div class="conduct-section-header">
+        <span class="section-icon">🏅</span>
+        <div class="section-title">COACHES &amp; VOLUNTEERS</div>
+      </div>
+      <p class="conduct-intro">Our coaches and volunteers set the tone for the whole club. We hold ourselves to the same high standards we ask of our members.</p>
+
+      <ul class="conduct-list green">
+        <li>Put the safety and wellbeing of all riders above everything else at all times.</li>
+        <li>Treat all riders and parents with respect, fairness and consistency.</li>
+        <li>Uphold the club's inclusive values — welcoming riders of all backgrounds, abilities and ages.</li>
+        <li>Maintain appropriate professional boundaries with all club members at all times.</li>
+        <li>Hold valid British Cycling coaching qualifications relevant to the level being coached.</li>
+        <li>Never work alone with a young person where possible — follow the club's two-adult approach.</li>
+        <li>Report any safeguarding concerns immediately to the Welfare Officer.</li>
+        <li>Lead by example — act as an ambassador for the club and the sport both on and off the track.</li>
+      </ul>
+    </div>
+
+    <!-- Waiver CTA -->
+    <div class="waiver-cta">
+      <div>
+        <h3>READ &amp; AGREE TO THIS CODE</h3>
+        <p>All riders and parents are required to read this Code of Conduct and complete our waiver form before participating in club sessions.</p>
+      </div>
+      <!--
+        REPLACE THE HREF BELOW WITH YOUR GOOGLE FORM WAIVER LINK
+        e.g. href="https://forms.gle/YOURFORMLINK"
+      -->
+      <a href="https://forms.gle/a4K64z4J81WpgJLj6" target="_blank" class="btn btn-red">Complete the Waiver Form →</a>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>© 2026 Merseyside BMX Club</span>
+    <span><a href="index.html">← Back to main site</a> · <a href="faq.html">FAQs</a> · <a href="sponsors.html">Sponsors</a></span>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQs — Merseyside BMX Club</title>
+  <meta name="description" content="Frequently asked questions about Merseyside BMX Club — sessions, coaching, kit, membership and racing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #d42b2b; --red2: #b52020;
+      --black: #0f0f0f; --dark: #191919; --mid: #2a2a2a;
+      --border: #383838; --text: #e2e2e2; --muted: #aaa;
+      --blue: #1a3d8f; --blue2: #0d2660;
+      --fd: 'Bebas Neue', sans-serif; --fb: 'DM Sans', sans-serif;
+      --mw: 860px; --pad: 5vw;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--fb); font-size: 16px; line-height: 1.65; overflow-x: hidden; background: var(--black); color: var(--text); }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 60px; background: var(--black); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 var(--pad); gap: 1rem; }
+    .nav-stripe { width: 4px; height: 26px; flex-shrink: 0; background: linear-gradient(to bottom, var(--red) 50%, var(--blue) 50%); }
+    .nav-logo img { height: 38px; width: auto; display: block; }
+    .nav-back { margin-left: auto; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.08em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: #fff; }
+
+    /* PAGE HEADER */
+    .page-header { padding: 7rem var(--pad) 3.5rem; background: var(--dark); border-bottom: 3px solid var(--red); }
+    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: var(--red); margin-bottom: 0.4rem; }
+    .page-header h1 { font-family: var(--fd); font-size: clamp(2.5rem, 5vw, 4rem); line-height: 0.95; color: #fff; }
+    .page-header p { font-size: 0.95rem; color: var(--muted); max-width: 560px; margin-top: 0.9rem; line-height: 1.75; }
+    .page-header a { color: var(--red); text-decoration: none; }
+    .page-header a:hover { text-decoration: underline; }
+
+    /* CONTENT */
+    .faq-page { max-width: var(--mw); margin: 0 auto; padding: 4rem var(--pad) 5rem; }
+
+    /* Category filter nav */
+    .faq-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .faq-nav-btn {
+      font-family: var(--fd); font-size: 0.85rem; letter-spacing: 0.1em;
+      padding: 0.45rem 1rem; background: var(--mid); border: 1px solid var(--border);
+      color: var(--muted); cursor: pointer; border-radius: 2px; transition: all 0.2s;
+    }
+    .faq-nav-btn:hover { color: var(--text); border-color: var(--muted); }
+    .faq-nav-btn.active { background: var(--red); border-color: var(--red); color: #fff; }
+
+    /* Category block */
+    .faq-category { margin-bottom: 3.5rem; }
+    .faq-cat-title {
+      font-family: var(--fd); font-size: 1.4rem; letter-spacing: 0.06em;
+      color: var(--red); border-bottom: 1px solid var(--border);
+      padding-bottom: 0.6rem; margin-bottom: 1.25rem;
+    }
+
+    /* Accordion */
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      width: 100%; background: none; border: none; text-align: left;
+      padding: 1.1rem 0; cursor: pointer;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+    }
+    .faq-q-text { font-size: 0.97rem; font-weight: 600; color: var(--text); line-height: 1.45; font-family: var(--fb); }
+    .faq-q:hover .faq-q-text { color: #fff; }
+    .faq-icon {
+      flex-shrink: 0; width: 22px; height: 22px;
+      border: 1px solid var(--border); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; color: var(--muted); transition: all 0.25s; margin-top: 0.1rem;
+    }
+    .faq-item.open .faq-icon { background: var(--red); border-color: var(--red); color: #fff; transform: rotate(45deg); }
+    .faq-a { display: none; padding: 0 0 1.25rem; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-a p { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 0.6rem; }
+    .faq-a p:last-child { margin-bottom: 0; }
+    .faq-a a { color: var(--red); text-decoration: none; }
+    .faq-a a:hover { text-decoration: underline; }
+    .faq-a strong { color: var(--text); }
+    .faq-a ul { list-style: none; margin: 0.5rem 0; }
+    .faq-a ul li { font-size: 0.9rem; color: var(--muted); padding: 0.2rem 0; display: flex; gap: 0.5rem; line-height: 1.6; }
+    .faq-a ul li::before { content: '→'; color: var(--red); flex-shrink: 0; }
+
+    /* Age category table */
+    .age-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.88rem; }
+    .age-table th { font-family: var(--fd); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--muted); padding: 0.4rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+    .age-table td { padding: 0.5rem 0.75rem; color: var(--muted); border-bottom: 1px solid #222; }
+    .age-table td:first-child { color: var(--text); font-weight: 600; }
+
+    /* Pricing callout */
+    .price-note { background: var(--mid); border-left: 3px solid var(--blue); padding: 0.85rem 1rem; margin-top: 0.75rem; font-size: 0.88rem; color: var(--muted); }
+    .price-note strong { color: var(--text); }
+
+    /* CTA at bottom */
+    .faq-cta { background: var(--dark); border: 1px solid var(--border); border-left: 3px solid var(--blue); padding: 2rem; margin-top: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+    .faq-cta h3 { font-family: var(--fd); font-size: 1.3rem; letter-spacing: 0.06em; color: #fff; }
+    .faq-cta p { font-size: 0.88rem; color: var(--muted); margin-top: 0.25rem; }
+    .btn { display: inline-block; font-family: var(--fd); font-size: 1rem; letter-spacing: 0.08em; text-decoration: none; padding: 0.7rem 1.8rem; border-radius: 2px; cursor: pointer; border: none; transition: all 0.2s; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red2); transform: translateY(-2px); }
+
+    /* Footer */
+    footer { background: #080808; border-top: 1px solid var(--border); padding: 1.5rem var(--pad); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.78rem; color: #333; }
+    footer a { color: #444; text-decoration: none; }
+    footer a:hover { color: #fff; }
+
+    @media (max-width: 600px) { .faq-cta { flex-direction: column; align-items: flex-start; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-stripe"></div>
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="Merseyside BMX Club" /></a>
+    <a href="index.html" class="nav-back">← Back to site</a>
+  </nav>
+
+  <div class="page-header">
+    <div class="kicker">Help &amp; Info</div>
+    <h1>FREQUENTLY ASKED<br>QUESTIONS</h1>
+    <p>Everything you need to know about sessions, coaching, kit, membership and racing at Merseyside BMX Club. Can't find your answer? <a href="index.html#contact">Drop us a message.</a></p>
+  </div>
+
+  <div class="faq-page">
+
+    <!-- Category filter -->
+    <div class="faq-nav" id="faq-nav">
+      <button class="faq-nav-btn active" data-cat="all">All</button>
+      <button class="faq-nav-btn" data-cat="getting-started">Getting Started</button>
+      <button class="faq-nav-btn" data-cat="sessions">Sessions &amp; Coaching</button>
+      <button class="faq-nav-btn" data-cat="kit">Kit &amp; Equipment</button>
+      <button class="faq-nav-btn" data-cat="membership">Membership</button>
+      <button class="faq-nav-btn" data-cat="racing">Racing</button>
+      <button class="faq-nav-btn" data-cat="getinvolved">Get Involved</button>
+    </div>
+
+    <!-- ── GETTING STARTED ── -->
+    <div class="faq-category" data-cat="getting-started">
+      <div class="faq-cat-title">GETTING STARTED</div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">What age can my child start BMX?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>We welcome riders from as young as <strong>4 years old</strong>. The key requirement is that they can ride a bike standing up — but this isn't always essential. We also welcome younger children on balance bikes to get a feel for the BMX environment. There's no upper age limit — sessions cater for all ages and abilities.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">Do I need to book in advance or can I just turn up?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>You can just turn up — no booking required for your first visit. We do recommend <a href="index.html#contact">getting in touch beforehand</a> so we know you're coming and can make sure someone is on hand to welcome you.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">How much does the first session cost?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Your <strong>first session is free</strong>. After that, sessions cost £3 for members and £5 for non-members. Bike and kit hire is an additional £3 per session.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">What's the best session to try first?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>The best place to start is our <strong>Thursday Level 1 coaching session, 17:15–18:15</strong>. It's designed specifically for new riders — coaches will assess your child and provide tailored guidance from day one. Please <a href="index.html#contact">get in touch</a> before attending so we can expect you.</p>
+          <p>You're also welcome to come and watch a Tuesday or Thursday session before joining, to get a feel for the club.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">Do I need to stay during the session?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Yes — we require a parent or guardian to remain on-site during all sessions. You're welcome to watch and cheer from the sidelines.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">What are the benefits of joining a BMX club?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>BMX racing develops physical fitness, coordination and discipline in a fun, outdoor environment. It's also a brilliant way to make friends and build confidence. Our club offers a structured pathway from complete beginner right through to national-level competition — there's always a next step to aim for.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">Can siblings come along and join in?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Absolutely — siblings are welcome to join in as long as they meet the age and basic skill requirements. If they're not ready to ride yet they're welcome to watch, and they can join in when they feel ready.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">What happens if the weather is bad?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>We ride in most weather conditions. If a session needs to be cancelled due to unsafe conditions, we'll post an update on our <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank">Facebook page</a> and <a href="https://www.instagram.com/merseysidebmxclub" target="_blank">Instagram</a> by 4pm on the day. Always worth checking before you travel.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── SESSIONS & COACHING ── -->
+    <div class="faq-category" data-cat="sessions">
+      <div class="faq-cat-title">SESSIONS &amp; COACHING</div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">When do sessions run?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <ul>
+            <li><strong>Tuesday</strong> — Open Gates, 18:15–20:00. All welcome.</li>
+            <li><strong>Wednesday</strong> — Race Development with Quillan Isidore. Invite only.</li>
+            <li><strong>Thursday</strong> — Coaching for all levels (see times below).</li>
+            <li><strong>Saturday &amp; Sunday</strong> — Coming soon. Follow our social media for updates.</li>
+          </ul>
+          <div class="price-note">
+            <strong>Thursday coaching times:</strong><br>
+            L1 Foundations — 17:15–18:15 &nbsp;|&nbsp;
+            L2 Development — 18:30–19:30 &nbsp;|&nbsp;
+            L3 Regional — 18:00–19:30 &nbsp;|&nbsp;
+            L4 National — 19:15–20:45
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">How much do sessions cost?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Your first session is <strong>free</strong>. After that:</p>
+          <ul>
+            <li>Members — £3 per session</li>
+            <li>Non-members — £5 per session</li>
+            <li>Bike &amp; kit hire — £3 per session (additional)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">What are the coaching levels and who are they for?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <ul>
+            <li><strong>Level 1 — Foundations:</strong> For brand new riders. Flatland skills, gate introduction and track basics. Riders must be able to ride standing up.</li>
+            <li><strong>Level 2 — Development:</strong> Racing lines, pumping technique and preparation for regional novice racing.</li>
+            <li><strong>Level 3 — Regional:</strong> Advanced skills including manualing and jumping. Preparation for national-level racing begins.</li>
+            <li><strong>Level 4 — National:</strong> Elite race craft, fitness and mental focus. Coached by Quillan Isidore.</li>
+          </ul>
+          <p>New riders must join Level 1 for an initial assessment before progressing. Please <a href="index.html#contact">get in touch</a> to book your place.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">Who are the coaches?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>All our coaches are British Cycling BMX-qualified:</p>
+          <ul>
+            <li><strong>Quillan Isidore</strong> — Levels 3 &amp; 4. 2012 UCI World Champion (U16) and multiple-time British National Champion.</li>
+            <li><strong>Coach Michael</strong> — Level 2. Specialises in building confidence in new and young riders.</li>
+            <li><strong>Coach Karl</strong> — Level 1. Focused on introducing beginners to the sport.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">What is the Tuesday Open Gates session?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Tuesday evenings (18:15–20:00) are open gate sessions — the start gate is running and the track is open for all members and visitors to ride. It's great for building track time and confidence. If it's your first time, please <a href="index.html#contact">get in touch beforehand</a>.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── KIT & EQUIPMENT ── -->
+    <div class="faq-category" data-cat="kit">
+      <div class="faq-cat-title">KIT &amp; EQUIPMENT</div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">What does my child need to wear?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <ul>
+            <li><strong>Full-face helmet</strong> — mandatory at all times while riding</li>
+            <li><strong>Gloves</strong> — mandatory</li>
+            <li><strong>Long sleeves and long trousers</strong> — no shorts</li>
+            <li>Knee pads, elbow pads and body armour — recommended but not required</li>
+          </ul>
+          <p>All essential safety gear can be hired from us for £3 per session if you don't have your own.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">Can I hire a bike and equipment?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Yes — bike and kit hire is available for <strong>£3 per session</strong>. This includes a bike, full-face helmet, pads and gloves. We have a full range of sizes from micro minis to cruisers. Hire is on a first-come, first-served basis and availability is limited, so arriving early is recommended.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">Do I need to buy a BMX bike before joining?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>No — you can hire a bike from us for £3 per session while you decide if the sport is right for you. Once you're sure, investing in your own bike will give you the best experience on the track.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">Can my child use a non-BMX bike?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Yes — you can bring a BMX, jump bike or MTB (no stunt pegs). A BMX is always preferable as it's designed for the track, but a non-BMX bike is fine while you're getting started, especially if our hire bikes are unavailable.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">How do I order official club kit?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Club jerseys are made to order and personalised with your rider's name on the back. Race plate stickers and other club merchandise are also available. Visit our <a href="shop.html">club shop</a> or <a href="index.html#contact">contact us</a> to place an order.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── MEMBERSHIP ── -->
+    <div class="faq-category" data-cat="membership">
+      <div class="faq-cat-title">MEMBERSHIP</div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">How do I join Merseyside BMX Club?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Membership is handled through <a href="https://www.britishcycling.org.uk/club/profile/6660/knowsley-bmx-club" target="_blank">British Cycling</a>. We offer Junior (age 4–16) and Adult (age 16+) memberships. There is a non-refundable £1.00 application fee. By joining you agree to our <a href="conduct.html">Code of Conduct</a>.</p>
+          <ul>
+            <li><strong>Junior membership</strong> — £10 per year</li>
+            <li><strong>Adult membership</strong> — £15 per year</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">What are the benefits of membership?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <ul>
+            <li>Discounted session rate (£3 vs £5 for non-members)</li>
+            <li>Insurance cover through British Cycling</li>
+            <li>Eligibility to compete in club, regional and national races</li>
+            <li>Access to all coaching levels</li>
+            <li>Ability to order personalised club kit</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">Do I need to be a member to come to a session?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>No — you're welcome to try a session or two before committing to membership. Your first session is free. If you decide to keep coming regularly, we'd ask you to join through British Cycling.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">Is the club affiliated with British Cycling?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Yes — Merseyside BMX Club is an officially affiliated British Cycling club. Our coaching follows British Cycling standards and membership gives riders access to compete in sanctioned events at club, regional and national level.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── RACING ── -->
+    <div class="faq-category" data-cat="racing">
+      <div class="faq-cat-title">RACING</div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">How do I get into racing?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Start by attending our regular sessions and building confidence on the track. Once you're comfortable, our club race series is the perfect first step — it's low pressure, open to all abilities and a great introduction to competitive BMX before moving up to regional events.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">What is the difference between novice and expert racing?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <ul>
+            <li><strong>Novice:</strong> Perfect for beginners. Guidance is on hand from officials and volunteers. You can compete at novice level for one full season before moving up to expert. A British Cycling bronze membership is sufficient.</li>
+            <li><strong>Expert:</strong> Requires a British Cycling race licence (silver membership or above) and a MYLAPS transponder. More competitive but still great fun.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">How do I know which age category my child competes in?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>BMX age categories run from <strong>1st January to 31st December</strong>. Simply subtract your child's birth year from the current year. For example, a rider born in 2013 racing in 2025 would compete in the 12-year-old category (2025 − 2013 = 12).</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">How do I get a race licence?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Race licences are available through <a href="https://www.britishcycling.org.uk" target="_blank">British Cycling</a>. A bronze membership and provisional licence are sufficient for novice racing. For expert-level regional races, a silver membership is required.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">What is the progression from club to national racing?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <ul>
+            <li><strong>Club races</strong> — our own series, open to all, ideal for first-time racers</li>
+            <li><strong>Regional races</strong> — British Cycling North Region series, April to October</li>
+            <li><strong>National Series</strong> — riders who complete 5 regional rounds at expert level qualify</li>
+            <li><strong>British Championships</strong> — "The Brits", held on the August bank holiday. The UK's top event</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">What happens if it rains on race day?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Races go ahead in all weather unless the track is deemed unsafe. Always check our <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank">Facebook</a> and <a href="https://www.instagram.com/merseysidebmxclub" target="_blank">Instagram</a> on the morning of a race day for any updates.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">Can parents help on race day?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Yes — BMX is run almost entirely by volunteers and help is always welcome on race days. If you'd like to get involved, see the Get Involved section below or <a href="index.html#contact">get in touch</a>.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── GET INVOLVED ── -->
+    <div class="faq-category" data-cat="getinvolved">
+      <div class="faq-cat-title">GET INVOLVED</div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">How can I volunteer at the club?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>We're always looking for enthusiastic volunteers — no prior experience needed. We provide all the support you need to get involved. Get in touch at <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a> and we'll be happy to chat about how you can help.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-q-text">How can my business sponsor the club?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">
+          <p>Sponsoring Merseyside BMX Club is a great way to support local youth development and gain brand exposure within the BMX community. Visit our <a href="sponsors.html">sponsors page</a> to find out more, or <a href="index.html#contact">get in touch directly</a>.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="faq-cta">
+      <div>
+        <h3>STILL HAVE A QUESTION?</h3>
+        <p>Drop us a message and we'll get back to you as soon as we can.</p>
+      </div>
+      <a href="index.html#contact" class="btn btn-red">Get In Touch →</a>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>© 2026 Merseyside BMX Club</span>
+    <span><a href="index.html">← Back to main site</a> · <a href="conduct.html">Code of Conduct</a> · <a href="sponsors.html">Sponsors</a></span>
+  </footer>
+
+  <script>
+    // Accordion
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+
+    // Category filter
+    const navBtns = document.querySelectorAll('.faq-nav-btn');
+    const categories = document.querySelectorAll('.faq-category');
+    navBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        navBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.cat;
+        categories.forEach(c => {
+          c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

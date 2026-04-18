@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Sponsors — Merseyside BMX Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #d42b2b; --red2: #b52020;
+      --black: #0f0f0f; --dark: #191919; --mid: #2a2a2a;
+      --border: #383838; --text: #e2e2e2; --muted: #aaa;
+      --blue: #1a3d8f; --blue2: #0d2660;
+      --fd: 'Bebas Neue', sans-serif; --fb: 'DM Sans', sans-serif;
+      --mw: 1100px; --pad: 5vw;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--fb); font-size: 16px; line-height: 1.65; overflow-x: hidden; background: #f4f4f4; color: #222; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 60px; background: var(--black); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 var(--pad); gap: 1rem; }
+    .nav-stripe { width: 4px; height: 26px; flex-shrink: 0; background: linear-gradient(to bottom, var(--red) 50%, var(--blue) 50%); }
+    .nav-logo img { height: 48px; width: auto; display: block; }
+    .nav-links { display: flex; list-style: none; margin-left: auto; }
+    .nav-links a { display: flex; align-items: center; height: 60px; padding: 0 0.85rem; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.06em; color: var(--text); text-decoration: none; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+    .nav-links a:hover { color: #fff; border-bottom-color: var(--red); }
+    .nav-links a.nav-shop { color: var(--red); background: transparent; border: 1px solid var(--red); border-bottom: 1px solid var(--red); padding: 0 1.1rem; }
+    .nav-links a.nav-shop:hover { background: var(--red); color: #fff; }
+    .nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 0; flex-direction: column; gap: 5px; margin-left: auto; }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: #fff; }
+    @media (max-width: 900px) {
+      .nav-links { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--dark); flex-direction: column; border-top: 1px solid var(--border); }
+      .nav-links.open { display: flex; }
+      .nav-links a { height: 50px; border-bottom: 1px solid var(--border); padding: 0 1.5rem; }
+      .nav-links a.nav-shop { background: none; color: var(--red); border: none; border-bottom: 1px solid var(--border); }
+      .nav-burger { display: flex; }
+    }
+
+    /* PAGE HEADER */
+    .page-header { padding: 7rem var(--pad) 3.5rem; background: var(--dark); border-bottom: 3px solid var(--red); }
+    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: var(--red); margin-bottom: 0.4rem; }
+    .page-header h1 { font-family: var(--fd); font-size: clamp(2.5rem, 5vw, 4rem); line-height: 0.95; color: #fff; }
+    .page-header p { font-size: 0.95rem; color: var(--muted); max-width: 580px; margin-top: 0.9rem; line-height: 1.75; }
+
+    .dd { height: 5px; background: linear-gradient(to right, var(--red) 25%, var(--black) 25% 50%, var(--blue) 50% 75%, #e0e0e0 75%); }
+
+    /* SPONSOR CARDS */
+    .sponsors-page { max-width: var(--mw); margin: 0 auto; padding: 4rem var(--pad) 5rem; background: #f4f4f4; }
+    .sponsor-cards { display: flex; flex-direction: column; gap: 1px; background: #ddd; }
+
+    .sponsor-card { background: #fff; display: grid; grid-template-columns: 180px 1fr; transition: background 0.2s; }
+    .sponsor-card:hover { background: #f9f9f9; }
+
+    .sponsor-logo-panel { background: #f0f0f0; display: flex; align-items: center; justify-content: center; padding: 1.75rem; border-right: 1px solid #e0e0e0; min-height: 120px; }
+    .sponsor-logo-panel img { max-width: 130px; max-height: 80px; width: auto; height: auto; object-fit: contain; display: block; }
+
+    .sponsor-info { padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 0.4rem; }
+    .sponsor-name { font-family: var(--fd); font-size: 1.3rem; letter-spacing: 0.04em; color: #111; }
+    .sponsor-desc { font-size: 0.88rem; color: #444; line-height: 1.7; max-width: 580px; margin-top: 0.1rem; }
+
+    /* Contact row */
+    .sponsor-contacts { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-top: 0.85rem; }
+    .sponsor-contact { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: #555; text-decoration: none; transition: color 0.2s; }
+    .sponsor-contact:hover { color: var(--red); }
+    .sponsor-contact svg { flex-shrink: 0; opacity: 0.7; }
+    .sponsor-contact:hover svg { opacity: 1; }
+
+    /* Become a sponsor CTA */
+    .sponsor-cta { background: #fff; border: 1px solid #ddd; border-left: 3px solid var(--blue); padding: 2rem; margin-top: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .sponsor-cta h3 { font-family: var(--fd); font-size: 1.4rem; letter-spacing: 0.06em; color: #111; }
+    .sponsor-cta p { font-size: 0.88rem; color: #555; margin-top: 0.25rem; max-width: 500px; }
+    .btn { display: inline-block; font-family: var(--fd); font-size: 1rem; letter-spacing: 0.08em; text-decoration: none; padding: 0.75rem 2rem; cursor: pointer; border: none; transition: all 0.2s; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red2); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
+    .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }
+    .footer-logo img { height: 44px; width: auto; display: block; margin-bottom: 0.75rem; }
+    .footer-stripe { display: flex; gap: 4px; margin-bottom: 0.75rem; }
+    .footer-stripe span { height: 3px; width: 22px; border-radius: 1px; }
+    .footer-brand p { font-size: 0.82rem; color: #444; line-height: 1.6; margin-bottom: 0.35rem; }
+    .footer-brand a { color: #444; text-decoration: none; font-size: 0.82rem; }
+    .footer-brand a:hover { color: var(--red); }
+    .footer-social { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+    .footer-social a { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--mid); border: 1px solid var(--border); color: var(--text); text-decoration: none; transition: all 0.2s; }
+    .footer-social a:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    .footer-col h4 { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.2em; color: var(--red); margin-bottom: 0.75rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.35rem; }
+    .footer-col ul li a { font-size: 0.82rem; color: #555; text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { max-width: var(--mw); margin: 2rem auto 0; padding-top: 1.25rem; border-top: 1px solid var(--border); font-size: 0.75rem; color: #333; }
+    @media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; } }
+
+    @media (max-width: 560px) {
+      .sponsor-card { grid-template-columns: 1fr; }
+      .sponsor-logo-panel { border-right: none; border-bottom: 1px solid var(--border); min-height: 100px; }
+      .sponsor-cta { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-stripe"></div>
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="Merseyside BMX Club" /></a>
+    <button class="nav-burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#sessions">Sessions</a></li>
+      <li><a href="shop.html" class="nav-shop">Shop</a></li>
+      <li><a href="index.html#join">Join</a></li>
+      <li><a href="index.html#coaches">Coaches</a></li>
+      <li><a href="index.html#riders">Riders</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="kicker">Supporting the Club</div>
+    <h1>OUR SPONSORS</h1>
+    <p>Merseyside BMX Club wouldn't be what it is without the generous support of our sponsors and partners. We're proud to work with businesses and organisations that share our passion for BMX and community.</p>
+  </div>
+
+  <div class="dd"></div>
+
+  <div class="sponsors-page">
+    <div class="sponsor-cards">
+
+      <!-- Crave Digital -->
+      <div class="sponsor-card">
+        <div class="sponsor-logo-panel">
+          <img src="sponsor_crave.avif" alt="Crave Digital" />
+        </div>
+        <div class="sponsor-info">
+          <div class="sponsor-name">CRAVE DIGITAL</div>
+          <div class="sponsor-desc">Freelance design, websites, hosting, graphics and content for businesses big or small, with over 25 years of experience in B2B and B2C.</div>
+          <div class="sponsor-contacts">
+            <a href="https://cravedigital.co.uk" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              cravedigital.co.uk
+            </a>
+            <a href="mailto:andy@cravedigital.co.uk" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              andy@cravedigital.co.uk
+            </a>
+            <a href="tel:07960018529" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.97-1.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              07960 018529
+            </a>
+            <a href="https://www.facebook.com/cravedigital" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              Facebook
+            </a>
+            <a href="https://www.instagram.com/crave_digital/" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- DC Cycles -->
+      <div class="sponsor-card">
+        <div class="sponsor-logo-panel">
+          <img src="sponsor_dc_cycles.avif" alt="DC Cycles" />
+        </div>
+        <div class="sponsor-info">
+          <div class="sponsor-name">DC CYCLES</div>
+          <div class="sponsor-desc">A leading provider of high-quality BMX parts, race gear and expert support, serving riders across the UK with their nationwide pop-up shop. Whether you need race essentials, bike maintenance advice or top-tier equipment, DC Cycles has you covered.</div>
+          <div class="sponsor-contacts">
+            <a href="http://www.dccycles.co.uk" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              dccycles.co.uk
+            </a>
+            <a href="mailto:info@dccycles.co.uk" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              info@dccycles.co.uk
+            </a>
+            <a href="tel:07541955416" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.97-1.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              07541 955416
+            </a>
+            <a href="https://www.facebook.com/DCcyclessouth" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              Facebook
+            </a>
+            <a href="https://www.instagram.com/dccyclessouthampton/" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kirkby Signs -->
+      <div class="sponsor-card">
+        <div class="sponsor-logo-panel">
+          <img src="sponsor_kirkby.avif" alt="Kirkby Signs" />
+        </div>
+        <div class="sponsor-info">
+          <div class="sponsor-name">KIRKBY SIGNS LTD</div>
+          <div class="sponsor-desc">Specialists in high-quality signage solutions, including vehicle graphics, shop fascias, illuminated signs, banners and custom branding for businesses of all sizes. Expert design, manufacturing and installation services.</div>
+          <div class="sponsor-contacts">
+            <a href="http://www.kirkbysigns.com" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              kirkbysigns.com
+            </a>
+            <a href="mailto:terry@kirkbysigns.com" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              terry@kirkbysigns.com
+            </a>
+            <a href="tel:01512898127" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.97-1.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              0151 289 8127
+            </a>
+            <a href="https://www.instagram.com/kirkbysigns/" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Maximel -->
+      <div class="sponsor-card">
+        <div class="sponsor-logo-panel">
+          <img src="sponsor_maximel.avif" alt="Maximel Plastering Limited" />
+        </div>
+        <div class="sponsor-info">
+          <div class="sponsor-name">MAXIMEL PLASTERING LTD</div>
+          <div class="sponsor-desc">A trusted commercial plastering company based in Wigan, delivering high-quality plastering services to projects nationwide. As a proud family-run business, they bring dedication, craftsmanship and reliability to every job. MAXIMEL have generously supported Merseyside BMX Club, donating valuable time and effort to help our community grow.</div>
+          <div class="sponsor-contacts">
+            <a href="mailto:Sales@maximelplastering.com" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Sales@maximelplastering.com
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PWG Fabrications -->
+      <div class="sponsor-card">
+        <div class="sponsor-logo-panel">
+          <img src="sponsor_pwg.avif" alt="PWG Fabrications" />
+        </div>
+        <div class="sponsor-info">
+          <div class="sponsor-name">PWG FABRICATIONS</div>
+          <div class="sponsor-desc">Specialists in high-quality tube and sheet metal component manufacturing, with over 25 years of experience in the industry. Combining traditional techniques with modern technology, they deliver a unique and reliable service. PWG Fabrications have been a huge supporter of Merseyside BMX Club, generously donating time and materials to help the club thrive.</div>
+          <div class="sponsor-contacts">
+            <a href="http://pwgfabrications.co.uk" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              pwgfabrications.co.uk
+            </a>
+            <a href="mailto:Mark@pwgfabrications.com" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Mark@pwgfabrications.com
+            </a>
+            <a href="tel:01744884091" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.97-1.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              01744 884091
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100063480070717" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              Facebook
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Equistables -->
+      <div class="sponsor-card">
+        <div class="sponsor-logo-panel">
+          <img src="sponsor_equistables.avif" alt="Equistables" />
+        </div>
+        <div class="sponsor-info">
+          <div class="sponsor-name">EQUISTABLES</div>
+          <div class="sponsor-desc">A trusted family-run business with over 50 years of expertise in equine building design and installation. Offering nationwide delivery, expert joinery and professional planning support. Equistables have been a fantastic supporter of Merseyside BMX Club, giving time and help that has made a real difference to our riders and facilities.</div>
+          <div class="sponsor-contacts">
+            <a href="https://equistables.com" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              equistables.com
+            </a>
+            <a href="mailto:contact@equistables.com" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              contact@equistables.com
+            </a>
+            <a href="tel:03300314175" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.97-1.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              03300 314175
+            </a>
+            <a href="https://www.facebook.com/equistables/" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              Facebook
+            </a>
+            <a href="https://www.instagram.com/equistables?igsh=aTMydml1aDZvOTFu" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Burm -->
+      <div class="sponsor-card">
+        <div class="sponsor-logo-panel">
+          <img src="sponsor_theburm.avif" alt="The Burm" />
+        </div>
+        <div class="sponsor-info">
+          <div class="sponsor-name">THE BURM</div>
+          <div class="sponsor-desc">A leading BMX platform dedicated to elevating the sport across the UK. Through insightful news, race coverage, rider education and a comprehensive club and track guide, The Burm connects riders, clubs and coaches to grow the BMX community.</div>
+          <div class="sponsor-contacts">
+            <a href="https://theburm.com" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              theburm.com
+            </a>
+            <a href="mailto:info@theburm.com" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              info@theburm.com
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61571370509576" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              Facebook
+            </a>
+            <a href="https://www.instagram.com/theburmbmx/" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- e.parr photography -->
+      <div class="sponsor-card">
+        <div class="sponsor-logo-panel">
+          <img src="sponsor_eparr.png" alt="e.parr photography" />
+        </div>
+        <div class="sponsor-info">
+          <div class="sponsor-name">E. PARR PHOTOGRAPHY</div>
+          <div class="sponsor-desc">E. Parr Photography has been capturing the action and emotion of BMX for years, delivering stunning shots and unforgettable moments. Almost all of the photos on our website were taken by Eirian, whose hard work and passion for the sport shines through in every image.</div>
+          <div class="sponsor-contacts">
+            <a href="https://www.rootsandrain.com/photos/e-parr-photography" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              rootsandrain.com
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61573648823243" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              Facebook
+            </a>
+            <a href="https://www.instagram.com/eirianparr/" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fuel Doctor -->
+      <div class="sponsor-card">
+        <div class="sponsor-logo-panel">
+          <img src="sponsor_fueldoctor.avif" alt="Fuel Doctor" />
+        </div>
+        <div class="sponsor-info">
+          <div class="sponsor-name">FUEL DOCTOR</div>
+          <div class="sponsor-desc">Nationwide wrong-fuel assistance, helping drivers get back on the road quickly and safely. With expert technicians available within the hour, they drain and replace contaminated fuel efficiently, offering peace of mind when mistakes happen.</div>
+          <div class="sponsor-contacts">
+            <a href="https://www.fueldoctoruk.co.uk" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              fueldoctoruk.co.uk
+            </a>
+            <a href="tel:03334449000" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.97-1.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              0333 444 9000
+            </a>
+            <a href="https://www.facebook.com/fueldoc/" target="_blank" class="sponsor-contact">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              Facebook
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sponsor-cta">
+      <div>
+        <h3>INTERESTED IN SPONSORING US?</h3>
+        <p>We're always open to new partnerships with businesses and organisations that share our passion for BMX and community. Get in touch to find out more.</p>
+      </div>
+      <a href="index.html#contact" class="btn btn-red">Get In Touch →</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="logo.png" alt="Merseyside BMX Club" /></div>
+        <div class="footer-stripe">
+          <span style="background:var(--red);"></span>
+          <span style="background:rgba(255,255,255,0.2);"></span>
+          <span style="background:var(--blue);"></span>
+          <span style="background:var(--border);"></span>
+        </div>
+        <p>Knowsley Leisure and Culture Park<br>Longview Drive, Huyton, L36 6EG</p>
+        <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank" title="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/merseysidebmxclub?igsh=MWo2d2ZvcGZtc2pvNA==" target="_blank" title="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="mailto:merseysidebmx@gmail.com" title="Email">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>The Club</h4>
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#sessions">Club Sessions</a></li>
+          <li><a href="index.html#join">Join the Club</a></li>
+          <li><a href="index.html#coaches">Our Coaches</a></li>
+          <li><a href="index.html#riders">The Riders</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="shop.html">Club Shop</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+          <li><a href="sponsors.html">Our Sponsors</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="conduct.html">Code of Conduct</a></li>
+          <li><a href="https://www.britishcycling.org.uk/club/profile/6660/knowsley-bmx-club" target="_blank">British Cycling</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Merseyside BMX Club. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('nav-links');
+    burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+  </script>
+</body>
+</html>
