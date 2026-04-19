@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="color-scheme" content="only light" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Race Day Guide — Merseyside BMX Club</title>
+  <meta name="description" content="Everything new riders and parents need to know about race day at a BMX event. Motos, finals, Sqorz, pens and the start gate explained." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #d42b2b; --red2: #b52020;
+      --black: #0f0f0f; --dark: #191919; --mid: #2a2a2a;
+      --border: #383838; --text: #e2e2e2; --muted: #aaa;
+      --blue: #1a3d8f; --blue2: #0d2660;
+      --white: #f6f6f6; --offwhite: #ececec;
+      --rtext: #181818; --rmuted: #444;
+      --fd: 'Bebas Neue', sans-serif; --fb: 'DM Sans', sans-serif;
+      --mw: 1060px; --pad: 5vw;
+      --green: #1e8a4a; --amber: #c07a00;
+    }
+    html { scroll-behavior: smooth; color-scheme: only light; }
+    body { font-family: var(--fb); font-size: 16px; line-height: 1.65; overflow-x: hidden; background: var(--black); color: var(--text); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 60px; background: var(--black); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 var(--pad); gap: 1rem; }
+    .nav-stripe { width: 4px; height: 26px; flex-shrink: 0; background: linear-gradient(to bottom, var(--red) 50%, var(--blue) 50%); }
+    .nav-logo img { height: 48px; width: auto; display: block; }
+    .nav-links { display: flex; list-style: none; margin-left: auto; }
+    .nav-links a { display: flex; align-items: center; height: 60px; padding: 0 0.85rem; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.06em; color: var(--text); text-decoration: none; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+    .nav-links a:hover { color: #fff; border-bottom-color: var(--red); }
+    .nav-links a.nav-shop { color: var(--red); background: transparent; border: 1px solid var(--red); border-bottom: 1px solid var(--red); padding: 0 1.1rem; }
+    .nav-links a.nav-shop:hover { background: var(--red); color: #fff; }
+    .nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 0; flex-direction: column; gap: 5px; margin-left: auto; }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: #fff; }
+    @media (max-width: 900px) {
+      .nav-links { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--dark); flex-direction: column; border-top: 1px solid var(--border); }
+      .nav-links.open { display: flex; }
+      .nav-links a { height: 50px; border-bottom: 1px solid var(--border); padding: 0 1.5rem; }
+      .nav-links a.nav-shop { background: none; color: var(--red); border: none; border-bottom: 1px solid var(--border); }
+      .nav-burger { display: flex; }
+    }
+    .page-header { padding: 7rem var(--pad) 3.5rem; background: var(--dark); border-bottom: 3px solid var(--red); }
+    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: var(--red); margin-bottom: 0.4rem; }
+    .page-header h1 { font-family: var(--fd); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 0.95; color: #fff; letter-spacing: 0.02em; }
+    .page-header p { font-size: 0.95rem; color: var(--muted); max-width: 600px; margin-top: 0.9rem; line-height: 1.75; }
+    .dd { height: 5px; background: linear-gradient(to right, var(--red) 25%, var(--black) 25% 50%, var(--blue) 50% 75%, #e0e0e0 75%); }
+    .contents { background: var(--dark); padding: 1.5rem var(--pad); border-bottom: 1px solid var(--border); }
+    .contents-inner { max-width: var(--mw); margin: 0 auto; }
+    .contents-label { font-family: var(--fd); font-size: 0.72rem; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 0.65rem; }
+    .contents-links { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .contents-link { font-family: var(--fd); font-size: 0.76rem; letter-spacing: 0.08em; color: #aaa; text-decoration: none; padding: 0.3rem 0.75rem; border: 1px solid var(--border); transition: all 0.2s; }
+    .contents-link:hover { color: #fff; border-color: #666; background: var(--mid); }
+    .container { max-width: var(--mw); margin: 0 auto; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    .sec-num { font-family: var(--fd); font-size: 0.72rem; letter-spacing: 0.25em; color: var(--red); margin-bottom: 0.2rem; }
+    .sec-title { font-family: var(--fd); font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 0.95; letter-spacing: 0.02em; color: #fff; }
+    .sec-lead { font-size: 0.95rem; color: #aaa; line-height: 1.75; max-width: 680px; margin-top: 0.75rem; }
+    .guide-sec { padding: 4rem var(--pad); }
+    .guide-sec.dark { background: var(--dark); border-top: 1px solid var(--border); }
+    .guide-sec.black { background: var(--black); border-top: 1px solid var(--border); }
+    .tip { background: var(--mid); border-left: 3px solid var(--blue); padding: 1rem 1.25rem; margin-top: 1.25rem; font-size: 0.88rem; color: #ccc; line-height: 1.65; }
+    .tip strong { color: #7a9de8; display: block; font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+    .tip.red { border-left-color: var(--red); }
+    .tip.red strong { color: #e87a7a; }
+    .tip.green { border-left-color: var(--green); }
+    .tip.green strong { color: #6abf8a; }
+    .tip.amber { border-left-color: var(--amber); }
+    .tip.amber strong { color: #e8a840; }
+    .timeline { display: flex; align-items: stretch; gap: 0; margin-top: 2rem; overflow-x: auto; padding-bottom: 0.5rem; }
+    .tl-step { flex: 1; min-width: 110px; display: flex; flex-direction: column; position: relative; }
+    .tl-step::after { content: '→'; position: absolute; right: -10px; top: 28px; color: #333; font-size: 0.9rem; z-index: 1; }
+    .tl-step:last-child::after { display: none; }
+    .tl-icon { background: var(--mid); border: 1px solid var(--border); padding: 0.75rem; text-align: center; font-size: 1.3rem; }
+    .tl-step.highlight .tl-icon { background: var(--red); border-color: var(--red); }
+    .tl-step.blue .tl-icon { background: var(--blue); border-color: var(--blue); }
+    .tl-body { background: var(--dark); border: 1px solid var(--border); border-top: none; padding: 0.75rem; flex: 1; }
+    .tl-title { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.06em; color: #fff; line-height: 1.1; margin-bottom: 0.25rem; }
+    .tl-desc { font-size: 0.72rem; color: #666; line-height: 1.4; }
+    .tl-optional { font-size: 0.65rem; color: #555; margin-top: 0.2rem; font-style: italic; }
+    .practice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-top: 1.75rem; }
+    .practice-card { background: var(--dark); padding: 1.5rem; }
+    .practice-card-label { font-family: var(--fd); font-size: 0.7rem; letter-spacing: 0.18em; color: var(--red); margin-bottom: 0.5rem; }
+    .practice-card-title { font-family: var(--fd); font-size: 1.2rem; letter-spacing: 0.04em; color: #fff; margin-bottom: 0.6rem; }
+    .practice-card p { font-size: 0.88rem; color: #aaa; line-height: 1.7; }
+    @media (max-width: 560px) { .practice-grid { grid-template-columns: 1fr; } }
+    .format-grid { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 1.75rem; }
+    .format-row { display: grid; grid-template-columns: 1fr 2fr; background: var(--dark); transition: background 0.2s; }
+    .format-row:hover { background: var(--mid); }
+    .format-row.header { background: var(--red); }
+    .format-cell { padding: 0.85rem 1.1rem; font-size: 0.88rem; color: #bbb; border-right: 1px solid var(--border); }
+    .format-cell:last-child { border-right: none; }
+    .format-row.header .format-cell { font-family: var(--fd); font-size: 0.75rem; letter-spacing: 0.15em; color: #fff; }
+    .format-riders { font-family: var(--fd); font-size: 1rem; color: #fff; }
+    .stages { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 1.75rem; }
+    .stage { background: var(--dark); display: grid; grid-template-columns: 80px 1fr; }
+    .stage-num { display: flex; align-items: center; justify-content: center; padding: 1.5rem 0; border-right: 1px solid var(--border); }
+    .stage-num-inner { font-family: var(--fd); font-size: 2rem; color: var(--red); opacity: 0.5; text-align: center; line-height: 1; }
+    .stage-num-label { font-family: var(--fd); font-size: 0.55rem; letter-spacing: 0.1em; color: #555; margin-top: 0.2rem; }
+    .stage-body { padding: 1.25rem 1.5rem; }
+    .stage-title { font-family: var(--fd); font-size: 1.2rem; letter-spacing: 0.04em; color: #fff; margin-bottom: 0.4rem; }
+    .stage-desc { font-size: 0.88rem; color: #aaa; line-height: 1.7; }
+    .stage-tag { display: inline-block; font-family: var(--fd); font-size: 0.65rem; letter-spacing: 0.15em; padding: 0.15rem 0.5rem; margin-bottom: 0.5rem; }
+    .tag-blue { background: rgba(26,61,143,0.2); color: #7a9de8; }
+    .tag-red { background: rgba(212,43,43,0.15); color: #e87a7a; }
+    .tag-green { background: rgba(30,138,74,0.2); color: #6abf8a; }
+    .points-row { display: grid; grid-template-columns: repeat(8, 1fr); gap: 1px; background: var(--border); margin-top: 1.25rem; }
+    .points-cell { background: var(--dark); padding: 0.75rem 0.5rem; text-align: center; }
+    .points-pos { font-family: var(--fd); font-size: 1.1rem; color: #fff; }
+    .points-pts { font-size: 0.75rem; color: #666; margin-top: 0.1rem; }
+    .points-cell:first-child .points-pos { color: var(--red); }
+    .points-cell:first-child .points-pts { color: #e87a7a; }
+    .sqorz-path { display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem; margin: 1.25rem 0; }
+    .sqorz-step { font-family: var(--fd); font-size: 0.82rem; letter-spacing: 0.06em; background: var(--mid); color: #ddd; padding: 0.4rem 0.9rem; border: 1px solid var(--border); }
+    .sqorz-arrow { color: #444; font-size: 0.85rem; }
+    .sqorz-table { width: 100%; border-collapse: collapse; margin-top: 1.25rem; font-size: 0.88rem; }
+    .sqorz-table th { font-family: var(--fd); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--muted); padding: 0.6rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); }
+    .sqorz-table td { padding: 0.65rem 0.9rem; border-bottom: 1px solid #1e1e1e; color: #bbb; vertical-align: top; }
+    .sqorz-table tr:last-child td { border-bottom: none; }
+    .sqorz-table td:first-child { font-family: var(--fd); font-size: 1rem; color: var(--red); letter-spacing: 0.04em; }
+    .sqorz-table td:nth-child(2) { color: #ddd; }
+    .sqorz-screens { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .sqorz-screen { display: flex; flex-direction: column; gap: 0.75rem; }
+    .sqorz-screen-img { border: 1px solid var(--border); overflow: hidden; }
+    .sqorz-screen-img img { width: 100%; display: block; }
+    .sqorz-screen-label { font-family: var(--fd); font-size: 0.75rem; letter-spacing: 0.1em; color: var(--red); }
+    .sqorz-screen-desc { font-size: 0.82rem; color: #aaa; line-height: 1.6; }
+    @media (max-width: 700px) { .sqorz-screens { grid-template-columns: 1fr; } }
+    .pen-formula { background: var(--mid); border: 1px solid var(--border); border-left: 4px solid var(--red); padding: 1.75rem; margin-top: 1.5rem; }
+    .pen-formula-title { font-family: var(--fd); font-size: 1rem; letter-spacing: 0.1em; color: var(--red); margin-bottom: 1rem; }
+    .pen-examples { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-top: 1rem; }
+    .pen-example { background: var(--dark); padding: 1rem; text-align: center; }
+    .pen-race { font-family: var(--fd); font-size: 1.2rem; color: #fff; }
+    .pen-arrow { color: #444; font-size: 0.75rem; margin: 0.2rem 0; }
+    .pen-result { font-family: var(--fd); font-size: 1rem; color: var(--red); }
+    .pen-label { font-size: 0.7rem; color: #666; margin-top: 0.15rem; }
+    @media (max-width: 500px) { .pen-examples { grid-template-columns: 1fr 1fr; } }
+    .gate-seq { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 1.5rem; }
+    .gate-step { background: var(--dark); display: grid; grid-template-columns: 140px 1fr; }
+    .gate-call { font-family: var(--fd); font-size: 0.82rem; letter-spacing: 0.06em; color: #fff; padding: 1.1rem 1.25rem; border-right: 1px solid var(--border); display: flex; align-items: center; }
+    .gate-desc { font-size: 0.88rem; color: #aaa; padding: 1.1rem 1.25rem; line-height: 1.6; }
+    .gate-step.start .gate-call { color: #6abf8a; }
+    .gate-step.race .gate-call { color: var(--red); }
+    @media (max-width: 560px) { .gate-step { grid-template-columns: 1fr; } .gate-call { border-right: none; border-bottom: 1px solid var(--border); } }
+    .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-top: 1.75rem; }
+    .checklist-col { background: var(--dark); padding: 1.5rem; }
+    .checklist-col-title { font-family: var(--fd); font-size: 0.85rem; letter-spacing: 0.12em; color: var(--red); margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); }
+    .checklist-items { display: flex; flex-direction: column; gap: 0.5rem; }
+    .checklist-item { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.88rem; color: #bbb; line-height: 1.5; }
+    .checklist-box { width: 16px; height: 16px; border: 1.5px solid var(--border); flex-shrink: 0; margin-top: 2px; border-radius: 2px; }
+    @media (max-width: 580px) { .checklist-grid { grid-template-columns: 1fr; } }
+    .glossary { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 1.75rem; }
+    .gloss-item { background: var(--dark); display: grid; grid-template-columns: 160px 1fr; transition: background 0.2s; }
+    .gloss-item:hover { background: var(--mid); }
+    .gloss-term { font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.04em; color: #fff; padding: 0.85rem 1.1rem; border-right: 1px solid var(--border); display: flex; align-items: center; }
+    .gloss-def { font-size: 0.85rem; color: #aaa; padding: 0.85rem 1.1rem; line-height: 1.6; display: flex; align-items: center; }
+    @media (max-width: 560px) { .gloss-item { grid-template-columns: 1fr; } .gloss-term { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; } }
+    footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
+    .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }
+    .footer-logo img { height: 44px; width: auto; display: block; margin-bottom: 0.75rem; }
+    .footer-stripe { display: flex; gap: 4px; margin-bottom: 0.75rem; }
+    .footer-stripe span { height: 3px; width: 22px; border-radius: 1px; }
+    .footer-brand p { font-size: 0.82rem; color: #aaa; line-height: 1.6; margin-bottom: 0.35rem; }
+    .footer-brand a { color: #aaa; text-decoration: none; font-size: 0.82rem; }
+    .footer-brand a:hover { color: var(--red); }
+    .footer-social { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+    .footer-social a { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--mid); border: 1px solid var(--border); color: var(--text); text-decoration: none; transition: all 0.2s; }
+    .footer-social a:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    .footer-col h4 { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.2em; color: var(--red); margin-bottom: 0.75rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.35rem; }
+    .footer-col ul li a { font-size: 0.82rem; color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { max-width: var(--mw); margin: 2rem auto 0; padding-top: 1.25rem; border-top: 1px solid var(--border); font-size: 0.75rem; color: #888; }
+    @media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-stripe"></div>
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="Merseyside BMX Club" /></a>
+    <button class="nav-burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#sessions">Sessions</a></li>
+      <li><a href="shop.html" class="nav-shop">Shop</a></li>
+      <li><a href="index.html#join">Join</a></li>
+      <li><a href="index.html#coaches">Coaches</a></li>
+      <li><a href="index.html#riders">Riders</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="kicker">Racing</div>
+    <h1>RACE DAY GUIDE</h1>
+    <p>Everything you need to know about race day. How the day flows, the format, Sqorz, the pens and the start gate. Read this before your first race and keep it handy on the day.</p>
+  </div>
+
+  <div class="dd"></div>
+
+  <div class="contents">
+    <div class="contents-inner">
+      <div class="contents-label">ON THIS PAGE</div>
+      <div class="contents-links">
+        <a href="#overview" class="contents-link">Day Overview</a>
+        <a href="#practice" class="contents-link">Practice Sessions</a>
+        <a href="#format" class="contents-link">Race Format</a>
+        <a href="#stages" class="contents-link">The Stages</a>
+        <a href="#points" class="contents-link">Points System</a>
+        <a href="#sqorz" class="contents-link">Using Sqorz</a>
+        <a href="#pens" class="contents-link">The Pens</a>
+        <a href="#gate" class="contents-link">The Start Gate</a>
+        <a href="#checklist" class="contents-link">Checklist</a>
+        <a href="#glossary" class="contents-link">Glossary</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-sec dark" id="overview">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">SECTION 1</div>
+        <h2 class="sec-title">HOW YOUR DAY LOOKS</h2>
+        <p class="sec-lead">Race days follow a similar structure at most UK BMX events. Here is a high level view of what to expect from arrival to the final.</p>
+      </div>
+      <div class="timeline reveal">
+        <div class="tl-step">
+          <div class="tl-icon" aria-hidden="true">📋</div>
+          <div class="tl-body"><div class="tl-title">ARRIVE AND REGISTER</div><div class="tl-desc">Sign in at race admin. Confirm your entry.</div></div>
+        </div>
+        <div class="tl-step blue">
+          <div class="tl-icon" aria-hidden="true">🚲</div>
+          <div class="tl-body"><div class="tl-title">OPEN PRACTICE</div><div class="tl-desc">All riders on track together to warm up.</div><div class="tl-optional">May vary by event</div></div>
+        </div>
+        <div class="tl-step blue">
+          <div class="tl-icon" aria-hidden="true">👥</div>
+          <div class="tl-body"><div class="tl-title">AGE GROUP PRACTICE</div><div class="tl-desc">Track split by age group for focused practice.</div><div class="tl-optional">May vary by event</div></div>
+        </div>
+        <div class="tl-step highlight">
+          <div class="tl-icon" aria-hidden="true">🏁</div>
+          <div class="tl-body"><div class="tl-title">MOTOS</div><div class="tl-desc">3 qualifying races. Back to back with short gaps.</div></div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-icon" aria-hidden="true">⚡</div>
+          <div class="tl-body"><div class="tl-title">QUARTERS / SEMIS</div><div class="tl-desc">Knockout rounds. Longer gap before these begin.</div><div class="tl-optional">If enough riders</div></div>
+        </div>
+        <div class="tl-step highlight">
+          <div class="tl-icon" aria-hidden="true">🏆</div>
+          <div class="tl-body"><div class="tl-title">FINALS</div><div class="tl-desc">A Final and B Final. Usually the longest gap of the day.</div></div>
+        </div>
+      </div>
+      <div class="tip amber reveal">
+        <strong>GAPS BETWEEN STAGES</strong>
+        Motos run back to back with only short gaps. Once knockouts begin there is usually a longer break before quarters and semis, and the gap before finals is typically the longest of the day. Keep checking Sqorz and listening to the PA so you always know where the day is up to.
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-sec black" id="practice">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">SECTION 2</div>
+        <h2 class="sec-title">PRACTICE SESSIONS</h2>
+        <p class="sec-lead">Most race meets include practice time before racing begins. The format varies by event so always check the programme on the day.</p>
+      </div>
+      <div class="practice-grid reveal">
+        <div class="practice-card">
+          <div class="practice-card-label">TYPICALLY FIRST</div>
+          <div class="practice-card-title">OPEN PRACTICE</div>
+          <p>All riders from all age groups on the track at the same time. Your chance to ride the full course, get comfortable with the surface and warm up. Keep your head up and be aware of other riders around you.</p>
+        </div>
+        <div class="practice-card">
+          <div class="practice-card-label">TYPICALLY SECOND</div>
+          <div class="practice-card-title">AGE GROUP PRACTICE</div>
+          <p>Track split into time slots by age group for a less crowded session. Not all events run age group practice. Check the event programme to see when your rider's group is on.</p>
+        </div>
+      </div>
+      <div class="tip reveal">
+        <strong>USE PRACTICE WELL</strong>
+        Practice is not compulsory but strongly recommended, especially at a track you haven't raced before. A few laps in practice to check the berms and find your line through the rollers makes a big difference when the gate drops.
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-sec dark" id="format">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">SECTION 3</div>
+        <h2 class="sec-title">HOW A RACE DAY WORKS</h2>
+        <p class="sec-lead">All riders start in the Motos and then progress through further rounds depending on how many riders are in their class.</p>
+      </div>
+      <div class="format-grid reveal">
+        <div class="format-row header">
+          <div class="format-cell">RIDERS IN CLASS</div>
+          <div class="format-cell">FORMAT</div>
+        </div>
+        <div class="format-row">
+          <div class="format-cell"><span class="format-riders">8 or fewer</span></div>
+          <div class="format-cell">Grand Prix — 4 motos, no finals. Points winner takes the result.</div>
+        </div>
+        <div class="format-row">
+          <div class="format-cell"><span class="format-riders">9 to 16</span></div>
+          <div class="format-cell">3 motos, then straight to Finals. Top 8 into the A Final, rest into the B Final.</div>
+        </div>
+        <div class="format-row">
+          <div class="format-cell"><span class="format-riders">17 to 32</span></div>
+          <div class="format-cell">3 motos, then Semi Finals. Top 16 from motos into Semis. Top 4 from each semi into the A Final, rest into B Final.</div>
+        </div>
+        <div class="format-row">
+          <div class="format-cell"><span class="format-riders">33 or more</span></div>
+          <div class="format-cell">3 motos, then Quarter Finals (top 32 qualify). Top 4 from each quarter into Semis. Top 4 from each semi into A Final, rest into B Final.</div>
+        </div>
+      </div>
+      <div class="tip reveal">
+        <strong>MOTO ROTATION</strong>
+        At most UK events, moto rotation is used. You won't race against exactly the same riders in every moto. The draw is rotated to give a fairer reflection of overall ability.
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-sec black" id="stages">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">SECTION 4</div>
+        <h2 class="sec-title">THE STAGES</h2>
+        <p class="sec-lead">Each stage has different stakes. Here is what to expect at each one.</p>
+      </div>
+      <div class="stages reveal">
+        <div class="stage">
+          <div class="stage-num"><div><div class="stage-num-inner">M</div><div class="stage-num-label">MOTOS</div></div></div>
+          <div class="stage-body">
+            <span class="stage-tag tag-blue">ALL RIDERS</span>
+            <div class="stage-title">MOTOS — QUALIFYING ROUNDS</div>
+            <div class="stage-desc">Every rider does three motos regardless of class or ability. A moto is a single race of up to 8 riders sprinting one lap, lasting roughly 30 to 45 seconds. Points are awarded based on finishing position and added up after all three motos. Lower total is better. Motos run back to back with short gaps throughout the morning.</div>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num"><div><div class="stage-num-inner">QF</div><div class="stage-num-label">QUARTERS</div></div></div>
+          <div class="stage-body">
+            <span class="stage-tag tag-red">33+ RIDERS ONLY</span>
+            <div class="stage-title">QUARTER FINALS</div>
+            <div class="stage-desc">Only the top 32 from the motos qualify. Top 4 from each heat progress to the Semis. Sudden death — finish 5th or below and your day ends here. Check Sqorz after the motos to see your new race number and gate draw.</div>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num"><div><div class="stage-num-inner">SF</div><div class="stage-num-label">SEMIS</div></div></div>
+          <div class="stage-body">
+            <span class="stage-tag tag-red">17+ RIDERS</span>
+            <div class="stage-title">SEMI FINALS</div>
+            <div class="stage-desc">Top 16 from the motos qualify. Up to 8 per heat, top 4 go to the A Final. Positions 5 to 8 go to the B Final. Gate positions are seeded on moto results, so riding well earlier gives you a better gate draw here.</div>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num"><div><div class="stage-num-inner">F</div><div class="stage-num-label">FINAL</div></div></div>
+          <div class="stage-body">
+            <span class="stage-tag tag-green">THE BIG ONE</span>
+            <div class="stage-title">THE FINAL</div>
+            <div class="stage-desc">One race. First across the line wins. No averaging, no points — pure racing. A Final for the top 8, B Final for those who didn't make it. Both count separately for series standings. Race hard all the way to the line.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-sec dark" id="points">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">SECTION 5</div>
+        <h2 class="sec-title">THE POINTS SYSTEM</h2>
+        <p class="sec-lead">After each moto, riders earn points based on finishing position. These are added up across all three motos. Lower total is better — 1st, 2nd and 2nd scores 5 points, which beats 2nd, 3rd and 4th (9 points).</p>
+      </div>
+      <div class="points-row reveal">
+        <div class="points-cell"><div class="points-pos">1st</div><div class="points-pts">1 point</div></div>
+        <div class="points-cell"><div class="points-pos">2nd</div><div class="points-pts">2 points</div></div>
+        <div class="points-cell"><div class="points-pos">3rd</div><div class="points-pts">3 points</div></div>
+        <div class="points-cell"><div class="points-pos">4th</div><div class="points-pts">4 points</div></div>
+        <div class="points-cell"><div class="points-pos">5th</div><div class="points-pts">5 points</div></div>
+        <div class="points-cell"><div class="points-pos">6th</div><div class="points-pts">6 points</div></div>
+        <div class="points-cell"><div class="points-pos">7th</div><div class="points-pts">7 points</div></div>
+        <div class="points-cell"><div class="points-pos">8th</div><div class="points-pts">8 points</div></div>
+      </div>
+      <div class="tip amber reveal">
+        <strong>HOW TIES ARE RESOLVED</strong>
+        If two riders finish on equal points after three motos, the tie is resolved by their finishing position in the last moto. Whoever finished higher in the final moto takes the better overall position. If still tied, the moto before that is used, working backwards.
+      </div>
+      <div class="tip green reveal">
+        <strong>GRAND PRIX FORMAT</strong>
+        With 8 or fewer riders, the event runs as a Grand Prix. Riders complete 4 motos and the points winner is the event winner. No separate final race.
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-sec black" id="sqorz">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">SECTION 6</div>
+        <h2 class="sec-title">USING SQORZ</h2>
+        <p class="sec-lead">Sqorz is the live results system used at most UK BMX races. Race numbers, gate draws, results and standings all live here. No app needed — open a browser and go to <a href="https://our.sqorz.com" target="_blank" style="color:var(--blue);">our.sqorz.com</a>.</p>
+      </div>
+      <div class="tip reveal">
+        <strong>ADD IT TO YOUR HOME SCREEN</strong>
+        On iPhone, tap the Share button then "Add to Home Screen". On Android, tap the three dot menu and choose "Add to Home Screen". Much quicker than hunting for it in a browser on race day.
+      </div>
+      <div class="reveal" style="margin-top:2rem;">
+        <div class="sec-num">FINDING YOUR RIDER</div>
+        <p style="font-size:0.92rem; color:#aaa; line-height:1.75; margin-top:0.4rem; max-width:640px;">There is no top level search. Browse by country then organisation to find your event.</p>
+        <div class="sqorz-path">
+          <div class="sqorz-step">our.sqorz.com</div>
+          <span class="sqorz-arrow">→</span>
+          <div class="sqorz-step">United Kingdom</div>
+          <span class="sqorz-arrow">→</span>
+          <div class="sqorz-step">North Region BMX</div>
+          <span class="sqorz-arrow">→</span>
+          <div class="sqorz-step">Your Event</div>
+          <span class="sqorz-arrow">→</span>
+          <div class="sqorz-step">Riders Tab</div>
+          <span class="sqorz-arrow">→</span>
+          <div class="sqorz-step">Rider's Name</div>
+        </div>
+      </div>
+      <div class="sqorz-screens reveal">
+        <div class="sqorz-screen">
+          <div class="sqorz-screen-img"><img src="sqorz_classes.png" alt="Sqorz classes tab showing age groups and rider counts" loading="lazy" /></div>
+          <div class="sqorz-screen-label">CLASSES TAB</div>
+          <div class="sqorz-screen-desc">Shows all age groups at the event and rider counts. Use this to check how many riders are in your class and which format applies.</div>
+        </div>
+        <div class="sqorz-screen">
+          <div class="sqorz-screen-img"><img src="sqorz_riders.png" alt="Sqorz riders tab showing results across rounds" loading="lazy" /></div>
+          <div class="sqorz-screen-label">RIDERS TAB</div>
+          <div class="sqorz-screen-desc">Search by name. Shows your rider's class, rank and results for each round. Columns show each stage: 1F (first final), XF (quarter), 2F (semi).</div>
+        </div>
+        <div class="sqorz-screen">
+          <div class="sqorz-screen-img"><img src="sqorz_detail.png" alt="Sqorz rider detail showing race numbers, gates and times" loading="lazy" /></div>
+          <div class="sqorz-screen-label">RIDER DETAIL</div>
+          <div class="sqorz-screen-desc">Tap a rider for full detail. Each row shows the round (M1, M2, M3, 2F, 1F), race number and gate (e.g. 6:3 = race 6, gate 3), reaction time, lap time and finishing position.</div>
+        </div>
+      </div>
+      <div class="reveal" style="margin-top:2rem;">
+        <div class="sec-num">READING YOUR RACE INFORMATION</div>
+        <p style="font-size:0.92rem; color:#aaa; line-height:1.75; margin-top:0.4rem; margin-bottom:0;">The number before the colon is your race number. After the colon is your gate. The pen number is always the last digit of the race number — this applies to motos, semis and finals.</p>
+        <table class="sqorz-table" style="margin-top:1rem;">
+          <thead><tr><th>SQORZ DISPLAY</th><th>WHAT IT MEANS</th><th>PEN TO GO TO</th><th>GATE</th></tr></thead>
+          <tbody>
+            <tr><td>46:3</td><td>Race 46, Gate 3</td><td>Pen 6</td><td>Gate 3</td></tr>
+            <tr><td>124:5</td><td>Race 124, Gate 5</td><td>Pen 4</td><td>Gate 5</td></tr>
+            <tr><td>S9:1</td><td>Semi Final 9, Gate 1</td><td>Pen 9</td><td>Gate 1</td></tr>
+            <tr><td>F6:3</td><td>Final 6, Gate 3</td><td>Pen 6</td><td>Gate 3</td></tr>
+            <tr><td>F43:2</td><td>Final 43, Gate 2</td><td>Pen 3</td><td>Gate 2</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tip red reveal">
+        <strong>LIVE RESULTS</strong>
+        Results update within seconds of each race finishing. Check after every moto to see position, accumulated points and whether you have progressed. With MYLAPS transponders you will also see reaction times and lap times for every rider.
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-sec dark" id="pens">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">SECTION 7</div>
+        <h2 class="sec-title">THE PENS</h2>
+        <p class="sec-lead">The pens are the staging area at the back of the start hill where riders wait before heading to the gate. Knowing how to find your pen makes race day much less stressful.</p>
+      </div>
+      <div class="pen-formula reveal">
+        <div class="pen-formula-title">THE PEN NUMBER FORMULA</div>
+        <p style="font-size:0.88rem; color:#bbb; line-height:1.65;">The pen number is always the last digit of your race number. This applies to motos, semis and finals.</p>
+        <div class="pen-examples">
+          <div class="pen-example"><div class="pen-race">Race 46</div><div class="pen-arrow">last digit</div><div class="pen-result">Pen 6</div><div class="pen-label">Moto</div></div>
+          <div class="pen-example"><div class="pen-race">Race 124</div><div class="pen-arrow">last digit</div><div class="pen-result">Pen 4</div><div class="pen-label">Moto</div></div>
+          <div class="pen-example"><div class="pen-race">F6</div><div class="pen-arrow">last digit</div><div class="pen-result">Pen 6</div><div class="pen-label">Final</div></div>
+          <div class="pen-example"><div class="pen-race">F43</div><div class="pen-arrow">last digit</div><div class="pen-result">Pen 3</div><div class="pen-label">Final</div></div>
+        </div>
+      </div>
+      <div class="tip reveal">
+        <strong>ARRIVE AT THE PENS EARLY</strong>
+        Aim to be in the pens at least 10 races before yours. If your race is 46 and race 36 is on the track, it is time to go now. Keep checking Sqorz and listening to the PA.
+      </div>
+      <div class="tip green reveal">
+        <strong>FOR FIRST TIME RIDERS</strong>
+        Tell the marshal it is your first race. They will look after you. Everyone in the pens is there to help.
+      </div>
+      <div class="tip reveal">
+        <strong>WRITE IT ON MASKING TAPE</strong>
+        Write your race and gate numbers on masking tape and stick it to the back of your race plate before the day starts. No need to check your phone when you are in the pens.
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-sec black" id="gate">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">SECTION 8</div>
+        <h2 class="sec-title">THE START GATE</h2>
+        <p class="sec-lead">Once riders are called to the gate, the automated start sequence begins. Here is exactly what the rider will hear.</p>
+      </div>
+      <div class="gate-seq reveal">
+        <div class="gate-step">
+          <div class="gate-call">OK RIDERS</div>
+          <div class="gate-desc">The sequence has begun. If not ready, shout "Wait!" or "No!" and raise a hand. The sequence restarts. Once past this point the race is in progress.</div>
+        </div>
+        <div class="gate-step">
+          <div class="gate-call">RIDERS READY</div>
+          <div class="gate-desc">Fully set and in position. The start is now in progress and will not stop. Focus on the lights.</div>
+        </div>
+        <div class="gate-step start">
+          <div class="gate-call">WATCH THE LIGHTS</div>
+          <div class="gate-desc">The traffic light sequence begins. Somewhere between 0 and 2.5 seconds the lights turn green and the gate drops. The race is on.</div>
+        </div>
+        <div class="gate-step race">
+          <div class="gate-call">GATE DROPS</div>
+          <div class="gate-desc">Sprint hard all the way to the line. Many races are decided in the final few pedals. After crossing, brake carefully and watch for riders behind.</div>
+        </div>
+      </div>
+      <div class="tip red reveal">
+        <strong>IT IS YOUR RESPONSIBILITY</strong>
+        No one will come to find you. Keep checking Sqorz and listening to the PA. It is the rider's job to be at the gate on time.
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-sec dark" id="checklist">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">SECTION 9</div>
+        <h2 class="sec-title">RACE DAY CHECKLIST</h2>
+        <p class="sec-lead">Screenshot this or print it off. Nothing worse than arriving and realising you have forgotten something.</p>
+      </div>
+      <div class="checklist-grid reveal">
+        <div class="checklist-col">
+          <div class="checklist-col-title">BEFORE YOU ARRIVE</div>
+          <div class="checklist-items">
+            <div class="checklist-item"><div class="checklist-box"></div>Entry confirmed, signed in on Sqorz (green tick next to name)</div>
+            <div class="checklist-item"><div class="checklist-box"></div>Race plate and side plates correctly fitted</div>
+            <div class="checklist-item"><div class="checklist-box"></div>Transponder attached to front fork (if using)</div>
+            <div class="checklist-item"><div class="checklist-box"></div>Full race kit ready: helmet, long sleeves, trousers, gloves</div>
+            <div class="checklist-item"><div class="checklist-box"></div>Phone charged, Sqorz bookmarked or on home screen</div>
+            <div class="checklist-item"><div class="checklist-box"></div>Masking tape and pen for writing race numbers</div>
+          </div>
+        </div>
+        <div class="checklist-col">
+          <div class="checklist-col-title">WHEN YOU ARRIVE</div>
+          <div class="checklist-items">
+            <div class="checklist-item"><div class="checklist-box"></div>Go to race registration to confirm entry</div>
+            <div class="checklist-item"><div class="checklist-box"></div>Open Sqorz and find your event and class</div>
+            <div class="checklist-item"><div class="checklist-box"></div>Note race numbers and gate draws</div>
+            <div class="checklist-item"><div class="checklist-box"></div>Write numbers on masking tape on your plate</div>
+            <div class="checklist-item"><div class="checklist-box"></div>Find the pens and check the track layout</div>
+          </div>
+        </div>
+        <div class="checklist-col">
+          <div class="checklist-col-title">DURING RACING</div>
+          <div class="checklist-items">
+            <div class="checklist-item"><div class="checklist-box"></div>Head to pens at least 10 races before yours</div>
+            <div class="checklist-item"><div class="checklist-box"></div>Tell the pen marshal your name and race number</div>
+            <div class="checklist-item"><div class="checklist-box"></div>Check Sqorz after each race for results and next race info</div>
+            <div class="checklist-item"><div class="checklist-box"></div>Hydrate and recover between motos</div>
+            <div class="checklist-item"><div class="checklist-box"></div>After motos: confirm if you have progressed and find new race number</div>
+          </div>
+        </div>
+        <div class="checklist-col">
+          <div class="checklist-col-title">DON'T LEAVE EARLY</div>
+          <div class="checklist-items">
+            <div class="checklist-item"><div class="checklist-box"></div>Stay until all finals have run</div>
+            <div class="checklist-item"><div class="checklist-box"></div>Confirm on Sqorz you haven't qualified before leaving</div>
+            <div class="checklist-item"><div class="checklist-box"></div>Every position counts for series standings, even in a B Final</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-sec black" id="glossary">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">SECTION 10</div>
+        <h2 class="sec-title">GLOSSARY</h2>
+        <p class="sec-lead">Quick reference for the terms you will hear on race day.</p>
+      </div>
+      <div class="glossary reveal">
+        <div class="gloss-item"><div class="gloss-term">Moto</div><div class="gloss-def">A single qualifying race heat. Every rider does 3 motos to accumulate points.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Grand Prix</div><div class="gloss-def">Format for 8 or fewer riders. 4 motos, points decide the winner. No separate final.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Quarter Final</div><div class="gloss-def">Run with 33 or more riders. Top 32 from motos qualify. Top 4 per heat advance.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Semi Final</div><div class="gloss-def">Run with 17 or more riders. Top 4 advance to A Final. Positions 5 to 8 go to B Final.</div></div>
+        <div class="gloss-item"><div class="gloss-term">A Final</div><div class="gloss-def">The main final. Top 8 riders. One race to decide the winner.</div></div>
+        <div class="gloss-item"><div class="gloss-term">B Final</div><div class="gloss-def">Secondary final for riders who didn't make the A Final. Counts for series standings.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Gate</div><div class="gloss-def">Your numbered starting lane. 8 lanes marked 1 to 8.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Pen</div><div class="gloss-def">The staging area where riders wait before heading to the start gate.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Race Number</div><div class="gloss-def">Your assigned number for each heat. The last digit is your pen number.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Gate Number</div><div class="gloss-def">The number after the colon in Sqorz. For example 46:3 means gate 3.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Holeshot</div><div class="gloss-def">Being first through the first corner after the gate drops. A big advantage.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Transponder</div><div class="gloss-def">A small timing chip (MYLAPS) on the bike's front fork that records your times.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Sqorz</div><div class="gloss-def">The digital event management system used at most UK BMX races. our.sqorz.com.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Berm</div><div class="gloss-def">A banked corner on the track.</div></div>
+        <div class="gloss-item"><div class="gloss-term">DNS</div><div class="gloss-def">Did Not Start. Usually receives points equal to the number of riders in the race plus 2.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Moto Rotation</div><div class="gloss-def">A system that rotates which riders race together in each moto for a fairer result overall.</div></div>
+      </div>
+      <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+        <p style="font-size:0.88rem; color:#666;">Any questions on race day, speak to a club volunteer. We are always there to help.</p>
+        <a href="index.html#contact" style="font-family:var(--fd); font-size:0.85rem; letter-spacing:0.08em; color:var(--blue); text-decoration:none; border:1px solid var(--blue); padding:0.5rem 1.1rem; transition:all 0.2s;" onmouseover="this.style.background='var(--blue)'; this.style.color='#fff'" onmouseout="this.style.background='transparent'; this.style.color='var(--blue)'">Contact the Club →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="dd"></div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="logo.png" alt="Merseyside BMX Club" /></div>
+        <div class="footer-stripe"><span style="background:var(--red);"></span><span style="background:rgba(255,255,255,0.2);"></span><span style="background:var(--blue);"></span><span style="background:var(--border);"></span></div>
+        <p>Knowsley Leisure and Culture Park<br>Longview Drive, Huyton, L36 6EG</p>
+        <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank" title="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.instagram.com/merseysidebmxclub?igsh=MWo2d2ZvcGZtc2pvNA==" target="_blank" title="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="mailto:merseysidebmx@gmail.com" title="Email"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>The Club</h4><ul><li><a href="index.html#about">About</a></li><li><a href="index.html#sessions">Club Sessions</a></li><li><a href="index.html#join">Join the Club</a></li><li><a href="index.html#coaches">Our Coaches</a></li><li><a href="coaching.html">Coaching Pathway</a></li><li><a href="index.html#riders">The Riders</a></li></ul></div>
+      <div class="footer-col"><h4>More</h4><ul><li><a href="shop.html">Club Shop</a></li><li><a href="index.html#contact">Contact Us</a></li><li><a href="sponsors.html">Our Sponsors</a></li><li><a href="faq.html">FAQs</a></li><li><a href="kit-guide.html">Bikes &amp; Kit Guide</a></li><li><a href="race-guide.html">Race Day Guide</a></li></ul></div>
+      <div class="footer-col"><h4>Policies</h4><ul><li><a href="conduct.html">Code of Conduct</a></li><li><a href="privacy.html">Privacy Policy</a></li><li><a href="https://www.britishcycling.org.uk/club/profile/6660/knowsley-bmx-club" target="_blank">British Cycling</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">© 2026 Merseyside BMX Club. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('nav-links');
+    burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 4) * 0.07}s`;
+      obs.observe(el);
+    });
+  </script>
+</body>
+</html>
