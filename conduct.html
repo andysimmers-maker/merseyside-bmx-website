@@ -121,6 +121,17 @@
     .btn-red:hover { background: var(--red2); transform: translateY(-2px); }
 
     /* Footer */
+    /* DARK MODE OVERRIDE */
+    @media (prefers-color-scheme: dark) {
+      body { background: var(--white) !important; color: var(--rtext) !important; }
+      .rights-box { background: #fff !important; border-color: #e8e8e8 !important; color: var(--rtext) !important; }
+      .rights-box ul li { color: #444 !important; }
+      .consequences-box { background: #fff5f5 !important; }
+      .welfare-box { background: #fff !important; border-color: #e0e0e0 !important; }
+      .welfare-box p { color: #555 !important; }
+      .waiver-cta { background: var(--dark) !important; }
+    }
+
     footer { background: #080808; border-top: 1px solid var(--border); padding: 1.5rem var(--pad); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.78rem; color: #333; }
     footer a { color: #444; text-decoration: none; }
     footer a:hover { color: #fff; }

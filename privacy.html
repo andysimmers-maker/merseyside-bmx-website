@@ -57,6 +57,13 @@
     .updated-note { background: var(--mid); border-left: 3px solid var(--border); padding: 1rem 1.25rem; font-size: 0.82rem; color: #666; margin-bottom: 3rem; }
     .updated-note strong { color: #999; }
 
+    /* DARK MODE OVERRIDE */
+    @media (prefers-color-scheme: dark) {
+      .policy-section h2 { color: #fff !important; }
+      .policy-section p, .policy-section li { color: #bbb !important; }
+      .updated-note { color: #999 !important; }
+    }
+
     /* FOOTER */
     footer { background: #080808; border-top: 1px solid var(--border); padding: 1.5rem var(--pad); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.78rem; color: #444; }
     footer a { color: #555; text-decoration: none; }

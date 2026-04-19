@@ -269,6 +269,34 @@
     @media (max-width: 860px) { .sponsors-logos { grid-template-columns: repeat(5, 1fr); } }
     @media (max-width: 500px) { .sponsors-logos { grid-template-columns: repeat(3, 1fr); } }
 
+    /* ══ DARK MODE OVERRIDE ══ */
+    /* Force light sections to stay light regardless of OS dark mode */
+    @media (prefers-color-scheme: dark) {
+      #sessions, #join, #contact { background: var(--white) !important; color: var(--rtext) !important; }
+      .s-card { background: #fff !important; border-color: #ddd !important; color: var(--rtext) !important; }
+      .s-body { color: #555 !important; }
+      .s-name { color: var(--rtext) !important; }
+      .mem-card { background: #fff !important; color: var(--rtext) !important; }
+      .join-body p { color: #555 !important; }
+      .contact-info p { color: #555 !important; }
+      .contact-info h3 { color: var(--rtext) !important; }
+      .form-group input, .form-group select, .form-group textarea { background: #fff !important; color: var(--rtext) !important; border-color: #ccc !important; }
+      .form-label { color: #333 !important; }
+      .sponsor-tile { background: #f0f0f0 !important; }
+      .sponsors-logos { background: #ccc !important; }
+      #sessions .sec-title, #join .sec-title, #contact .sec-title { color: var(--rtext) !important; }
+      #sessions .sec-lead, #join .sec-lead, #contact .sec-lead { color: var(--rmuted) !important; }
+      .coaching-table td { color: #444 !important; }
+      .coaching-table th { color: #aaa !important; }
+      .price-note { color: #555 !important; }
+      .mem-type, .mem-age, .mem-dur { color: #666 !important; }
+      .mem-name { color: var(--rtext) !important; }
+      .mem-price { color: var(--rtext) !important; }
+      .mem-card a { color: var(--blue) !important; }
+      .s-day.dark { color: #555 !important; }
+      .chip-dark { background: #f0f0f0 !important; color: #777 !important; }
+    }
+
     /* ══ FOOTER ══ */
     footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
     .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }

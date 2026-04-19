@@ -77,6 +77,22 @@
     .btn-red { background: var(--red); color: #fff; }
     .btn-red:hover { background: var(--red2); transform: translateY(-2px); }
 
+    /* DARK MODE OVERRIDE */
+    @media (prefers-color-scheme: dark) {
+      body { background: #f4f4f4 !important; color: #222 !important; }
+      .sponsors-page { background: #f4f4f4 !important; }
+      .sponsor-card { background: #fff !important; }
+      .sponsor-card:hover { background: #f9f9f9 !important; }
+      .sponsor-logo-panel { background: #f0f0f0 !important; border-color: #e0e0e0 !important; }
+      .sponsor-name { color: #111 !important; }
+      .sponsor-desc { color: #444 !important; }
+      .sponsor-contact { color: #555 !important; }
+      .sponsor-cards { background: #ddd !important; }
+      .sponsor-cta { background: #fff !important; border-color: #ddd !important; }
+      .sponsor-cta h3 { color: #111 !important; }
+      .sponsor-cta p { color: #555 !important; }
+    }
+
     /* FOOTER */
     footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
     .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }

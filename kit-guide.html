@@ -180,6 +180,16 @@
     .note-box a { color: var(--blue); text-decoration: none; }
     .note-box a:hover { text-decoration: underline; }
 
+    /* DARK MODE OVERRIDE */
+    @media (prefers-color-scheme: dark) {
+      .guide-section.light { background: var(--white) !important; color: var(--rtext) !important; }
+      .guide-section.light .card { background: #fff !important; }
+      .guide-section.light .card-title { color: var(--rtext) !important; }
+      .guide-section.light .card p, .guide-section.light .card ul li { color: var(--rmuted) !important; }
+      .guide-section.light .section-title { color: var(--rtext) !important; }
+      .guide-section.light .section-lead { color: var(--rmuted) !important; }
+    }
+
     /* FOOTER */
     footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
     .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }

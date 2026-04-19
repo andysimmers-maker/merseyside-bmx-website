@@ -104,6 +104,14 @@
     .btn-red:hover { background: var(--red2); transform: translateY(-2px); }
 
     /* Footer */
+    /* DARK MODE OVERRIDE */
+    @media (prefers-color-scheme: dark) {
+      .faq-q { color: var(--text) !important; background: var(--dark) !important; }
+      .faq-a { background: var(--black) !important; color: #bbb !important; }
+      .faq-a p, .faq-a li { color: #bbb !important; }
+      .price-note { background: var(--mid) !important; color: #bbb !important; }
+    }
+
     footer { background: #080808; border-top: 1px solid var(--border); padding: 1.5rem var(--pad); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.78rem; color: #333; }
     footer a { color: #444; text-decoration: none; }
     footer a:hover { color: #fff; }
