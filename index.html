@@ -213,7 +213,7 @@
     .riders-col-title { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.2em; padding-bottom: 0.6rem; border-bottom: 2px solid var(--border); margin-bottom: 1.5rem; color: var(--muted); }
     .riders-intro { font-size: 0.9rem; color: #999; margin-bottom: 1.75rem; line-height: 1.7; }
     /* Card grid */
-    .rider-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 1px; background: var(--border); }
+    .rider-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 3px; background: var(--black); }
     .rider-card { background: var(--dark); display: flex; flex-direction: column; transition: background 0.2s; }
     .rider-card:hover { background: var(--mid); }
     .rider-photo { width: 100%; aspect-ratio: 1/1; overflow: hidden; flex-shrink: 0; }
@@ -602,7 +602,15 @@
           <div class="rider-cards">
 
             <div class="rider-card">
-              <div class="rider-photo"><img src="fin_thomson_926_male7s_NRT.avif" alt="Fin Thomson" /></div>
+              <div class="rider-photo"><img src="rider_jaxon.jpg" alt="Jaxon" /></div>
+              <div class="rider-meta">
+                <div class="rider-name">Jaxon</div>
+                <div class="rider-number">#39</div>
+                <div class="rider-category">Male 11s</div>
+              </div>
+            </div>
+
+            <div class="rider-card">
               <div class="rider-meta">
                 <div class="rider-name">Fin Thomson</div>
                 <div class="rider-number">#926</div>
@@ -670,7 +678,7 @@
         <!-- REGIONAL TEAM -->
         <div class="reveal">
           <div class="riders-col-title">Regional Team</div>
-          <p class="riders-intro">Our regional riders compete across the North Region series. Dedicated athletes achieving outstanding results and inspiring the next generation at the club.</p>
+          <p class="riders-intro">Our regional riders compete across the North Region series, representing the club with determination and skill at every round.</p>
           <div class="rider-cards">
 
             <div class="rider-card">
