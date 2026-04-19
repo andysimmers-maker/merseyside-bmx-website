@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="color-scheme" content="only light" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bikes &amp; Kit Guide, Merseyside BMX Club</title>
+  <meta name="description" content="Everything new riders and parents need to know about buying a BMX race bike, helmet and protection. Advice from Merseyside BMX Club." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #d42b2b; --red2: #b52020;
+      --black: #0f0f0f; --dark: #191919; --mid: #2a2a2a;
+      --border: #383838; --text: #e2e2e2; --muted: #aaa;
+      --blue: #1a3d8f; --blue2: #0d2660;
+      --white: #f6f6f6; --offwhite: #ececec;
+      --rtext: #181818; --rmuted: #444;
+      --fd: 'Bebas Neue', sans-serif; --fb: 'DM Sans', sans-serif;
+      --mw: 1100px; --pad: 5vw;
+    }
+    html { scroll-behavior: smooth; color-scheme: only light; }
+    body { font-family: var(--fb); font-size: 16px; line-height: 1.65; overflow-x: hidden; background: var(--black); color: var(--text); }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 60px; background: var(--black); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 var(--pad); gap: 1rem; }
+    .nav-stripe { width: 4px; height: 26px; flex-shrink: 0; background: linear-gradient(to bottom, var(--red) 50%, var(--blue) 50%); }
+    .nav-logo img { height: 48px; width: auto; display: block; }
+    .nav-links { display: flex; list-style: none; margin-left: auto; }
+    .nav-links a { display: flex; align-items: center; height: 60px; padding: 0 0.85rem; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.06em; color: var(--text); text-decoration: none; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+    .nav-links a:hover { color: #fff; border-bottom-color: var(--red); }
+    .nav-links a.nav-shop { color: var(--red); background: transparent; border: 1px solid var(--red); border-bottom: 1px solid var(--red); padding: 0 1.1rem; }
+    .nav-links a.nav-shop:hover { background: var(--red); color: #fff; }
+    .nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 0; flex-direction: column; gap: 5px; margin-left: auto; }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: #fff; }
+    @media (max-width: 900px) {
+      .nav-links { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--dark); flex-direction: column; border-top: 1px solid var(--border); }
+      .nav-links.open { display: flex; }
+      .nav-links a { height: 50px; border-bottom: 1px solid var(--border); padding: 0 1.5rem; }
+      .nav-links a.nav-shop { background: none; color: var(--red); border: none; border-bottom: 1px solid var(--border); }
+      .nav-burger { display: flex; }
+    }
+
+    /* PAGE HEADER */
+    .page-header { padding: 7rem var(--pad) 3.5rem; background: var(--dark); border-bottom: 3px solid var(--red); }
+    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: var(--red); margin-bottom: 0.4rem; }
+    .page-header h1 { font-family: var(--fd); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 0.95; color: #fff; letter-spacing: 0.02em; }
+    .page-header p { font-size: 0.95rem; color: var(--muted); max-width: 600px; margin-top: 0.9rem; line-height: 1.75; }
+
+    .dd { height: 5px; background: linear-gradient(to right, var(--red) 25%, var(--black) 25% 50%, var(--blue) 50% 75%, #e0e0e0 75%); }
+
+    .container { max-width: var(--mw); margin: 0 auto; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ASK US BANNER */
+    .ask-banner { background: var(--blue); padding: 2rem var(--pad); }
+    .ask-banner-inner { max-width: var(--mw); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .ask-banner h3 { font-family: var(--fd); font-size: 1.4rem; letter-spacing: 0.06em; color: #fff; }
+    .ask-banner p { font-size: 0.88rem; color: rgba(255,255,255,0.8); margin-top: 0.25rem; max-width: 540px; line-height: 1.6; }
+    .btn { display: inline-block; font-family: var(--fd); font-size: 0.95rem; letter-spacing: 0.08em; text-decoration: none; padding: 0.7rem 1.75rem; cursor: pointer; border: none; transition: all 0.2s; white-space: nowrap; }
+    .btn-white { background: #fff; color: var(--blue); }
+    .btn-white:hover { background: var(--offwhite); transform: translateY(-2px); }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red2); transform: translateY(-2px); }
+
+    /* CONTENTS NAV */
+    .contents { background: var(--dark); padding: 2rem var(--pad); border-bottom: 1px solid var(--border); }
+    .contents-inner { max-width: var(--mw); margin: 0 auto; }
+    .contents-label { font-family: var(--fd); font-size: 0.75rem; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 0.75rem; }
+    .contents-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .contents-link { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.08em; color: #aaa; text-decoration: none; padding: 0.3rem 0.75rem; border: 1px solid var(--border); transition: all 0.2s; }
+    .contents-link:hover { color: #fff; border-color: #666; background: var(--mid); }
+
+    /* SECTIONS */
+    .guide-section { padding: 4rem var(--pad); border-top: 1px solid var(--border); }
+    .guide-section:first-of-type { border-top: none; }
+    .guide-section.light { background: var(--white); color: var(--rtext); }
+    .guide-section.dark { background: var(--dark); }
+    .guide-section.black { background: var(--black); }
+
+    .section-inner { max-width: var(--mw); margin: 0 auto; }
+    .section-num { font-family: var(--fd); font-size: 0.75rem; letter-spacing: 0.25em; color: var(--red); margin-bottom: 0.25rem; }
+    .section-title { font-family: var(--fd); font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 0.95; letter-spacing: 0.02em; margin-bottom: 1rem; }
+    .guide-section.light .section-title { color: var(--rtext); }
+    .guide-section.dark .section-title,
+    .guide-section.black .section-title { color: #fff; }
+    .section-lead { font-size: 0.95rem; line-height: 1.75; max-width: 680px; margin-bottom: 2rem; }
+    .guide-section.light .section-lead { color: var(--rmuted); }
+    .guide-section.dark .section-lead,
+    .guide-section.black .section-lead { color: #aaa; }
+
+    /* CARDS GRID */
+    .cards { display: grid; gap: 1px; background: var(--border); }
+    .cards-2 { grid-template-columns: 1fr 1fr; }
+    .cards-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .card { padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .guide-section.light .card { background: #fff; }
+    .guide-section.dark .card { background: var(--black); }
+    .guide-section.black .card { background: var(--dark); }
+    .card-label { font-family: var(--fd); font-size: 0.72rem; letter-spacing: 0.2em; color: var(--red); }
+    .card-title { font-family: var(--fd); font-size: 1.3rem; letter-spacing: 0.04em; }
+    .guide-section.light .card-title { color: var(--rtext); }
+    .guide-section.dark .card-title,
+    .guide-section.black .card-title { color: #fff; }
+    .card p { font-size: 0.88rem; line-height: 1.7; }
+    .guide-section.light .card p { color: var(--rmuted); }
+    .guide-section.dark .card p,
+    .guide-section.black .card p { color: #aaa; }
+    .card ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+    .card ul li { font-size: 0.85rem; line-height: 1.5; display: flex; gap: 0.5rem; }
+    .card ul li::before { content: '→'; color: var(--red); flex-shrink: 0; }
+    .guide-section.light .card ul li { color: var(--rmuted); }
+    .guide-section.dark .card ul li,
+    .guide-section.black .card ul li { color: #aaa; }
+    .card-tag { display: inline-block; font-family: var(--fd); font-size: 0.7rem; letter-spacing: 0.15em; padding: 0.2rem 0.6rem; margin-top: 0.25rem; }
+    .tag-recommended { background: rgba(26,61,143,0.15); color: #7a9de8; }
+    .tag-optional { background: rgba(212,43,43,0.1); color: #e87a7a; }
+    .tag-required { background: rgba(42,122,74,0.15); color: #6abf8a; }
+    @media (max-width: 720px) { .cards-2, .cards-3 { grid-template-columns: 1fr; } }
+    @media (max-width: 860px) { .cards-3 { grid-template-columns: 1fr 1fr; } }
+
+    /* BIKE SIZES TABLE */
+    .size-table-wrap { overflow-x: auto; margin-top: 1.5rem; }
+    .size-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .size-table th { font-family: var(--fd); font-size: 0.72rem; letter-spacing: 0.15em; padding: 0.6rem 1rem; text-align: left; border-bottom: 2px solid var(--border); color: var(--muted); }
+    .size-table td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); color: #bbb; }
+    .size-table tr:last-child td { border-bottom: none; }
+    .size-table tr:hover td { background: var(--mid); }
+    .size-tag { display: inline-block; font-family: var(--fd); font-size: 0.65rem; letter-spacing: 0.1em; padding: 0.15rem 0.45rem; background: rgba(26,61,143,0.2); color: #7a9de8; margin-left: 0.4rem; vertical-align: middle; }
+
+    /* PRICE GUIDE */
+    .price-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); margin-top: 1.5rem; }
+    .price-card { background: var(--black); padding: 1.5rem; }
+    .price-range { font-family: var(--fd); font-size: 1.8rem; color: var(--red); line-height: 1; margin-bottom: 0.4rem; }
+    .price-label { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.12em; color: #fff; margin-bottom: 0.4rem; }
+    .price-desc { font-size: 0.82rem; color: #777; line-height: 1.5; }
+    @media (max-width: 560px) { .price-cards { grid-template-columns: 1fr; } }
+
+    /* BRAND GRID */
+    .brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1px; background: var(--border); margin-top: 1.5rem; }
+    .brand-item { background: var(--black); padding: 1rem 1.25rem; font-family: var(--fd); font-size: 0.95rem; letter-spacing: 0.04em; color: #ddd; transition: background 0.2s; }
+    .brand-item:hover { background: var(--mid); }
+    .brand-item.sponsor { color: var(--red); }
+    .brand-note { font-size: 0.72rem; font-family: var(--fb); color: #555; font-family: var(--fb); letter-spacing: 0; display: block; margin-top: 0.15rem; font-weight: normal; }
+
+    /* WHERE TO BUY */
+    .shop-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 1.5rem; }
+    .shop-item { background: var(--dark); padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; transition: background 0.2s; }
+    .shop-item:hover { background: var(--mid); }
+    .shop-name { font-family: var(--fd); font-size: 1rem; letter-spacing: 0.04em; color: #fff; }
+    .shop-note { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+    .shop-link { font-family: var(--fd); font-size: 0.75rem; letter-spacing: 0.08em; color: var(--red); text-decoration: none; white-space: nowrap; transition: color 0.2s; }
+    .shop-link:hover { color: #fff; }
+    .shop-sponsor-tag { font-family: var(--fd); font-size: 0.65rem; letter-spacing: 0.12em; background: rgba(212,43,43,0.15); color: #e87a7a; padding: 0.15rem 0.45rem; }
+
+    /* SECONDHAND WARNING */
+    .warning-box { background: var(--mid); border-left: 3px solid var(--red); padding: 1.25rem 1.5rem; margin-top: 1.5rem; font-size: 0.88rem; color: #bbb; line-height: 1.65; }
+    .warning-box strong { color: #fff; }
+
+    /* FB GROUPS */
+    .fb-groups { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
+    .fb-group { display: flex; align-items: center; gap: 0.75rem; background: var(--black); padding: 0.75rem 1rem; text-decoration: none; transition: background 0.2s; }
+    .fb-group:hover { background: var(--mid); }
+    .fb-group-name { font-size: 0.88rem; color: #ddd; }
+    .fb-group svg { flex-shrink: 0; }
+
+    /* HELMET BRANDS */
+    .helmet-table { width: 100%; border-collapse: collapse; margin-top: 1.25rem; }
+    .helmet-table th { font-family: var(--fd); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--muted); padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+    .helmet-table td { font-size: 0.85rem; color: #bbb; padding: 0.55rem 0.75rem; border-bottom: 1px solid #1e1e1e; }
+    .helmet-table tr:last-child td { border-bottom: none; }
+    .helmet-table td:first-child { font-family: var(--fd); font-size: 0.95rem; color: #fff; }
+
+    /* NOTE BOX */
+    .note-box { background: var(--mid); border-left: 3px solid var(--blue); padding: 1.25rem 1.5rem; margin-top: 1.5rem; font-size: 0.88rem; color: #bbb; line-height: 1.65; }
+    .note-box strong { color: #fff; }
+    .note-box a { color: var(--blue); text-decoration: none; }
+    .note-box a:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
+    .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }
+    .footer-logo img { height: 44px; width: auto; display: block; margin-bottom: 0.75rem; }
+    .footer-stripe { display: flex; gap: 4px; margin-bottom: 0.75rem; }
+    .footer-stripe span { height: 3px; width: 22px; border-radius: 1px; }
+    .footer-brand p { font-size: 0.82rem; color: #aaa; line-height: 1.6; margin-bottom: 0.35rem; }
+    .footer-brand a { color: #aaa; text-decoration: none; font-size: 0.82rem; }
+    .footer-brand a:hover { color: var(--red); }
+    .footer-social { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+    .footer-social a { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--mid); border: 1px solid var(--border); color: var(--text); text-decoration: none; transition: all 0.2s; }
+    .footer-social a:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    .footer-col h4 { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.2em; color: var(--red); margin-bottom: 0.75rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.35rem; }
+    .footer-col ul li a { font-size: 0.82rem; color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { max-width: var(--mw); margin: 2rem auto 0; padding-top: 1.25rem; border-top: 1px solid var(--border); font-size: 0.75rem; color: #888; }
+    @media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-stripe"></div>
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="Merseyside BMX Club" /></a>
+    <button class="nav-burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#sessions">Sessions</a></li>
+      <li><a href="shop.html" class="nav-shop">Shop</a></li>
+      <li><a href="index.html#join">Join</a></li>
+      <li><a href="index.html#coaches">Coaches</a></li>
+      <li><a href="index.html#riders">Riders</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="kicker">New Riders</div>
+    <h1>BIKES &amp; KIT GUIDE</h1>
+    <p>Everything you need to know about buying a BMX race bike, helmet and protection. Written by the club to help new riders and parents make the right choices from day one.</p>
+  </div>
+
+  <div class="dd"></div>
+
+  <!-- ASK US FIRST -->
+  <div class="ask-banner">
+    <div class="ask-banner-inner">
+      <div>
+        <h3>NOT SURE WHERE TO START? ASK US FIRST.</h3>
+        <p>Before buying a bike, speak with one of our coaches or committee members. We can check your rider's measurements, recommend the right size and help you avoid a costly mistake. We do this all the time and are always happy to help.</p>
+      </div>
+      <a href="index.html#contact" class="btn btn-white">Get In Touch →</a>
+    </div>
+  </div>
+
+  <!-- CONTENTS -->
+  <div class="contents">
+    <div class="contents-inner">
+      <div class="contents-label">JUMP TO SECTION</div>
+      <div class="contents-links">
+        <a href="#essential" class="contents-link">Essential Kit</a>
+        <a href="#helmets" class="contents-link">Helmets</a>
+        <a href="#protection" class="contents-link">Body Protection</a>
+        <a href="#bike-sizes" class="contents-link">Bike Sizes</a>
+        <a href="#complete-vs-custom" class="contents-link">Complete vs Custom</a>
+        <a href="#brands" class="contents-link">Recommended Brands</a>
+        <a href="#prices" class="contents-link">Price Guide</a>
+        <a href="#where-to-buy" class="contents-link">Where to Buy</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. ESSENTIAL KIT -->
+  <div class="guide-section dark" id="essential">
+    <div class="section-inner reveal">
+      <div class="section-num">SECTION 1</div>
+      <h2 class="section-title">ESSENTIAL EQUIPMENT</h2>
+      <p class="section-lead">Starting BMX is a bit different from sports like football or gymnastics where you can walk into any shop and pick up what you need for £100. The kit is more specialist, but you don't need to spend a fortune to get started well.</p>
+      <div class="cards cards-3">
+        <div class="card">
+          <div class="card-label">REQUIRED</div>
+          <div class="card-title">FULL FACE HELMET</div>
+          <p>A BMX or MTB specific full face helmet is mandatory. Don't be tempted by motocross helmets. They are much heavier and less comfortable. Don't buy from toy shops like Smyths or Argos. Buy from a proper bike or BMX supplier.</p>
+          <span class="card-tag tag-required">Mandatory</span>
+        </div>
+        <div class="card">
+          <div class="card-label">REQUIRED</div>
+          <div class="card-title">GLOVES</div>
+          <p>Mandatory at all sessions. BMX or MTB gloves are best. They don't need to be expensive. Any full finger glove from a bike supplier will do the job.</p>
+          <span class="card-tag tag-required">Mandatory</span>
+        </div>
+        <div class="card">
+          <div class="card-label">REQUIRED</div>
+          <div class="card-title">LONG SLEEVES &amp; TROUSERS</div>
+          <p>Long sleeves and long trousers are required at all sessions. No shorts without knee and shin pads. Race pants are ideal once you're committed, but any suitable sportswear is fine to start.</p>
+          <span class="card-tag tag-required">Mandatory</span>
+        </div>
+        <div class="card">
+          <div class="card-label">RECOMMENDED</div>
+          <div class="card-title">BODY ARMOUR</div>
+          <p>Not mandatory but strongly recommended. Upper body armour protects the torso, arms and elbows. Once a rider is committed to the sport this becomes an important investment.</p>
+          <span class="card-tag tag-recommended">Recommended</span>
+        </div>
+        <div class="card">
+          <div class="card-label">RECOMMENDED</div>
+          <div class="card-title">KNEE &amp; SHIN PADS</div>
+          <p>Highly advisable and required if wearing race shorts. Can be worn over race pants. Affordable options are available from most BMX suppliers.</p>
+          <span class="card-tag tag-recommended">Recommended</span>
+        </div>
+        <div class="card">
+          <div class="card-label">AVAILABLE TO HIRE</div>
+          <div class="card-title">BIKE HIRE</div>
+          <p>Not sure if BMX is right for your rider yet? You can hire a bike, helmet, pads and gloves from the club for £3 per session on Tuesdays and Thursdays. Limited availability, so arrive early.</p>
+          <span class="card-tag tag-optional">£3 per session</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. HELMETS -->
+  <div class="guide-section black" id="helmets">
+    <div class="section-inner reveal">
+      <div class="section-num">SECTION 2</div>
+      <h2 class="section-title">HELMETS</h2>
+      <p class="section-lead">Getting the right helmet is one of the most important purchases you'll make. Fit matters more than price. Always try before you buy where possible, as manufacturer size charts don't always match actual head sizes.</p>
+
+      <div class="note-box">
+        <strong>Fitting advice:</strong> The helmet should fit snug around the cheeks as well as the top of the head. There should be no gaps and it should not move from side to side or up and down. If possible, buy in person so you can try it on.
+      </div>
+
+      <table class="helmet-table">
+        <thead>
+          <tr><th>Brand</th><th>Approx. Price</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>7Protection M1</td><td>~£70</td><td>Good starter option. Available Youth M to Adult XL.</td></tr>
+          <tr><td>Bell</td><td>~£70</td><td>Well known, widely available.</td></tr>
+          <tr><td>Leatt</td><td>~£100</td><td>Good mid range option.</td></tr>
+          <tr><td>100%</td><td>~£100</td><td>Popular in the BMX community.</td></tr>
+          <tr><td>Fox</td><td>~£150</td><td>Trusted brand, wide range of sizes.</td></tr>
+          <tr><td>Fly Racing</td><td>~£200</td><td>Premium option.</td></tr>
+          <tr><td>Troy Lee Designs</td><td>£250+</td><td>Top of the range.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3. BODY PROTECTION -->
+  <div class="guide-section dark" id="protection">
+    <div class="section-inner reveal">
+      <div class="section-num">SECTION 3</div>
+      <h2 class="section-title">BODY PROTECTION</h2>
+      <p class="section-lead">Two main approaches for upper body protection, depending on budget and how committed your rider is to the sport.</p>
+
+      <div class="cards cards-2">
+        <div class="card">
+          <span class="card-tag tag-recommended" style="margin-bottom:0.25rem;">RECOMMENDED ONCE COMMITTED</span>
+          <div class="card-title">FULL UPPER BODY ARMOUR</div>
+          <p>Covers the torso and arms including elbows in one piece. More expensive but offers comprehensive protection. S1 protection is a good option at this level, though it is towards the higher end of the price range.</p>
+          <ul>
+            <li>Best overall protection</li>
+            <li>One piece, no fuss</li>
+            <li>Worth the investment once committed</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="card-tag tag-optional" style="margin-bottom:0.25rem;">BUDGET FRIENDLY STARTING POINT</span>
+          <div class="card-title">ELBOW AND ARM PADS</div>
+          <p>A more affordable option for riders just getting started. Protects the most common contact points without the full outlay of a complete armour set. More budget friendly options are available but try on for sizing where possible.</p>
+          <ul>
+            <li>Lower cost</li>
+            <li>Covers key injury points</li>
+            <li>Good starting option</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top:1.5rem;">
+        <div class="card-label" style="color:var(--muted); margin-bottom:0.75rem;">PROTECTION BRANDS</div>
+        <div class="brand-grid">
+          <div class="brand-item">Fox</div>
+          <div class="brand-item">Raceface</div>
+          <div class="brand-item">7Protection</div>
+          <div class="brand-item">100%</div>
+          <div class="brand-item">S1</div>
+          <div class="brand-item">Leatt</div>
+          <div class="brand-item">G-Form</div>
+          <div class="brand-item">Troy Lee Designs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. BIKE SIZES -->
+  <div class="guide-section black" id="bike-sizes">
+    <div class="section-inner reveal">
+      <div class="section-num">SECTION 4</div>
+      <h2 class="section-title">UNDERSTANDING BIKE SIZES</h2>
+      <p class="section-lead">BMX race bikes come in a wide range of sizes. The most important measurement is the reach from the seat area to the handlebars. Size depends on the rider's height, inside leg measurement and the frame geometry of the specific brand.</p>
+
+      <div class="size-table-wrap">
+        <table class="size-table">
+          <thead>
+            <tr><th>Size</th><th>Wheel Size</th><th>Tyre Width</th><th>Typical Rider</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Micro</td><td>18"</td><td>Skinny</td><td>Youngest/smallest riders</td></tr>
+            <tr><td>Micro Mini</td><td>20"</td><td>Skinny</td><td>Small young riders</td></tr>
+            <tr><td>Mini</td><td>20"</td><td>Skinny</td><td>Young riders</td></tr>
+            <tr><td>Junior</td><td>20"</td><td>Skinny</td><td>Older juniors</td></tr>
+            <tr><td>Expert</td><td>20"</td><td>Skinny</td><td>Most common size range</td></tr>
+            <tr><td>Expert XL</td><td>20"</td><td>Skinny</td><td>Taller riders at this level</td></tr>
+            <tr><td>Pro L</td><td>20"</td><td>Thicker</td><td>Adult/larger riders</td></tr>
+            <tr><td>Pro XL</td><td>20"</td><td>Thicker</td><td>Adult/larger riders</td></tr>
+            <tr><td>Pro XXL</td><td>20"</td><td>Thicker</td><td>Tall adult riders</td></tr>
+            <tr><td>Pro XXXL</td><td>20"</td><td>Thicker</td><td>Very tall riders</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note-box" style="margin-top:1.5rem;">
+        <strong>Important:</strong> Every brand has its own size chart and frame geometry can vary. Always follow the recommended size guide for the specific brand you are buying. BMX sizing is not the same as mountain bike sizing. It is not always recommended to size up for a rider to grow into, as this can hinder progress. Speak to us if you are unsure.
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. COMPLETE VS CUSTOM -->
+  <div class="guide-section dark" id="complete-vs-custom">
+    <div class="section-inner reveal">
+      <div class="section-num">SECTION 5</div>
+      <h2 class="section-title">COMPLETE BIKE vs CUSTOM BUILD</h2>
+      <p class="section-lead">For new riders the answer is simple: buy a factory complete bike. Custom builds are for experienced riders who have fully committed to the sport.</p>
+
+      <div class="cards cards-2">
+        <div class="card">
+          <span class="card-tag tag-recommended" style="margin-bottom:0.25rem;">FOR NEW RIDERS</span>
+          <div class="card-title">FACTORY COMPLETE BIKE</div>
+          <p>The best and most cost effective choice when starting out. Comes fully assembled with frame, wheels, brakes and all components, ready to ride straight away.</p>
+          <ul>
+            <li>Best value for beginners</li>
+            <li>Ready to ride immediately</li>
+            <li>All parts matched and compatible</li>
+            <li>Typically £400 to £700 new, £100 to £400 second hand</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="card-tag tag-optional" style="margin-bottom:0.25rem;">NOT FOR BEGINNERS</span>
+          <div class="card-title">CUSTOM BUILD</div>
+          <p>Custom builds are for riders who have committed fully to BMX and want a bike designed to their exact specification. They are expensive and unnecessary when starting out.</p>
+          <ul>
+            <li>Typically starts at £1,500 upwards</li>
+            <li>Not recommended until fully committed</li>
+            <li>A custom build will not make a rider faster on its own</li>
+            <li>Speak to us before going down this route</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. BRANDS -->
+  <div class="guide-section black" id="brands">
+    <div class="section-inner reveal">
+      <div class="section-num">SECTION 6</div>
+      <h2 class="section-title">RECOMMENDED STARTER BRANDS</h2>
+      <p class="section-lead">These brands all produce reliable factory complete BMX race bikes and are well known and trusted in the BMX racing community.</p>
+
+      <div class="brand-grid">
+        <div class="brand-item">StayStrong</div>
+        <div class="brand-item">Meybo</div>
+        <div class="brand-item">Haro</div>
+        <div class="brand-item">Radio</div>
+        <div class="brand-item">Inspyre</div>
+        <div class="brand-item">Jet BMX</div>
+        <div class="brand-item">Cuda</div>
+        <div class="brand-item">GT</div>
+      </div>
+
+      <div class="note-box" style="margin-top:1.5rem;">
+        <strong>Note on GT:</strong> GT are currently on a brand pause so no new bikes are being made. They are however a highly rated option second hand, especially the Speed Series models which are widely available. Parts can be interchanged easily if needed.
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. PRICE GUIDE -->
+  <div class="guide-section dark" id="prices">
+    <div class="section-inner reveal">
+      <div class="section-num">SECTION 7</div>
+      <h2 class="section-title">PRICE GUIDE</h2>
+      <p class="section-lead">A rough guide to what you can expect to spend. You do not need a high end bike to get started, confidence, skills and technique matter far more than the bike.</p>
+
+      <div class="price-cards">
+        <div class="price-card">
+          <div class="price-range">£100–£300</div>
+          <div class="price-label">SECOND HAND</div>
+          <div class="price-desc">Good starter option if buying wisely. Make sure it's a race bike, not a park or street BMX. Ask the club before buying if you're unsure.</div>
+        </div>
+        <div class="price-card">
+          <div class="price-range">£200–£400</div>
+          <div class="price-label">IDEAL BEGINNER BUDGET</div>
+          <div class="price-desc">Sweet spot for a good quality second hand bike or an entry level new complete. Plenty of options available in this range.</div>
+        </div>
+        <div class="price-card">
+          <div class="price-range">£400–£700+</div>
+          <div class="price-label">BRAND NEW COMPLETE</div>
+          <div class="price-desc">Brand new complete bike from a shop or supplier. A good investment once committed to the sport.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. WHERE TO BUY -->
+  <div class="guide-section black" id="where-to-buy">
+    <div class="section-inner reveal">
+      <div class="section-num">SECTION 8</div>
+      <h2 class="section-title">WHERE TO BUY</h2>
+      <p class="section-lead">Specialist BMX suppliers will give you the best advice and the right product. These are shops we know and trust.</p>
+
+      <div class="shop-list">
+        <div class="shop-item">
+          <div>
+            <div class="shop-name">DC Cycles <span class="shop-sponsor-tag">CLUB SPONSOR</span></div>
+            <div class="shop-note">Nationwide pop up shop. BMX parts, race gear and expert support. Please support them where possible.</div>
+          </div>
+          <a href="https://www.dccycles.co.uk" target="_blank" class="shop-link">dccycles.co.uk →</a>
+        </div>
+        <div class="shop-item">
+          <div>
+            <div class="shop-name">Alan's BMX</div>
+            <div class="shop-note">Wigan. Within half an hour of Liverpool.</div>
+          </div>
+          <a href="https://alansbmx.com" target="_blank" class="shop-link">alansbmx.com →</a>
+        </div>
+        <div class="shop-item">
+          <div>
+            <div class="shop-name">Winstanleys BMX</div>
+            <div class="shop-note">Wigan. Within half an hour of Liverpool.</div>
+          </div>
+          <a href="https://winstanleysbmx.com" target="_blank" class="shop-link">winstanleysbmx.com →</a>
+        </div>
+        <div class="shop-item">
+          <div>
+            <div class="shop-name">Sorted Racegear</div>
+            <div class="shop-note">Warrington. Within half an hour of Liverpool.</div>
+          </div>
+          <a href="https://www.sortedracegear.com" target="_blank" class="shop-link">sortedracegear.com →</a>
+        </div>
+        <div class="shop-item">
+          <div>
+            <div class="shop-name">Crucial BMX</div>
+            <div class="shop-note">Bristol based. Ships UK wide.</div>
+          </div>
+          <a href="https://crucialbmxshop.com" target="_blank" class="shop-link">crucialbmxshop.com →</a>
+        </div>
+        <div class="shop-item">
+          <div>
+            <div class="shop-name">Source BMX</div>
+            <div class="shop-note">Online only. Wide range.</div>
+          </div>
+          <a href="https://www.sourcebmx.com" target="_blank" class="shop-link">sourcebmx.com →</a>
+        </div>
+      </div>
+
+      <div style="margin-top:2.5rem;">
+        <div class="section-num" style="margin-bottom:0.5rem;">SECOND HAND</div>
+        <p style="font-size:0.92rem; color:#aaa; line-height:1.7; max-width:680px; margin-bottom:1rem;">Second hand bikes can represent great value. The main thing to watch out for is making sure you're buying a race bike, not a park or street BMX. Sizes aren't always clearly described by sellers either, so ask us before committing to a purchase.</p>
+
+        <div class="warning-box">
+          <strong>Important:</strong> When buying online, do not send money upfront for a bike you are not 100% sure about. If in doubt, ask. Our members WhatsApp group is very active and the coaches and committee are always happy to help check a listing before you buy.
+        </div>
+
+        <div class="fb-groups">
+          <a href="https://www.facebook.com/share/g/1ZR1B9YLyS/?mibextid=wwXIfr" target="_blank" class="fb-group">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#7a9de8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            <span class="fb-group-name">BMX Trader UK (race bikes only, invite via FB friends)</span>
+          </a>
+          <a href="https://www.facebook.com/share/g/1Afrbnpd54/?mibextid=wwXIfr" target="_blank" class="fb-group">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#7a9de8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            <span class="fb-group-name">BMX Race Bikes Buy and Sell</span>
+          </a>
+          <a href="https://www.facebook.com/share/g/1DPZuRHLeZ/?mibextid=wwXIfr" target="_blank" class="fb-group">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#7a9de8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            <span class="fb-group-name">BMX Race Bikes UK</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="note-box" style="margin-top:2rem;">
+        <strong>Remember:</strong> you do not need a high end bike to begin. Focus first on confidence, skills and technique on the track. Speak to a coach, committee member or club mechanic at any point. Between us we have a lot of experience and are always happy to guide you through buying equipment and bikes. <a href="index.html#contact">Get in touch</a> any time.
+      </div>
+    </div>
+  </div>
+
+  <div class="dd"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="logo.png" alt="Merseyside BMX Club" /></div>
+        <div class="footer-stripe">
+          <span style="background:var(--red);"></span>
+          <span style="background:rgba(255,255,255,0.2);"></span>
+          <span style="background:var(--blue);"></span>
+          <span style="background:var(--border);"></span>
+        </div>
+        <p>Knowsley Leisure and Culture Park<br>Longview Drive, Huyton, L36 6EG</p>
+        <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank" title="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/merseysidebmxclub?igsh=MWo2d2ZvcGZtc2pvNA==" target="_blank" title="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="mailto:merseysidebmx@gmail.com" title="Email">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>The Club</h4>
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#sessions">Club Sessions</a></li>
+          <li><a href="index.html#join">Join the Club</a></li>
+          <li><a href="index.html#coaches">Our Coaches</a></li>
+          <li><a href="coaching.html">Coaching Pathway</a></li>
+          <li><a href="index.html#riders">The Riders</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="shop.html">Club Shop</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+          <li><a href="sponsors.html">Our Sponsors</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+          <li><a href="kit-guide.html">Bikes &amp; Kit Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="conduct.html">Code of Conduct</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="https://www.britishcycling.org.uk/club/profile/6660/knowsley-bmx-club" target="_blank">British Cycling</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Merseyside BMX Club. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('nav-links');
+    burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 3) * 0.1}s`;
+      obs.observe(el);
+    });
+  </script>
+</body>
+</html>
