@@ -179,7 +179,7 @@
     .mem-price { font-family: var(--fd); font-size: 2rem; color: var(--rtext); line-height: 1; margin: 0.5rem 0 0.2rem; }
     .mem-price small { font-size: 0.72rem; color: #bbb; font-family: var(--fb); font-weight: 400; }
     .mem-dur { font-size: 0.77rem; color: #aaa; margin-bottom: 0.75rem; }
-    .mem-card a { display: block; background: var(--blue); color: #fff; text-decoration: none; padding: 0.6rem 1rem; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.08em; text-align: center; border-radius: 2px; margin-top: auto; transition: background 0.2s; }
+    .mem-card a { display: block; background: var(--blue); color: #fff !important; text-decoration: none; padding: 0.6rem 1rem; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.08em; text-align: center; border-radius: 2px; margin-top: auto; transition: background 0.2s; -webkit-text-fill-color: #fff; }
     .mem-card a:hover { background: var(--blue2); }
     /* FIX 5: Join image — riders only, no duplicate */
     .join-photo img { width: 100%; display: block; }
@@ -194,13 +194,13 @@
     .coach-card { background: var(--black); padding: 2rem; transition: background 0.2s; }
     .coach-card:hover { background: var(--mid); }
     .coach-photo { width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: top; display: block; margin-bottom: 1.25rem; }
-    .coach-photo-placeholder { width: 100%; aspect-ratio: 4/3; background: var(--mid); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--fd); font-size: 0.7rem; letter-spacing: 0.18em; color: #444; margin-bottom: 1.25rem; }
+    .coach-photo-placeholder { width: 100%; aspect-ratio: 1/1; background: var(--mid); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--fd); font-size: 0.7rem; letter-spacing: 0.18em; color: #444; margin-bottom: 1.25rem; }
     .coach-level { font-family: var(--fd); font-size: 0.7rem; letter-spacing: 0.22em; color: var(--red); margin-bottom: 0.2rem; }
     .coach-name { font-family: var(--fd); font-size: 1.5rem; color: #fff; letter-spacing: 0.04em; }
     .coach-desc { font-size: 0.88rem; color: #999; margin-top: 0.6rem; line-height: 1.6; }
     .coach-featured { grid-column: span 2; background: rgba(212,43,43,0.05); border: 1px solid rgba(212,43,43,0.15); }
     .coach-featured .coach-level { color: #f88; }
-    .coach-featured-inner { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; align-items: start; }
+    .coach-featured-inner { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; align-items: start; }
     .coach-featured-inner .coach-photo { margin-bottom: 0; aspect-ratio: 3/4; }
     @media (max-width: 720px) { .coaches-grid { grid-template-columns: 1fr; } .coach-featured { grid-column: span 1; } .coach-featured-inner { grid-template-columns: 1fr; } }
 
@@ -597,16 +597,15 @@
 
         <!-- NATIONAL TEAM -->
         <div class="reveal">
-          <div class="riders-col-title">National Team</div>
-          <p class="riders-intro">Our national riders compete at British Championship level and beyond, representing the club at the highest level of domestic BMX racing.</p>
+          <div class="riders-col-title">Merseyside BMX National Race Team</div>
           <div class="rider-cards">
 
             <div class="rider-card">
-              <div class="rider-photo"><img src="rider_jaxon.jpg" alt="Jaxon" /></div>
+              <div class="rider-photo"><img src="joe_garrett_439_Male7s_NRT.avif" alt="Joe Garrett" /></div>
               <div class="rider-meta">
-                <div class="rider-name">Jaxon</div>
-                <div class="rider-number">#39</div>
-                <div class="rider-category">Male 11s</div>
+                <div class="rider-name">Joe Garrett</div>
+                <div class="rider-number">#439</div>
+                <div class="rider-category">6 and Under</div>
               </div>
             </div>
 
@@ -624,15 +623,6 @@
               <div class="rider-meta">
                 <div class="rider-name">Finley Jones</div>
                 <div class="rider-number">#595</div>
-                <div class="rider-category">Male 7s</div>
-              </div>
-            </div>
-
-            <div class="rider-card">
-              <div class="rider-photo"><img src="joe_garrett_439_Male7s_NRT.avif" alt="Joe Garrett" /></div>
-              <div class="rider-meta">
-                <div class="rider-name">Joe Garrett</div>
-                <div class="rider-number">#439</div>
                 <div class="rider-category">Male 7s</div>
               </div>
             </div>
@@ -665,6 +655,15 @@
             </div>
 
             <div class="rider-card">
+              <div class="rider-photo"><img src="rider_jaxon.jpg" alt="Jaxon" /></div>
+              <div class="rider-meta">
+                <div class="rider-name">Jaxon</div>
+                <div class="rider-number">#39</div>
+                <div class="rider-category">Male 11s</div>
+              </div>
+            </div>
+
+            <div class="rider-card">
               <div class="rider-photo"><img src="josh_lewis_672_open14s_NRT.avif" alt="Josh Lewis" /></div>
               <div class="rider-meta">
                 <div class="rider-name">Josh Lewis</div>
@@ -687,8 +686,7 @@
 
         <!-- REGIONAL TEAM -->
         <div class="reveal">
-          <div class="riders-col-title">Regional Team</div>
-          <p class="riders-intro">Our regional riders compete across the North Region series, representing the club with determination and skill at every round.</p>
+          <div class="riders-col-title">Merseyside BMX Regional Race Team</div>
           <div class="rider-cards">
 
             <div class="rider-card">
@@ -882,7 +880,7 @@
           <li><a href="#sessions">Club Sessions</a></li>
           <li><a href="#join">Join the Club</a></li>
           <li><a href="#coaches">Our Coaches</a></li>
-          <li><a href="coaching.html">Coaching Pathway</a></li>
+          <!-- <li><a href="coaching.html">Coaching Pathway</a></li> -->
           <li><a href="#riders">The Riders</a></li>
         </ul>
       </div>
@@ -894,7 +892,7 @@
           <li><a href="sponsors.html">Our Sponsors</a></li>
           <li><a href="faq.html">FAQs</a></li>
           <li><a href="kit-guide.html">Bikes &amp; Kit Guide</a></li>
-          <li><a href="race-guide.html">Race Day Guide</a></li>
+          <!-- <li><a href="race-guide.html">Race Day Guide</a></li> -->
         </ul>
       </div>
       <div class="footer-col">
