@@ -93,14 +93,14 @@
       .sponsor-cta p { color: #555 !important; }
     }
 
-    /* FOOTER */
+    /* ══ FOOTER ══ */
     footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
     .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }
     .footer-logo img { height: 44px; width: auto; display: block; margin-bottom: 0.75rem; }
     .footer-stripe { display: flex; gap: 4px; margin-bottom: 0.75rem; }
     .footer-stripe span { height: 3px; width: 22px; border-radius: 1px; }
-    .footer-brand p { font-size: 0.82rem; color: #444; line-height: 1.6; margin-bottom: 0.35rem; }
-    .footer-brand a { color: #444; text-decoration: none; font-size: 0.82rem; }
+    .footer-brand p { font-size: 0.82rem; color: #aaa; line-height: 1.6; margin-bottom: 0.35rem; }
+    .footer-brand a { color: #aaa; text-decoration: none; font-size: 0.82rem; }
     .footer-brand a:hover { color: var(--red); }
     .footer-social { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
     .footer-social a { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--mid); border: 1px solid var(--border); color: var(--text); text-decoration: none; transition: all 0.2s; }
@@ -108,17 +108,13 @@
     .footer-col h4 { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.2em; color: var(--red); margin-bottom: 0.75rem; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 0.35rem; }
-    .footer-col ul li a { font-size: 0.82rem; color: #555; text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a { font-size: 0.82rem; color: #aaa; text-decoration: none; transition: color 0.2s; }
     .footer-col ul li a:hover { color: #fff; }
-    .footer-bottom { max-width: var(--mw); margin: 2rem auto 0; padding-top: 1.25rem; border-top: 1px solid var(--border); font-size: 0.75rem; color: #333; }
+    .footer-bottom { max-width: var(--mw); margin: 2rem auto 0; padding-top: 1.25rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; color: #888; }
+    .footer-bottom a { color: #999; text-decoration: none; }
+    .footer-bottom a:hover { color: #fff; }
     @media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; } }
-
-    @media (max-width: 560px) {
-      .sponsor-card { grid-template-columns: 1fr; }
-      .sponsor-logo-panel { border-right: none; border-bottom: 1px solid var(--border); min-height: 100px; }
-      .sponsor-cta { flex-direction: column; align-items: flex-start; }
-    }
   </style>
 </head>
 <body>
@@ -432,23 +428,23 @@
       <div class="footer-col">
         <h4>The Club</h4>
         <ul>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#sessions">Club Sessions</a></li>
-          <li><a href="index.html#join">Join the Club</a></li>
-          <li><a href="index.html#coaches">Our Coaches</a></li>
-          <li><a href="coaching.html">Coaching Pathway</a></li>
-          <li><a href="index.html#riders">The Riders</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#sessions">Club Sessions</a></li>
+          <li><a href="#join">Join the Club</a></li>
+          <li><a href="#coaches">Our Coaches</a></li>
+          <!-- <li><a href="coaching.html">Coaching Pathway</a></li> -->
+          <li><a href="#riders">The Riders</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>More</h4>
         <ul>
           <li><a href="shop.html">Club Shop</a></li>
-          <li><a href="index.html#contact">Contact Us</a></li>
+          <li><a href="#contact">Contact Us</a></li>
           <li><a href="sponsors.html">Our Sponsors</a></li>
           <li><a href="faq.html">FAQs</a></li>
           <li><a href="kit-guide.html">Bikes &amp; Kit Guide</a></li>
-          <li><a href="race-guide.html">Race Day Guide</a></li>
+          <!-- <li><a href="race-guide.html">Race Day Guide</a></li> -->
         </ul>
       </div>
       <div class="footer-col">
