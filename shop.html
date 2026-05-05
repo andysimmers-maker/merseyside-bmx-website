@@ -281,9 +281,7 @@
             <div class="product-name">YOUTH RACE JERSEY</div>
             <div class="product-price">£32</div>
             <p class="product-desc">Personalised with rider's name on the back. Sizes 5–6 up to 13–14. Size up to fit over body armour.</p>
-            <div class="product-cta">
-              <span style="font-family:var(--fd);font-size:0.8rem;letter-spacing:0.08em;color:#ccc;display:block;margin-top:0.5rem;">Orders currently paused — <a href="index.html#contact" style="color:var(--blue);">speak to the club</a></span>
-            </div>
+            <div class="product-cta" id="cta-youth"></div>
           </div>
         </div>
 
@@ -296,9 +294,7 @@
             <div class="product-name">ADULT RACE JERSEY</div>
             <div class="product-price">£35</div>
             <p class="product-desc">Personalised with rider's name on the back. Sizes XS through to XXL. Size up to fit over body armour.</p>
-            <div class="product-cta">
-              <span style="font-family:var(--fd);font-size:0.8rem;letter-spacing:0.08em;color:#ccc;display:block;margin-top:0.5rem;">Orders currently paused — <a href="index.html#contact" style="color:var(--blue);">speak to the club</a></span>
-            </div>
+            <div class="product-cta" id="cta-adult"></div>
           </div>
         </div>
 
@@ -311,9 +307,7 @@
             <div class="product-name">RACE PLATE STICKERS</div>
             <div class="product-price">£25</div>
             <p class="product-desc">Includes front plate and side plate numbers. Personalised with rider name, race number and age category.</p>
-            <div class="product-cta">
-              <span style="font-family:var(--fd);font-size:0.8rem;letter-spacing:0.08em;color:#ccc;display:block;margin-top:0.5rem;">Orders currently paused — <a href="index.html#contact" style="color:var(--blue);">speak to the club</a></span>
-            </div>
+            <div class="product-cta" id="cta-stickers"></div>
           </div>
         </div>
 
@@ -618,11 +612,33 @@
   </div>
 
   <script>
+    // ── ORDER WINDOW TOGGLE ──────────────────────────────
+    // Change to true to open the order window
+    const ORDERS_OPEN = false;
+
+    function initOrderButtons() {
+      const paused = `<span style="font-family:var(--fd);font-size:0.8rem;letter-spacing:0.08em;color:#ccc;display:block;margin-top:0.5rem;">The order window is currently closed. We will announce when the next order window opens.</span>`;
+      const ctaYouth    = `<button class="btn-red" onclick="openModal('youth')">Add to Order →</button>`;
+      const ctaAdult    = `<button class="btn-red" onclick="openModal('adult')">Add to Order →</button>`;
+      const ctaStickers = `<button class="btn-blue" onclick="openModal('stickers')">Add to Order →</button>`;
+
+      document.getElementById('cta-youth').innerHTML    = ORDERS_OPEN ? ctaYouth    : paused;
+      document.getElementById('cta-adult').innerHTML    = ORDERS_OPEN ? ctaAdult    : paused;
+      document.getElementById('cta-stickers').innerHTML = ORDERS_OPEN ? ctaStickers : paused;
+
+      // Hide basket section when orders closed
+      if (!ORDERS_OPEN) {
+        const orderSec = document.getElementById('order-section');
+        if (orderSec) orderSec.style.display = 'none';
+      }
+    }
+
     // NAV
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('nav-links');
     burger.addEventListener('click', () => navLinks.classList.toggle('open'));
     navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+    initOrderButtons();
 
     // REVEAL
     const obs = new IntersectionObserver(entries => {
