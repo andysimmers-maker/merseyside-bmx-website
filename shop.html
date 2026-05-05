@@ -236,7 +236,7 @@
   <div class="page-header">
     <div class="kicker">Official Kit</div>
     <h1>CLUB SHOP</h1>
-    <p>Official Merseyside BMX Club jerseys and race plate stickers. The order window is currently closed. Get in touch if you have an urgent kit requirement.</p>
+    <p id="shop-header-desc">Official Merseyside BMX Club jerseys and race plate stickers. The order window is currently closed. Get in touch if you have an urgent kit requirement.</p>
   </div>
 
   <div class="dd"></div>
@@ -255,7 +255,7 @@
         <div class="info-banner-icon" aria-hidden="true">📦</div>
         <div>
           
-          <p>The order window is currently closed. We will announce when the next order window opens.</p>
+          <p id="shop-banner-desc">The order window is currently closed. We will announce when the next order window opens.</p>
         </div>
       </div>
     </div>
@@ -399,8 +399,7 @@
           <div class="how-desc">We'll let you know when your items arrive and arrange collection at the track. Allow a few weeks after the order date.</div>
         </div>
       </div>
-      <div class="order-note reveal">
-        <strong>Please note:</strong> Orders are placed monthly. Once your payment is made, your spot in the next order is confirmed. Allow 3–5 weeks from the order date for delivery to the club.
+      <div class="order-note reveal" id="order-note"><strong>Please note:</strong> Orders are placed monthly. Once your payment is made, your spot in the next order is confirmed. Allow 3–5 weeks from the order date for delivery to the club.
       </div>
     </div>
   </section>
@@ -614,7 +613,7 @@
   <script>
     // ── ORDER WINDOW TOGGLE ──────────────────────────────
     // Change to true to open the order window
-    const ORDERS_OPEN = true;
+    const ORDERS_OPEN = false;
 
     function initOrderButtons() {
       const paused = `<span style="font-family:var(--fd);font-size:0.8rem;letter-spacing:0.08em;color:#ccc;display:block;margin-top:0.5rem;">The order window is currently closed. We will announce when the next order window opens.</span>`;
@@ -626,11 +625,24 @@
       document.getElementById('cta-adult').innerHTML    = ORDERS_OPEN ? ctaAdult    : paused;
       document.getElementById('cta-stickers').innerHTML = ORDERS_OPEN ? ctaStickers : paused;
 
-      // Hide basket section when orders closed
-      if (!ORDERS_OPEN) {
-        const orderSec = document.getElementById('order-section');
-        if (orderSec) orderSec.style.display = 'none';
-      }
+      // Update header description
+      const headerDesc = document.getElementById('shop-header-desc');
+      if (headerDesc) headerDesc.textContent = ORDERS_OPEN
+        ? 'Official Merseyside BMX Club jerseys and race plate stickers. Made to order and personalised with your rider's details.'
+        : 'Official Merseyside BMX Club jerseys and race plate stickers. The order window is currently closed. Get in touch if you have an urgent kit requirement.';
+
+      // Update info banner
+      const bannerDesc = document.getElementById('shop-banner-desc');
+      if (bannerDesc) bannerDesc.textContent = ORDERS_OPEN
+        ? 'All orders are placed with our supplier once a month. Payment is taken at the time of ordering to secure your place in the next batch.'
+        : 'The order window is currently closed. We will announce when the next order window opens.';
+
+      // Show/hide order note and basket section
+      const orderNote = document.getElementById('order-note');
+      if (orderNote) orderNote.style.display = ORDERS_OPEN ? 'block' : 'none';
+
+      const orderSec = document.getElementById('order-section');
+      if (orderSec) orderSec.style.display = ORDERS_OPEN ? 'block' : 'none';
     }
 
     // NAV
