@@ -340,12 +340,24 @@
 
       <div id="basket-footer" class="basket-footer" style="display:none;">
         <div class="basket-total">TOTAL: <span id="basket-total-amount">£0</span></div>
-        <div>
-          <div id="checkout-error" class="error-msg"></div>
-          <button class="checkout-btn" id="checkout-btn" onclick="startCheckout()">
-            <span>Pay Securely with Stripe</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
+        <div style="width:100%; margin-top:1rem; display:flex; flex-direction:column; gap:0.75rem;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+            <div>
+              <label style="font-family:var(--fd); font-size:0.72rem; letter-spacing:0.15em; color:#aaa; display:block; margin-bottom:0.3rem;">YOUR NAME</label>
+              <input id="customer-name" type="text" placeholder="Full name" style="width:100%; background:var(--black); border:1px solid var(--border); color:#fff; padding:0.6rem 0.85rem; font-family:var(--fb); font-size:0.88rem; outline:none;" />
+            </div>
+            <div>
+              <label style="font-family:var(--fd); font-size:0.72rem; letter-spacing:0.15em; color:#aaa; display:block; margin-bottom:0.3rem;">EMAIL ADDRESS</label>
+              <input id="customer-email" type="email" placeholder="your@email.com" style="width:100%; background:var(--black); border:1px solid var(--border); color:#fff; padding:0.6rem 0.85rem; font-family:var(--fb); font-size:0.88rem; outline:none;" />
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+            <div id="checkout-error" class="error-msg"></div>
+            <button class="checkout-btn" id="checkout-btn" onclick="startCheckout()">
+              <span>Pay Securely with SumUp</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -380,7 +392,7 @@
         <div class="how-step">
           <div class="how-num">2</div>
           <div class="how-title">PAY SECURELY</div>
-          <div class="how-desc">Checkout via Stripe. Payment is taken immediately and you'll receive an email confirmation of your order.</div>
+          <div class="how-desc">Checkout via SumUp. Payment is taken immediately and your order is logged with the club.</div>
         </div>
         <div class="how-step">
           <div class="how-num">3</div>
@@ -730,16 +742,23 @@
     // CHECKOUT
     async function startCheckout() {
       if (!basket.length) return;
+
+      const name  = document.getElementById('customer-name').value.trim();
+      const email = document.getElementById('customer-email').value.trim();
+      if (!name)  { alert('Please enter your name.'); return; }
+      if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+
       const btn = document.getElementById('checkout-btn');
       const err = document.getElementById('checkout-error');
       btn.disabled = true;
       btn.querySelector('span').textContent = 'Redirecting to payment…';
       err.classList.remove('show');
+
       try {
-        const res  = await fetch('/.netlify/functions/create-checkout', {
+        const res  = await fetch('https://bmx-checkout.andy-simmers.workers.dev/create-checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ items: basket })
+          body: JSON.stringify({ items: basket, customer: { name, email } })
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Something went wrong');
@@ -748,9 +767,38 @@
         err.textContent = 'Payment could not be started: ' + e.message + '. Please try again or contact us.';
         err.classList.add('show');
         btn.disabled = false;
-        btn.querySelector('span').textContent = 'Pay Securely with Stripe';
+        btn.querySelector('span').textContent = 'Pay Securely with SumUp';
       }
     }
+
+    // HANDLE RETURN FROM SUMUP
+    (async function handleReturn() {
+      const params = new URLSearchParams(window.location.search);
+      const ref    = params.get('order');
+      const status = params.get('status');
+      if (!ref || status !== 'success') return;
+
+      // Clean URL
+      window.history.replaceState({}, '', '/shop.html');
+
+      // Confirm with Worker
+      try {
+        const res  = await fetch('https://bmx-checkout.andy-simmers.workers.dev/confirm-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ref })
+        });
+        const data = await res.json();
+        if (data.status === 'PAID') {
+          basket = [];
+          renderBasket();
+          document.getElementById('success-section').style.display = 'block';
+          document.getElementById('success-section').scrollIntoView({ behavior: 'smooth' });
+        }
+      } catch (e) {
+        console.error('Confirm failed:', e);
+      }
+    })();
   </script>
 </body>
 </html>
