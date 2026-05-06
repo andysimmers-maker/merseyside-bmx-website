@@ -823,18 +823,34 @@
         SumUpCard.mount({
           checkoutId: data.id,
           onResponse: async function(type, body) {
+            console.log('SumUp onResponse:', type, JSON.stringify(body));
+
             overlay.classList.remove('open');
             document.body.style.overflow = '';
-            if (type === 'success') {
+            btn.disabled = true;
+            btn.querySelector('span').textContent = 'Verifying payment…';
+
+            // Retry up to 3 times with a 2s gap — SumUp may not confirm immediately
+            let paid = false;
+            for (let attempt = 0; attempt < 3; attempt++) {
+              if (attempt > 0) await new Promise(r => setTimeout(r, 2000));
               try {
-                await fetch('https://bmx-checkout.andy-simmers.workers.dev/confirm-order', {
+                const confirmRes = await fetch('https://bmx-checkout.andy-simmers.workers.dev/confirm-order', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ ref: data.ref })
                 });
+                const confirmData = await confirmRes.json();
+                if (confirmData.status === 'PAID') { paid = true; break; }
               } catch (e) {
-                console.error('Confirm failed:', e);
+                console.error('Confirm attempt ' + (attempt + 1) + ' failed:', e);
               }
+            }
+
+            btn.disabled = false;
+            btn.querySelector('span').textContent = 'Pay Securely with SumUp';
+
+            if (paid) {
               basket = [];
               renderBasket();
               document.getElementById('success-section').style.display = 'block';
