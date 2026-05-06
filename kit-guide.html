@@ -144,7 +144,7 @@
     .brand-item { background: var(--black); padding: 1rem 1.25rem; font-family: var(--fd); font-size: 0.95rem; letter-spacing: 0.04em; color: #ddd; transition: background 0.2s; }
     .brand-item:hover { background: var(--mid); }
     .brand-item.sponsor { color: var(--red); }
-    .brand-note { font-size: 0.72rem; font-family: var(--fb); color: #555; font-family: var(--fb); letter-spacing: 0; display: block; margin-top: 0.15rem; font-weight: normal; }
+    .brand-note { font-size: 0.72rem; font-family: var(--fb); color: #555; letter-spacing: 0; display: block; margin-top: 0.15rem; font-weight: normal; }
 
     /* WHERE TO BUY */
     .shop-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 1.5rem; }
@@ -190,6 +190,8 @@
       .guide-section.light .section-lead { color: var(--rmuted) !important; }
     }
 
+    .download-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--fd); font-size: 0.82rem; letter-spacing: 0.08em; background: var(--red); color: #fff; padding: 0.5rem 1.1rem; text-decoration: none; transition: background 0.2s; }
+    .download-link:hover { background: var(--red2); }
     /* ══ FOOTER ══ */
     footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
     .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }
@@ -254,7 +256,7 @@
   <div style="background:var(--dark); padding:1.25rem var(--pad); border-bottom:1px solid var(--border);">
     <div style="max-width:var(--mw); margin:0 auto; display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
       <span style="font-family:var(--fd); font-size:0.75rem; letter-spacing:0.15em; color:var(--muted);">PRINT THIS GUIDE</span>
-      <a href="bmx_kit_guide_homeprint.pdf" download style="display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--fd); font-size:0.82rem; letter-spacing:0.08em; background:var(--red); color:#fff; padding:0.5rem 1.1rem; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#b52020'" onmouseout="this.style.background='var(--red)'">
+      <a href="bmx_kit_guide_homeprint.pdf" download class="download-link">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Download Print at Home Guide
       </a>
@@ -608,13 +610,13 @@
         <p>Knowsley Leisure and Culture Park<br>Longview Drive, Huyton, L36 6EG</p>
         <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>
         <div class="footer-social">
-          <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank" title="Facebook">
+          <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank" title="Facebook" aria-label="Facebook">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
           </a>
-          <a href="https://www.instagram.com/merseysidebmxclub?igsh=MWo2d2ZvcGZtc2pvNA==" target="_blank" title="Instagram">
+          <a href="https://www.instagram.com/merseysidebmxclub?igsh=MWo2d2ZvcGZtc2pvNA==" target="_blank" title="Instagram" aria-label="Instagram">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
-          <a href="mailto:merseysidebmx@gmail.com" title="Email">
+          <a href="mailto:merseysidebmx@gmail.com" title="Email" aria-label="Email">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </a>
         </div>
@@ -622,19 +624,19 @@
       <div class="footer-col">
         <h4>The Club</h4>
         <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#sessions">Club Sessions</a></li>
-          <li><a href="#join">Join the Club</a></li>
-          <li><a href="#coaches">Our Coaches</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#sessions">Club Sessions</a></li>
+          <li><a href="index.html#join">Join the Club</a></li>
+          <li><a href="index.html#coaches">Our Coaches</a></li>
           <!-- <li><a href="coaching.html">Coaching Pathway</a></li> -->
-          <li><a href="#riders">The Riders</a></li>
+          <li><a href="index.html#riders">The Riders</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>More</h4>
         <ul>
           <li><a href="shop.html">Club Shop</a></li>
-          <li><a href="#contact">Contact Us</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
           <li><a href="sponsors.html">Our Sponsors</a></li>
           <li><a href="faq.html">FAQs</a></li>
           <li><a href="kit-guide.html">Bikes &amp; Kit Guide</a></li>
