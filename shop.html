@@ -855,6 +855,19 @@
           }
         });
 
+      } catch (e) {
+        err.textContent = 'Payment could not be started: ' + e.message + '. Please try again or contact us.';
+        err.classList.add('show');
+        btn.disabled = false;
+        btn.querySelector('span').textContent = 'Pay Securely with SumUp';
+      }
+    }
+
+    function cancelPayment() {
+      document.getElementById('payment-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
     // HANDLE RETURN FROM 3DS REDIRECT
     (async function handleReturn() {
       const params = new URLSearchParams(window.location.search);
@@ -881,19 +894,6 @@
         console.error('Confirm failed:', e);
       }
     })();
-
-      } catch (e) {
-        err.textContent = 'Payment could not be started: ' + e.message + '. Please try again or contact us.';
-        err.classList.add('show');
-        btn.disabled = false;
-        btn.querySelector('span').textContent = 'Pay Securely with SumUp';
-      }
-    }
-
-    function cancelPayment() {
-      document.getElementById('payment-overlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
   </script>
 </body>
 </html>
