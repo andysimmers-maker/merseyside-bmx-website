@@ -825,8 +825,8 @@
           onResponse: async function(type, body) {
             console.log('SumUp onResponse:', type, JSON.stringify(body));
 
-            // 3DS redirect is starting — page will navigate away, handleReturn picks it up on return
-            if (type === 'auth-screen') return;
+            // Intermediate events — page will navigate away for 3DS, handleReturn picks it up on return
+            if (type === 'sent' || type === 'auth-screen') return;
 
             overlay.classList.remove('open');
             document.body.style.overflow = '';
