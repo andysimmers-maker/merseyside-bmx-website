@@ -195,6 +195,12 @@
     /* TOAST */
     .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(calc(100% + 3rem)); background: #1e8a4a; color: #fff; font-family: var(--fd); font-size: 0.95rem; letter-spacing: 0.08em; padding: 0.8rem 1.75rem; z-index: 3000; transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1); white-space: nowrap; cursor: pointer; }
     .toast.show { transform: translateX(-50%) translateY(0); }
+    /* VALIDATION */
+    .modal-error { font-size: 0.82rem; color: var(--red); margin-top: 0.75rem; display: none; }
+    .modal-error.show { display: block; }
+    .field-error { border-color: var(--red) !important; }
+    .grid-error { outline: 1px solid var(--red); }
+
     /* PAYMENT OVERLAY */
     #payment-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 3000; align-items: center; justify-content: center; padding: 1rem; }
     #payment-overlay.open { display: flex; }
@@ -535,6 +541,7 @@
             <option>1</option><option>2</option><option>3</option>
           </select>
         </div>
+        <div class="modal-error" id="modal-error-youth"></div>
         <button class="modal-add-btn" onclick="addToBasket('youth')">ADD TO ORDER · £32</button>
       </div>
     </div>
@@ -578,6 +585,7 @@
             <option>1</option><option>2</option><option>3</option>
           </select>
         </div>
+        <div class="modal-error" id="modal-error-adult"></div>
         <button class="modal-add-btn" onclick="addToBasket('adult')">ADD TO ORDER · £35</button>
       </div>
     </div>
@@ -633,6 +641,7 @@
             <option>1</option><option>2</option><option>3</option>
           </select>
         </div>
+        <div class="modal-error" id="modal-error-stickers"></div>
         <button class="modal-add-btn" onclick="addToBasket('stickers')">ADD TO ORDER · £25</button>
       </div>
     </div>
@@ -700,6 +709,14 @@
       obs.observe(el);
     });
 
+    // Clear validation highlights when user types
+    document.getElementById('customer-name').addEventListener('input', function() { this.style.borderColor = ''; });
+    document.getElementById('customer-email').addEventListener('input', function() { this.style.borderColor = ''; });
+    ['youth-name','adult-name','stickers-name','stickers-number','stickers-age'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', function() { this.classList.remove('field-error'); });
+    });
+
     // STATE
     let basket = [];
     const selectedSizes = { youth: null, adult: null, stickers: null };
@@ -719,6 +736,10 @@
         const el = document.getElementById(id); if (el) el.value = '';
       });
       const qty = document.getElementById(type + '-qty'); if (qty) qty.value = '1';
+      const errEl = document.getElementById('modal-error-' + type);
+      if (errEl) { errEl.classList.remove('show'); errEl.textContent = ''; }
+      document.querySelectorAll('#modal-' + type + ' .field-error, #modal-' + type + ' .grid-error')
+        .forEach(el => el.classList.remove('field-error', 'grid-error'));
     }
     function closeModal(type) {
       document.getElementById('modal-' + type).classList.remove('open');
@@ -732,29 +753,50 @@
       selectedSizes[type] = size;
       btn.closest('.size-grid').querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
+      btn.closest('.size-grid').classList.remove('grid-error');
+      const errEl = document.getElementById('modal-error-' + type);
+      if (errEl && errEl.textContent === 'Please select a size.') errEl.classList.remove('show');
     }
     function selectColour(colour, btn) {
       selectedColour = colour;
       document.querySelectorAll('#sticker-colours .colour-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
+      document.getElementById('sticker-colours').classList.remove('grid-error');
+      const errEl = document.getElementById('modal-error-stickers');
+      if (errEl && errEl.textContent === 'Please select a colour.') errEl.classList.remove('show');
     }
 
     // ADD TO BASKET
     function addToBasket(type) {
-      const qty = parseInt(document.getElementById(type + '-qty').value);
-      if (!selectedSizes[type]) { alert('Please select a size.'); return; }
+      const qty    = parseInt(document.getElementById(type + '-qty').value);
+      const errEl  = document.getElementById('modal-error-' + type);
+      errEl.classList.remove('show');
+      document.querySelectorAll('#modal-' + type + ' .field-error, #modal-' + type + ' .grid-error')
+        .forEach(el => el.classList.remove('field-error', 'grid-error'));
+
+      function showErr(msg, el) {
+        errEl.textContent = msg;
+        errEl.classList.add('show');
+        if (el) el.classList.add(el.classList.contains('size-grid') || el.classList.contains('colour-grid') ? 'grid-error' : 'field-error');
+      }
+
+      if (!selectedSizes[type]) {
+        return showErr('Please select a size.', document.querySelector('#modal-' + type + ' .size-grid'));
+      }
 
       let details;
       if (type === 'stickers') {
-        if (!selectedColour) { alert('Please select a colour.'); return; }
+        if (!selectedColour) return showErr('Please select a colour.', document.getElementById('sticker-colours'));
         const name   = document.getElementById('stickers-name').value.trim();
         const number = document.getElementById('stickers-number').value.trim();
         const age    = document.getElementById('stickers-age').value.trim();
-        if (!name || !number || !age) { alert('Please fill in all rider details.'); return; }
+        if (!name)   return showErr('Please enter the rider name.', document.getElementById('stickers-name'));
+        if (!number) return showErr('Please enter the race number.', document.getElementById('stickers-number'));
+        if (!age)    return showErr('Please enter the age category.', document.getElementById('stickers-age'));
         details = `Size: ${selectedSizes.stickers} · Colour: ${selectedColour} · Name: ${name} · Number: ${number} · Age: ${age}`;
       } else {
         const riderName = document.getElementById(type + '-name').value.trim();
-        if (!riderName) { alert('Please enter the rider name.'); return; }
+        if (!riderName) return showErr('Please enter the rider name.', document.getElementById(type + '-name'));
         details = `Size: ${selectedSizes[type]} · Name: ${riderName}`;
       }
 
@@ -805,8 +847,12 @@
 
       const name  = document.getElementById('customer-name').value.trim();
       const email = document.getElementById('customer-email').value.trim();
-      if (!name)  { alert('Please enter your name.'); return; }
-      if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+      const nameInput  = document.getElementById('customer-name');
+      const emailInput = document.getElementById('customer-email');
+      nameInput.style.borderColor  = '';
+      emailInput.style.borderColor = '';
+      if (!name)  { nameInput.style.borderColor  = 'var(--red)'; nameInput.focus();  return; }
+      if (!email || !email.includes('@')) { emailInput.style.borderColor = 'var(--red)'; emailInput.focus(); return; }
 
       const btn = document.getElementById('checkout-btn');
       const err = document.getElementById('checkout-error');
