@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://gateway.sumup.com/gateway/ecom/card/v2/sdk.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -778,7 +779,7 @@
       const btn = document.getElementById('checkout-btn');
       const err = document.getElementById('checkout-error');
       btn.disabled = true;
-      btn.querySelector('span').textContent = 'Redirecting to payment…';
+      btn.querySelector('span').textContent = 'Loading payment…';
       err.classList.remove('show');
 
       try {
@@ -789,7 +790,34 @@
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Something went wrong');
-        window.location.href = data.url;
+
+        btn.querySelector('span').textContent = 'Pay Securely with SumUp';
+        btn.disabled = false;
+
+        SumUpCard.mount({
+          checkoutId: data.id,
+          onResponse: async function(type, body) {
+            if (type === 'success') {
+              try {
+                await fetch('https://bmx-checkout.andy-simmers.workers.dev/confirm-order', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ ref: data.ref })
+                });
+              } catch (e) {
+                console.error('Confirm failed:', e);
+              }
+              basket = [];
+              renderBasket();
+              document.getElementById('success-section').style.display = 'block';
+              document.getElementById('success-section').scrollIntoView({ behavior: 'smooth' });
+            } else {
+              err.textContent = 'Payment was not completed. Please try again or contact us.';
+              err.classList.add('show');
+            }
+          }
+        });
+
       } catch (e) {
         err.textContent = 'Payment could not be started: ' + e.message + '. Please try again or contact us.';
         err.classList.add('show');
@@ -797,35 +825,6 @@
         btn.querySelector('span').textContent = 'Pay Securely with SumUp';
       }
     }
-
-    // HANDLE RETURN FROM SUMUP
-    (async function handleReturn() {
-      const params = new URLSearchParams(window.location.search);
-      const ref    = params.get('order');
-      const status = params.get('status');
-      if (!ref || status !== 'success') return;
-
-      // Clean URL
-      window.history.replaceState({}, '', '/shop.html');
-
-      // Confirm with Worker
-      try {
-        const res  = await fetch('https://bmx-checkout.andy-simmers.workers.dev/confirm-order', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ref })
-        });
-        const data = await res.json();
-        if (data.status === 'PAID') {
-          basket = [];
-          renderBasket();
-          document.getElementById('success-section').style.display = 'block';
-          document.getElementById('success-section').scrollIntoView({ behavior: 'smooth' });
-        }
-      } catch (e) {
-        console.error('Confirm failed:', e);
-      }
-    })();
   </script>
 </body>
 </html>
