@@ -195,6 +195,16 @@
     /* TOAST */
     .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(calc(100% + 3rem)); background: #1e8a4a; color: #fff; font-family: var(--fd); font-size: 0.95rem; letter-spacing: 0.08em; padding: 0.8rem 1.75rem; z-index: 3000; transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1); white-space: nowrap; cursor: pointer; }
     .toast.show { transform: translateX(-50%) translateY(0); }
+    /* PAYMENT OVERLAY */
+    #payment-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 3000; align-items: center; justify-content: center; padding: 1rem; }
+    #payment-overlay.open { display: flex; }
+    .payment-box { background: #fff; width: 100%; max-width: 480px; }
+    .payment-box-header { background: #f5f5f5; padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e0e0e0; }
+    .payment-box-title { font-family: var(--fd); font-size: 1rem; letter-spacing: 0.1em; color: #111; }
+    .payment-cancel-btn { background: none; border: none; cursor: pointer; color: #888; font-size: 0.85rem; padding: 0.25rem 0.5rem; transition: color 0.2s; font-family: var(--fb); }
+    .payment-cancel-btn:hover { color: #111; }
+    #sumup-card { min-height: 200px; }
+
     /* ══ FOOTER ══ */
     footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
     .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }
@@ -617,6 +627,17 @@
     </div>
   </div>
 
+  <!-- SUMUP PAYMENT OVERLAY -->
+  <div id="payment-overlay">
+    <div class="payment-box">
+      <div class="payment-box-header">
+        <div class="payment-box-title">SECURE PAYMENT</div>
+        <button class="payment-cancel-btn" onclick="cancelPayment()">✕ Cancel</button>
+      </div>
+      <div id="sumup-card"></div>
+    </div>
+  </div>
+
   <script>
     // ── ORDER WINDOW TOGGLE ──────────────────────────────
     // Change to true to open the order window
@@ -794,9 +815,16 @@
         btn.querySelector('span').textContent = 'Pay Securely with SumUp';
         btn.disabled = false;
 
+        // Show payment overlay
+        const overlay = document.getElementById('payment-overlay');
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+
         SumUpCard.mount({
           checkoutId: data.id,
           onResponse: async function(type, body) {
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
             if (type === 'success') {
               try {
                 await fetch('https://bmx-checkout.andy-simmers.workers.dev/confirm-order', {
@@ -824,6 +852,11 @@
         btn.disabled = false;
         btn.querySelector('span').textContent = 'Pay Securely with SumUp';
       }
+    }
+
+    function cancelPayment() {
+      document.getElementById('payment-overlay').classList.remove('open');
+      document.body.style.overflow = '';
     }
   </script>
 </body>
