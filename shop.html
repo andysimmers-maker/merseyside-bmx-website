@@ -254,7 +254,7 @@
       <div class="info-banner reveal">
         <div class="info-banner-icon" aria-hidden="true">📦</div>
         <div>
-          
+          <h4>Order Window</h4>
           <p id="shop-banner-desc">The order window is currently closed. We will announce when the next order window opens.</p>
         </div>
       </div>
@@ -660,13 +660,6 @@
       el.style.transitionDelay = `${(i % 4) * 0.08}s`;
       obs.observe(el);
     });
-
-    // SUCCESS / CANCEL
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('success') === '1') {
-      document.getElementById('success-section').classList.add('show');
-      document.getElementById('order-section').style.display = 'none';
-    }
 
     // STATE
     let basket = [];
