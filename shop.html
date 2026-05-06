@@ -825,8 +825,11 @@
           onResponse: async function(type, body) {
             console.log('SumUp onResponse:', type, JSON.stringify(body));
 
-            // Intermediate events — page will navigate away for 3DS, handleReturn picks it up on return
-            if (type === 'sent' || type === 'auth-screen') return;
+            if (type === 'sent') return;
+
+            // 3DS runs inside the widget's iframes — by the time auth-screen fires
+            // the URL already has ?order=...&status=success, so confirm now
+            if (type === 'auth-screen') { checkReturnUrl(); return; }
 
             overlay.classList.remove('open');
             document.body.style.overflow = '';
@@ -868,8 +871,8 @@
       document.body.style.overflow = '';
     }
 
-    // HANDLE RETURN FROM 3DS REDIRECT
-    (async function handleReturn() {
+    // Called on page load (full redirect case) and from auth-screen onResponse (iframe 3DS case)
+    async function checkReturnUrl() {
       const params = new URLSearchParams(window.location.search);
       const ref    = params.get('order');
       const status = params.get('status');
@@ -893,7 +896,8 @@
       } catch (e) {
         console.error('Confirm failed:', e);
       }
-    })();
+    }
+    checkReturnUrl();
   </script>
 </body>
 </html>
