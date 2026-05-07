@@ -118,11 +118,13 @@ The shop page (`shop.html`) allows members to order:
 
 ### How it works
 1. Members add items to a basket on the site and enter their name and email address
-2. They click "Pay Securely with SumUp" which redirects to SumUp Checkout
-3. Payment is taken immediately
-4. On return, the site confirms the payment with the `bmx-checkout` Cloudflare Worker
+2. They click "Pay Securely with SumUp" — an embedded payment form opens as an overlay on the same page
+3. The member enters their card details and pays; they stay on the shop page throughout
+4. The site confirms the payment with the `bmx-checkout` Cloudflare Worker
 5. The Worker writes the order details to the club Google Sheet
 6. The committee compiles orders from the Google Sheet and places a monthly bulk order with the supplier
+
+> **Note for Android Chrome users:** The SumUp payment widget requires two taps of the Pay button on the first payment attempt after a page load. This is a known quirk of the SumUp SDK on Android Chrome — the second tap completes the payment normally.
 
 ### Opening and closing the order window
 The shop has a toggle to open and close the order window. When closed, the product buttons are hidden and a "closed" message is shown.
@@ -244,4 +246,4 @@ When you're ready to point the club's own domain (e.g. merseysidebmx.co.uk) at t
 
 ---
 
-*Document last updated: May 2026*
+*Document last updated: May 2026 — shop payment flow updated to reflect embedded SumUp widget*
