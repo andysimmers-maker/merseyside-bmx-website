@@ -916,6 +916,8 @@
           // the URL already has ?order=...&status=success, so confirm now
           if (type === 'auth-screen') { checkReturnUrl(); return; }
 
+          dbg(type);
+
           // SumUp mobile quirk: fires 'Invalid' on first tap — show a prompt and wait for second tap
           if (type === 'Invalid') {
             if (!document.getElementById('sumup-tap-hint')) {
@@ -1005,6 +1007,11 @@
       }
     }
     checkReturnUrl();
+
+    const _d = document.createElement('div');
+    _d.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#000;color:#0f0;font:11px monospace;padding:6px;z-index:9999;display:none;';
+    document.body.appendChild(_d);
+    function dbg(m) { _d.style.display='block'; _d.innerHTML = m + '<br>' + _d.innerHTML; }
   </script>
 </body>
 </html>
