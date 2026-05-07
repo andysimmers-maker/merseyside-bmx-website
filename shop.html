@@ -916,12 +916,27 @@
           // the URL already has ?order=...&status=success, so confirm now
           if (type === 'auth-screen') { checkReturnUrl(); return; }
 
+          // SumUp mobile quirk: fires 'Invalid' on first tap — show a prompt and wait for second tap
+          if (type === 'Invalid') {
+            if (!document.getElementById('sumup-tap-hint')) {
+              const hint = document.createElement('p');
+              hint.id = 'sumup-tap-hint';
+              hint.style.cssText = 'margin:0;padding:0.5rem 1.25rem;font-size:0.8rem;color:#888;text-align:center;';
+              hint.textContent = 'Please tap Pay once more to complete.';
+              const card = document.getElementById('sumup-card');
+              card.parentNode.insertBefore(hint, card);
+            }
+            return;
+          }
+
           // Only act on terminal payment states
           if (type !== 'success' && type !== 'error') return;
 
           overlay.classList.remove('open');
           document.body.style.overflow = '';
           pendingCheckout = null;
+          const hint = document.getElementById('sumup-tap-hint');
+          if (hint) hint.remove();
 
           try {
             const confirmRes = await fetch('https://bmx-checkout.andy-simmers.workers.dev/confirm-order', {
@@ -955,6 +970,8 @@
       document.body.style.overflow = '';
       pendingCheckout = null;
       document.getElementById('checkout-btn').querySelector('span').textContent = 'Confirm Order';
+      const hint = document.getElementById('sumup-tap-hint');
+      if (hint) hint.remove();
     }
 
     // Called on page load (full redirect case) and from auth-screen onResponse (iframe 3DS case)
