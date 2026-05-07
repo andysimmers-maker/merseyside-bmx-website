@@ -370,8 +370,8 @@
           </div>
           <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
             <div id="checkout-error" class="error-msg"></div>
-            <button class="checkout-btn" id="checkout-btn" onclick="handleCheckoutBtn()">
-              <span>Confirm Order</span>
+            <button class="checkout-btn" id="checkout-btn" onclick="startCheckout()">
+              <span>Pay Securely with SumUp</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </button>
           </div>
@@ -709,15 +709,9 @@
       obs.observe(el);
     });
 
-    // Clear validation highlights when user types; reset confirmed checkout if details change
-    document.getElementById('customer-name').addEventListener('input', function() {
-      this.style.borderColor = '';
-      if (pendingCheckout) { pendingCheckout = null; document.getElementById('checkout-btn').querySelector('span').textContent = 'Confirm Order'; }
-    });
-    document.getElementById('customer-email').addEventListener('input', function() {
-      this.style.borderColor = '';
-      if (pendingCheckout) { pendingCheckout = null; document.getElementById('checkout-btn').querySelector('span').textContent = 'Confirm Order'; }
-    });
+    // Clear validation highlights when user types
+    document.getElementById('customer-name').addEventListener('input', function() { this.style.borderColor = ''; });
+    document.getElementById('customer-email').addEventListener('input', function() { this.style.borderColor = ''; });
     ['youth-name','adult-name','stickers-name','stickers-number','stickers-age'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.addEventListener('input', function() { this.classList.remove('field-error'); });
@@ -835,11 +829,7 @@
         </div>`).join('');
       document.getElementById('basket-total-amount').textContent = '£' + basket.reduce((s, i) => s + i.price, 0);
     }
-    function removeItem(id) {
-      basket = basket.filter(i => i.id !== id);
-      if (pendingCheckout) { pendingCheckout = null; document.getElementById('checkout-btn').querySelector('span').textContent = 'Confirm Order'; }
-      renderBasket();
-    }
+    function removeItem(id) { basket = basket.filter(i => i.id !== id); renderBasket(); }
 
     // TOAST
     let toastTimer;
@@ -852,14 +842,7 @@
     }
 
     // CHECKOUT
-    let pendingCheckout = null;
-
-    function handleCheckoutBtn() {
-      if (pendingCheckout) completePayment();
-      else confirmOrder();
-    }
-
-    async function confirmOrder() {
+    async function startCheckout() {
       if (!basket.length) return;
 
       const name       = document.getElementById('customer-name').value.trim();
@@ -874,7 +857,7 @@
       const btn = document.getElementById('checkout-btn');
       const err = document.getElementById('checkout-error');
       btn.disabled = true;
-      btn.querySelector('span').textContent = 'Setting up payment…';
+      btn.querySelector('span').textContent = 'Loading payment…';
       err.classList.remove('show');
 
       try {
@@ -886,94 +869,63 @@
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Something went wrong');
 
-        pendingCheckout = data;
-        btn.querySelector('span').textContent = 'Complete Payment';
+        btn.querySelector('span').textContent = 'Pay Securely with SumUp';
         btn.disabled = false;
 
-      } catch (e) {
-        err.textContent = 'Could not set up payment: ' + e.message + '. Please try again or contact us.';
-        err.classList.add('show');
-        btn.disabled = false;
-        btn.querySelector('span').textContent = 'Confirm Order';
-      }
-    }
+        const overlay = document.getElementById('payment-overlay');
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
 
-    function completePayment() {
-      if (!pendingCheckout) return;
-      const data = pendingCheckout;
-      const btn  = document.getElementById('checkout-btn');
-      const err  = document.getElementById('checkout-error');
-      err.classList.remove('show');
+        SumUpCard.mount({
+          checkoutId: data.id,
+          onResponse: async function(type, body) {
+            // 3DS runs inside the widget's iframes — by the time auth-screen fires
+            // the URL already has ?order=...&status=success, so confirm now
+            if (type === 'auth-screen') { checkReturnUrl(); return; }
 
-      const overlay = document.getElementById('payment-overlay');
-      overlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
+            // SumUp fires 'Invalid' on first tap on mobile — ignore and wait for second tap
+            if (type === 'Invalid') return;
 
-      SumUpCard.mount({
-        checkoutId: data.id,
-        onResponse: async function(type, body) {
-          // 3DS runs inside the widget's iframes — by the time auth-screen fires
-          // the URL already has ?order=...&status=success, so confirm now
-          if (type === 'auth-screen') { checkReturnUrl(); return; }
+            // Only act on terminal payment states
+            if (type !== 'success' && type !== 'error') return;
 
-          dbg(type);
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
 
-          // SumUp mobile quirk: fires 'Invalid' on first tap — show a prompt and wait for second tap
-          if (type === 'Invalid') {
-            if (!document.getElementById('sumup-tap-hint')) {
-              const hint = document.createElement('p');
-              hint.id = 'sumup-tap-hint';
-              hint.style.cssText = 'margin:0;padding:0.5rem 1.25rem;font-size:0.8rem;color:#888;text-align:center;';
-              hint.textContent = 'Please tap Pay once more to complete.';
-              const card = document.getElementById('sumup-card');
-              card.parentNode.insertBefore(hint, card);
-            }
-            return;
-          }
-
-          // Only act on terminal payment states
-          if (type !== 'success' && type !== 'error') return;
-
-          overlay.classList.remove('open');
-          document.body.style.overflow = '';
-          pendingCheckout = null;
-          const hint = document.getElementById('sumup-tap-hint');
-          if (hint) hint.remove();
-
-          try {
-            const confirmRes = await fetch('https://bmx-checkout.andy-simmers.workers.dev/confirm-order', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ ref: data.ref })
-            });
-            const confirmData = await confirmRes.json();
-            if (confirmData.status === 'PAID') {
-              basket = [];
-              renderBasket();
-              btn.querySelector('span').textContent = 'Confirm Order';
-              document.getElementById('success-section').style.display = 'block';
-              document.getElementById('success-section').scrollIntoView({ behavior: 'smooth' });
-            } else {
-              btn.querySelector('span').textContent = 'Confirm Order';
-              err.textContent = 'Payment was not completed. Please try again or contact us.';
+            try {
+              const confirmRes = await fetch('https://bmx-checkout.andy-simmers.workers.dev/confirm-order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ref: data.ref })
+              });
+              const confirmData = await confirmRes.json();
+              if (confirmData.status === 'PAID') {
+                basket = [];
+                renderBasket();
+                document.getElementById('success-section').style.display = 'block';
+                document.getElementById('success-section').scrollIntoView({ behavior: 'smooth' });
+              } else {
+                err.textContent = 'Payment was not completed. Please try again or contact us.';
+                err.classList.add('show');
+              }
+            } catch (e) {
+              err.textContent = 'Could not verify payment. Please contact us to confirm your order was received.';
               err.classList.add('show');
             }
-          } catch (e) {
-            btn.querySelector('span').textContent = 'Confirm Order';
-            err.textContent = 'Could not verify payment. Please contact us to confirm your order was received.';
-            err.classList.add('show');
           }
-        }
-      });
+        });
+
+      } catch (e) {
+        err.textContent = 'Payment could not be started: ' + e.message + '. Please try again or contact us.';
+        err.classList.add('show');
+        btn.disabled = false;
+        btn.querySelector('span').textContent = 'Pay Securely with SumUp';
+      }
     }
 
     function cancelPayment() {
       document.getElementById('payment-overlay').classList.remove('open');
       document.body.style.overflow = '';
-      pendingCheckout = null;
-      document.getElementById('checkout-btn').querySelector('span').textContent = 'Confirm Order';
-      const hint = document.getElementById('sumup-tap-hint');
-      if (hint) hint.remove();
     }
 
     // Called on page load (full redirect case) and from auth-screen onResponse (iframe 3DS case)
@@ -1007,11 +959,6 @@
       }
     }
     checkReturnUrl();
-
-    const _d = document.createElement('div');
-    _d.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#000;color:#0f0;font:11px monospace;padding:6px;z-index:9999;display:none;';
-    document.body.appendChild(_d);
-    function dbg(m) { _d.style.display='block'; _d.innerHTML = m + '<br>' + _d.innerHTML; }
   </script>
 </body>
 </html>
