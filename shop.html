@@ -882,11 +882,12 @@
           onResponse: async function(type, body) {
             console.log('SumUp onResponse:', type, JSON.stringify(body));
 
-            if (type === 'sent') return;
-
             // 3DS runs inside the widget's iframes — by the time auth-screen fires
             // the URL already has ?order=...&status=success, so confirm now
             if (type === 'auth-screen') { checkReturnUrl(); return; }
+
+            // Only act on terminal payment states — ignore SDK init/intermediate events
+            if (type !== 'success' && type !== 'error') return;
 
             overlay.classList.remove('open');
             document.body.style.overflow = '';
