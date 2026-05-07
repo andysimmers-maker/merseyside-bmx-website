@@ -241,7 +241,7 @@
   <nav>
     <div class="nav-stripe"></div>
     <a href="index.html" class="nav-logo"><img src="logo.png" alt="Merseyside BMX Club" /></a>
-    <button class="nav-burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#sessions">Sessions</a></li>
@@ -505,11 +505,11 @@
   <!-- MODALS -->
 
   <!-- Youth Jersey -->
-  <div class="modal-overlay" id="modal-youth">
+  <div class="modal-overlay" id="modal-youth" role="dialog" aria-modal="true" aria-labelledby="modal-title-youth">
     <div class="modal">
       <div class="modal-header">
-        <div class="modal-title">YOUTH RACE JERSEY</div>
-        <button class="modal-close" onclick="closeModal('youth')">✕</button>
+        <div class="modal-title" id="modal-title-youth">YOUTH RACE JERSEY</div>
+        <button class="modal-close" aria-label="Close" onclick="closeModal('youth')">✕</button>
       </div>
       <div class="modal-body">
         <div class="modal-product-info">
@@ -548,11 +548,11 @@
   </div>
 
   <!-- Adult Jersey -->
-  <div class="modal-overlay" id="modal-adult">
+  <div class="modal-overlay" id="modal-adult" role="dialog" aria-modal="true" aria-labelledby="modal-title-adult">
     <div class="modal">
       <div class="modal-header">
-        <div class="modal-title">ADULT RACE JERSEY</div>
-        <button class="modal-close" onclick="closeModal('adult')">✕</button>
+        <div class="modal-title" id="modal-title-adult">ADULT RACE JERSEY</div>
+        <button class="modal-close" aria-label="Close" onclick="closeModal('adult')">✕</button>
       </div>
       <div class="modal-body">
         <div class="modal-product-info">
@@ -592,11 +592,11 @@
   </div>
 
   <!-- Stickers -->
-  <div class="modal-overlay" id="modal-stickers">
+  <div class="modal-overlay" id="modal-stickers" role="dialog" aria-modal="true" aria-labelledby="modal-title-stickers">
     <div class="modal">
       <div class="modal-header">
-        <div class="modal-title">RACE PLATE STICKERS</div>
-        <button class="modal-close" onclick="closeModal('stickers')">✕</button>
+        <div class="modal-title" id="modal-title-stickers">RACE PLATE STICKERS</div>
+        <button class="modal-close" aria-label="Close" onclick="closeModal('stickers')">✕</button>
       </div>
       <div class="modal-body">
         <div class="modal-product-info">
@@ -648,10 +648,10 @@
   </div>
 
   <!-- SUMUP PAYMENT OVERLAY -->
-  <div id="payment-overlay">
+  <div id="payment-overlay" role="dialog" aria-modal="true" aria-labelledby="payment-title">
     <div class="payment-box">
       <div class="payment-box-header">
-        <div class="payment-box-title">SECURE PAYMENT</div>
+        <div class="payment-box-title" id="payment-title">SECURE PAYMENT</div>
         <button class="payment-cancel-btn" onclick="cancelPayment()">✕ Cancel</button>
       </div>
       <div id="sumup-card"></div>
@@ -696,9 +696,18 @@
     // NAV
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('nav-links');
-    burger.addEventListener('click', () => navLinks.classList.toggle('open'));
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+    burger.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open);
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-label', 'Open menu');
+    }));
     initOrderButtons();
+    document.querySelectorAll('.size-btn, .colour-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
 
     // REVEAL
     const obs = new IntersectionObserver(entries => {
@@ -731,7 +740,7 @@
       selectedSizes[type] = null;
       if (type === 'stickers') selectedColour = null;
       document.querySelectorAll('#modal-' + type + ' .size-btn, #modal-' + type + ' .colour-btn')
-        .forEach(b => b.classList.remove('selected'));
+        .forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
       ['youth-name','adult-name','stickers-name','stickers-number','stickers-age'].forEach(id => {
         const el = document.getElementById(id); if (el) el.value = '';
       });
@@ -751,16 +760,18 @@
 
     function selectSize(type, size, btn) {
       selectedSizes[type] = size;
-      btn.closest('.size-grid').querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+      btn.closest('.size-grid').querySelectorAll('.size-btn').forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
       btn.classList.add('selected');
+      btn.setAttribute('aria-pressed', 'true');
       btn.closest('.size-grid').classList.remove('grid-error');
       const errEl = document.getElementById('modal-error-' + type);
       if (errEl && errEl.textContent === 'Please select a size.') errEl.classList.remove('show');
     }
     function selectColour(colour, btn) {
       selectedColour = colour;
-      document.querySelectorAll('#sticker-colours .colour-btn').forEach(b => b.classList.remove('selected'));
+      document.querySelectorAll('#sticker-colours .colour-btn').forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
       btn.classList.add('selected');
+      btn.setAttribute('aria-pressed', 'true');
       document.getElementById('sticker-colours').classList.remove('grid-error');
       const errEl = document.getElementById('modal-error-stickers');
       if (errEl && errEl.textContent === 'Please select a colour.') errEl.classList.remove('show');
