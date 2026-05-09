@@ -334,19 +334,6 @@
           </div>
         </div>
 
-        <div class="product-card">
-          <div class="product-img" style="background:var(--mid);">
-            <span style="font-family:var(--fd);font-size:1.1rem;letter-spacing:0.12em;color:#666;">TEST ONLY</span>
-          </div>
-          <div class="product-info">
-            <div class="product-tag" style="color:#666;">Internal</div>
-            <div class="product-name">TEST PAYMENT</div>
-            <div class="product-price">£1</div>
-            <p class="product-desc">For shop testing only — do not order.</p>
-            <div class="product-cta" id="cta-test"></div>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
@@ -681,12 +668,9 @@
       const ctaYouth    = `<button class="btn-red" onclick="openModal('youth')">Add to Order →</button>`;
       const ctaAdult    = `<button class="btn-red" onclick="openModal('adult')">Add to Order →</button>`;
       const ctaStickers = `<button class="btn-blue" onclick="openModal('stickers')">Add to Order →</button>`;
-      const ctaTest     = `<button class="btn-red" onclick="addTestItem()">Add to Order →</button>`;
-
       document.getElementById('cta-youth').innerHTML    = ORDERS_OPEN ? ctaYouth    : paused;
       document.getElementById('cta-adult').innerHTML    = ORDERS_OPEN ? ctaAdult    : paused;
       document.getElementById('cta-stickers').innerHTML = ORDERS_OPEN ? ctaStickers : paused;
-      document.getElementById('cta-test').innerHTML     = ORDERS_OPEN ? ctaTest     : paused;
 
       // Update header description
       const headerDesc = document.getElementById('shop-header-desc');
@@ -745,8 +729,8 @@
     let basket = [];
     const selectedSizes = { youth: null, adult: null, stickers: null };
     let selectedColour = null;
-    const PRICES = { youth: 32, adult: 35, stickers: 25, test: 1 };
-    const NAMES  = { youth: 'Youth Race Jersey', adult: 'Adult Race Jersey', stickers: 'Race Plate Stickers', test: 'Test Payment' };
+    const PRICES = { youth: 32, adult: 35, stickers: 25 };
+    const NAMES  = { youth: 'Youth Race Jersey', adult: 'Adult Race Jersey', stickers: 'Race Plate Stickers' };
 
     // MODAL
     function openModal(type) {
@@ -793,12 +777,6 @@
     }
 
     // ADD TO BASKET
-    function addTestItem() {
-      basket.push({ id: Date.now(), type: 'test', name: NAMES.test, price: PRICES.test, details: 'Test purchase' });
-      renderBasket();
-      showToast('Added to basket ↓');
-    }
-
     function addToBasket(type) {
       const qty    = parseInt(document.getElementById(type + '-qty').value);
       const errEl  = document.getElementById('modal-error-' + type);
