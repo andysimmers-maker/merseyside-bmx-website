@@ -43,7 +43,7 @@ There are five services involved in running the site. Whoever takes over the sit
 
 ### 4. SumUp *(shop payments)*
 **What it is:** Handles online payments for the club shop (jerseys, race plate stickers). Payments go directly to the club's linked bank account.  
-**Status:** API keys need to be obtained from SumUp and added to the Cloudflare Worker before the shop goes live. The treasurer is responsible for setting this up.  
+**Status:** Live — production API credentials are configured in the Cloudflare Worker and the full payment flow has been tested successfully.  
 **URL:** sumup.com  
 **Cost:** No monthly fee — SumUp charges a small percentage per transaction. Check sumup.com for current UK rates.  
 **To hand over:** Transfer the SumUp account to the new treasurer/responsible person. Update the `SUMUP_API_KEY` and `SUMUP_MERCHANT_CODE` secrets in the `bmx-checkout` Cloudflare Worker.
@@ -137,16 +137,14 @@ To **open** the shop:
 
 To **close** the shop: reverse the same change.
 
-### To activate the shop for the first time
-The shop page and checkout Worker are fully built. Before the shop can take payments:
-1. The treasurer sets up a SumUp account at sumup.com and completes club verification
-2. Obtain the API key and merchant code from the SumUp dashboard
-3. Add them as secrets to the `bmx-checkout` Cloudflare Worker:
-   - Secret name: `SUMUP_API_KEY`
-   - Secret name: `SUMUP_MERCHANT_CODE`
-4. Add column headers to row 1 of the Google Sheet: **Date, Name, Email, Product, Size, Colour, Rider Name, Race Number, Amount, Payment Reference, Status**
-5. Test using SumUp's sandbox mode before going live (test card: `4111 1111 1111 1111`, any future expiry, any CVV)
-6. Open the order window as described above
+### SumUp and Worker configuration
+The shop is fully set up and has been tested with live payments. The `bmx-checkout` Cloudflare Worker has the following secrets configured:
+- `SUMUP_API_KEY` — production API key from the SumUp dashboard
+- `SUMUP_MERCHANT_CODE` — the club's SumUp merchant code
+- `GOOGLE_CREDENTIALS` — service account credentials for writing to the orders Google Sheet
+- `SHEET_ID` — ID of the club orders Google Sheet
+
+If these ever need to be updated (e.g. after a SumUp account transfer), go to **Cloudflare dashboard → Workers & Pages → bmx-checkout → Settings → Variables & Secrets**.
 
 ---
 
@@ -246,4 +244,4 @@ When you're ready to point the club's own domain (e.g. merseysidebmx.co.uk) at t
 
 ---
 
-*Document last updated: May 2026 — shop payment flow updated to reflect embedded SumUp widget*
+*Document last updated: May 2026 — shop live with production SumUp credentials; setup sections updated to reflect current state*
