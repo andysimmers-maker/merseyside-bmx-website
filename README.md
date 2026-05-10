@@ -8,8 +8,7 @@ This document explains everything about the club website: how it was built, wher
 
 The website is a static HTML site — no WordPress, no database, no complex framework. It's a set of plain HTML, CSS and JavaScript files hosted on Cloudflare Pages. This keeps it fast, cheap (free), and simple to maintain.
 
-**Live site:** merseyside-bmx-website.andy-simmers.workers.dev  
-*(When the club domain is pointed here this will change to the club's own domain)*
+**Live site:** merseysidebmx.co.uk
 
 ---
 
@@ -220,14 +219,15 @@ All CSS and JavaScript is written inline within each HTML file — there are no 
 
 ---
 
-## Domain Setup *(when ready)*
+## Domain Setup
 
-When you're ready to point the club's own domain (e.g. merseysidebmx.co.uk) at the site:
-1. Log into wherever the domain is registered
-2. Update the DNS nameservers to point to Cloudflare (Cloudflare will provide the nameserver addresses)
-3. In Cloudflare, add the domain to your account and configure it to point to the Pages project
-4. Update the Web3Forms allowed domain to the new domain name
-5. Update the domain reference in `privacy.html`
+The site is live at **merseysidebmx.co.uk**, pointed at the Cloudflare Pages project. The domain is registered with IONOS and DNS is managed through Cloudflare.
+
+If the domain ever needs to be re-pointed (e.g. after a hosting change):
+1. In Cloudflare, go to **Pages → merseyside-bmx-website → Custom domains** and add the domain
+2. Cloudflare will provide nameserver addresses
+3. In IONOS, update the nameservers for merseysidebmx.co.uk to the Cloudflare ones
+4. SSL is handled automatically by Cloudflare — no certificate to manage
 
 ---
 
