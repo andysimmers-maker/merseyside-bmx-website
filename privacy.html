@@ -58,6 +58,14 @@
     .updated-note { background: var(--mid); border-left: 3px solid var(--border); padding: 1rem 1.25rem; font-size: 0.82rem; color: #666; margin-bottom: 3rem; }
     .updated-note strong { color: #999; }
 
+    .policy-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 0.75rem 0 0.85rem; }
+    .policy-table th { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.12em; color: var(--muted); text-align: left; padding: 0.6rem 1rem; background: var(--mid); border: 1px solid var(--border); }
+    .policy-table td { padding: 0.75rem 1rem; color: #bbb; border: 1px solid var(--border); line-height: 1.65; vertical-align: top; }
+    .policy-table td strong { color: #ddd; }
+    .policy-table td a { color: var(--blue); text-decoration: none; }
+    .policy-table td a:hover { text-decoration: underline; }
+    .policy-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
     /* DARK MODE OVERRIDE */
     @media (prefers-color-scheme: dark) {
       .policy-section h2 { color: #fff !important; }
@@ -147,46 +155,58 @@
     <div class="policy-section">
       <h2>HOW WE USE YOUR DATA</h2>
       <p>We use the data we collect only for the following purposes:</p>
-      <ul>
-        <li>To respond to enquiries submitted via the contact form</li>
-        <li>To process and fulfil shop orders, including passing personalisation details to our kit supplier</li>
-        <li>To maintain records of waivers and membership as required for club administration and safeguarding</li>
-      </ul>
+      <table class="policy-table">
+        <thead><tr><th>Data</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Contact form submissions</td><td>To respond to your enquiry</td></tr>
+          <tr><td>Shop order details</td><td>To process and fulfil your order, including passing personalisation details to our kit supplier</td></tr>
+          <tr><td>Waiver and membership records</td><td>For club administration and safeguarding purposes</td></tr>
+        </tbody>
+      </table>
       <p>We do not use your data for marketing, and we do not send unsolicited emails. We do not sell, rent or share your personal data with any third party except as described below.</p>
     </div>
 
     <div class="policy-section">
       <h2>THIRD PARTIES WE SHARE DATA WITH</h2>
       <p>We share data with the following third-party services only where necessary to deliver our services:</p>
-      <ul>
-        <li><strong>Web3Forms</strong> — processes contact form submissions and forwards them to our email. Privacy policy: web3forms.com/privacy</li>
-        <li><strong>SumUp</strong> — processes payments for shop orders securely. Privacy policy: sumup.com/privacy</li>
-        <li><strong>Google Sheets</strong> — stores confirmed order records, accessible only to club administrators. Privacy policy: policies.google.com/privacy</li>
-        <li><strong>Google Forms</strong> — collects waiver data. Privacy policy: policies.google.com/privacy</li>
-        <li><strong>Our kit supplier</strong> — we share rider name, size and personalisation details with our supplier solely for the purpose of producing ordered items. No contact or payment data is shared.</li>
-      </ul>
+      <table class="policy-table">
+        <thead><tr><th>Provider</th><th>Purpose</th><th>Privacy Policy</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Web3Forms</strong></td><td>Processes contact form submissions and forwards them to our email</td><td><a href="https://web3forms.com/privacy" target="_blank">web3forms.com/privacy</a></td></tr>
+          <tr><td><strong>SumUp</strong></td><td>Processes payments for shop orders securely</td><td><a href="https://sumup.com/privacy" target="_blank">sumup.com/privacy</a></td></tr>
+          <tr><td><strong>Google Sheets</strong></td><td>Stores confirmed order records, accessible only to club administrators</td><td><a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></td></tr>
+          <tr><td><strong>Google Forms</strong></td><td>Collects waiver data</td><td><a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></td></tr>
+          <tr><td><strong>Our kit supplier</strong></td><td>Receives rider name, size and personalisation details solely to produce ordered items. No contact or payment data is shared.</td><td>N/A</td></tr>
+        </tbody>
+      </table>
       <p>All third-party providers are required to handle your data in accordance with applicable data protection law.</p>
     </div>
 
     <div class="policy-section">
       <h2>HOW LONG WE KEEP YOUR DATA</h2>
-      <ul>
-        <li><strong>Contact form enquiries</strong> — retained in our email inbox and deleted when no longer needed, typically within 12 months</li>
-        <li><strong>Shop orders</strong> — order records are kept for up to 3 years for accounting and dispute resolution purposes</li>
-        <li><strong>Waivers</strong> — retained for the duration of a rider's membership and for a reasonable period thereafter</li>
-      </ul>
+      <table class="policy-table">
+        <thead><tr><th>Data</th><th>Retention Period</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Contact form enquiries</strong></td><td>Retained in our email inbox and deleted when no longer needed, typically within 12 months</td></tr>
+          <tr><td><strong>Shop orders</strong></td><td>Kept for up to 3 years for accounting and dispute resolution purposes</td></tr>
+          <tr><td><strong>Waivers</strong></td><td>Retained for the duration of a rider's membership and for a reasonable period thereafter</td></tr>
+        </tbody>
+      </table>
     </div>
 
     <div class="policy-section">
       <h2>YOUR RIGHTS</h2>
       <p>Under UK GDPR, you have the following rights regarding your personal data:</p>
-      <ul>
-        <li><strong>Right of access</strong> — you can request a copy of any personal data we hold about you</li>
-        <li><strong>Right to rectification</strong> — you can ask us to correct inaccurate data</li>
-        <li><strong>Right to erasure</strong> — you can ask us to delete your data where there is no legitimate reason to retain it</li>
-        <li><strong>Right to object</strong> — you can object to our processing of your data</li>
-        <li><strong>Right to data portability</strong> — you can request your data in a machine-readable format</li>
-      </ul>
+      <table class="policy-table">
+        <thead><tr><th>Right</th><th>What it means</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Right of access</strong></td><td>You can request a copy of any personal data we hold about you</td></tr>
+          <tr><td><strong>Right to rectification</strong></td><td>You can ask us to correct inaccurate data</td></tr>
+          <tr><td><strong>Right to erasure</strong></td><td>You can ask us to delete your data where there is no legitimate reason to retain it</td></tr>
+          <tr><td><strong>Right to object</strong></td><td>You can object to our processing of your data</td></tr>
+          <tr><td><strong>Right to data portability</strong></td><td>You can request your data in a machine-readable format</td></tr>
+        </tbody>
+      </table>
       <p>To exercise any of these rights, please contact us at <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>. We will respond within 30 days.</p>
       <p>If you are unhappy with how we have handled your data, you have the right to lodge a complaint with the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" target="_blank">ico.org.uk</a>.</p>
     </div>
