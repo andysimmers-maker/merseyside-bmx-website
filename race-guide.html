@@ -28,6 +28,8 @@
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 60px; background: var(--black); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 var(--pad); gap: 1rem; }
     .nav-stripe { width: 4px; height: 26px; flex-shrink: 0; background: linear-gradient(to bottom, var(--red) 50%, var(--blue) 50%); }
     .nav-logo img { height: 48px; width: auto; display: block; }
+    .nav-back { margin-left: auto; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.08em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: #fff; }
     .nav-links { display: flex; list-style: none; margin-left: auto; }
     .nav-links a { display: flex; align-items: center; height: 60px; padding: 0 0.85rem; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.06em; color: var(--text); text-decoration: none; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
     .nav-links a:hover { color: #fff; border-bottom-color: var(--red); }
@@ -189,16 +191,7 @@
   <nav>
     <div class="nav-stripe"></div>
     <a href="index.html" class="nav-logo"><img src="logo.png" alt="Merseyside BMX Club" /></a>
-    <button class="nav-burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#sessions">Sessions</a></li>
-      <li><a href="shop.html" class="nav-shop">Shop</a></li>
-      <li><a href="index.html#join">Join</a></li>
-      <li><a href="index.html#coaches">Coaches</a></li>
-      <li><a href="index.html#riders">Riders</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
+    <a href="index.html" class="nav-back">← Back to site</a>
   </nav>
 
   <div class="page-header">
