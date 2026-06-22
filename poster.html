@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="color-scheme" content="only light" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.png" type="image/png">
+  <title>New Rider Poster — Merseyside BMX Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    :root {
+      --red: #d42b2b; --blue: #1a3d8f; --black: #0f0f0f;
+      --dark: #191919; --mid: #2a2a2a; --white: #f6f6f6;
+      --fd: 'Bebas Neue', sans-serif; --fb: 'DM Sans', sans-serif;
+    }
+    html { color-scheme: only light; }
+    body {
+      font-family: var(--fb);
+      background: #d8d8d8;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .toolbar { display: flex; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .toolbar button, .toolbar a {
+      font-family: var(--fd); letter-spacing: 0.08em; font-size: 0.9rem;
+      padding: 0.6rem 1.4rem; border: none; border-radius: 2px; cursor: pointer;
+      background: var(--red); color: #fff; text-decoration: none;
+    }
+    .toolbar a.secondary { background: var(--mid); color: var(--white); }
+
+    .poster {
+      width: 210mm; min-height: 297mm;
+      background: #fff;
+      box-shadow: 0 0 24px rgba(0,0,0,0.25);
+      display: flex; flex-direction: column;
+      position: relative;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .dd { height: 8mm; display: flex; }
+    .dd span { flex: 1; }
+    .dd span:first-child { background: var(--red); }
+    .dd span:last-child { background: var(--blue); }
+
+    .poster-body {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 10mm 14mm 8mm;
+      text-align: center;
+    }
+
+    .logo { width: 120mm; max-width: 100%; height: auto; margin-top: 2mm; }
+
+    h1.headline {
+      font-family: var(--fd);
+      font-size: 17mm;
+      line-height: 0.95;
+      color: var(--black);
+      margin-top: 6mm;
+      letter-spacing: 0.02em;
+    }
+    h1.headline span { color: var(--red); }
+
+    .sub {
+      font-size: 4.2mm;
+      color: #444;
+      max-width: 150mm;
+      margin-top: 3mm;
+      line-height: 1.6;
+    }
+    .sub strong { color: var(--black); }
+
+    .qr-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 14mm;
+      margin-top: 8mm;
+      width: 100%;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .qr-card {
+      display: flex; flex-direction: column; align-items: center;
+      flex: 1;
+      max-width: 80mm;
+    }
+
+    .qr-step {
+      font-family: var(--fd);
+      font-size: 4mm;
+      letter-spacing: 0.12em;
+      color: #fff;
+      padding: 1.5mm 5mm;
+      border-radius: 2px;
+      margin-bottom: 4mm;
+    }
+    .qr-card.primary .qr-step { background: var(--red); }
+    .qr-card.secondary .qr-step { background: var(--blue); }
+
+    .qr-card img.qr {
+      width: 100%;
+      max-width: 62mm;
+      border: 2mm solid #fff;
+      box-shadow: 0 0 0 0.6mm #e2e2e2;
+    }
+
+    .qr-title {
+      font-family: var(--fd);
+      font-size: 5.6mm;
+      letter-spacing: 0.03em;
+      color: var(--black);
+      margin-top: 4mm;
+    }
+
+    .qr-desc {
+      font-size: 3.4mm;
+      color: #555;
+      margin-top: 1.5mm;
+      line-height: 1.5;
+    }
+
+    .poster-footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 5mm 10mm;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 1.5mm;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .poster-footer .club {
+      font-family: var(--fd);
+      font-size: 5mm;
+      letter-spacing: 0.08em;
+    }
+    .poster-footer .club span { color: var(--red); }
+    .poster-footer .meta {
+      font-size: 3.2mm;
+      color: #aaa;
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .toolbar { display: none; }
+      .poster { box-shadow: none; }
+      @page { size: A4; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <button onclick="window.print()">Print poster</button>
+    <a class="secondary" href="index.html">Back to site</a>
+  </div>
+
+  <div class="poster">
+    <div class="dd"><span></span><span></span></div>
+
+    <div class="poster-body">
+      <img class="logo" src="logo-2026.png" alt="Merseyside BMX Club logo" />
+
+      <h1 class="headline">NEW <span>RIDER?</span></h1>
+      <p class="sub">Before you hit the track, please scan the codes below.</p>
+
+      <div class="qr-row">
+        <div class="qr-card secondary">
+          <div class="qr-step">STEP 1</div>
+          <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=10&data=https%3A%2F%2Fmerseysidebmx.co.uk%2Fconduct.html" alt="QR code linking to the club code of conduct" />
+          <div class="qr-title">Code of Conduct</div>
+          <div class="qr-desc">Read this first, how we look after each other on and off the track.</div>
+        </div>
+
+        <div class="qr-card primary">
+          <div class="qr-step">STEP 2</div>
+          <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=10&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLScmV9Ep5OYKeah5jG3XKrfXenLE82oEEJMO2pcEBseOJpC7xA%2Fviewform" alt="QR code linking to the rider waiver form" />
+          <div class="qr-title">Rider Waiver</div>
+          <div class="qr-desc">Riders 18+ complete their own. A parent or guardian completes it for riders under 18.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="poster-footer">
+      <div class="club">MERSEYSIDE <span>BMX</span> CLUB</div>
+      <div class="meta">merseysidebmx.co.uk &nbsp;·&nbsp; merseysidebmx@gmail.com</div>
+    </div>
+  </div>
+
+</body>
+</html>
