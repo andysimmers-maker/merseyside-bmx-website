@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="color-scheme" content="only light" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.png" type="image/png">
+  <title>Conduct &amp; Safeguarding — Merseyside BMX Club</title>
+  <meta name="description" content="Code of Conduct and Safeguarding Policy for Merseyside BMX Club — standards, safeguarding commitments, and welfare contact." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #d42b2b; --red2: #b52020;
+      --black: #0f0f0f; --dark: #191919; --mid: #2a2a2a;
+      --border: #383838; --text: #e2e2e2; --muted: #aaa;
+      --blue: #1a3d8f; --blue2: #0d2660;
+      --white: #f6f6f6; --rtext: #181818; --rmuted: #555;
+      --fd: "Bebas Neue", sans-serif; --fb: "DM Sans", sans-serif;
+      --mw: 860px; --pad: 5vw;
+    }
+    html { scroll-behavior: smooth; color-scheme: only light; }
+    body { font-family: var(--fb); font-size: 16px; line-height: 1.65; overflow-x: hidden; background: var(--white); color: var(--rtext); }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 60px; background: var(--black); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 var(--pad); gap: 1rem; }
+    .nav-stripe { width: 4px; height: 26px; flex-shrink: 0; background: linear-gradient(to bottom, var(--red) 50%, var(--blue) 50%); }
+    .nav-logo img { height: 48px; width: auto; display: block; }
+    .nav-back { margin-left: auto; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.08em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: #fff; }
+
+    .page-header { padding: 7rem var(--pad) 3.5rem; background: var(--dark); border-bottom: 3px solid var(--blue); }
+    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: #7a9de8; margin-bottom: 0.4rem; }
+    .page-header h1 { font-family: var(--fd); font-size: clamp(2.5rem, 5vw, 4rem); line-height: 0.95; color: #fff; }
+    .page-header p { font-size: 0.95rem; color: var(--muted); max-width: 580px; margin-top: 0.9rem; line-height: 1.75; }
+
+    .dd { height: 5px; background: linear-gradient(to right, var(--red) 25%, var(--black) 25% 50%, var(--blue) 50% 75%, #e0e0e0 75%); }
+
+    .page-content { max-width: var(--mw); margin: 0 auto; padding: 4rem var(--pad) 5rem; }
+
+    /* Welfare contact */
+    .welfare-contact { background: var(--dark); border-left: 4px solid var(--red); padding: 1.75rem 2rem; margin-bottom: 2.5rem; }
+    .welfare-contact h3 { font-family: var(--fd); font-size: 1rem; letter-spacing: 0.1em; color: #fff; margin-bottom: 0.5rem; }
+    .welfare-contact p { font-size: 0.9rem; color: #aaa; margin-bottom: 0.4rem; }
+    .welfare-contact p:last-child { margin-bottom: 0; }
+    .welfare-contact a { color: #7a9de8; font-weight: 600; text-decoration: none; }
+    .welfare-contact a:hover { text-decoration: underline; }
+
+    /* Jump nav */
+    .jump-nav { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .jump-btn { font-family: var(--fd); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--blue); text-decoration: none; border: 1px solid var(--blue); padding: 0.5rem 1.25rem; transition: all 0.2s; }
+    .jump-btn:hover { background: var(--blue); color: #fff; }
+
+    /* PDF downloads */
+    .pdf-links { display: flex; gap: 1rem; margin-bottom: 3.5rem; flex-wrap: wrap; }
+    .pdf-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--fd); font-size: 0.82rem; letter-spacing: 0.06em; color: #555; text-decoration: none; border: 1px solid #ccc; padding: 0.5rem 1.25rem; background: #fff; transition: all 0.2s; }
+    .pdf-btn:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* Document sections */
+    .policy-doc { margin-bottom: 4.5rem; padding-bottom: 4.5rem; border-bottom: 3px solid #e0e0e0; }
+    .policy-doc:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .doc-title { font-family: var(--fd); font-size: clamp(1.8rem, 3vw, 2.6rem); letter-spacing: 0.04em; color: var(--rtext); padding-bottom: 0.6rem; border-bottom: 3px solid var(--red); margin-bottom: 0.4rem; }
+    .doc-meta { font-size: 0.78rem; color: #999; font-style: italic; margin-bottom: 2.5rem; }
+
+    /* Subsections */
+    .subsection { margin-bottom: 2rem; }
+    .subsection-title { font-family: var(--fd); font-size: 1.15rem; letter-spacing: 0.06em; color: var(--rtext); margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e0e0e0; }
+    .subsection-subtitle { font-family: var(--fd); font-size: 0.95rem; letter-spacing: 0.05em; color: var(--blue); margin: 1.25rem 0 0.6rem; }
+
+    .policy-p { font-size: 0.93rem; color: var(--rmuted); line-height: 1.75; margin-bottom: 0.75rem; }
+    .policy-p:last-child { margin-bottom: 0; }
+    .policy-p strong { color: var(--rtext); }
+
+    /* Lists */
+    .policy-list { list-style: none; margin: 0.6rem 0 1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+    .policy-list li { font-size: 0.9rem; color: #444; line-height: 1.6; padding: 0.55rem 1rem 0.55rem 2.25rem; background: #fff; border: 1px solid #ebebeb; border-left: 3px solid var(--blue); position: relative; }
+    .policy-list li::before { content: "●"; position: absolute; left: 0.7rem; color: var(--blue); font-size: 0.45rem; top: 0.88rem; }
+    .policy-list li strong { color: var(--rtext); }
+    .policy-list.red li { border-left-color: var(--red); }
+    .policy-list.red li::before { color: var(--red); }
+    .policy-list.green li { border-left-color: #2a7a3e; }
+    .policy-list.green li::before { color: #2a7a3e; }
+
+    .ordered-list { list-style: none; margin: 0.6rem 0 1rem; counter-reset: ol-counter; display: flex; flex-direction: column; gap: 0.35rem; }
+    .ordered-list li { font-size: 0.9rem; color: #444; line-height: 1.6; padding: 0.55rem 1rem 0.55rem 2.5rem; background: #fff; border: 1px solid #ebebeb; border-left: 3px solid var(--blue); position: relative; counter-increment: ol-counter; }
+    .ordered-list li::before { content: counter(ol-counter); position: absolute; left: 0; top: 0; bottom: 0; width: 2rem; display: flex; align-items: center; justify-content: center; color: #fff; background: var(--blue); font-weight: 600; font-size: 0.8rem; font-family: var(--fd); letter-spacing: 0.05em; }
+
+    /* Info box */
+    .info-box { background: #f0f4ff; border-left: 4px solid var(--blue); padding: 1.1rem 1.4rem; margin: 0.75rem 0; }
+    .info-box p { font-size: 0.88rem; color: #444; line-height: 1.65; }
+    .info-box a { color: var(--blue); font-weight: 600; text-decoration: none; }
+    .info-box a:hover { text-decoration: underline; }
+
+    /* Waiver CTA */
+    .waiver-cta { background: var(--dark); border: 1px solid var(--border); padding: 2rem; margin-top: 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+    .waiver-cta h3 { font-family: var(--fd); font-size: 1.3rem; letter-spacing: 0.06em; color: #fff; }
+    .waiver-cta p { font-size: 0.88rem; color: #aaa; margin-top: 0.25rem; max-width: 440px; }
+    .btn { display: inline-block; font-family: var(--fd); font-size: 1rem; letter-spacing: 0.08em; text-decoration: none; padding: 0.75rem 2rem; border-radius: 2px; cursor: pointer; border: none; transition: all 0.2s; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red2); transform: translateY(-2px); }
+
+    /* Contacts grid */
+    .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin: 1rem 0; }
+    .contact-card { background: #fff; border: 1px solid #e0e0e0; padding: 1.1rem 1.3rem; }
+    .contact-card h4 { font-family: var(--fd); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--rtext); margin-bottom: 0.4rem; }
+    .contact-card p { font-size: 0.85rem; color: #555; line-height: 1.5; margin-bottom: 0.2rem; }
+    .contact-card p:last-child { margin-bottom: 0; }
+    .contact-card a { color: var(--blue); text-decoration: none; }
+    .contact-card a:hover { text-decoration: underline; }
+    .contact-card.urgent { border-left: 3px solid var(--red); }
+    .contact-card.urgent h4 { color: var(--red); }
+
+    /* Footer */
+    footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
+    .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }
+    .footer-logo img { height: 44px; width: auto; display: block; margin-bottom: 0.75rem; }
+    .footer-stripe { display: flex; gap: 4px; margin-bottom: 0.75rem; }
+    .footer-stripe span { height: 3px; width: 22px; border-radius: 1px; }
+    .footer-brand p { font-size: 0.82rem; color: #aaa; line-height: 1.6; margin-bottom: 0.35rem; }
+    .footer-brand a { color: #aaa; text-decoration: none; font-size: 0.82rem; }
+    .footer-brand a:hover { color: var(--red); }
+    .footer-social { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+    .footer-social a { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--mid); border: 1px solid var(--border); color: var(--text); text-decoration: none; transition: all 0.2s; }
+    .footer-social a:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    .footer-col h4 { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.2em; color: var(--red); margin-bottom: 0.75rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.35rem; }
+    .footer-col ul li a { font-size: 0.82rem; color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { max-width: var(--mw); margin: 2rem auto 0; padding-top: 1.25rem; border-top: 1px solid var(--border); font-size: 0.75rem; color: #888; }
+    @media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } .contacts-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { .waiver-cta { flex-direction: column; align-items: flex-start; } }
+    @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-stripe"></div>
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="Merseyside BMX Club" /></a>
+    <a href="index.html" class="nav-back">&#8592; Back to site</a>
+  </nav>
+
+  <div class="page-header">
+    <div class="kicker">Club Policies</div>
+    <h1>CONDUCT &amp; SAFEGUARDING</h1>
+    <p>Our Code of Conduct and Safeguarding Policy set out the standards we uphold and our commitment to keeping every rider safe, included and supported.</p>
+  </div>
+
+  <div class="dd"></div>
+
+  <div class="page-content">
+
+    <div class="welfare-contact">
+      <h3>WELFARE OFFICER CONTACT</h3>
+      <p>For any safeguarding or welfare concern, contact our Club Welfare Officer directly:</p>
+      <p><a href="mailto:merseysidebmxwelfare@gmail.com">merseysidebmxwelfare@gmail.com</a></p>
+      <p>You can also speak to any coach or committee member in person at any session or event.</p>
+    </div>
+
+    <div class="jump-nav">
+      <a href="#code-of-conduct" class="jump-btn">Code of Conduct &#8595;</a>
+      <a href="#safeguarding-policy" class="jump-btn">Safeguarding Policy &#8595;</a>
+    </div>
+
+    <div class="pdf-links">
+      <a href="Code of Conduct.docx.pdf" target="_blank" class="pdf-btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Download Code of Conduct (PDF)
+      </a>
+      <a href="Safeguarding Policy.docx.pdf" target="_blank" class="pdf-btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Download Safeguarding Policy (PDF)
+      </a>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════ -->
+    <!-- CODE OF CONDUCT                                  -->
+    <!-- ══════════════════════════════════════════════════ -->
+    <div id="code-of-conduct" class="policy-doc">
+
+      <div class="doc-title">CODE OF CONDUCT</div>
+      <div class="doc-meta">Merseyside BMX Club &mdash; June 2026</div>
+
+      <div class="subsection">
+        <div class="subsection-title">OUR COMMITMENT</div>
+        <p class="policy-p">Merseyside BMX Club is committed to providing a <strong>Safe, Inclusive and Enjoyable</strong> environment for all riders, parents/carers, coaches, volunteers and officials.</p>
+        <p class="policy-p">The welfare and safeguarding of our riders is our highest priority. Everyone involved in the club has a responsibility to uphold the standards set out in this Code of Conduct and to act in accordance with <strong>British Cycling's Code of Conduct, Safeguarding Policies, Regulations and Guidance</strong>.</p>
+        <p class="policy-p">This Code of Conduct applies at <strong>training sessions, races, events, travel, online spaces</strong>, and whenever individuals are representing Merseyside BMX Club.</p>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">CODE OF CONDUCT &ndash; RIDERS</div>
+        <p class="policy-p">As a rider at Merseyside BMX Club, I agree to:</p>
+        <ul class="policy-list">
+          <li>Arrive on time and ready for training and competition.</li>
+          <li>Wear appropriate clothing and safety equipment, including a helmet, as directed by coaches.</li>
+          <li>Warm up and cool down properly at every session.</li>
+          <li>Follow the rules and respect officials and their decisions.</li>
+          <li>Show good sportsmanship and applaud good performances by all riders.</li>
+          <li>Control my behaviour and language at all times.</li>
+          <li>Never bully, intimidate, provoke or abuse others.</li>
+          <li>Work hard for myself and my club.</li>
+          <li>Respect everyone regardless of gender, ability, disability, background or religion.</li>
+          <li>Ensure all fees are paid (by me or on my behalf).</li>
+          <li>Not smoke, vape, drink alcohol or use drugs while at the club or representing it.</li>
+          <li>Treat others as I expect to be treated.</li>
+          <li>Cooperate with coaches, teammates and opponents.</li>
+          <li>Remember that I represent Merseyside BMX Club at all times.</li>
+          <li>Thank officials, volunteers and opponents after events when the opportunity arises.</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">CODE OF CONDUCT &ndash; PARENTS / CARERS</div>
+        <p class="policy-p">As a parent or carer at Merseyside BMX Club, I agree to:</p>
+        <ul class="policy-list red">
+          <li>Support the club in maintaining a safe, inclusive and enjoyable environment.</li>
+          <li>Ensure that my child is supervised by an appropriate adult at all times when participating in sessions. For the purpose of this policy, a child is classed as any individual under the age of 18. A parent or carer must be present at all club sessions for those under the age of 18.</li>
+          <li>Inform the club of any medical conditions or additional needs in advance, to ensure that sessions can be adapted as needed.</li>
+          <li>Notify coaches if my child is leaving early or being collected by someone else.</li>
+          <li>Encourage my child to learn the rules and race fairly at all times.</li>
+          <li>Discourage arguing with officials and any confrontational behaviour.</li>
+          <li>Focus on effort, enjoyment and development rather than just results.</li>
+          <li>Set a positive example through my behaviour and be mindful of the language I use eg swearing in front of children.</li>
+          <li>Never punish or criticise a child for mistakes or losing.</li>
+          <li>Publicly accept officials' decisions and help children do the same.</li>
+          <li>Remember BMX is for my child's enjoyment, not mine.</li>
+          <li>Support the removal of verbal, physical and online abuse from sport.</li>
+          <li>Respect the rights and dignity of all riders and families.</li>
+          <li>Show appreciation for coaches, officials and volunteers.</li>
+          <li>Follow instructions from coaches and officials without argument.</li>
+          <li>Remember that both my child and I represent the club at all times.</li>
+          <li>Not smoke, vape, consume alcohol or take drugs when attending sessions at the track.</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">CODE OF CONDUCT &ndash; COACHES &amp; VOLUNTEERS</div>
+        <p class="policy-p">Coaches and volunteers at Merseyside BMX Club are expected to:</p>
+        <ul class="policy-list green">
+          <li>Act in accordance with <strong>British Cycling's Code of Conduct, Safeguarding Policies and Regulations</strong>.</li>
+          <li>Promote a safe, inclusive and enjoyable environment at all times.</li>
+          <li>Act as positive role models.</li>
+          <li>Put rider welfare and safety first.</li>
+          <li>Support rider development at an appropriate pace.</li>
+          <li>Never communicate directly via text message or online with a child under the age of 18.</li>
+          <li>Never place themselves in a position where they are in a private, one to one situation with an unsupervised child.</li>
+          <li>Have an awareness and understanding of any SEND needs that may need to be considered when planning and delivering sessions.</li>
+          <li>Treat all riders fairly, respectfully and without discrimination.</li>
+          <li>Create an inclusive, supportive and encouraging atmosphere.</li>
+          <li>Use appropriate language and demonstrate positive behaviour at all times.</li>
+          <li>Never humiliate, intimidate or abuse riders.</li>
+          <li>Communicate clearly and respectfully with riders and parents/carers.</li>
+          <li>Follow club safeguarding policies and British Cycling guidance.</li>
+          <li>Raise concerns at the earliest possible opportunity with parents directly or through the Club Welfare Officer.</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">BEHAVIOUR EXPECTATIONS</div>
+        <ul class="policy-list">
+          <li>This Code of Conduct applies to <strong>all club activities</strong>, including training, racing, travel and online communication.</li>
+          <li>Any behaviour that undermines our values will not be tolerated.</li>
+          <li>Bullying, discrimination, harassment, aggressive or passive-aggressive behaviour is unacceptable.</li>
+          <li>Social media and messaging must be respectful and must not bring individuals or the club into disrepute.</li>
+          <li>Welfare and safeguarding concerns should be reported to the Club Welfare Officer.</li>
+        </ul>
+        <div class="info-box" style="margin-top:0.75rem;">
+          <p><strong>Merseyside BMX Club Welfare Mailbox:</strong> <a href="mailto:merseysidebmxwelfare@gmail.com">merseysidebmxwelfare@gmail.com</a></p>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">DISCIPLINARY ACTION</div>
+        <p class="policy-p">Where behaviour does not align with the club's values and expectations outlined above, the following steps may be taken, depending on the nature and severity of the breach:</p>
+        <ol class="ordered-list">
+          <li>Verbal reminder of expectations</li>
+          <li>Formal written warning</li>
+          <li>Suspension from training and/or events</li>
+          <li>Termination of membership</li>
+        </ol>
+        <p class="policy-p" style="margin-top:0.75rem;">Serious incidents, including threatening, abusive or violent behaviour, safeguarding breaches, or conduct which brings the club into disrepute, may result in <strong>immediate suspension</strong>, referral to <strong>British Cycling</strong>, and involvement of statutory agencies where appropriate.</p>
+      </div>
+
+      <div class="waiver-cta">
+        <div>
+          <h3>READ &amp; AGREE TO THIS CODE</h3>
+          <p>All riders and parents are required to read this Code of Conduct and complete our waiver form before participating in club sessions.</p>
+        </div>
+        <a href="https://forms.gle/a4K64z4J81WpgJLj6" target="_blank" class="btn btn-red">Complete the Waiver Form &#8594;</a>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════════════════════════════════ -->
+    <!-- SAFEGUARDING POLICY                              -->
+    <!-- ══════════════════════════════════════════════════ -->
+    <div id="safeguarding-policy" class="policy-doc">
+
+      <div class="doc-title">SAFEGUARDING CHILDREN &amp; YOUNG PEOPLE POLICY</div>
+      <div class="doc-meta">Merseyside BMX Club &mdash; June 2026</div>
+
+      <div class="subsection">
+        <div class="subsection-title">1. SAFEGUARDING POLICY STATEMENT</div>
+        <p class="policy-p">Merseyside BMX Club is committed to safeguarding and promoting the welfare of all who participate in our activities. We believe that every rider has the right to take part in BMX in a <strong>safe, inclusive and enjoyable environment</strong>, free from abuse, bullying, neglect or harm.</p>
+        <p class="policy-p">We recognise our responsibility to act in line with <strong>British Cycling Safeguarding Children and Young People Policy</strong>, relevant legislation including the Children Act 1989, The Children Act 2004, Working Together to Safeguard Children 2023 and associated statutory guidance.</p>
+        <p class="policy-p">For the purposes of this policy, a child or young person is defined as anyone under the age of 18.</p>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">2. KEY PRINCIPLES</div>
+        <ul class="policy-list">
+          <li>The welfare of the child is paramount</li>
+          <li>All children have the right to protection, regardless of age, gender, disability, race, religion, sexual orientation or background</li>
+          <li>Safeguarding is everyone's responsibility</li>
+          <li>All concerns will be taken seriously and responded to promptly</li>
+          <li>We will work in partnership with parents/carers, British Cycling and statutory agencies</li>
+          <li>Children and young people should feel listened to and respected</li>
+          <li>The club operates Codes of Conduct for coaches, volunteers, riders and parents, in line with British Cycling requirements</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">3. OBJECTIVES OF THE POLICY</div>
+        <p class="policy-p">Merseyside BMX Club aims to:</p>
+        <ul class="policy-list">
+          <li>Provide a safe, inclusive and supportive environment for all riders</li>
+          <li>Prevent abuse, poor practice and bullying</li>
+          <li>Ensure concerns are reported and managed appropriately</li>
+          <li>Appoint and support a trained <strong>Club Welfare Officer (CWO)</strong></li>
+          <li>Ensure safe recruitment, training and supervision of adults</li>
+          <li>Review safeguarding practice regularly</li>
+        </ul>
+        <p class="policy-p">This policy will be reviewed every <strong>three years</strong>, or sooner if legislation or British Cycling guidance changes.</p>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">4. MANDATORY SAFEGUARDING REQUIREMENTS</div>
+        <p class="policy-p">Merseyside BMX Club will:</p>
+        <ul class="policy-list">
+          <li>Adopt and implement <strong>British Cycling</strong> safeguarding policies and procedures</li>
+          <li>Appoint a named <strong>Club Welfare Officer</strong></li>
+          <li>Ensure the Club Welfare Officer holds a current <strong>DBS check through British Cycling</strong></li>
+          <li>Ensure all adults in <strong>regulated activity (Coaching)</strong> hold an appropriate DBS check</li>
+          <li>Publicise <strong>Welfare Officer</strong> contact details to members</li>
+          <li>Follow <strong>British Cycling</strong> reporting procedures</li>
+          <li>Refer safeguarding concerns to the <strong>British Cycling Lead Safeguarding Officer</strong></li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">5. RECRUITMENT AND TRAINING</div>
+        <div class="subsection-subtitle">5.1 Safer Recruitment</div>
+        <p class="policy-p">All roles involving responsibility for children will follow safer recruitment practices, including:</p>
+        <ul class="policy-list">
+          <li>Application and role assessment</li>
+          <li>Self-disclosure</li>
+          <li>References where appropriate</li>
+          <li>DBS checks through <strong>British Cycling</strong></li>
+          <li>Clear role descriptions</li>
+        </ul>
+        <p class="policy-p">Anyone subject to investigation relating to children must inform the club immediately. The matter will be referred to <strong>British Cycling</strong> for advice.</p>
+        <div class="subsection-subtitle">5.2 Training</div>
+        <ul class="policy-list">
+          <li>Safeguarding training will be provided appropriate to each role</li>
+          <li>Safeguarding training is mandatory for anyone in regulated activity</li>
+          <li>Training will be refreshed at least every three years</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">6. COMPLAINTS, CONCERNS AND ALLEGATIONS</div>
+        <div class="subsection-subtitle">6.1 Reporting Concerns</div>
+        <p class="policy-p">Any concern relating to:</p>
+        <ul class="policy-list">
+          <li>The welfare of a child</li>
+          <li>Possible abuse or neglect</li>
+          <li>Poor practice</li>
+          <li>Bullying or harassment (including online)</li>
+        </ul>
+        <p class="policy-p">must be reported <strong>immediately</strong> to the <strong>Club Welfare Officer</strong>.</p>
+        <p class="policy-p">If the concern involves the Club Welfare Officer, it must be reported directly to <strong>British Cycling</strong> or statutory agencies.</p>
+        <div class="subsection-subtitle">6.2 Responding to a Disclosure</div>
+        <p class="policy-p">If a child discloses abuse or raises a concern:</p>
+        <ul class="policy-list">
+          <li>Stay calm and listen carefully</li>
+          <li>Reassure the child they have done the right thing</li>
+          <li>Do not promise confidentiality</li>
+          <li>Do not investigate or ask leading questions</li>
+          <li>Record what was said as soon as possible</li>
+          <li>Pass the information to the Welfare Officer immediately</li>
+        </ul>
+        <p class="policy-p">Parents/carers will be informed unless doing so places the child at further risk.</p>
+        <div class="subsection-subtitle">6.3 Confidentiality and Records</div>
+        <ul class="policy-list">
+          <li>Information will only be shared on a <strong>need-to-know basis</strong></li>
+          <li>Records will be stored securely</li>
+          <li>Information may be shared without consent where safeguarding requires it</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">7. RESPONDING TO SAFEGUARDING CONCERNS</div>
+        <ul class="policy-list">
+          <li>All safeguarding concerns will be recorded and referred to British Cycling within <strong>24 hours if necessary</strong></li>
+          <li>If necessary for immediate safeguarding concerns, statutory services will be informed</li>
+          <li>Temporary measures (e.g. suspension from activity) may be used as a <strong>neutral safeguarding action</strong></li>
+          <li><strong>British Cycling's</strong> Case Management Group will advise on next steps</li>
+          <li>Statutory agencies will be involved where appropriate</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">8. GOOD PRACTICE GUIDELINES</div>
+        <div class="subsection-subtitle">8.1 Supervision</div>
+        <ul class="policy-list">
+          <li>Appropriate supervision ratios will be maintained</li>
+          <li>Risk assessments will be completed for sessions and events</li>
+          <li>Wherever possible, a minimum of <strong>two adults</strong> will be present</li>
+          <li>Parents/carers remain responsible for children whilst they are participating in club sessions. A parent or carer must remain present at the track for the duration of the session.</li>
+        </ul>
+        <div class="subsection-subtitle">8.2 Behaviour and Physical Contact</div>
+        <ul class="policy-list">
+          <li>Adults working with children are in positions of trust</li>
+          <li>Behaviour must be professional, respectful and appropriate</li>
+          <li>Physical contact must be necessary, proportionate and in the child's best interests</li>
+          <li>Any physical contact should be open and observable</li>
+          <li>Unnecessary or inappropriate contact is not permitted</li>
+        </ul>
+        <div class="subsection-subtitle">8.3 Transport</div>
+        <ul class="policy-list">
+          <li>Parents/carers are responsible for transport to and from activities unless agreed in advance</li>
+          <li>Written parental consent is required for any club-arranged transport</li>
+          <li>Transport arrangements will be risk assessed</li>
+        </ul>
+        <div class="subsection-subtitle">8.4 Social Media and Online Safety</div>
+        <ul class="policy-list">
+          <li>Online communication must be professional and appropriate</li>
+          <li>Coaches and volunteers should not engage in private one-to-one messaging with children</li>
+          <li>All online behaviour must reflect the club's commitment to creating a safe, inclusive and enjoyable environment for all</li>
+          <li>Any online safeguarding concerns must be reported to the Welfare Officer</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">9. ANTI-BULLYING</div>
+        <p class="policy-p">Merseyside BMX Club has <strong>zero tolerance</strong> for bullying.</p>
+        <p class="policy-p">Bullying may be:</p>
+        <ul class="policy-list">
+          <li>Physical</li>
+          <li>Verbal</li>
+          <li>Emotional</li>
+          <li>Discriminatory</li>
+          <li>Online (cyberbullying)</li>
+        </ul>
+        <p class="policy-p">Bullying behaviour will be addressed promptly and may result in disciplinary action in line with club and <strong>British Cycling</strong> procedures. Any concerns related to bullying should be reported to the <strong>Club Welfare Officer</strong>.</p>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">10. CHILDREN AT INCREASED RISK</div>
+        <p class="policy-p">Merseyside BMX Club recognises that some children and young people may be at <strong>increased risk of harm</strong>, including:</p>
+        <ul class="policy-list">
+          <li>Children with <strong>Special Educational Needs and Disabilities (SEND)</strong></li>
+          <li>Children with physical, sensory, learning or communication difficulties</li>
+          <li>Children with diagnosed medical conditions which may impact their ability to participate fully in sessions</li>
+          <li>Looked-after children or those with care experience</li>
+          <li>Children from minority ethnic backgrounds</li>
+          <li>LGBT+ children and young people</li>
+          <li>Children who have experienced trauma or abuse</li>
+          <li>Young athletes involved in talent or performance pathways</li>
+        </ul>
+        <p class="policy-p">Children with SEND may face additional safeguarding challenges due to communication barriers, increased dependency, or difficulty recognising or reporting concerns.</p>
+        <p class="policy-p">The club will:</p>
+        <ul class="policy-list">
+          <li>Work closely with parents/carers and the child to understand individual needs</li>
+          <li>Make reasonable adjustments to ensure activities are inclusive and safe</li>
+          <li>Ensure coaches and volunteers understand additional safeguarding needs</li>
+          <li>Put additional safeguards in place where required</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">11. SAFEGUARDING ADULTS AT RISK</div>
+        <p class="policy-p">Merseyside BMX Club recognises that safeguarding responsibilities may also extend to <strong>adults at risk</strong> who participate in our activities.</p>
+        <p class="policy-p">An adult at risk is a person aged 18 or over who may be unable to protect themselves from abuse, neglect or exploitation due to disability, illness, mental health needs, learning difficulties, age, or other vulnerabilities.</p>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">12. POOR PRACTICE IN SPORT</div>
+        <p class="policy-p">Poor practice is behaviour that falls below expected standards but may not meet the threshold of abuse. This includes:</p>
+        <ul class="policy-list">
+          <li>Swearing or inappropriate language in front of children</li>
+          <li>Favouritism or exclusion</li>
+          <li>Inadequate supervision</li>
+          <li>Ignoring safety guidance</li>
+          <li>Unprofessional behaviour</li>
+        </ul>
+        <p class="policy-p">Poor practice will be challenged and may be escalated if repeated or serious.</p>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">12. USEFUL CONTACTS</div>
+        <div class="contacts-grid">
+          <div class="contact-card urgent">
+            <h4>MERSEYSIDE BMX WELFARE OFFICER</h4>
+            <p><a href="mailto:merseysidebmxwelfare@gmail.com">merseysidebmxwelfare@gmail.com</a></p>
+          </div>
+          <div class="contact-card">
+            <h4>BRITISH CYCLING &ndash; LEAD SAFEGUARDING OFFICER</h4>
+            <p><a href="tel:01612742000">0161 274 2000</a></p>
+            <p><a href="mailto:compliance@britishcycling.org.uk">compliance@britishcycling.org.uk</a></p>
+          </div>
+          <div class="contact-card urgent">
+            <h4>EMERGENCY SERVICES</h4>
+            <p><a href="tel:999">999</a></p>
+          </div>
+          <div class="contact-card">
+            <h4>NSPCC HELPLINE</h4>
+            <p><a href="tel:08088005000">0808 800 5000</a></p>
+          </div>
+          <div class="contact-card">
+            <h4>CHILDLINE (FOR CHILDREN)</h4>
+            <p><a href="tel:08001111">0800 1111</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="subsection-title">13. POLICY REVIEW</div>
+        <p class="policy-p">This policy will be reviewed:</p>
+        <ul class="policy-list">
+          <li>Every three years</li>
+          <li>Following any significant safeguarding incident</li>
+          <li>When British Cycling guidance or legislation changes</li>
+        </ul>
+      </div>
+
+      <div class="info-box" style="margin-top:2rem;">
+        <p><strong>Final Statement:</strong> Merseyside BMX Club is committed to creating a culture where all members feel <strong>safe, supported and empowered</strong>, and where safeguarding is embedded in everything we do.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="logo.png" alt="Merseyside BMX Club" /></div>
+        <div class="footer-stripe">
+          <span style="background:var(--red);"></span>
+          <span style="background:rgba(255,255,255,0.2);"></span>
+          <span style="background:var(--blue);"></span>
+          <span style="background:var(--border);"></span>
+        </div>
+        <p>Knowsley Leisure and Culture Park<br>Longview Drive, Huyton, L36 6EG</p>
+        <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank" title="Facebook" aria-label="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/merseysidebmxclub?igsh=MWo2d2ZvcGZtc2pvNA==" target="_blank" title="Instagram" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="mailto:merseysidebmx@gmail.com" title="Email" aria-label="Email">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>The Club</h4>
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#sessions">Club Sessions</a></li>
+          <li><a href="index.html#join">Join the Club</a></li>
+          <li><a href="index.html#coaches">Our Coaches</a></li>
+          <li><a href="index.html#riders">The Riders</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="shop.html">Club Shop</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+          <li><a href="sponsors.html">Our Sponsors</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+          <li><a href="kit-guide.html">Bikes &amp; Kit Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="policies.html">Conduct &amp; Safeguarding</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="https://www.britishcycling.org.uk/club/profile/6660/knowsley-bmx-club" target="_blank">British Cycling</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&#169; 2026 Merseyside BMX Club. All rights reserved.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
