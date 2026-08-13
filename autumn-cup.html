@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="color-scheme" content="only light" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.png" type="image/png">
+  <title>Autumn Cup, Merseyside BMX Club</title>
+  <meta name="description" content="Merseyside BMX Club's Autumn Cup, a four round club race series. Save the dates, see who can enter and how the series works." />
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Autumn Cup, Merseyside BMX Club">
+  <meta property="og:description" content="A four round club race series this autumn. Expert & Novice categories. Best 3 of 4 rounds counts towards a trophy.">
+  <meta property="og:url" content="https://merseysidebmx.co.uk/autumn-cup.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #d42b2b; --red2: #b52020;
+      --black: #0f0f0f; --dark: #191919; --mid: #2a2a2a;
+      --border: #383838; --text: #e2e2e2; --muted: #aaa;
+      --blue: #1a3d8f; --blue2: #0d2660;
+      --white: #f6f6f6; --offwhite: #ececec;
+      --fd: 'Bebas Neue', sans-serif; --fb: 'DM Sans', sans-serif;
+      --mw: 1060px; --pad: 5vw;
+      --amber: #e8a840; --amber2: #c07a20; --rust: #a8431a;
+    }
+    html { scroll-behavior: smooth; color-scheme: only light; }
+    body { font-family: var(--fb); font-size: 16px; line-height: 1.65; overflow-x: hidden; background: var(--black); color: var(--text); }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 60px; background: var(--black); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 var(--pad); gap: 1rem; }
+    .nav-stripe { width: 4px; height: 26px; flex-shrink: 0; background: linear-gradient(to bottom, var(--red) 50%, var(--blue) 50%); }
+    .nav-logo img { height: 48px; width: auto; display: block; }
+    .nav-back { margin-left: auto; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.08em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: #fff; }
+
+    /* PAGE HEADER (autumn theme) */
+    .page-header { padding: 7rem var(--pad) 3.5rem; position: relative; overflow: hidden; background: linear-gradient(135deg, #4a1f0c 0%, #7a3312 25%, #a8431a 60%, #7a3312 100%); border-bottom: 3px solid var(--amber); }
+    .page-header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 88% 15%, rgba(255,255,255,0.10), transparent 55%); pointer-events: none; }
+    .page-header-inner { position: relative; z-index: 1; }
+    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: var(--amber); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.6rem; }
+    .page-header h1 { font-family: var(--fd); font-size: clamp(2.8rem, 6vw, 5.2rem); line-height: 0.92; color: #fff; letter-spacing: 0.02em; text-shadow: 0 2px 14px rgba(0,0,0,0.3); }
+    .page-header p { font-size: 0.95rem; color: rgba(255,255,255,0.85); max-width: 600px; margin-top: 0.9rem; line-height: 1.75; }
+
+    .dd { height: 5px; background: linear-gradient(to right, var(--red) 25%, var(--black) 25% 50%, var(--blue) 50% 75%, #e0e0e0 75%); }
+
+    .contents { background: var(--dark); padding: 1.5rem var(--pad); border-bottom: 1px solid var(--border); }
+    .contents-inner { max-width: var(--mw); margin: 0 auto; }
+    .contents-label { font-family: var(--fd); font-size: 0.72rem; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 0.65rem; }
+    .contents-links { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .contents-link { font-family: var(--fd); font-size: 0.76rem; letter-spacing: 0.08em; color: #aaa; text-decoration: none; padding: 0.3rem 0.75rem; border: 1px solid var(--border); transition: all 0.2s; }
+    .contents-link:hover { color: #fff; border-color: var(--amber); background: var(--mid); }
+
+    .container { max-width: var(--mw); margin: 0 auto; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    .sec-num { font-family: var(--fd); font-size: 0.72rem; letter-spacing: 0.25em; color: var(--amber); margin-bottom: 0.2rem; }
+    .sec-title { font-family: var(--fd); font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 0.95; letter-spacing: 0.02em; color: #fff; }
+    .sec-lead { font-size: 0.95rem; color: #aaa; line-height: 1.75; max-width: 680px; margin-top: 0.75rem; }
+    .ac-sec { padding: 4rem var(--pad); }
+    .ac-sec.dark { background: var(--dark); border-top: 1px solid var(--border); }
+    .ac-sec.black { background: var(--black); border-top: 1px solid var(--border); }
+
+    .tip { background: var(--mid); border-left: 3px solid var(--blue); padding: 1rem 1.25rem; margin-top: 1.25rem; font-size: 0.88rem; color: #ccc; line-height: 1.65; }
+    .tip strong { color: #7a9de8; display: block; font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+    .tip.amber { border-left-color: var(--amber); }
+    .tip.amber strong { color: var(--amber); }
+
+    /* ROUND DATES */
+    .round-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-top: 1.75rem; }
+    .round-card { background: var(--dark); padding: 1.75rem 1.25rem; text-align: center; transition: background 0.2s; }
+    .round-card:hover { background: var(--mid); }
+    .round-card-leaf { font-size: 1.3rem; opacity: 0.75; margin-bottom: 0.6rem; }
+    .round-card-label { font-family: var(--fd); font-size: 0.68rem; letter-spacing: 0.2em; color: var(--amber); margin-bottom: 0.9rem; }
+    .round-card-day { font-family: var(--fd); font-size: 0.82rem; letter-spacing: 0.1em; color: #999; }
+    .round-card-date { font-family: var(--fd); font-size: 1.85rem; letter-spacing: 0.02em; color: #fff; margin-top: 0.15rem; }
+    .round-card .btn { margin-top: 1.25rem; width: 100%; font-size: 0.78rem; padding: 0.6rem 0.75rem; }
+    @media (max-width: 680px) { .round-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 420px) { .round-grid { grid-template-columns: 1fr; } }
+
+    /* CATEGORIES */
+    .cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-top: 1.75rem; }
+    .cat-card { background: var(--dark); padding: 1.75rem; }
+    .cat-card-label { font-family: var(--fd); font-size: 0.7rem; letter-spacing: 0.18em; color: var(--amber); margin-bottom: 0.5rem; }
+    .cat-card-title { font-family: var(--fd); font-size: 1.4rem; letter-spacing: 0.04em; color: #fff; margin-bottom: 0.6rem; }
+    .cat-card p { font-size: 0.88rem; color: #aaa; line-height: 1.7; }
+    @media (max-width: 560px) { .cat-grid { grid-template-columns: 1fr; } }
+
+    /* ENTRY */
+    .entry-status { display: inline-block; font-family: var(--fd); font-size: 0.72rem; letter-spacing: 0.18em; background: rgba(232,168,64,0.15); color: var(--amber); border: 1px solid rgba(232,168,64,0.35); padding: 0.4rem 1rem; margin-top: 1.75rem; }
+    .btn { display: inline-block; font-family: var(--fd); font-size: 1rem; letter-spacing: 0.08em; text-decoration: none; padding: 0.85rem 2.2rem; border-radius: 2px; cursor: pointer; border: none; transition: all 0.2s; text-align: center; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red2); transform: translateY(-2px); }
+    .btn-disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+    .btn-disabled:hover { transform: none; }
+    .entry-note { font-size: 0.82rem; color: #888; margin-top: 1.75rem; text-align: center; }
+    .entry-note a { color: var(--amber); text-decoration: none; }
+    .entry-note a:hover { text-decoration: underline; }
+
+    .text-cta-link { display: inline-block; font-family: var(--fd); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--blue); text-decoration: none; border: 1px solid var(--blue); padding: 0.5rem 1.1rem; transition: all 0.2s; }
+    .text-cta-link:hover { background: var(--blue); color: #fff; }
+
+    /* ══ FOOTER ══ */
+    footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
+    .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }
+    .footer-logo img { height: 44px; width: auto; display: block; margin-bottom: 0.75rem; }
+    .footer-stripe { display: flex; gap: 4px; margin-bottom: 0.75rem; }
+    .footer-stripe span { height: 3px; width: 22px; border-radius: 1px; }
+    .footer-brand p { font-size: 0.82rem; color: #aaa; line-height: 1.6; margin-bottom: 0.35rem; }
+    .footer-brand a { color: #aaa; text-decoration: none; font-size: 0.82rem; }
+    .footer-brand a:hover { color: var(--red); }
+    .footer-social { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+    .footer-social a { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--mid); border: 1px solid var(--border); color: var(--text); text-decoration: none; transition: all 0.2s; }
+    .footer-social a:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    .footer-col h4 { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.2em; color: var(--red); margin-bottom: 0.75rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.35rem; }
+    .footer-col ul li a { font-size: 0.82rem; color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { max-width: var(--mw); margin: 2rem auto 0; padding-top: 1.25rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; color: #888; }
+    @media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-stripe"></div>
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="Merseyside BMX Club" /></a>
+    <a href="index.html" class="nav-back">← Back to site</a>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="kicker">🏆 Club Race Series</div>
+      <h1>AUTUMN CUP</h1>
+      <p>A four round club race series running through September, October and November. Open to Expert and Novice riders. Come and race for a trophy.</p>
+    </div>
+  </div>
+
+  <div class="dd"></div>
+
+  <div class="contents">
+    <div class="contents-inner">
+      <div class="contents-label">ON THIS PAGE</div>
+      <div class="contents-links">
+        <a href="#dates" class="contents-link">Series Dates</a>
+        <a href="#categories" class="contents-link">Who Can Enter</a>
+        <a href="#format" class="contents-link">How It Works</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ac-sec dark" id="dates">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">ROUND SCHEDULE</div>
+        <h2 class="sec-title">SERIES DATES</h2>
+        <p class="sec-lead">Four rounds across autumn 2026. More detail on timings and format for each round will follow closer to the date.</p>
+        <div class="entry-status">ENTRIES OPENING SOON</div>
+      </div>
+      <!-- ENTRY FORMS: once a round's form is ready, add the ENTER link back into that round's card
+           (href set to the Google Form, without the btn-disabled class or aria-disabled / tabindex attributes). -->
+      <div class="round-grid reveal">
+        <div class="round-card">
+          <div class="round-card-leaf" aria-hidden="true">🍂</div>
+          <div class="round-card-label">ROUND 1</div>
+          <div class="round-card-day">SATURDAY</div>
+          <div class="round-card-date">19 SEP</div>
+          <a href="#" class="btn btn-red btn-disabled" aria-disabled="true" tabindex="-1">ENTER</a>
+        </div>
+        <div class="round-card">
+          <div class="round-card-leaf" aria-hidden="true">🍂</div>
+          <div class="round-card-label">ROUND 2</div>
+          <div class="round-card-day">SUNDAY</div>
+          <div class="round-card-date">4 OCT</div>
+        </div>
+        <div class="round-card">
+          <div class="round-card-leaf" aria-hidden="true">🍂</div>
+          <div class="round-card-label">ROUND 3</div>
+          <div class="round-card-day">SATURDAY</div>
+          <div class="round-card-date">17 OCT</div>
+        </div>
+        <div class="round-card">
+          <div class="round-card-leaf" aria-hidden="true">🍂</div>
+          <div class="round-card-label">ROUND 4</div>
+          <div class="round-card-day">SUNDAY</div>
+          <div class="round-card-date">1 NOV</div>
+        </div>
+      </div>
+      <p class="entry-note">Follow us on <a href="https://www.instagram.com/merseysidebmxclub?igsh=MWo2d2ZvcGZtc2pvNA==" target="_blank">Instagram</a> or <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank">Facebook</a> for updates, or <a href="index.html#contact">contact the club</a> with any questions.</p>
+    </div>
+  </div>
+
+  <div class="ac-sec black" id="categories">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">CATEGORIES</div>
+        <h2 class="sec-title">EXPERT &amp; NOVICE</h2>
+        <p class="sec-lead">The Autumn Cup runs two categories, so riders race others at a similar stage of their racing development.</p>
+      </div>
+      <div class="cat-grid reveal">
+        <div class="cat-card">
+          <div class="cat-card-label">CATEGORY</div>
+          <div class="cat-card-title">NOVICE</div>
+          <p>For riders earlier in their racing journey. A great environment to build race craft and confidence at club pace.</p>
+        </div>
+        <div class="cat-card">
+          <div class="cat-card-label">CATEGORY</div>
+          <div class="cat-card-title">EXPERT</div>
+          <p>For more experienced racers ready to push their pace against other club riders at a higher level.</p>
+        </div>
+      </div>
+      <div class="tip reveal">
+        <strong>NOT SURE WHICH CATEGORY?</strong>
+        Ask a coach if you're unsure which category applies to you, or if you're new to racing. Everyone starts somewhere.
+      </div>
+    </div>
+  </div>
+
+  <div class="ac-sec dark" id="format">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">TROPHIES</div>
+        <h2 class="sec-title">RACE 3 OF 4, EARN A TROPHY</h2>
+        <p class="sec-lead">You don't need to race every round. Race in at least three of the four rounds and you'll earn a trophy in your category at the end of the series.</p>
+      </div>
+      <div class="tip amber reveal">
+        <strong>MISS A ROUND? NO PROBLEM</strong>
+        You only need to race 3 of the 4 rounds to qualify, so missing one due to illness, holidays or a clash won't stop you earning a trophy.
+      </div>
+      <div class="tip reveal">
+        <strong>TROPHIES</strong>
+        Every rider who races at least 3 of the 4 rounds earns a trophy in their category. It's not a knockout, everyone who qualifies gets one.
+      </div>
+    </div>
+  </div>
+
+  <div class="dd"></div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="logo.png" alt="Merseyside BMX Club" /></div>
+        <div class="footer-stripe">
+          <span style="background:var(--red);"></span>
+          <span style="background:rgba(255,255,255,0.2);"></span>
+          <span style="background:var(--blue);"></span>
+          <span style="background:var(--border);"></span>
+        </div>
+        <p>Knowsley Leisure and Culture Park<br>Longview Drive, Huyton, L36 6EG</p>
+        <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank" title="Facebook" aria-label="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/merseysidebmxclub?igsh=MWo2d2ZvcGZtc2pvNA==" target="_blank" title="Instagram" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="mailto:merseysidebmx@gmail.com" title="Email" aria-label="Email">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>The Club</h4>
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#sessions">Club Sessions</a></li>
+          <li><a href="index.html#join">Join the Club</a></li>
+          <li><a href="index.html#coaches">Our Coaches</a></li>
+          <li><a href="index.html#riders">The Riders</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="shop.html">Club Shop</a></li>
+          <li><a href="autumn-cup.html">Autumn Cup</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+          <li><a href="sponsors.html">Our Sponsors</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+          <li><a href="kit-guide.html">Bikes &amp; Kit Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="policies.html">Conduct &amp; Safeguarding</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="https://www.britishcycling.org.uk/club/profile/6660/knowsley-bmx-club" target="_blank">British Cycling</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Merseyside BMX Club. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 3) * 0.1}s`;
+      obs.observe(el);
+    });
+  </script>
+</body>
+</html>
