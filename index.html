@@ -878,7 +878,7 @@
             </a>
           </div>
           <h3>Location</h3>
-          <p>Knowsley Leisure and Culture Park<br>Longview Drive, Huyton<br>Liverpool, L36 6EG</p>
+          <p>Volair Leisure Centre, Knowsley Leisure and Culture Park<br>Longview Drive, Huyton<br>Liverpool, L36 6EG</p>
           <div class="map-embed">
             <iframe src="https://maps.google.com/maps?q=Knowsley+Leisure+and+Culture+Park,+Longview+Drive,+Huyton,+L36+6EG&t=&z=17&ie=UTF8&iwloc=&output=embed" title="Club location map" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
@@ -906,6 +906,9 @@
                 <option>Sponsorship</option>
                 <option>Something else</option>
               </select>
+            </div>
+            <div id="first-session-help" style="display:none; margin:-0.25rem 0 0.25rem; padding:1rem 1.25rem; background:rgba(26,61,143,0.08); border-left:3px solid var(--blue); font-size:0.87rem; color:var(--rtext); line-height:1.6;">
+              Good news — you don't need to email us to come and try it out. Just turn up to our <strong>Level 1 session, Thursdays 17:15–18:15</strong>, no booking required. Bike and kit hire is available for £3. See our <a href="faq.html#first-session" target="_blank" style="color:var(--blue);">First Session FAQs</a> for everything else. Still have a question? Send it below and we'll get back to you.
             </div>
             <div class="form-group"><label class="form-label" for="message">Message</label><textarea id="message" name="message" placeholder="Your message…" required></textarea></div>
             <button type="submit" id="contact-submit" class="btn btn-blue" style="align-self:flex-start;">Send Message →</button>
@@ -953,7 +956,7 @@
           <span style="background:var(--blue);"></span>
           <span style="background:var(--border);"></span>
         </div>
-        <p>Knowsley Leisure and Culture Park<br>Longview Drive, Huyton, L36 6EG</p>
+        <p>Volair Leisure Centre, Knowsley Leisure and Culture Park<br>Longview Drive, Huyton, L36 6EG</p>
         <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>
         <div class="footer-social">
           <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank" title="Facebook" aria-label="Facebook">
@@ -1033,6 +1036,15 @@
       sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
       navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${cur}`));
     }, { passive: true });
+
+    // Contact form — show self-serve info when "trying a session" is selected
+    const enquirySelect = document.getElementById('enquiry');
+    const firstSessionHelp = document.getElementById('first-session-help');
+    if (enquirySelect && firstSessionHelp) {
+      enquirySelect.addEventListener('change', function() {
+        firstSessionHelp.style.display = this.value === 'Trying a session for the first time' ? 'block' : 'none';
+      });
+    }
 
     // Contact form — AJAX submission via Web3Forms
     const contactForm = document.getElementById('contact-form');
