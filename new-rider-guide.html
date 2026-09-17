@@ -90,10 +90,10 @@
     @media (max-width: 560px) { .format-row { grid-template-columns: 1fr; } .format-cell { border-right: none; border-bottom: 1px solid var(--border); } .format-cell:last-child { border-bottom: none; } }
 
     /* SCREENSHOTS */
-    .shot { margin-top: 2rem; }
+    .shot { margin-top: 2rem; max-width: 460px; }
     .shot-img { border: 1px solid var(--border); overflow: hidden; }
     .shot-img img { width: 100%; display: block; }
-    .shot-caption { font-size: 0.82rem; color: #888; line-height: 1.6; margin-top: 0.6rem; max-width: 640px; }
+    .shot-caption { font-size: 0.82rem; color: #888; line-height: 1.6; margin-top: 0.6rem; }
     .shot-caption strong { color: #ddd; }
 
     /* RACE:GATE EXAMPLE */
@@ -182,13 +182,13 @@
       <div class="cards cards-2">
         <div class="card">
           <div class="card-label">NOVICE RIDERS</div>
-          <div class="card-title">PAY AT THE GREEN CABIN</div>
-          <p>All riders must pay at the registration desk in the green cabin. For novice riders, this also registers you for the round.</p>
+          <div class="card-title">PAY &amp; REGISTER AT THE CABIN</div>
+          <p>Pay at the registration desk in the green cabin. For novice riders, this also registers you for the round.</p>
         </div>
         <div class="card">
           <div class="card-label">EXPERT RIDERS</div>
-          <div class="card-title">AUTOMATIC VIA TRANSPONDER</div>
-          <p>Expert riders are registered automatically via their transponder during practice. Still pay at the green cabin.</p>
+          <div class="card-title">PAY AT THE CABIN, REGISTER VIA TRANSPONDER</div>
+          <p>Pay at the green cabin as normal. You're registered automatically via your transponder during practice.</p>
         </div>
       </div>
 
@@ -249,6 +249,11 @@
       <p style="font-size:0.92rem; color:#aaa; line-height:1.75; margin-top:1.5rem;">From the club page you can open the current event, for example <a href="https://our.sqorz.com/org/msbmx/event/6a99de8e76483d65601ee5b4/classes" target="_blank" style="color:var(--blue);">Autumn Cup Round 1</a>, view previous events, and see series leaderboards.</p>
 
       <div class="shot">
+        <div class="shot-img"><img src="images/sqorz-event-classes.png" alt="Event classes page on Sqorz" loading="lazy" /></div>
+        <div class="shot-caption">Each class shows the number of riders entered, which decides Grand Prix vs Moto format (see above).</div>
+      </div>
+
+      <div class="shot">
         <div class="shot-img"><img src="images/sqorz-event-info.png" alt="Event info box showing timings and pricing" loading="lazy" /></div>
         <div class="shot-caption">Key timing and pricing info is on the event page.</div>
       </div>
@@ -287,11 +292,6 @@
       </div>
 
       <p style="font-size:0.92rem; color:#aaa; line-height:1.75; margin-top:1.5rem;">Our pen marshals will call each race forward and tell riders when to go to the start hill. Riders line up in the gate shown as the second number on Sqorz.</p>
-
-      <div class="shot">
-        <div class="shot-img"><img src="images/sqorz-event-classes.png" alt="Event classes page on Sqorz" loading="lazy" /></div>
-        <div class="shot-caption">Each class shows the number of riders entered, which decides Grand Prix vs Moto format (see above).</div>
-      </div>
 
       <div class="reveal" style="margin-top:2.5rem;">
         <div class="sec-num" style="margin-bottom:0.5rem;">RESULTS</div>
