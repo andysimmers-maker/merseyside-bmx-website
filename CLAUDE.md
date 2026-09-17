@@ -23,7 +23,7 @@ All CSS and JavaScript lives inline within each HTML file — there are no exter
 **Pages:**
 - `index.html` — single-page site with all main sections: Hero, About, Sessions, Shop teaser, Join, Coaches, Riders, Contact, Sponsors
 - `shop.html` — club shop (jerseys, stickers) with a client-side basket and SumUp checkout flow; `ORDERS_OPEN` toggle on line ~617 controls whether the shop accepts orders
-- `sponsors.html`, `faq.html`, `conduct.html`, `welfare.html`, `race-guide.html`, `kit-guide.html`, `coaching.html`, `privacy.html` — standalone informational pages
+- `sponsors.html`, `faq.html`, `conduct.html`, `welfare.html`, `new-rider-guide.html`, `kit-guide.html`, `coaching.html`, `privacy.html` — standalone informational pages
 
 **Shop checkout flow:**
 - Client-side basket + customer details (name, email) in `shop.html` (vanilla JS)

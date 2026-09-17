@@ -93,7 +93,7 @@ Contact someone with basic HTML knowledge, or use an AI assistant (like Claude a
 | `welfare.html` | Safeguarding and welfare policy |
 | `privacy.html` | Privacy policy |
 | `kit-guide.html` | Bikes and kit buying guide for new riders |
-| `race-guide.html` | Race day guide — format, Sqorz, pens and the start gate |
+| `new-rider-guide.html` | New rider guide — registration, race format, series points and Sqorz walkthrough |
 | `coaching.html` | Coaching pathway — levels and progression *(hidden pending committee approval)* |
 | `logo.png` | Club logo |
 | `rider_placeholder.svg` | Silhouette placeholder for riders without a photo |
