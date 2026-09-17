@@ -89,7 +89,15 @@
     .format-cell:last-child { border-right: none; }
     .format-row.header .format-cell { font-family: var(--fd); font-size: 0.75rem; letter-spacing: 0.15em; color: #fff; }
     .format-riders { font-family: var(--fd); font-size: 1rem; color: #fff; }
-    @media (max-width: 560px) { .format-row { grid-template-columns: 1fr; } .format-cell { border-right: none; border-bottom: 1px solid var(--border); } .format-cell:last-child { border-bottom: none; } }
+    @media (max-width: 560px) {
+      .format-row { grid-template-columns: 1fr; }
+      .format-row.header { display: none; }
+      .format-cell { border-right: none; border-bottom: 1px solid var(--border); }
+      .format-cell:last-child { border-bottom: none; }
+      .format-cell::before { display: block; font-family: var(--fd); font-size: 0.65rem; letter-spacing: 0.15em; color: var(--red); margin-bottom: 0.3rem; }
+      .format-cell:first-child::before { content: 'RIDERS IN CLASS'; }
+      .format-cell:last-child::before { content: 'FORMAT'; }
+    }
 
     /* SCREENSHOTS */
     .shot { margin-top: 2rem; max-width: 460px; }
