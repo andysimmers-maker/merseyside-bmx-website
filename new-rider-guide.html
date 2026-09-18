@@ -79,26 +79,6 @@
     .card p { font-size: 0.88rem; color: #aaa; line-height: 1.7; }
     @media (max-width: 620px) { .cards-2 { grid-template-columns: 1fr; } }
 
-    /* FORMAT TABLE */
-    .format-grid { display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 1.75rem; }
-    .format-row { display: grid; grid-template-columns: 1fr 2fr; background: var(--dark); transition: background 0.2s; }
-    .guide-sec.black .format-row { background: var(--black); }
-    .format-row:hover { background: var(--mid); }
-    .format-row.header { background: var(--red) !important; }
-    .format-cell { padding: 0.85rem 1.1rem; font-size: 0.88rem; color: #bbb; border-right: 1px solid var(--border); }
-    .format-cell:last-child { border-right: none; }
-    .format-row.header .format-cell { font-family: var(--fd); font-size: 0.75rem; letter-spacing: 0.15em; color: #fff; }
-    .format-riders { font-family: var(--fd); font-size: 1rem; color: #fff; }
-    @media (max-width: 560px) {
-      .format-row { grid-template-columns: 1fr; }
-      .format-row.header { display: none; }
-      .format-cell { border-right: none; border-bottom: 1px solid var(--border); }
-      .format-cell:last-child { border-bottom: none; }
-      .format-cell::before { display: block; font-family: var(--fd); font-size: 0.65rem; letter-spacing: 0.15em; color: var(--red); margin-bottom: 0.3rem; }
-      .format-cell:first-child::before { content: 'RIDERS IN CLASS'; }
-      .format-cell:last-child::before { content: 'FORMAT'; }
-    }
-
     /* SCREENSHOTS */
     .shot { margin-top: 2rem; max-width: 460px; }
     .shot-img { border: 1px solid var(--border); overflow: hidden; }
@@ -216,30 +196,16 @@
       <h2 class="sec-title">HOW RACING WORKS</h2>
       <p class="sec-lead">Novice and expert classes are split by age. Groups may be merged on the day depending on rider numbers, but overall series ranking is always determined by class.</p>
 
-      <div class="format-grid">
-        <div class="format-row header">
-          <div class="format-cell">RIDERS IN CLASS</div>
-          <div class="format-cell">FORMAT</div>
-        </div>
-        <div class="format-row">
-          <div class="format-cell"><span class="format-riders">8 or fewer</span></div>
-          <div class="format-cell">Grand Prix of 4 races (Motos). Each rider earns points equal to their finishing position in each Moto, added up across all 4. Lowest points total wins.</div>
-        </div>
-        <div class="format-row">
-          <div class="format-cell"><span class="format-riders">9 to 16</span></div>
-          <div class="format-cell">3 Motos, scored the same way as a Grand Prix, followed by a Final. The 8 riders with the fewest points go into the A Final, riders finishing 9th to 16th go into the B Final.</div>
-        </div>
-      </div>
+      <div class="sec-num" style="margin-top:1.75rem;">8 OR FEWER RIDERS, GRAND PRIX</div>
+      <p style="font-size:0.92rem; color:#aaa; line-height:1.75; margin-top:0.4rem;">Run as a Grand Prix of 4 races (Motos). Each rider earns points equal to their finishing position in each Moto, added up across all 4. Lowest points total wins.</p>
 
       <div class="tip">
         <strong>GRAND PRIX SCORING</strong>
-        Points are simply your finishing position in each Moto, so lower is better. A rider who finishes 1st in all 4 Motos scores 4 points; a rider who finishes 2nd in all 4 Motos scores 8 points. The same scoring applies to the first 3 Motos when there are 9 to 16 riders, e.g. 3 wins scores 3 points.
+        Points are simply your finishing position in each Moto, so lower is better. A rider who finishes 1st in all 4 Motos scores 4 points; a rider who finishes 2nd in all 4 Motos scores 8 points.
       </div>
 
-      <div class="tip">
-        <strong>TIES</strong>
-        If riders finish level on points, it's settled by countback: whoever did better in the latest race wins the tie, working backwards through the earlier races if needed.
-      </div>
+      <div class="sec-num" style="margin-top:2.5rem;">9 TO 16 RIDERS</div>
+      <p style="font-size:0.92rem; color:#aaa; line-height:1.75; margin-top:0.4rem;">3 Motos, scored the same way as a Grand Prix (e.g. 3 wins scores 3 points), followed by a Final. The 8 riders with the fewest points go into the A Final, riders finishing 9th to 16th go into the B Final.</p>
 
       <div class="tip">
         <strong>CHOOSING YOUR GATE IN THE FINAL</strong>
@@ -249,6 +215,11 @@
       <div class="tip">
         <strong>LARGER FIELDS</strong>
         This won't affect our club series, but larger fields (17 or more riders) run extra knockout rounds first, to cut the field down to 16 riders for the A and B finals.
+      </div>
+
+      <div class="tip">
+        <strong>TIES</strong>
+        If riders finish level on points, it's settled by countback: whoever did better in the latest race wins the tie, working backwards through the earlier races if needed.
       </div>
     </div>
   </div>
