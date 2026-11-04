@@ -127,6 +127,14 @@
     .basket-item-remove { background: none; border: 1px solid #333; color: #555; cursor: pointer; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.2s; flex-shrink: 0; margin-top: 2px; }
     .basket-item-remove:hover { background: var(--red); border-color: var(--red); color: #fff; }
     .basket-footer { background: var(--mid); padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1px; }
+    .customer-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .customer-fields label { font-family: var(--fd); font-size: 0.72rem; letter-spacing: 0.15em; color: #aaa; display: block; margin-bottom: 0.3rem; }
+    .customer-fields input { width: 100%; background: var(--black); border: 1px solid var(--border); color: #fff; padding: 0.6rem 0.85rem; font-family: var(--fb); font-size: 0.88rem; outline: none; border-radius: 0; }
+    .customer-fields input:focus { border-color: var(--red); }
+    @media (max-width: 560px) {
+      .customer-fields { grid-template-columns: 1fr; }
+      .customer-fields input, .field input, .field select { font-size: 16px; }
+    }
     .basket-total { font-family: var(--fd); font-size: 1.4rem; color: #fff; letter-spacing: 0.04em; }
     .basket-total span { color: var(--red); }
     .checkout-btn { font-family: var(--fd); font-size: 1.1rem; letter-spacing: 0.1em; background: var(--red); color: #fff; border: none; padding: 0.85rem 2.5rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem; }
@@ -155,6 +163,8 @@
     .modal-product-info { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem; padding-bottom: 1.75rem; border-bottom: 1px solid var(--border); }
     .modal-product-img { width: 80px; height: 80px; background: #e8e8e8; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .modal-product-img img { max-width: 70px; max-height: 70px; object-fit: contain; }
+    .sticker-preview { background: #fff; margin-top: 0.75rem; padding: 0.75rem; text-align: center; }
+    .sticker-preview img { max-width: 100%; max-height: 240px; object-fit: contain; display: inline-block; }
     .modal-product-name { font-family: var(--fd); font-size: 1.1rem; letter-spacing: 0.04em; color: #fff; }
     .modal-product-price { font-family: var(--fd); font-size: 1.3rem; color: var(--red); margin-top: 0.2rem; }
 
@@ -364,14 +374,14 @@
       <div id="basket-footer" class="basket-footer" style="display:none;">
         <div class="basket-total">TOTAL: <span id="basket-total-amount">£0</span></div>
         <div style="width:100%; margin-top:1rem; display:flex; flex-direction:column; gap:0.75rem;">
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <div class="customer-fields">
             <div>
-              <label style="font-family:var(--fd); font-size:0.72rem; letter-spacing:0.15em; color:#aaa; display:block; margin-bottom:0.3rem;">YOUR NAME</label>
-              <input id="customer-name" type="text" placeholder="Full name" style="width:100%; background:var(--black); border:1px solid var(--border); color:#fff; padding:0.6rem 0.85rem; font-family:var(--fb); font-size:0.88rem; outline:none;" />
+              <label for="customer-name">YOUR NAME</label>
+              <input id="customer-name" type="text" placeholder="Full name" autocomplete="name" />
             </div>
             <div>
-              <label style="font-family:var(--fd); font-size:0.72rem; letter-spacing:0.15em; color:#aaa; display:block; margin-bottom:0.3rem;">EMAIL ADDRESS</label>
-              <input id="customer-email" type="email" placeholder="your@email.com" style="width:100%; background:var(--black); border:1px solid var(--border); color:#fff; padding:0.6rem 0.85rem; font-family:var(--fb); font-size:0.88rem; outline:none;" />
+              <label for="customer-email">EMAIL ADDRESS</label>
+              <input id="customer-email" type="email" placeholder="your@email.com" autocomplete="email" inputmode="email" />
             </div>
           </div>
           <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
@@ -403,7 +413,7 @@
       <div class="success-box">
         <div class="icon" aria-hidden="true">✅</div>
         <h2>ORDER CONFIRMED!</h2>
-        <p>Thanks for your order. Your payment has been taken and your order is logged with the club. Your items will be included in the next monthly bulk order. We will be in touch when they're ready to collect.</p>
+        <p>Thanks for your order. Your payment has been taken and your order is logged with the club. Your items will be included in the next quarterly bulk order. We will be in touch when they're ready to collect.</p>
       </div>
     </div>
   </section>
@@ -431,15 +441,15 @@
         <div class="how-step">
           <div class="how-num">3</div>
           <div class="how-title">BULK ORDER</div>
-          <div class="how-desc">Your order is added to the club's monthly bulk order with our supplier. All personalisation is handled by us.</div>
+          <div class="how-desc">Your order is added to the club's quarterly bulk order with our supplier. All personalisation is handled by us.</div>
         </div>
         <div class="how-step">
           <div class="how-num">4</div>
           <div class="how-title">COLLECTION</div>
-          <div class="how-desc">We'll let you know when your items arrive and arrange collection at the track. Allow a few weeks after the order date.</div>
+          <div class="how-desc">We'll let you know when your items arrive and arrange collection at the track.</div>
         </div>
       </div>
-      <div class="order-note reveal" id="order-note"><strong>Please note:</strong> Orders are placed monthly. Once your payment is made, your spot in the next order is confirmed. Allow 3–5 weeks from the order date for delivery to the club.
+      <div class="order-note reveal" id="order-note"><strong>Please note:</strong> Orders are placed with our supplier every quarter. Once your payment is made, your spot in the next order is confirmed. Allow 3–5 weeks from the date the club places the order for delivery to the club.
       </div>
     </div>
   </section>
@@ -605,7 +615,7 @@
       </div>
       <div class="modal-body">
         <div class="modal-product-info">
-          <div class="modal-product-img" style="background:#fff;"><img src="stickers-club.jpg" alt="Race Plate Stickers" /></div>
+          <div class="modal-product-img" style="background:#fff;"><img id="sticker-thumb-img" src="stickers-club.jpg" alt="" /></div>
           <div>
             <div class="modal-product-name">Race Plate Stickers</div>
             <div class="modal-product-price">£12.50 · front and side plates</div>
@@ -620,6 +630,7 @@
             <button class="colour-btn" onclick="selectColour('Red (Cruiser)',this)"><span class="colour-dot" style="background:#ed1b24;border:1px solid #fff;"></span> Cruiser</button>
           </div>
           <div class="field-note">Sets the number panel colours. Male / Open: yellow background, black numbers. Female: blue background, white numbers. Cruiser (male and female): red background, white numbers.</div>
+          <div class="sticker-preview"><img id="sticker-preview-img" src="stickers-club.jpg" alt="Preview of the Male / Open race plate stickers" /></div>
         </div>
         <div class="field">
           <label>Size <span style="color:var(--red)">*</span></label>
@@ -627,6 +638,7 @@
             <button class="size-btn" onclick="selectSize('stickers','Small',this)">Small</button>
             <button class="size-btn" onclick="selectSize('stickers','Large',this)">Large</button>
           </div>
+          <div class="field-note">Small fits mini and junior size number plates. Large fits standard (pro) size plates. Not sure which your rider has? Ask a coach at the track before ordering.</div>
         </div>
         <div class="field">
           <label>Rider Name <span style="color:var(--red)">*</span></label>
@@ -635,7 +647,8 @@
         </div>
         <div class="field">
           <label>Race Number <span style="color:var(--red)">*</span></label>
-          <input type="text" id="stickers-number" placeholder="e.g. 38" maxlength="4" inputmode="numeric" />
+          <input type="text" id="stickers-number" placeholder="e.g. 234" maxlength="4" inputmode="numeric" />
+          <div class="field-note">Either the <strong style="color:var(--text)">last 3 digits of your British Cycling membership number</strong> (e.g. 2001234 is 234), or your <strong style="color:var(--text)">national ranking number</strong> from last season (e.g. 10).<br>Keep any zeros at the start: if your BC number ends in 001, enter <strong style="color:var(--text)">001</strong>, not 1. The plate is printed exactly as entered.</div>
         </div>
         <div class="field">
           <label>Age <span style="color:var(--red)">*</span></label>
@@ -716,7 +729,7 @@
       // Update info banner
       const bannerDesc = document.getElementById('shop-banner-desc');
       if (bannerDesc) bannerDesc.textContent = CAN_ORDER
-        ? 'All orders are placed with our supplier once a month. Payment is taken at the time of ordering to secure your place in the next batch.'
+        ? 'Orders are placed with our supplier every quarter, with 3 to 5 weeks for delivery. Payment is taken when you order to secure your place in the next batch.'
         : 'The order window is currently closed. We will announce when the next order window opens.';
 
       // Show/hide order note and basket section
@@ -773,7 +786,7 @@
       document.getElementById('modal-' + type).classList.add('open');
       document.body.style.overflow = 'hidden';
       selectedSizes[type] = null;
-      if (type === 'stickers') selectedColour = null;
+      if (type === 'stickers') { selectedColour = null; setStickerPreview(null); }
       document.querySelectorAll('#modal-' + type + ' .size-btn, #modal-' + type + ' .colour-btn')
         .forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
       ['youth-name','adult-name','stickers-name','stickers-number','stickers-age'].forEach(id => {
@@ -802,8 +815,24 @@
       const errEl = document.getElementById('modal-error-' + type);
       if (errEl && errEl.textContent === 'Please select a size.') errEl.classList.remove('show');
     }
+    const STICKER_PREVIEWS = {
+      'Yellow (Male/Open)': ['stickers-club.jpg',         'Male / Open'],
+      'Blue (Female)':      ['stickers-club-female.jpg',  'Female'],
+      'Red (Cruiser)':      ['stickers-club-cruiser.jpg', 'Cruiser'],
+    };
+    function setStickerPreview(colour) {
+      const [src, label] = STICKER_PREVIEWS[colour] || STICKER_PREVIEWS['Yellow (Male/Open)'];
+      const img = document.getElementById('sticker-preview-img');
+      img.src = src;
+      img.alt = 'Preview of the ' + label + ' race plate stickers';
+      document.getElementById('sticker-thumb-img').src = src;
+    }
+    // Preload the other colourways so switching is instant
+    Object.values(STICKER_PREVIEWS).forEach(([src]) => { const i = new Image(); i.src = src; });
+
     function selectColour(colour, btn) {
       selectedColour = colour;
+      setStickerPreview(colour);
       document.querySelectorAll('#sticker-colours .colour-btn').forEach(b => { b.classList.remove('selected'); b.setAttribute('aria-pressed', 'false'); });
       btn.classList.add('selected');
       btn.setAttribute('aria-pressed', 'true');

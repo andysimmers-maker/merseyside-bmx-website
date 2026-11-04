@@ -19,6 +19,21 @@ Secrets (`SUMUP_API_KEY`, `SUMUP_MERCHANT_CODE`, `GOOGLE_CREDENTIALS`, `SHEET_ID
 - **Sheet row 1 headers (A to M):** Date, Name, Email, Product, Size, Colour, Rider Name,
   Race Number, Age, Amount, Payment Reference, SumUp Transaction, Status
 
+## Confirmation emails (Resend)
+
+Off until `RESEND_API_KEY` is set. To switch on:
+
+1. In Resend (the same account as My BMX Season is fine): Domains > Add `merseysidebmx.co.uk`,
+   then add the DNS records it shows in Cloudflare DNS and wait for "Verified"
+2. Resend > API Keys > create a key with "Sending access" for that domain
+3. On the `bmx-checkout` Worker > Settings > Variables and Secrets, add:
+   - `RESEND_API_KEY` (secret): the key
+   - `EMAIL_FROM` (optional): defaults to `Merseyside BMX Club <shop@merseysidebmx.co.uk>`
+   - `ORDER_NOTIFY_EMAIL` (optional): e.g. `merseysidebmx@gmail.com` to get a copy of every order
+
+Replies go to merseysidebmx@gmail.com. An email failure is logged but never stops an order
+being recorded.
+
 ## Products and prices
 
 `PRODUCTS` at the top of the file sets the price charged and whether each product can be

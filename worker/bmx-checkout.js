@@ -10,6 +10,12 @@
 //   GOOGLE_CREDENTIALS   Google service account JSON as a string (secret)
 //   SHEET_ID             Google Sheets spreadsheet ID
 //   ORDERS_KV            KV namespace binding (BMX_ORDERS)
+// Optional (order confirmation emails via Resend; no emails are sent without the key):
+//   RESEND_API_KEY       Resend API key (secret)
+//   EMAIL_FROM           e.g. "Merseyside BMX Club <shop@merseysidebmx.co.uk>" (domain must be verified in Resend)
+//   ORDER_NOTIFY_EMAIL   address that gets a copy of every order, e.g. merseysidebmx@gmail.com
+
+const CLUB_EMAIL = 'merseysidebmx@gmail.com';
 
 // ── PRODUCT CATALOGUE ─────────────────────────────────────────────
 // Prices live here, not in the browser. Keep in step with PRICES in shop.html.
@@ -170,6 +176,11 @@ async function confirmOrder(env, ref) {
     throw e;
   }
   await env.ORDERS_KV.delete('pending:' + ref);
+
+  // The order is safely logged by now, so an email failure must not fail the confirm
+  try { await sendConfirmationEmail(env, pending); }
+  catch (e) { console.error('Confirmation email failed for', ref, e.message); }
+
   return 'PAID';
 }
 
@@ -244,7 +255,7 @@ async function logToSheets(env, order, transactionCode) {
     sheetSafe(item.fields.size),
     sheetSafe(item.fields.colour),
     sheetSafe(item.fields.name),
-    sheetSafe(item.fields.number),
+    item.fields.number ? "'" + item.fields.number : '',  // keep leading zeros: 001 must stay 001
     sheetSafe(item.fields.age),
     '£' + (item.pence / 100).toFixed(2),
     order.ref,
@@ -262,6 +273,67 @@ async function logToSheets(env, order, transactionCode) {
     }
   );
   if (!res.ok) throw new Error('Sheets write failed: ' + await res.text());
+}
+
+// ── CONFIRMATION EMAIL ────────────────────────────────────────────
+async function sendConfirmationEmail(env, order) {
+  if (!env.RESEND_API_KEY) return;
+  const from = env.EMAIL_FROM || 'Merseyside BMX Club <shop@merseysidebmx.co.uk>';
+  const totalPence = order.items.reduce((s, i) => s + i.pence, 0);
+  const td = 'padding:8px 10px;border-bottom:1px solid #ddd;vertical-align:top;';
+
+  const rows = order.items.map(i => {
+    const f = i.fields;
+    const parts = [
+      f.colour && 'Category: ' + f.colour,
+      f.size   && 'Size: ' + f.size,
+      f.name   && 'Rider name: ' + f.name,
+      f.number && 'Race number: ' + f.number,
+      f.age    && 'Age: ' + f.age,
+    ].filter(Boolean).map(esc).join('<br>');
+    return `<tr><td style="${td}"><strong>${esc(i.name)}</strong><br><span style="color:#555;font-size:13px">${parts}</span></td>` +
+           `<td style="${td}text-align:right;white-space:nowrap">£${(i.pence / 100).toFixed(2)}</td></tr>`;
+  }).join('');
+
+  const html = `
+<div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;margin:0 auto;color:#111">
+  <div style="background:#0f0f0f;padding:16px 20px;border-bottom:4px solid #d42b2b">
+    <span style="color:#fff;font-size:20px;font-weight:bold;letter-spacing:1px">MERSEYSIDE BMX CLUB</span>
+  </div>
+  <div style="padding:20px">
+    <p>Hi ${esc(order.customer?.name || '')},</p>
+    <p>Thanks for your order. Your payment has been received and your order is logged with the club.</p>
+    <p><strong>Please check the details below.</strong> Stickers are printed exactly as entered, so if anything is wrong just reply to this email and we'll fix it before the order goes to our supplier.</p>
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin:16px 0">
+      ${rows}
+      <tr><td style="padding:10px;text-align:right"><strong>Total</strong></td>
+          <td style="padding:10px;text-align:right"><strong>£${(totalPence / 100).toFixed(2)}</strong></td></tr>
+    </table>
+    <p style="font-size:13px;color:#555">Order reference: ${esc(order.ref)}</p>
+    <p>Orders are placed with our supplier every quarter, with 3 to 5 weeks for delivery. We'll be in touch when your items are ready to collect at the track.</p>
+    <p>Merseyside BMX Club<br><a href="mailto:${CLUB_EMAIL}" style="color:#d42b2b">${CLUB_EMAIL}</a></p>
+  </div>
+</div>`;
+
+  const payload = {
+    from,
+    to: [order.customer.email],
+    reply_to: CLUB_EMAIL,
+    subject: 'Your Merseyside BMX Club order (' + order.ref + ')',
+    html,
+  };
+  if (env.ORDER_NOTIFY_EMAIL) payload.bcc = [env.ORDER_NOTIFY_EMAIL];
+
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + env.RESEND_API_KEY, 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) throw new Error('Resend ' + res.status + ': ' + await res.text());
+}
+
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
 async function getAccessToken(creds) {

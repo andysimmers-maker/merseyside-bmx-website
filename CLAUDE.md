@@ -22,17 +22,26 @@ All CSS and JavaScript lives inline within each HTML file — there are no exter
 
 **Pages:**
 - `index.html` — single-page site with all main sections: Hero, About, Sessions, Shop teaser, Join, Coaches, Riders, Contact, Sponsors
-- `shop.html` — club shop (jerseys, stickers) with a client-side basket and SumUp checkout flow; `ORDERS_OPEN` toggle on line ~617 controls whether the shop accepts orders
-- `sponsors.html`, `faq.html`, `conduct.html`, `welfare.html`, `new-rider-guide.html`, `kit-guide.html`, `coaching.html`, `privacy.html` — standalone informational pages
+- `shop.html`: club shop (race plate stickers now, jerseys later) with a client-side basket and SumUp checkout flow. Unlinked from the site and `noindex` while in development
+- `kit-order.html`: current kit order page (Google Form). The nav "Shop" button points here for now
+- `sponsors.html`, `faq.html`, `conduct.html`, `welfare.html`, `new-rider-guide.html`, `kit-guide.html`, `coaching.html`, `privacy.html`: standalone informational pages
+
+**Shop controls (top of the `<script>` in `shop.html`):**
+- `ORDERS_OPEN`: opens ordering to the public
+- `LIVE_PRODUCTS`: which product cards show (`stickers` now; add `youth`, `adult` for a jersey window)
+- `shop.html?preview=1`: turns ordering on in your own browser tab only (`?preview=0` to leave). Payments are real
+- `PRICES` is display only. The Worker's `PRODUCTS` list sets what is charged and which products can be ordered, so change both together
 
 **Shop checkout flow:**
-- Client-side basket + customer details (name, email) in `shop.html` (vanilla JS)
-- On checkout, POSTs to the `bmx-checkout` Cloudflare Worker at `bmx-checkout.andy-simmers.workers.dev`
-- Worker endpoints: `/create-checkout` (creates SumUp payment) and `/confirm-order` (writes confirmed order to Google Sheets)
-- Worker secrets: `SUMUP_API_KEY`, `SUMUP_MERCHANT_CODE` (pending from treasurer), `GOOGLE_CREDENTIALS`, `SHEET_ID`
+- Basket items are sent as `{ type, fields }` to the `bmx-checkout` Cloudflare Worker at `bmx-checkout.andy-simmers.workers.dev`
+- Worker source: `worker/bmx-checkout.js` (deploy steps in `worker/README.md`). It is NOT deployed by a push: paste it into the dashboard (Edit code > Deploy)
+- Endpoints: `/create-checkout` (validates, prices and creates the SumUp checkout) and `/confirm-order` (checks SumUp, logs the order to Google Sheets once, sends the confirmation email)
+- A Cron Trigger (`*/15 * * * *`) sweeps paid orders whose confirm step never ran
+- Secrets: `SUMUP_API_KEY`, `SUMUP_MERCHANT_CODE`, `GOOGLE_CREDENTIALS`, `SHEET_ID`; optional `RESEND_API_KEY`, `EMAIL_FROM`, `ORDER_NOTIFY_EMAIL` for confirmation emails
 - KV namespace `BMX_ORDERS` bound as `ORDERS_KV` on the Worker
-- Google Sheet ID: `16u4lpPh4JM9dL4V7UH5nHLY7h5jyDlYsyrqFwTq1Pvo` — row 1 headers: Date, Name, Email, Product, Size, Colour, Rider Name, Race Number, Amount, Payment Reference, Status
-- To open orders: set `ORDERS_OPEN = true` in `shop.html` and push to `main`
+- Google Sheet ID: `16u4lpPh4JM9dL4V7UH5nHLY7h5jyDlYsyrqFwTq1Pvo`, row 1 headers (A to M): Date, Name, Email, Product, Size, Colour, Rider Name, Race Number, Age, Amount, Payment Reference, SumUp Transaction, Status
+- Orders go to the supplier quarterly, 3 to 5 weeks delivery
+- Sticker images: `stickers-club.jpg` (Male/Open), `stickers-club-female.jpg`, `stickers-club-cruiser.jpg`, `stickers-nrt.jpg`. Rider names on them are anonymised; never publish images with real children's names
 
 **Contact form:** Uses Web3Forms (access key `bb2db04e-8482-4dfa-b4fb-bd3d6afdbf6d`) — submits to `merseysidebmx@gmail.com` without a page reload.
 
