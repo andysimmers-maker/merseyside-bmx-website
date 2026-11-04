@@ -41,7 +41,7 @@ All CSS and JavaScript lives inline within each HTML file — there are no exter
 - KV namespace `BMX_ORDERS` bound as `ORDERS_KV` on the Worker
 - Google Sheet ID: `16u4lpPh4JM9dL4V7UH5nHLY7h5jyDlYsyrqFwTq1Pvo`, row 1 headers (A to N): Date, Name, Email, Product, Size, Colour, Rider Name, Race Number, Age, Amount, Payment Reference, SumUp Transaction, Status, Bundle. Kit is one row per garment (a bundle is 3 rows, price on the first)
 - Stickers and kit both go to the supplier quarterly, 3 to 5 weeks delivery
-- Kit images: `kit.jpeg` (bundles) and crops `kit-jersey.jpg`, `kit-pants.jpg`, `kit-shorts.jpg`, `kit-gloves.jpg`. Size charts: `size-chart-jersey.jpg`, `size-chart-pants.png` (pants and shorts), `size-chart-gloves.jpg`
+- Kit images: `kit-bundle-pants.jpg`, `kit-bundle-shorts.jpg` (bundles) and crops from `kit.jpeg`: `kit-jersey.jpg`, `kit-pants.jpg`, `kit-shorts.jpg`, `kit-gloves.jpg`. Size charts: `size-chart-jersey.jpg`, `size-chart-pants.png` (pants and shorts), `size-chart-gloves.jpg`
 - Sticker images: `stickers-club.jpg` (Male/Open), `stickers-club-female.jpg`, `stickers-club-cruiser.jpg`, `stickers-nrt.jpg`. Rider names on them are anonymised; never publish images with real children's names
 
 **Contact form:** Uses Web3Forms (access key `bb2db04e-8482-4dfa-b4fb-bd3d6afdbf6d`) — submits to `merseysidebmx@gmail.com` without a page reload.
