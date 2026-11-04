@@ -22,13 +22,13 @@ All CSS and JavaScript lives inline within each HTML file — there are no exter
 
 **Pages:**
 - `index.html` — single-page site with all main sections: Hero, About, Sessions, Shop teaser, Join, Coaches, Riders, Contact, Sponsors
-- `shop.html`: club shop (race plate stickers now, jerseys later) with a client-side basket and SumUp checkout flow. Unlinked from the site and `noindex` while in development
+- `shop.html`: club shop (race plate stickers and club kit: jersey, pants, shorts, gloves and two bundles) with a client-side basket and SumUp checkout flow. Unlinked from the site and `noindex` while in development
 - `kit-order.html`: current kit order page (Google Form). The nav "Shop" button points here for now
 - `sponsors.html`, `faq.html`, `conduct.html`, `welfare.html`, `new-rider-guide.html`, `kit-guide.html`, `coaching.html`, `privacy.html`: standalone informational pages
 
 **Shop controls (top of the `<script>` in `shop.html`):**
 - `ORDERS_OPEN`: opens ordering to the public
-- `LIVE_PRODUCTS`: which product cards show (`stickers` now; add `youth`, `adult` for a jersey window)
+- `LIVE_PRODUCTS`: which products the public sees (`stickers` now; add `kit` to open kit). Preview mode always shows both. `KIT` and `PARTS` define the kit cards, prices and sizes
 - `shop.html?preview=1`: turns ordering on in your own browser tab only (`?preview=0` to leave). Payments are real
 - `PRICES` is display only. The Worker's `PRODUCTS` list sets what is charged and which products can be ordered, so change both together
 
@@ -39,8 +39,9 @@ All CSS and JavaScript lives inline within each HTML file — there are no exter
 - A Cron Trigger (`*/15 * * * *`) sweeps paid orders whose confirm step never ran
 - Secrets: `SUMUP_API_KEY`, `SUMUP_MERCHANT_CODE`, `GOOGLE_CREDENTIALS`, `SHEET_ID`; optional `RESEND_API_KEY`, `EMAIL_FROM`, `ORDER_NOTIFY_EMAIL` for confirmation emails
 - KV namespace `BMX_ORDERS` bound as `ORDERS_KV` on the Worker
-- Google Sheet ID: `16u4lpPh4JM9dL4V7UH5nHLY7h5jyDlYsyrqFwTq1Pvo`, row 1 headers (A to M): Date, Name, Email, Product, Size, Colour, Rider Name, Race Number, Age, Amount, Payment Reference, SumUp Transaction, Status
-- Orders go to the supplier quarterly, 3 to 5 weeks delivery
+- Google Sheet ID: `16u4lpPh4JM9dL4V7UH5nHLY7h5jyDlYsyrqFwTq1Pvo`, row 1 headers (A to N): Date, Name, Email, Product, Size, Colour, Rider Name, Race Number, Age, Amount, Payment Reference, SumUp Transaction, Status, Bundle. Kit is one row per garment (a bundle is 3 rows, price on the first)
+- Stickers and kit both go to the supplier quarterly, 3 to 5 weeks delivery
+- Kit images: `kit.jpeg` (bundles) and crops `kit-jersey.jpg`, `kit-pants.jpg`, `kit-shorts.jpg`, `kit-gloves.jpg`. Size charts: `size-chart-jersey.jpg`, `size-chart-pants.png` (pants and shorts), `size-chart-gloves.jpg`
 - Sticker images: `stickers-club.jpg` (Male/Open), `stickers-club-female.jpg`, `stickers-club-cruiser.jpg`, `stickers-nrt.jpg`. Rider names on them are anonymised; never publish images with real children's names
 
 **Contact form:** Uses Web3Forms (access key `bb2db04e-8482-4dfa-b4fb-bd3d6afdbf6d`) — submits to `merseysidebmx@gmail.com` without a page reload.

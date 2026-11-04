@@ -20,16 +20,26 @@ const CLUB_EMAIL = 'merseysidebmx@gmail.com';
 // ── PRODUCT CATALOGUE ─────────────────────────────────────────────
 // Prices live here, not in the browser. Keep in step with PRICES in shop.html.
 // live: false means the Worker refuses orders for that product.
+// Kit products list the garments they include (parts). Bundles are several parts for one price.
 const PRODUCTS = {
-  stickers: { name: 'Race Plate Stickers', pence: 1250, live: true },
-  youth:    { name: 'Youth Race Jersey',   pence: 3200, live: false },
-  adult:    { name: 'Adult Race Jersey',   pence: 3500, live: false },
+  stickers:      { name: 'Race Plate Stickers',          pence: 1250, live: true },
+  jersey:        { name: 'Race Jersey',                  pence: 3000, live: true, parts: ['jersey'] },
+  pants:         { name: 'Race Pants',                   pence: 5000, live: true, parts: ['pants'] },
+  shorts:        { name: 'Race Shorts',                  pence: 4000, live: true, parts: ['shorts'] },
+  gloves:        { name: 'Race Gloves',                  pence: 2000, live: true, parts: ['gloves'] },
+  bundle_pants:  { name: 'Bundle: Jersey, Pants & Gloves',  pence: 7500, live: true, parts: ['jersey', 'pants', 'gloves'] },
+  bundle_shorts: { name: 'Bundle: Jersey, Shorts & Gloves', pence: 6500, live: true, parts: ['jersey', 'shorts', 'gloves'] },
 };
 
 const STICKER_SIZES   = ['Small', 'Large'];
 const STICKER_COLOURS = ['Yellow (Male/Open)', 'Blue (Female)', 'Red (Cruiser)'];
-const YOUTH_SIZES     = ['5-6', '7-8', '9-10', '11-12', '13-14'];
-const ADULT_SIZES     = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+const WAIST_SIZES     = ['Youth 22"', 'Youth 24"', 'Youth 26"', 'Youth 28"', 'Adult 28"', 'Adult 30"', 'Adult 32"', 'Adult 34"', 'Adult 36"'];
+const PARTS = {
+  jersey: { name: 'Race Jersey', sizes: ['Youth XS', 'Youth S', 'Youth M', 'Youth L', 'Youth XL', 'Adult XS', 'Adult S', 'Adult M', 'Adult L', 'Adult XL', 'Adult 2XL', 'Adult 3XL'] },
+  pants:  { name: 'Race Pants',  sizes: WAIST_SIZES },
+  shorts: { name: 'Race Shorts', sizes: WAIST_SIZES },
+  gloves: { name: 'Race Gloves', sizes: ['Youth XS', 'Youth S', 'Youth M', 'Youth L', 'Youth XL', 'Adult XS', 'Adult S', 'Adult M', 'Adult L', 'Adult XL'] },
+};
 const MAX_ITEMS       = 20;
 
 const SITE_ORIGINS = [
@@ -205,12 +215,12 @@ function validateItem(raw) {
   if (!product.live) return { error: 'The ' + product.name + ' is not available to order right now' };
 
   const f = raw.fields || {};
-  const size = clean(f.size, 10);
   const name = clean(f.name, 20);
   if (!name) return { error: 'Please enter the rider name' };
 
   let fields;
   if (type === 'stickers') {
+    const size   = clean(f.size, 10);
     const colour = clean(f.colour, 30);
     const number = clean(f.number, 4);
     const age    = clean(f.age, 2);
@@ -220,9 +230,13 @@ function validateItem(raw) {
     if (!/^\d{1,2}$/.test(age))            return { error: 'Please enter a valid age' };
     fields = { size, colour, name, number, age };
   } else {
-    const sizes = type === 'youth' ? YOUTH_SIZES : ADULT_SIZES;
-    if (!sizes.includes(size)) return { error: 'Please choose a jersey size' };
-    fields = { size, colour: '', name, number: '', age: '' };
+    // Kit: one size per garment in the product, e.g. a bundle needs jersey, pants and gloves sizes
+    fields = { name, sizes: {} };
+    for (const part of product.parts) {
+      const size = clean(f.sizes?.[part], 12);
+      if (!PARTS[part].sizes.includes(size)) return { error: 'Please choose a ' + part + ' size' };
+      fields.sizes[part] = size;
+    }
   }
 
   return { item: { type, name: product.name, pence: product.pence, fields } };
@@ -240,32 +254,46 @@ function sheetSafe(v) {
 }
 
 // ── GOOGLE SHEETS ─────────────────────────────────────────────────
-// Row 1 headers (A to M): Date, Name, Email, Product, Size, Colour, Rider Name,
-// Race Number, Age, Amount, Payment Reference, SumUp Transaction, Status
+// Row 1 headers (A to N): Date, Name, Email, Product, Size, Colour, Rider Name,
+// Race Number, Age, Amount, Payment Reference, SumUp Transaction, Status, Bundle
+//
+// One row per garment, so sizes can be counted straight off the Sheet for the supplier.
+// A bundle becomes three rows: the bundle price sits on the first, the others show £0.00,
+// and the Bundle column names the bundle on all three.
 async function logToSheets(env, order, transactionCode) {
   const creds = JSON.parse(env.GOOGLE_CREDENTIALS);
   const token = await getAccessToken(creds);
   const now   = new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' });
 
-  const rows = order.items.map(item => [
+  const row = (product, size, f, pence, bundle) => [
     now,
     sheetSafe(order.customer?.name),
     sheetSafe(order.customer?.email),
-    item.name,
-    sheetSafe(item.fields.size),
-    sheetSafe(item.fields.colour),
-    sheetSafe(item.fields.name),
-    item.fields.number ? "'" + item.fields.number : '',  // keep leading zeros: 001 must stay 001
-    sheetSafe(item.fields.age),
-    '£' + (item.pence / 100).toFixed(2),
+    product,
+    sheetSafe(size),
+    sheetSafe(f.colour),
+    sheetSafe(f.name),
+    f.number ? "'" + f.number : '',  // keep leading zeros: 001 must stay 001
+    sheetSafe(f.age),
+    '£' + (pence / 100).toFixed(2),
     order.ref,
     transactionCode,
     'PAID',
-  ]);
+    bundle,
+  ];
+
+  const rows = [];
+  for (const item of order.items) {
+    const f = item.fields;
+    if (!f.sizes) { rows.push(row(item.name, f.size, f, item.pence, '')); continue; }
+    const parts  = Object.keys(f.sizes);
+    const bundle = parts.length > 1 ? item.name : '';
+    parts.forEach((part, i) => rows.push(row(PARTS[part]?.name || part, f.sizes[part], f, i === 0 ? item.pence : 0, bundle)));
+  }
 
   const res = await fetch(
     'https://sheets.googleapis.com/v4/spreadsheets/' + env.SHEET_ID +
-    '/values/Sheet1!A:M:append?valueInputOption=USER_ENTERED',
+    '/values/Sheet1!A:N:append?valueInputOption=USER_ENTERED',
     {
       method: 'POST',
       headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
@@ -287,6 +315,7 @@ async function sendConfirmationEmail(env, order) {
     const parts = [
       f.colour && 'Category: ' + f.colour,
       f.size   && 'Size: ' + f.size,
+      ...Object.entries(f.sizes || {}).map(([p, s]) => (PARTS[p]?.name || p) + ' size: ' + s),
       f.name   && 'Rider name: ' + f.name,
       f.number && 'Race number: ' + f.number,
       f.age    && 'Age: ' + f.age,
@@ -303,7 +332,7 @@ async function sendConfirmationEmail(env, order) {
   <div style="padding:20px">
     <p>Hi ${esc(order.customer?.name || '')},</p>
     <p>Thanks for your order. Your payment has been received and your order is logged with the club.</p>
-    <p><strong>Please check the details below.</strong> Stickers are printed exactly as entered, so if anything is wrong just reply to this email and we'll fix it before the order goes to our supplier.</p>
+    <p><strong>Please check the details below.</strong> Everything is made exactly as entered, so if anything is wrong just reply to this email and we'll fix it before the order goes to our supplier.</p>
     <table style="width:100%;border-collapse:collapse;font-size:14px;margin:16px 0">
       ${rows}
       <tr><td style="padding:10px;text-align:right"><strong>Total</strong></td>
