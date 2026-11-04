@@ -5,12 +5,14 @@
   <meta name="color-scheme" content="only light" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="favicon.png" type="image/png">
-  <title>Club Shop — Merseyside BMX Club</title>
-  <meta name="description" content="Official Merseyside BMX Club shop. Jerseys and race plate stickers, made to order and personalised with your rider's name." />
+  <!-- Hidden from search engines while the shop is in development. Remove when it goes live. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Club Shop | Merseyside BMX Club</title>
+  <meta name="description" content="Official Merseyside BMX Club shop. Race plate stickers, made to order and personalised with your rider's details." />
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Club Shop — Merseyside BMX Club">
-  <meta property="og:description" content="Official Merseyside BMX Club jerseys and race plate stickers, made to order and personalised with your rider's details.">
-  <meta property="og:image" content="https://merseysidebmx.co.uk/jersey_regional.jpg">
+  <meta property="og:title" content="Club Shop | Merseyside BMX Club">
+  <meta property="og:description" content="Official Merseyside BMX Club race plate stickers, made to order and personalised with your rider's details.">
+  <meta property="og:image" content="https://merseysidebmx.co.uk/stickers-club.jpg">
   <meta property="og:url" content="https://merseysidebmx.co.uk/shop.html">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -84,8 +86,12 @@
 
     /* PRODUCTS */
     #products { background: var(--black); padding: 5rem var(--pad); }
-    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 3rem; }
-    .product-card { background: var(--dark); display: flex; flex-direction: column; transition: background 0.2s; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 360px)); gap: 1rem; margin-top: 3rem; }
+    .product-card { background: var(--dark); border: 1px solid var(--border); display: flex; flex-direction: column; transition: background 0.2s; }
+    .product-card.hidden { display: none; }
+    .preview-banner { display: none; margin-top: 1.25rem; background: #3a2a00; border: 1px solid #e8c000; color: #f3d64a; font-size: 0.85rem; padding: 0.7rem 1rem; max-width: 560px; line-height: 1.5; }
+    .preview-banner.show { display: block; }
+    .preview-banner strong { font-family: var(--fd); letter-spacing: 0.1em; font-weight: 400; }
     .product-card:hover { background: var(--mid); }
     .product-img { background: #e8e8e8; display: flex; align-items: center; justify-content: center; padding: 2rem; min-height: 280px; }
     .product-img img { max-height: 240px; max-width: 100%; width: auto; object-fit: contain; display: block; margin: 0 auto; }
@@ -103,7 +109,6 @@
     .product-cta .btn-red:hover { background: var(--red2); transform: translateY(-2px); }
     .product-cta .btn-blue { background: var(--blue); color: #fff; }
     .product-cta .btn-blue:hover { background: var(--blue2); transform: translateY(-2px); }
-    @media (max-width: 860px) { .products-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 560px) { .products-grid { grid-template-columns: 1fr; } }
 
     /* BASKET */
@@ -259,7 +264,8 @@
   <div class="page-header">
     <div class="kicker">Official Kit</div>
     <h1>CLUB SHOP</h1>
-    <p id="shop-header-desc">Official Merseyside BMX Club jerseys and race plate stickers. The order window is currently closed. Get in touch if you have an urgent kit requirement.</p>
+    <p id="shop-header-desc">Official Merseyside BMX Club race plate stickers. The order window is currently closed. Get in touch if you have an urgent kit requirement.</p>
+    <div class="preview-banner" id="preview-banner"><strong>PREVIEW MODE</strong> &middot; Ordering is switched on for you only. The public still sees the shop as closed. Payments are real. Visit <code>shop.html?preview=0</code> to leave preview.</div>
   </div>
 
   <div class="dd"></div>
@@ -268,10 +274,10 @@
   <div class="info-banners">
     <div class="container">
       <div class="info-banner reveal">
-        <div class="info-banner-icon" aria-hidden="true">📏</div>
+        <div class="info-banner-icon" aria-hidden="true">✏️</div>
         <div>
-          <h4>Jersey Sizing Advice</h4>
-          <p>We recommend sizing up to account for body armour worn underneath. If your rider is between sizes, go larger.</p>
+          <h4>Check Your Details</h4>
+          <p>Stickers are printed exactly as entered. Double check the rider name, race number, age and race category before you pay.</p>
         </div>
       </div>
       <div class="info-banner reveal">
@@ -295,7 +301,7 @@
       </div>
       <div class="products-grid reveal">
 
-        <div class="product-card">
+        <div class="product-card" id="card-youth">
           <div class="product-img">
             <img src="jersey_regional.jpg" alt="Merseyside BMX Youth Race Jersey" />
           </div>
@@ -308,7 +314,7 @@
           </div>
         </div>
 
-        <div class="product-card">
+        <div class="product-card" id="card-adult">
           <div class="product-img">
             <img src="jersey_regional.jpg" alt="Merseyside BMX Adult Race Jersey" />
           </div>
@@ -321,15 +327,15 @@
           </div>
         </div>
 
-        <div class="product-card">
+        <div class="product-card" id="card-stickers">
           <div class="product-img" style="background:#fff;">
-            <img src="stickers.jpg" alt="Merseyside BMX Race Plate Stickers" />
+            <img src="stickers-club.jpg" alt="Merseyside BMX race plate sticker set: front plate and two side plates" />
           </div>
           <div class="product-info">
             <div class="product-tag plates">Race Plates</div>
             <div class="product-name">RACE PLATE STICKERS</div>
-            <div class="product-price">£25</div>
-            <p class="product-desc">Includes front plate and side plate numbers. Personalised with rider name, race number and age category.</p>
+            <div class="product-price">£12.50</div>
+            <p class="product-desc">Front plate and both side plate stickers. Personalised with rider name, race number and age, in your race category colours. Small or large.</p>
             <div class="product-cta" id="cta-stickers"></div>
           </div>
         </div>
@@ -386,7 +392,7 @@
       <div class="success-box" style="border-color:rgba(212,43,43,0.3);">
         <div class="icon" aria-hidden="true">✕</div>
         <h2 style="color:var(--red);">PAYMENT UNSUCCESSFUL</h2>
-        <p>Your payment was not completed. Please try again — add your items back to the basket and checkout as normal. If the problem continues please <a href="index.html#contact" style="color:var(--red);">contact us</a>.</p>
+        <p>Your payment was not completed. Please try again: add your items back to the basket and checkout as normal. If the problem continues please <a href="index.html#contact" style="color:var(--red);">contact us</a>.</p>
       </div>
     </div>
   </section>
@@ -397,7 +403,7 @@
       <div class="success-box">
         <div class="icon" aria-hidden="true">✅</div>
         <h2>ORDER CONFIRMED!</h2>
-        <p>Thanks for your order. You'll receive a confirmation email shortly. Your items will be included in the next monthly bulk order. We will be in touch when they're ready to collect.</p>
+        <p>Thanks for your order. Your payment has been taken and your order is logged with the club. Your items will be included in the next monthly bulk order. We will be in touch when they're ready to collect.</p>
       </div>
     </div>
   </section>
@@ -530,7 +536,7 @@
           <div class="field-note highlight"><span aria-hidden="true">📏</span> Size up to account for body armour worn underneath.</div>
         </div>
         <div class="field">
-          <label>Rider Name — printed on back <span style="color:var(--red)">*</span></label>
+          <label>Rider Name (printed on back) <span style="color:var(--red)">*</span></label>
           <input type="text" id="youth-name" placeholder="e.g. SMITH" maxlength="20" />
           <div class="field-note">Use capitals. This is exactly how it will be printed.</div>
         </div>
@@ -574,7 +580,7 @@
           <div class="field-note highlight"><span aria-hidden="true">📏</span> Size up to account for body armour worn underneath.</div>
         </div>
         <div class="field">
-          <label>Rider Name — printed on back <span style="color:var(--red)">*</span></label>
+          <label>Rider Name (printed on back) <span style="color:var(--red)">*</span></label>
           <input type="text" id="adult-name" placeholder="e.g. SMITH" maxlength="20" />
           <div class="field-note">Use capitals. This is exactly how it will be printed.</div>
         </div>
@@ -599,20 +605,21 @@
       </div>
       <div class="modal-body">
         <div class="modal-product-info">
-          <div class="modal-product-img" style="background:#fff;"><img src="stickers.jpg" alt="Race Plate Stickers" /></div>
+          <div class="modal-product-img" style="background:#fff;"><img src="stickers-club.jpg" alt="Race Plate Stickers" /></div>
           <div>
             <div class="modal-product-name">Race Plate Stickers</div>
-            <div class="modal-product-price">£25 · includes side plate numbers</div>
+            <div class="modal-product-price">£12.50 · front and side plates</div>
           </div>
         </div>
 
         <div class="field">
-          <label>Colour <span style="color:var(--red)">*</span></label>
+          <label>Race Category <span style="color:var(--red)">*</span></label>
           <div class="colour-grid" id="sticker-colours">
-            <button class="colour-btn" onclick="selectColour('Red',this)"><span class="colour-dot" style="background:#d42b2b;"></span> Red</button>
-            <button class="colour-btn" onclick="selectColour('Yellow',this)"><span class="colour-dot" style="background:#e8c000;"></span> Yellow</button>
-            <button class="colour-btn" onclick="selectColour('Blue',this)"><span class="colour-dot" style="background:#1a3d8f;"></span> Blue</button>
+            <button class="colour-btn" onclick="selectColour('Yellow (Male/Open)',this)"><span class="colour-dot" style="background:#fff200;border:1px solid #000;"></span> Male / Open</button>
+            <button class="colour-btn" onclick="selectColour('Blue (Female)',this)"><span class="colour-dot" style="background:#1a3d8f;border:1px solid #fff;"></span> Female</button>
+            <button class="colour-btn" onclick="selectColour('Red (Cruiser)',this)"><span class="colour-dot" style="background:#ed1b24;border:1px solid #fff;"></span> Cruiser</button>
           </div>
+          <div class="field-note">Sets the number panel colours. Male / Open: yellow background, black numbers. Female: blue background, white numbers. Cruiser (male and female): red background, white numbers.</div>
         </div>
         <div class="field">
           <label>Size <span style="color:var(--red)">*</span></label>
@@ -623,16 +630,17 @@
         </div>
         <div class="field">
           <label>Rider Name <span style="color:var(--red)">*</span></label>
-          <input type="text" id="stickers-name" placeholder="e.g. SMITH" maxlength="20" />
+          <input type="text" id="stickers-name" placeholder="e.g. ALEX SMITH" maxlength="20" />
+          <div class="field-note">Printed next to the Union Jack exactly as you type it. Full name, first name or surname are all fine.</div>
         </div>
         <div class="field">
           <label>Race Number <span style="color:var(--red)">*</span></label>
-          <input type="text" id="stickers-number" placeholder="e.g. 00" maxlength="6" />
+          <input type="text" id="stickers-number" placeholder="e.g. 38" maxlength="4" inputmode="numeric" />
         </div>
         <div class="field">
-          <label>Age Category <span style="color:var(--red)">*</span></label>
-          <input type="text" id="stickers-age" placeholder="e.g. 10" maxlength="4" />
-          <div class="field-note">Enter your rider's age as of <strong style="color:var(--text)">31st December of the racing year</strong>. If ordering in November or December for the following season, use the age they will turn in the new year.</div>
+          <label>Age <span style="color:var(--red)">*</span></label>
+          <input type="text" id="stickers-age" placeholder="e.g. 10" maxlength="2" inputmode="numeric" />
+          <div class="field-note">Your rider's age on <strong style="color:var(--text)">31st December of the racing year</strong>. For next season's plates, use the age they will be on <strong style="color:var(--text)">31/12/<span id="sticker-age-year"></span></strong>.</div>
         </div>
         <div class="field">
           <label>Quantity</label>
@@ -641,7 +649,7 @@
           </select>
         </div>
         <div class="modal-error" id="modal-error-stickers"></div>
-        <button class="modal-add-btn" onclick="addToBasket('stickers')">ADD TO ORDER · £25</button>
+        <button class="modal-add-btn" onclick="addToBasket('stickers')">ADD TO ORDER · £12.50</button>
       </div>
     </div>
   </div>
@@ -662,33 +670,61 @@
     // Change to true to open the order window
     const ORDERS_OPEN = false;
 
+    // Products shown on the page. Add 'youth' and 'adult' back for the next jersey window.
+    const LIVE_PRODUCTS = ['stickers'];
+
+    // PREVIEW MODE: visit shop.html?preview=1 to turn ordering on in your browser only
+    // (remembered for the browser tab, so it survives the SumUp 3DS redirect).
+    // shop.html?preview=0 turns it off again.
+    const PREVIEW = (() => {
+      const q = new URLSearchParams(location.search).get('preview');
+      try {
+        if (q === '1') sessionStorage.setItem('shopPreview', '1');
+        if (q === '0') sessionStorage.removeItem('shopPreview');
+        return sessionStorage.getItem('shopPreview') === '1';
+      } catch (e) { return q === '1'; }
+    })();
+    const CAN_ORDER = ORDERS_OPEN || PREVIEW;
+
+    function money(n) { return '£' + (Number.isInteger(n) ? n : n.toFixed(2)); }
+    function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c])); }
+
     function initOrderButtons() {
+      ['youth', 'adult', 'stickers'].forEach(t => {
+        document.getElementById('card-' + t).classList.toggle('hidden', !LIVE_PRODUCTS.includes(t));
+      });
+      document.getElementById('preview-banner').classList.toggle('show', PREVIEW && !ORDERS_OPEN);
+
+      // Racing year for the age note: from November, orders are for next season
+      const now = new Date();
+      document.getElementById('sticker-age-year').textContent = now.getFullYear() + (now.getMonth() >= 10 ? 1 : 0);
+
       const paused = `<span style="font-family:var(--fd);font-size:0.8rem;letter-spacing:0.08em;color:#ccc;display:block;margin-top:0.5rem;">The order window is currently closed. We will announce when the next order window opens.</span>`;
       const ctaYouth    = `<button class="btn-red" onclick="openModal('youth')">Add to Order →</button>`;
       const ctaAdult    = `<button class="btn-red" onclick="openModal('adult')">Add to Order →</button>`;
       const ctaStickers = `<button class="btn-blue" onclick="openModal('stickers')">Add to Order →</button>`;
-      document.getElementById('cta-youth').innerHTML    = ORDERS_OPEN ? ctaYouth    : paused;
-      document.getElementById('cta-adult').innerHTML    = ORDERS_OPEN ? ctaAdult    : paused;
-      document.getElementById('cta-stickers').innerHTML = ORDERS_OPEN ? ctaStickers : paused;
+      document.getElementById('cta-youth').innerHTML    = CAN_ORDER ? ctaYouth    : paused;
+      document.getElementById('cta-adult').innerHTML    = CAN_ORDER ? ctaAdult    : paused;
+      document.getElementById('cta-stickers').innerHTML = CAN_ORDER ? ctaStickers : paused;
 
       // Update header description
       const headerDesc = document.getElementById('shop-header-desc');
-      if (headerDesc) headerDesc.textContent = ORDERS_OPEN
-        ? 'Official Merseyside BMX Club jerseys and race plate stickers. Made to order and personalised with your rider\u2019s details.'
-        : 'Official Merseyside BMX Club jerseys and race plate stickers. The order window is currently closed. Get in touch if you have an urgent kit requirement.';
+      if (headerDesc) headerDesc.textContent = CAN_ORDER
+        ? 'Official Merseyside BMX Club race plate stickers. Made to order and personalised with your rider\u2019s details.'
+        : 'Official Merseyside BMX Club race plate stickers. The order window is currently closed. Get in touch if you have an urgent kit requirement.';
 
       // Update info banner
       const bannerDesc = document.getElementById('shop-banner-desc');
-      if (bannerDesc) bannerDesc.textContent = ORDERS_OPEN
+      if (bannerDesc) bannerDesc.textContent = CAN_ORDER
         ? 'All orders are placed with our supplier once a month. Payment is taken at the time of ordering to secure your place in the next batch.'
         : 'The order window is currently closed. We will announce when the next order window opens.';
 
       // Show/hide order note and basket section
       const orderNote = document.getElementById('order-note');
-      if (orderNote) orderNote.style.display = ORDERS_OPEN ? 'block' : 'none';
+      if (orderNote) orderNote.style.display = CAN_ORDER ? 'block' : 'none';
 
       const orderSec = document.getElementById('order-section');
-      if (orderSec) orderSec.style.display = ORDERS_OPEN ? 'block' : 'none';
+      if (orderSec) orderSec.style.display = CAN_ORDER ? 'block' : 'none';
     }
 
     // NAV
@@ -728,7 +764,8 @@
     let basket = [];
     const selectedSizes = { youth: null, adult: null, stickers: null };
     let selectedColour = null;
-    const PRICES = { youth: 32, adult: 35, stickers: 25 };
+    // Must match the price list in the bmx-checkout Worker
+    const PRICES = { youth: 32, adult: 35, stickers: 12.5 };
     const NAMES  = { youth: 'Youth Race Jersey', adult: 'Adult Race Jersey', stickers: 'Race Plate Stickers' };
 
     // MODAL
@@ -772,7 +809,7 @@
       btn.setAttribute('aria-pressed', 'true');
       document.getElementById('sticker-colours').classList.remove('grid-error');
       const errEl = document.getElementById('modal-error-stickers');
-      if (errEl && errEl.textContent === 'Please select a colour.') errEl.classList.remove('show');
+      if (errEl && errEl.textContent === 'Please select a race category.') errEl.classList.remove('show');
     }
 
     // ADD TO BASKET
@@ -793,24 +830,27 @@
         return showErr('Please select a size.', document.querySelector('#modal-' + type + ' .size-grid'));
       }
 
-      let details;
+      let details, fields;
       if (type === 'stickers') {
-        if (!selectedColour) return showErr('Please select a colour.', document.getElementById('sticker-colours'));
+        if (!selectedColour) return showErr('Please select a race category.', document.getElementById('sticker-colours'));
         const name   = document.getElementById('stickers-name').value.trim();
         const number = document.getElementById('stickers-number').value.trim();
         const age    = document.getElementById('stickers-age').value.trim();
         if (!name)   return showErr('Please enter the rider name.', document.getElementById('stickers-name'));
-        if (!number) return showErr('Please enter the race number.', document.getElementById('stickers-number'));
-        if (!age)    return showErr('Please enter the age category.', document.getElementById('stickers-age'));
-        details = `Size: ${selectedSizes.stickers} · Colour: ${selectedColour} · Name: ${name} · Number: ${number} · Age: ${age}`;
+        if (!/^\d{1,4}$/.test(number)) return showErr('Please enter the race number (numbers only).', document.getElementById('stickers-number'));
+        if (!/^\d{1,2}$/.test(age) || +age < 2) return showErr('Please enter the rider’s age.', document.getElementById('stickers-age'));
+        fields  = { size: selectedSizes.stickers, colour: selectedColour, name, number, age };
+        details = `Size: ${fields.size} · ${fields.colour} · Name: ${name} · Number: ${number} · Age: ${age}`;
       } else {
         const riderName = document.getElementById(type + '-name').value.trim();
         if (!riderName) return showErr('Please enter the rider name.', document.getElementById(type + '-name'));
-        details = `Size: ${selectedSizes[type]} · Name: ${riderName}`;
+        fields  = { size: selectedSizes[type], name: riderName };
+        details = `Size: ${fields.size} · Name: ${riderName}`;
       }
 
+      // price is for display only: the Worker charges from its own price list
       for (let i = 0; i < qty; i++) {
-        basket.push({ id: Date.now() + i, type, name: NAMES[type], price: PRICES[type], details });
+        basket.push({ id: Date.now() + i, type, name: NAMES[type], price: PRICES[type], details, fields });
       }
       closeModal(type);
       renderBasket();
@@ -830,13 +870,13 @@
       items.innerHTML = basket.map(item => `
         <div class="basket-item">
           <div class="basket-item-info">
-            <div class="basket-item-name">${item.name}</div>
-            <div class="basket-item-details">${item.details}</div>
+            <div class="basket-item-name">${esc(item.name)}</div>
+            <div class="basket-item-details">${esc(item.details)}</div>
           </div>
-          <div class="basket-item-price">£${item.price}</div>
-          <button class="basket-item-remove" onclick="removeItem(${item.id})" title="Remove">✕</button>
+          <div class="basket-item-price">${money(item.price)}</div>
+          <button class="basket-item-remove" onclick="removeItem(${item.id})" title="Remove" aria-label="Remove item">✕</button>
         </div>`).join('');
-      document.getElementById('basket-total-amount').textContent = '£' + basket.reduce((s, i) => s + i.price, 0);
+      document.getElementById('basket-total-amount').textContent = money(basket.reduce((s, i) => s + i.price, 0));
     }
     function removeItem(id) { basket = basket.filter(i => i.id !== id); renderBasket(); }
 
@@ -873,7 +913,7 @@
         const res  = await fetch('https://bmx-checkout.andy-simmers.workers.dev/create-checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ items: basket, customer: { name, email } })
+          body: JSON.stringify({ items: basket.map(i => ({ type: i.type, fields: i.fields })), customer: { name, email } })
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Something went wrong');
@@ -901,6 +941,7 @@
             overlay.classList.remove('open');
             document.body.style.overflow = '';
 
+            if (!claimConfirm(data.ref)) return;
             try {
               const confirmRes = await fetch('https://bmx-checkout.andy-simmers.workers.dev/confirm-order', {
                 method: 'POST',
@@ -908,6 +949,7 @@
                 body: JSON.stringify({ ref: data.ref })
               });
               const confirmData = await confirmRes.json();
+              if (confirmData.status !== 'PAID') confirming.delete(data.ref);
               if (confirmData.status === 'PAID') {
                 basket = [];
                 renderBasket();
@@ -918,6 +960,7 @@
                 err.classList.add('show');
               }
             } catch (e) {
+              confirming.delete(data.ref);
               err.textContent = 'Could not verify payment. Please contact us to confirm your order was received.';
               err.classList.add('show');
             }
@@ -925,7 +968,7 @@
         });
 
       } catch (e) {
-        err.textContent = 'Payment could not be started: ' + e.message + '. Please try again or contact us.';
+        err.textContent = 'Payment could not be started: ' + e.message.replace(/\.$/, '') + '. Please try again or contact us.';
         err.classList.add('show');
         btn.disabled = false;
         btn.querySelector('span').textContent = 'Pay Securely with SumUp';
@@ -937,6 +980,15 @@
       document.body.style.overflow = '';
     }
 
+    // Only one confirm request per order at a time (the widget and the 3DS
+    // return can both fire). Released again if the payment isn't PAID yet.
+    const confirming = new Set();
+    function claimConfirm(ref) {
+      if (confirming.has(ref)) return false;
+      confirming.add(ref);
+      return true;
+    }
+
     // Called on page load (full redirect case) and from auth-screen onResponse (iframe 3DS case)
     async function checkReturnUrl() {
       const params = new URLSearchParams(window.location.search);
@@ -945,6 +997,7 @@
       if (!ref || status !== 'success') return;
 
       window.history.replaceState({}, '', '/shop.html');
+      if (!claimConfirm(ref)) return;
 
       try {
         const res  = await fetch('https://bmx-checkout.andy-simmers.workers.dev/confirm-order', {
