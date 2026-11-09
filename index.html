@@ -84,26 +84,6 @@
     h1.hero-title em { font-style: normal; color: var(--red); display: block; }
     .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.75); max-width: 480px; line-height: 1.75; }
 
-    /* ══ KIT ORDER BANNER (based on the 2026 jersey: white to navy fade with red/white/navy stripes) ══ */
-    #kit-banner { --navy: #14215a; position: relative; overflow: hidden; padding: 2.75rem var(--pad); background: linear-gradient(100deg, #fff 0%, #fff 34%, #8a97c4 56%, var(--navy) 80%); border-top: 3px solid var(--red); }
-    .kit-banner-stripes { position: absolute; top: 0; bottom: 0; left: 60%; width: 30px; background: linear-gradient(to right, var(--red) 0 12px, #fff 12px 18px, var(--navy) 18px 30px); pointer-events: none; }
-    .kit-banner-inner { position: relative; z-index: 1; max-width: var(--mw); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
-    .kit-banner-text { flex: 1; min-width: 280px; max-width: 520px; }
-    .kit-banner-kicker { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.28em; color: var(--red); margin-bottom: 0.4rem; }
-    .kit-banner-title { font-family: var(--fd); font-size: clamp(1.9rem, 4.2vw, 3rem); line-height: 0.92; color: var(--navy); letter-spacing: 0.02em; }
-    .kit-banner-sub { font-size: 0.9rem; color: #2a3358; max-width: 480px; margin-top: 0.6rem; line-height: 1.6; }
-    .kit-banner-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
-    .kit-chip { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.05em; background: var(--navy); color: #fff; padding: 0.35rem 0.8rem; border-radius: 2px; }
-    .kit-chip.red { background: var(--red); }
-    .kit-banner-cta { flex-shrink: 0; }
-    .kit-banner-cta .btn { font-size: 1rem; padding: 0.85rem 2.2rem; box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
-    @media (max-width: 680px) {
-      #kit-banner { background: linear-gradient(180deg, #fff 0%, #fff 50%, #8a97c4 75%, var(--navy) 100%); }
-      .kit-banner-stripes { left: auto; right: 5vw; }
-      .kit-banner-inner { flex-direction: column; align-items: flex-start; }
-      .kit-banner-text { padding-right: 40px; }
-    }
-
     /* ══ ABOUT ══ */
     #about { background: var(--dark); padding: 5rem var(--pad); border-top: 3px solid var(--red); }
     #about .kicker { color: var(--red); }
@@ -352,8 +332,7 @@
     <ul class="nav-links" id="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#sessions">Sessions</a></li>
-      <!-- Shop link points at the kit order page for now. Change back to shop.html when the integrated shop goes live. -->
-      <li><a href="kit-order.html" class="nav-shop">Shop</a></li>
+      <li><a href="shop.html" class="nav-shop">Shop</a></li>
       <li><a href="#join">Join</a></li>
       <li><a href="#coaches">Coaches</a></li>
       <li><a href="#riders">Riders</a></li>
@@ -368,27 +347,6 @@
       <div class="hero-eyebrow">Huyton, Liverpool · Est. 2012</div>
       <h1 class="hero-title">MERSEYSIDE<br><em>BMX</em>CLUB</h1>
       <p class="hero-sub">Racing, coaching and community for riders of all ages and abilities. Come and ride with us.</p>
-    </div>
-  </section>
-
-  <div class="dd"></div>
-
-  <!-- KIT ORDER BANNER -->
-  <section id="kit-banner">
-    <div class="kit-banner-stripes" aria-hidden="true"></div>
-    <div class="kit-banner-inner reveal">
-      <div class="kit-banner-text">
-        <div class="kit-banner-kicker">New Club Kit</div>
-        <h2 class="kit-banner-title">THE NEW KIT IS HERE</h2>
-        <p class="kit-banner-sub">Jersey, pants, shorts and gloves in the new club design. Items from £20 or save £25 with a bundle. One order form per rider.</p>
-        <div class="kit-banner-chips">
-          <span class="kit-chip red">Orders close 14:00, Sun 8 Nov</span>
-          <span class="kit-chip">Bundles save £25</span>
-        </div>
-      </div>
-      <div class="kit-banner-cta">
-        <a href="kit-order.html" class="btn btn-red">How to Order →</a>
-      </div>
     </div>
   </section>
 
@@ -522,26 +480,24 @@
 
   <div class="dd"></div>
 
-  <!-- SHOP TEASER: hidden while kit orders run through the Google Form. Remove the comment markers around
-       this section (and its divider below) to bring it back when the integrated shop goes live.
+  <!-- SHOP TEASER -->
   <section id="shop-teaser">
     <div class="shop-teaser-inner">
       <div class="shop-left reveal">
         <div class="kicker">Club Kit</div>
         <h2>OFFICIAL<br>CLUB SHOP</h2>
-        <p>Official club jerseys and race plate stickers, made to order and personalised with your rider's name.</p>
+        <p>Race plate stickers and the new club kit, made to order and personalised with your rider's details. Orders go to our supplier every quarter.</p>
         <div style="margin-top:0.5rem;">
           <a href="shop.html" class="btn btn-red">Visit the Shop →</a>
         </div>
       </div>
       <div class="shop-right">
-        <img src="jersey_regional.jpg" alt="Merseyside BMX Club official kit" />
+        <img src="kit-bundle-pants.jpg" alt="Merseyside BMX Club kit: jersey, race pants and gloves" />
       </div>
     </div>
   </section>
 
   <div class="dd"></div>
-  -->
 
   <!-- JOIN -->
   <section id="join">
@@ -991,8 +947,7 @@
       <div class="footer-col">
         <h4>More</h4>
         <ul>
-          <!-- <li><a href="shop.html">Club Shop</a></li> -->
-          <li><a href="kit-order.html">Kit Order</a></li>
+          <li><a href="shop.html">Club Shop</a></li>
           <li><a href="autumn-cup.html">Autumn Cup</a></li>
           <li><a href="#contact">Contact Us</a></li>
           <li><a href="sponsors.html">Our Sponsors</a></li>

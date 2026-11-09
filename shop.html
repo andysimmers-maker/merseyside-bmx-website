@@ -5,8 +5,6 @@
   <meta name="color-scheme" content="only light" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="favicon.png" type="image/png">
-  <!-- Hidden from search engines while the shop is in development. Remove when it goes live. -->
-  <meta name="robots" content="noindex, nofollow" />
   <title>Club Shop | Merseyside BMX Club</title>
   <meta name="description" content="Official Merseyside BMX Club shop. Race kit and race plate stickers, made to order and personalised with your rider's details." />
   <meta property="og:type" content="website">
@@ -92,8 +90,6 @@
     .preview-banner { display: none; margin-top: 1.25rem; background: #3a2a00; border: 1px solid #e8c000; color: #f3d64a; font-size: 0.85rem; padding: 0.7rem 1rem; max-width: 560px; line-height: 1.5; }
     .preview-banner.show { display: block; }
     .preview-banner strong { font-family: var(--fd); letter-spacing: 0.1em; font-weight: 400; }
-    .kit-form-banner { background: #2a1010; border-color: var(--red); color: #f0c8c8; }
-    .kit-form-banner a { color: #fff; font-weight: 600; }
     .product-card:hover { background: var(--mid); }
     .product-img { background: #e8e8e8; display: flex; align-items: center; justify-content: center; padding: 1.5rem; height: 280px; }
     .product-img img { max-height: 100%; max-width: 100%; width: auto; object-fit: contain; display: block; margin: 0 auto; }
@@ -268,7 +264,7 @@
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#sessions">Sessions</a></li>
-      <li><a href="kit-order.html" class="nav-shop">Shop</a></li>
+      <li><a href="shop.html" class="nav-shop">Shop</a></li>
       <li><a href="index.html#join">Join</a></li>
       <li><a href="index.html#coaches">Coaches</a></li>
       <li><a href="index.html#riders">Riders</a></li>
@@ -283,8 +279,7 @@
     <div class="kicker">Official Kit</div>
     <h1>CLUB SHOP</h1>
     <p id="shop-header-desc">Official Merseyside BMX Club race kit and race plate stickers. The order window is currently closed. Get in touch if you have an urgent kit requirement.</p>
-    <div class="preview-banner kit-form-banner" id="kit-form-banner"><strong>NOVEMBER KIT ORDER IS OPEN</strong> &middot; Order this round of kit through the kit order form. Closes 14:00, Sunday 8th November. <a href="kit-order.html">Go to the kit order page →</a></div>
-    <div class="preview-banner" id="preview-banner"><strong>PREVIEW MODE</strong> &middot; Ordering is switched on for you only. The public still sees the shop as closed. Payments are real. Visit <code>shop.html?preview=0</code> to leave preview.</div>
+    <div class="preview-banner" id="preview-banner"><strong>PREVIEW MODE</strong> &middot; Closed order windows are open for you only. The public still sees them as closed. Payments are real. Visit <code>shop.html?preview=0</code> to leave preview.</div>
   </div>
 
   <div class="dd"></div>
@@ -481,7 +476,7 @@
       <div class="footer-col">
         <h4>More</h4>
         <ul>
-          <li><a href="kit-order.html">Kit Order</a></li>
+          <li><a href="shop.html">Club Shop</a></li>
           <li><a href="index.html#contact">Contact Us</a></li>
           <li><a href="sponsors.html">Our Sponsors</a></li>
           <li><a href="faq.html">FAQs</a></li>
@@ -615,11 +610,8 @@
     // ── ORDER WINDOWS ────────────────────────────────────
     // Set to true to open that order window to the public. Both product ranges always show;
     // a closed range shows "order window closed" instead of the Add to Order button.
-    const WINDOWS_OPEN = { stickers: false, kit: false };
-
-    // While the November kit order runs on the Google Form, kit cards point to the kit order page.
-    // Stops automatically at this time.
-    const KIT_FORM_OPEN_UNTIL = new Date('2026-11-08T14:00:00Z');
+    // While kit is closed, the six kit cards collapse into one "Club Kit" card.
+    const WINDOWS_OPEN = { stickers: true, kit: false };
 
     // ── CLUB KIT ─────────────────────────────────────────
     // Prices are display only and must match PRODUCTS in the bmx-checkout Worker.
@@ -661,16 +653,30 @@
     })();
     const canOrder = range => PREVIEW || WINDOWS_OPEN[range];
     const CAN_ORDER = canOrder('stickers') || canOrder('kit');
-    const KIT_FORM_OPEN = Date.now() < KIT_FORM_OPEN_UNTIL.getTime();
     const PAUSED = `<span style="font-family:var(--fd);font-size:0.8rem;letter-spacing:0.08em;color:#ccc;display:block;margin-top:0.5rem;">The order window is currently closed. We will announce when the next order window opens.</span>`;
-    const KIT_FORM_CTA = `<a href="kit-order.html" class="btn btn-red" style="display:block;">November Kit Order →</a>`;
 
     function money(n) { return '£' + (Number.isInteger(n) ? n : n.toFixed(2)); }
     function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c])); }
 
     function renderKitCards() {
-      const closedCta = KIT_FORM_OPEN ? KIT_FORM_CTA : PAUSED;
-      document.getElementById('kit-cards').innerHTML = Object.entries(KIT).map(([type, k]) => `
+      const el = document.getElementById('kit-cards');
+      if (!canOrder('kit')) {
+        // One summary card, placed after the stickers so the open range comes first
+        const from = Math.min(...Object.values(KIT).map(k => k.price));
+        el.innerHTML = `
+        <div class="product-card" style="order:1;">
+          <div class="product-img" style="background:#fff;"><img src="kit-bundle-pants.jpg" alt="Merseyside BMX club kit: jersey, race pants and gloves" loading="lazy" /></div>
+          <div class="product-info">
+            <div class="product-tag kit">Club Kit</div>
+            <div class="product-name">JERSEY, PANTS, SHORTS &amp; GLOVES</div>
+            <div class="product-price">From ${money(from)}</div>
+            <p class="product-desc">The club race kit, with the rider name printed on the back of the jersey. Buy items on their own or save £25 with a bundle.</p>
+            <div class="product-cta"><span style="font-family:var(--fd);font-size:0.8rem;letter-spacing:0.08em;color:#ccc;display:block;margin-top:0.5rem;">The kit order window is currently closed. We will announce when the next one opens.</span></div>
+          </div>
+        </div>`;
+        return;
+      }
+      el.innerHTML = Object.entries(KIT).map(([type, k]) => `
         <div class="product-card">
           <div class="product-img" style="background:#fff;"><img src="${k.img}" alt="Merseyside BMX ${esc(k.name)}" loading="lazy" /></div>
           <div class="product-info">
@@ -678,7 +684,7 @@
             <div class="product-name">${esc(k.title)}</div>
             <div class="product-price">${money(k.price)}${k.save ? `<span class="product-save">SAVE ${money(k.save)}</span>` : ''}</div>
             <p class="product-desc">${esc(k.desc)}</p>
-            <div class="product-cta">${canOrder('kit') ? `<button class="btn-red" onclick="openKit('${type}')">Add to Order →</button>` : closedCta}</div>
+            <div class="product-cta"><button class="btn-red" onclick="openKit('${type}')">Add to Order →</button></div>
           </div>
         </div>`).join('');
     }
@@ -686,7 +692,6 @@
     function initOrderButtons() {
       renderKitCards();
       document.getElementById('preview-banner').classList.toggle('show', PREVIEW && !(WINDOWS_OPEN.stickers && WINDOWS_OPEN.kit));
-      document.getElementById('kit-form-banner').classList.toggle('show', KIT_FORM_OPEN && !canOrder('kit'));
 
       // Racing year for the age note: from November, orders are for next season
       const now = new Date();

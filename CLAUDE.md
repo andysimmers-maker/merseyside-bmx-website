@@ -22,13 +22,13 @@ All CSS and JavaScript lives inline within each HTML file — there are no exter
 
 **Pages:**
 - `index.html` — single-page site with all main sections: Hero, About, Sessions, Shop teaser, Join, Coaches, Riders, Contact, Sponsors
-- `shop.html`: club shop (race plate stickers and club kit: jersey, pants, shorts, gloves and two bundles) with a client-side basket and SumUp checkout flow. Unlinked from the site and `noindex` while in development
-- `kit-order.html`: current kit order page (Google Form). All Shop links on the site, including the ones on `shop.html`, point here for now
+- `shop.html`: club shop (race plate stickers and club kit: jersey, pants, shorts, gloves and two bundles) with a client-side basket and SumUp checkout flow. Live: every Shop link on the site points here
+- `kit-order.html`: the closed November 2026 kit order page (Google Form). Kept because members were sent the link: it says the order is closed and points to the shop. `noindex`, not linked from the site
 - `sponsors.html`, `faq.html`, `conduct.html`, `welfare.html`, `new-rider-guide.html`, `kit-guide.html`, `coaching.html`, `privacy.html`: standalone informational pages
 
 **Shop controls (top of the `<script>` in `shop.html`):**
 - `WINDOWS_OPEN = { stickers, kit }`: opens each order window to the public. Both ranges always show; a closed one says the window is closed
-- `KIT_FORM_OPEN_UNTIL`: while the Google Form kit order runs, kit cards and a header notice point to `kit-order.html`; stops by itself at that time. `KIT` and `PARTS` define the kit cards, prices and sizes
+- `KIT` and `PARTS` define the kit cards, prices and sizes. While the kit window is closed, the kit cards collapse into one "Club Kit" card placed after the stickers
 - `shop.html?preview=1`: opens both windows in your own browser tab only (`?preview=0` to leave). Payments are real
 - `PRICES` is display only. The Worker's `PRODUCTS` list sets what is charged and which products can be ordered, so change both together
 

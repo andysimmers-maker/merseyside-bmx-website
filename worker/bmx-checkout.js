@@ -90,7 +90,7 @@ export default {
         const totalPence = items.reduce((s, i) => s + i.pence, 0);
         const ref        = 'BMX-' + Date.now() + '-' + crypto.randomUUID().slice(0, 6);
         const siteOrigin = isSiteOrigin(origin) ? origin : DEFAULT_ORIGIN;
-        const description = 'Merseyside BMX Club order: ' + items.length + (items.length > 1 ? ' items' : ' item');
+        const description = checkoutDescription(customer.name, items, ref);
 
         const res = await fetch('https://api.sumup.com/v0.1/checkouts', {
           method: 'POST',
@@ -240,6 +240,19 @@ function validateItem(raw) {
   }
 
   return { item: { type, name: product.name, pence: product.pence, fields } };
+}
+
+// Shown on the payment in the SumUp dashboard, e.g.
+// "Pat Smith · 2x Race Plate Stickers, Bundle: Jersey, Pants & Gloves · BMX-1730000000000-ab12cd".
+// Buyer name and what was bought only: rider names stay in the Sheet. The item list is
+// shortened to keep the whole line within about 120 characters; the name and ref always fit.
+function checkoutDescription(buyer, items, ref) {
+  const counts = new Map();
+  for (const i of items) counts.set(i.name, (counts.get(i.name) || 0) + 1);
+  let what = [...counts].map(([n, c]) => (c > 1 ? c + 'x ' : '') + n).join(', ');
+  const room = 120 - buyer.length - ref.length - 6;
+  if (what.length > room) what = what.slice(0, Math.max(room - 3, 0)).trimEnd() + '...';
+  return [buyer, what, ref].filter(Boolean).join(' · ');
 }
 
 // Trims, strips control characters and the · separator, and caps the length.
