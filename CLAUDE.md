@@ -24,6 +24,8 @@ All CSS and JavaScript lives inline within each HTML file — there are no exter
 - `index.html` — single-page site with all main sections: Hero, About, Sessions, Shop teaser, Join, Coaches, Riders, Contact, Sponsors
 - `shop.html`: club shop (race plate stickers and club kit: jersey, pants, shorts, gloves and two bundles) with a client-side basket and SumUp checkout flow. Live: every Shop link on the site points here
 - `kit-order.html`: the closed November 2026 kit order page (Google Form). Kept because members were sent the link: it says the order is closed and points to the shop. `noindex`, not linked from the site
+- `race-series.html`: archive of every club race series (current series first, then past series newest first). How to add a series is in an HTML comment at the top of the page body. Linked from every footer as "Race Series"
+- `frostbite.html` (Frostbite Series, winter 2026/27, ice theme, logos `frostbite-logo-wide.png` / `frostbite-logo.png`) and `autumn-cup.html` (Autumn Cup 2026, complete): one page per series. The current series gets a banner on the home page straight after the hero (`#frostbite-banner`); replace it when the next series is announced
 - `sponsors.html`, `faq.html`, `conduct.html`, `welfare.html`, `new-rider-guide.html`, `kit-guide.html`, `coaching.html`, `privacy.html`: standalone informational pages
 
 **Shop controls (top of the `<script>` in `shop.html`):**
