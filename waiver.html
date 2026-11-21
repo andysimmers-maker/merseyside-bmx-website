@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="color-scheme" content="only light" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.png" type="image/png">
+  <title>Rider Waiver, Merseyside BMX Club</title>
+  <meta name="description" content="Sign the Merseyside BMX Club rider waiver. Every rider needs a completed waiver before their first session." />
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rider Waiver, Merseyside BMX Club">
+  <meta property="og:description" content="Sign the rider waiver before your first session.">
+  <meta property="og:url" content="https://merseysidebmx.co.uk/waiver.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #d42b2b; --red2: #b52020;
+      --black: #0f0f0f; --dark: #191919; --mid: #2a2a2a;
+      --border: #383838; --text: #e2e2e2; --muted: #aaa;
+      --blue: #1a3d8f; --blue2: #0d2660;
+      --white: #f6f6f6; --offwhite: #ececec;
+      --fd: 'Bebas Neue', sans-serif; --fb: 'DM Sans', sans-serif;
+      --mw: 1060px; --pad: 5vw;
+    }
+    html { scroll-behavior: smooth; color-scheme: only light; }
+    body { font-family: var(--fb); font-size: 16px; line-height: 1.65; overflow-x: hidden; background: var(--black); color: var(--text); }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 60px; background: var(--black); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 var(--pad); gap: 1rem; }
+    .nav-stripe { width: 4px; height: 26px; flex-shrink: 0; background: linear-gradient(to bottom, var(--red) 50%, var(--blue) 50%); }
+    .nav-logo img { height: 48px; width: auto; display: block; }
+    .nav-back { margin-left: auto; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.08em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: #fff; }
+
+    /* PAGE HEADER (club colours) */
+    .page-header { padding: 6.5rem var(--pad) 2.75rem; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--blue2) 0%, var(--blue) 55%, #12286a 100%); border-bottom: 3px solid var(--red); }
+    .page-header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 88% 15%, rgba(255,255,255,0.10), transparent 55%); pointer-events: none; }
+    .page-header-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: #ff8a8a; margin-bottom: 0.4rem; }
+    .page-header h1 { font-family: var(--fd); font-size: clamp(2.8rem, 9vw, 4.6rem); line-height: 0.92; color: #fff; letter-spacing: 0.02em; text-shadow: 0 2px 14px rgba(0,0,0,0.3); }
+    .page-header p { font-size: 1rem; color: rgba(255,255,255,0.88); margin-top: 0.9rem; line-height: 1.7; }
+
+    .dd { height: 5px; background: linear-gradient(to right, var(--red) 25%, var(--black) 25% 50%, var(--blue) 50% 75%, #e0e0e0 75%); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* WAIVER STEPS */
+    .wv { padding: 2.5rem var(--pad) 4rem; background: var(--dark); }
+    .wv-inner { max-width: 720px; margin: 0 auto; }
+    .steps { list-style: none; display: grid; gap: 1rem; counter-reset: step; }
+    .step { position: relative; background: var(--mid); border: 1px solid var(--border); padding: 1.25rem 1.25rem 1.35rem 4.25rem; }
+    .step::before { counter-increment: step; content: counter(step); position: absolute; left: 1.1rem; top: 1.15rem; width: 2.2rem; height: 2.2rem; display: flex; align-items: center; justify-content: center; font-family: var(--fd); font-size: 1.35rem; color: #fff; background: var(--blue); }
+    .step.main { border-color: var(--red); box-shadow: 0 0 0 1px var(--red) inset; }
+    .step.main::before { background: var(--red); }
+    .step h2 { font-family: var(--fd); font-size: 1.6rem; letter-spacing: 0.03em; color: #fff; line-height: 1.05; }
+    .step p { font-size: 0.95rem; color: #bbb; margin-top: 0.35rem; }
+    .step p a { color: #fff; }
+    .btn-sign { display: block; margin-top: 1rem; padding: 1.05rem 1.25rem; background: var(--red); color: #fff; text-align: center; text-decoration: none; font-family: var(--fd); font-size: 1.6rem; letter-spacing: 0.06em; transition: background 0.2s; }
+    .btn-sign:hover, .btn-sign:focus-visible { background: var(--red2); }
+    .btn-sign:focus-visible, .btn-line:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+    .btn-line { display: inline-block; margin-top: 0.85rem; padding: 0.6rem 1rem; border: 1px solid #fff; color: #fff; text-decoration: none; font-family: var(--fd); font-size: 1.05rem; letter-spacing: 0.06em; transition: all 0.2s; }
+    .btn-line:hover { background: #fff; color: var(--black); }
+    .help { margin-top: 1.75rem; background: var(--mid); border-left: 3px solid var(--blue); padding: 1rem 1.25rem; font-size: 0.92rem; color: #ccc; line-height: 1.65; }
+    .help strong { color: #7a9de8; display: block; font-family: var(--fd); font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+    .help a { color: #fff; }
+
+    /* ══ FOOTER ══ */
+    footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
+    .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }
+    .footer-logo img { height: 44px; width: auto; display: block; margin-bottom: 0.75rem; }
+    .footer-stripe { display: flex; gap: 4px; margin-bottom: 0.75rem; }
+    .footer-stripe span { height: 3px; width: 22px; border-radius: 1px; }
+    .footer-brand p { font-size: 0.82rem; color: #aaa; line-height: 1.6; margin-bottom: 0.35rem; }
+    .footer-brand a { color: #aaa; text-decoration: none; font-size: 0.82rem; }
+    .footer-brand a:hover { color: var(--red); }
+    .footer-social { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+    .footer-social a { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--mid); border: 1px solid var(--border); color: var(--text); text-decoration: none; transition: all 0.2s; }
+    .footer-social a:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    .footer-col h4 { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.2em; color: var(--red); margin-bottom: 0.75rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.35rem; }
+    .footer-col ul li a { font-size: 0.82rem; color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { max-width: var(--mw); margin: 2rem auto 0; padding-top: 1.25rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; color: #888; }
+    @media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-stripe"></div>
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="Merseyside BMX Club" /></a>
+    <a href="index.html" class="nav-back">← Back to site</a>
+  </nav>
+
+  <!--
+    RIDER WAIVER PAGE (merseysidebmx.co.uk/waiver)
+    The printed QR code poster points HERE, not at the form, so posters never need reprinting.
+    If the waiver form changes, update the one link marked WAIVER FORM LINK below. The FAQ links here too.
+  -->
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="kicker">New riders</div>
+      <h1>RIDER WAIVER</h1>
+      <p>Every rider needs a completed waiver before taking part in any club session. For riders under 18, a parent or guardian fills it in.</p>
+    </div>
+  </div>
+
+  <div class="dd"></div>
+
+  <div class="wv">
+    <div class="wv-inner">
+      <ol class="steps">
+        <li class="step reveal">
+          <h2>Read our Code of Conduct</h2>
+          <p>Our Code of Conduct and Safeguarding policy explains what we expect from riders, parents and coaches.</p>
+          <a class="btn-line" href="policies.html">READ THE CODE OF CONDUCT →</a>
+        </li>
+        <li class="step main reveal">
+          <h2>Sign the waiver</h2>
+          <p>It takes a couple of minutes on your phone.</p>
+          <!-- WAIVER FORM LINK -->
+          <a class="btn-sign" href="https://forms.gle/a4K64z4J81WpgJLj6" target="_blank" rel="noopener">SIGN THE WAIVER →</a>
+        </li>
+      </ol>
+      <div class="help reveal">
+        <strong>QUESTIONS?</strong>
+        Speak to a coach at the session, or email <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>. New to the club? Our <a href="new-rider-guide.html">New Rider Guide</a> explains what to expect.
+      </div>
+    </div>
+  </div>
+
+  <div class="dd"></div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="logo.png" alt="Merseyside BMX Club" /></div>
+        <div class="footer-stripe">
+          <span style="background:var(--red);"></span>
+          <span style="background:rgba(255,255,255,0.2);"></span>
+          <span style="background:var(--blue);"></span>
+          <span style="background:var(--border);"></span>
+        </div>
+        <p>Volair Leisure Centre, Knowsley Leisure and Culture Park<br>Longview Drive, Huyton, L36 6EG</p>
+        <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank" title="Facebook" aria-label="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/merseysidebmxclub?igsh=MWo2d2ZvcGZtc2pvNA==" target="_blank" title="Instagram" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="mailto:merseysidebmx@gmail.com" title="Email" aria-label="Email">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>The Club</h4>
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#sessions">Club Sessions</a></li>
+          <li><a href="index.html#join">Join the Club</a></li>
+          <li><a href="index.html#coaches">Our Coaches</a></li>
+          <li><a href="index.html#riders">The Riders</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="shop.html">Club Shop</a></li>
+          <li><a href="race-series.html">Club Race Series</a></li>
+          <li><a href="regional-races.html">North Region Series</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+          <li><a href="sponsors.html">Our Sponsors</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+          <li><a href="kit-guide.html">Bikes &amp; Kit Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="policies.html">Conduct &amp; Safeguarding</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="https://www.britishcycling.org.uk/club/profile/6660/knowsley-bmx-club" target="_blank">British Cycling</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Merseyside BMX Club. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 3) * 0.1}s`;
+      obs.observe(el);
+    });
+  </script>
+</body>
+</html>
