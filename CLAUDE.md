@@ -21,7 +21,7 @@ There are no tests, no linting tools, and no CI beyond Cloudflare's deployment p
 All CSS and JavaScript lives inline within each HTML file — there are no external `.css` or `.js` files. Each page is self-contained.
 
 **Pages:**
-- `index.html` — single-page site with all main sections: Hero, About, Sessions, Shop teaser, Join, Coaches, Riders, Contact, Sponsors
+- `index.html` — single-page site with all main sections: Hero, About, Sessions, Shop teaser, Join, Coaches, Contact, Sponsors (the Riders section was removed in Nov 2026; NRT riders live on the NRT site, and a link to it may replace the section later)
 - `shop.html`: club shop (race plate stickers and club kit: jersey, pants, shorts, gloves and two bundles) with a client-side basket and SumUp checkout flow. Live: every Shop link on the site points here
 - `kit-order.html`: the closed November 2026 kit order page (Google Form). Kept because members were sent the link: it says the order is closed and points to the shop. `noindex`, not linked from the site
 - `race-series.html`: archive of every club race series (current series first, then past series newest first). How to add a series is in an HTML comment at the top of the page body. Linked from every footer as "Club Race Series"

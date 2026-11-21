@@ -35,13 +35,12 @@
     .nav-back { margin-left: auto; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.08em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .nav-back:hover { color: #fff; }
 
-    /* PAGE HEADER (club colours) */
-    .page-header { padding: 7rem var(--pad) 3.5rem; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--blue2) 0%, var(--blue) 55%, #12286a 100%); border-bottom: 3px solid var(--red); }
-    .page-header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 88% 15%, rgba(255,255,255,0.10), transparent 55%); pointer-events: none; }
-    .page-header-inner { position: relative; z-index: 1; max-width: var(--mw); margin: 0 auto; }
-    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: #ff8a8a; margin-bottom: 0.4rem; }
-    .page-header h1 { font-family: var(--fd); font-size: clamp(2.8rem, 6vw, 5.2rem); line-height: 0.92; color: #fff; letter-spacing: 0.02em; text-shadow: 0 2px 14px rgba(0,0,0,0.3); }
-    .page-header p { font-size: 0.95rem; color: rgba(255,255,255,0.85); max-width: 600px; margin-top: 0.9rem; line-height: 1.75; }
+    /* PAGE HEADER (same as the FAQ and New Rider Guide) */
+    .page-header { padding: 7rem var(--pad) 3.5rem; background: var(--dark); border-bottom: 3px solid var(--red); }
+    .page-header-inner { max-width: var(--mw); margin: 0 auto; }
+    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: var(--red); margin-bottom: 0.4rem; }
+    .page-header h1 { font-family: var(--fd); font-size: clamp(2.8rem, 6vw, 5.2rem); line-height: 0.92; color: #fff; letter-spacing: 0.02em; }
+    .page-header p { font-size: 0.95rem; color: #bbb; max-width: 600px; margin-top: 0.9rem; line-height: 1.75; }
 
     .dd { height: 5px; background: linear-gradient(to right, var(--red) 25%, var(--black) 25% 50%, var(--blue) 50% 75%, #e0e0e0 75%); }
 
@@ -259,7 +258,6 @@
           <li><a href="index.html#sessions">Club Sessions</a></li>
           <li><a href="index.html#join">Join the Club</a></li>
           <li><a href="index.html#coaches">Our Coaches</a></li>
-          <li><a href="index.html#riders">The Riders</a></li>
         </ul>
       </div>
       <div class="footer-col">
