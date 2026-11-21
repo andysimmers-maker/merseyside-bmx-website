@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="color-scheme" content="only light" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.png" type="image/png">
+  <title>Regional Race Calendar, Merseyside BMX Club</title>
+  <meta name="description" content="North Region BMX race calendar for Merseyside BMX Club riders: dates, venues, directions and how to race for the club's regional race team." />
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Regional Race Calendar, Merseyside BMX Club">
+  <meta property="og:description" content="North Region BMX race dates, venues and race team info for Merseyside riders.">
+  <meta property="og:url" content="https://merseysidebmx.co.uk/regional-races.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #d42b2b; --red2: #b52020;
+      --black: #0f0f0f; --dark: #191919; --mid: #2a2a2a;
+      --border: #383838; --text: #e2e2e2; --muted: #aaa;
+      --blue: #1a3d8f; --blue2: #0d2660;
+      --white: #f6f6f6; --offwhite: #ececec;
+      --fd: 'Bebas Neue', sans-serif; --fb: 'DM Sans', sans-serif;
+      --mw: 1060px; --pad: 5vw;
+    }
+    html { scroll-behavior: smooth; color-scheme: only light; }
+    body { font-family: var(--fb); font-size: 16px; line-height: 1.65; overflow-x: hidden; background: var(--black); color: var(--text); }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 60px; background: var(--black); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 var(--pad); gap: 1rem; }
+    .nav-stripe { width: 4px; height: 26px; flex-shrink: 0; background: linear-gradient(to bottom, var(--red) 50%, var(--blue) 50%); }
+    .nav-logo img { height: 48px; width: auto; display: block; }
+    .nav-back { margin-left: auto; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.08em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: #fff; }
+
+    /* PAGE HEADER */
+    .page-header { padding: 7rem var(--pad) 3.5rem; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--blue2) 0%, var(--blue) 55%, #12286a 100%); border-bottom: 3px solid var(--red); }
+    .page-header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 88% 15%, rgba(255,255,255,0.10), transparent 55%); pointer-events: none; }
+    .page-header-inner { position: relative; z-index: 1; max-width: var(--mw); margin: 0 auto; }
+    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: #ff8a8a; margin-bottom: 0.4rem; }
+    .page-header h1 { font-family: var(--fd); font-size: clamp(2.8rem, 6vw, 5.2rem); line-height: 0.92; color: #fff; letter-spacing: 0.02em; text-shadow: 0 2px 14px rgba(0,0,0,0.3); }
+    .page-header p { font-size: 0.95rem; color: rgba(255,255,255,0.85); max-width: 620px; margin-top: 0.9rem; line-height: 1.75; }
+
+    .dd { height: 5px; background: linear-gradient(to right, var(--red) 25%, var(--black) 25% 50%, var(--blue) 50% 75%, #e0e0e0 75%); }
+
+    .container { max-width: var(--mw); margin: 0 auto; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    .sec-num { font-family: var(--fd); font-size: 0.72rem; letter-spacing: 0.25em; color: var(--red); margin-bottom: 0.2rem; }
+    .sec-title { font-family: var(--fd); font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 0.95; letter-spacing: 0.02em; color: #fff; }
+    .sec-lead { font-size: 0.95rem; color: #aaa; line-height: 1.75; max-width: 680px; margin-top: 0.75rem; }
+    .rr-sec { padding: 4rem var(--pad); }
+    .rr-sec.dark { background: var(--dark); border-top: 1px solid var(--border); }
+    .rr-sec.black { background: var(--black); border-top: 1px solid var(--border); }
+
+    /* SEASON + ROUNDS */
+    .season { margin-top: 2rem; }
+    .season + .season { margin-top: 3rem; }
+    .season-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; border-bottom: 1px solid var(--border); padding-bottom: 0.6rem; margin-bottom: 1rem; }
+    .season-title { font-family: var(--fd); font-size: 1.6rem; letter-spacing: 0.04em; color: #fff; line-height: 1; }
+    .season-meta { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.16em; color: #888; }
+    .rounds { display: grid; gap: 0.75rem; }
+    .round { display: grid; grid-template-columns: 92px 1fr auto; background: var(--mid); border: 1px solid var(--border); border-left: 3px solid var(--blue); }
+    .round.next { border-left-color: var(--red); box-shadow: 0 0 0 1px var(--red) inset; }
+    .round.past { opacity: 0.62; }
+    .round.past:hover { opacity: 1; }
+    .round-date { background: var(--dark); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.9rem 0.5rem; text-align: center; border-right: 1px solid var(--border); }
+    .round-day { font-family: var(--fd); font-size: 2.3rem; line-height: 0.9; color: #fff; }
+    .round-month { font-family: var(--fd); font-size: 0.95rem; letter-spacing: 0.12em; color: var(--red); }
+    .round-wd { font-size: 0.72rem; color: #888; margin-top: 0.15rem; }
+    .round-body { padding: 0.95rem 1.25rem; min-width: 0; }
+    .round-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.3rem; align-items: center; }
+    .round-label { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.18em; color: #8fb0f0; }
+    .chip { font-family: var(--fd); font-size: 0.66rem; letter-spacing: 0.16em; padding: 0.15rem 0.55rem; border: 1px solid; line-height: 1.5; }
+    .chip.next { color: #fff; background: var(--red); border-color: var(--red); }
+    .chip.home { color: #fff; background: var(--blue); border-color: #3a64c8; }
+    .chip.past { color: #aaa; background: var(--dark); border-color: var(--border); }
+    .chip.tbc { color: #ffcf6e; border-color: rgba(255,207,110,0.45); background: rgba(255,207,110,0.08); }
+    .round-venue { font-family: var(--fd); font-size: 1.45rem; letter-spacing: 0.03em; color: #fff; line-height: 1.05; }
+    .round-addr { font-size: 0.84rem; color: #aaa; margin-top: 0.2rem; }
+    .round-notes { font-size: 0.84rem; color: #ccc; margin-top: 0.45rem; line-height: 1.6; }
+    .round-links { display: flex; flex-direction: column; justify-content: center; gap: 0.4rem; padding: 0.9rem 1.1rem; border-left: 1px solid var(--border); min-width: 150px; }
+    .rl { display: block; font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.1em; color: #ddd; text-decoration: none; border: 1px solid var(--border); padding: 0.35rem 0.75rem; text-align: center; transition: all 0.2s; white-space: nowrap; }
+    .rl:hover { border-color: #fff; color: #fff; }
+    .rl.primary { background: var(--red); border-color: var(--red); color: #fff; }
+    .rl.primary:hover { background: var(--red2); border-color: var(--red2); }
+    @media (max-width: 680px) {
+      .round { grid-template-columns: 74px 1fr; }
+      .round-day { font-size: 1.9rem; }
+      .round-links { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; border-left: none; border-top: 1px solid var(--border); padding: 0.7rem 1rem; min-width: 0; }
+      .rl { flex: 1 1 auto; }
+    }
+
+    .state { background: var(--mid); border: 1px solid var(--border); border-left: 3px solid var(--blue); padding: 1.1rem 1.25rem; font-size: 0.9rem; color: #ccc; line-height: 1.65; margin-top: 1.5rem; }
+    .state strong { display: block; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.1em; color: #fff; margin-bottom: 0.2rem; }
+    .state a { color: #8fb0f0; }
+    .loading { color: #888; font-size: 0.9rem; margin-top: 1.5rem; }
+    details.archive { margin-top: 3rem; }
+    details.archive summary { cursor: pointer; font-family: var(--fd); font-size: 1.05rem; letter-spacing: 0.08em; color: #aaa; list-style: none; padding: 0.7rem 0; border-top: 1px solid var(--border); }
+    details.archive summary::-webkit-details-marker { display: none; }
+    details.archive summary::before { content: '+ '; color: var(--red); }
+    details.archive[open] summary::before { content: '− '; }
+    details.archive .season { margin-top: 1rem; }
+
+    /* INFO CARDS */
+    .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.75rem; }
+    .info-card { background: var(--mid); border: 1px solid var(--border); border-top: 3px solid var(--red); padding: 1.4rem 1.5rem; }
+    .info-card:nth-child(even) { border-top-color: var(--blue); }
+    .info-card h3 { font-family: var(--fd); font-size: 1.35rem; letter-spacing: 0.04em; color: #fff; margin-bottom: 0.45rem; }
+    .info-card p { font-size: 0.88rem; color: #bbb; line-height: 1.7; }
+    .info-card p + p { margin-top: 0.6rem; }
+    .info-card a { color: #8fb0f0; }
+    @media (max-width: 760px) { .info-grid { grid-template-columns: 1fr; } }
+
+    .tip { background: var(--mid); border-left: 3px solid var(--blue); padding: 1rem 1.25rem; margin-top: 1.75rem; font-size: 0.88rem; color: #ccc; line-height: 1.65; }
+    .tip strong { color: #7a9de8; display: block; font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+    .tip a { color: #7a9de8; }
+
+    /* ══ FOOTER ══ */
+    footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
+    .footer-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem; }
+    .footer-logo img { height: 44px; width: auto; display: block; margin-bottom: 0.75rem; }
+    .footer-stripe { display: flex; gap: 4px; margin-bottom: 0.75rem; }
+    .footer-stripe span { height: 3px; width: 22px; border-radius: 1px; }
+    .footer-brand p { font-size: 0.82rem; color: #aaa; line-height: 1.6; margin-bottom: 0.35rem; }
+    .footer-brand a { color: #aaa; text-decoration: none; font-size: 0.82rem; }
+    .footer-brand a:hover { color: var(--red); }
+    .footer-social { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+    .footer-social a { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--mid); border: 1px solid var(--border); color: var(--text); text-decoration: none; transition: all 0.2s; }
+    .footer-social a:hover { background: var(--red); color: #fff; border-color: var(--red); }
+    .footer-col h4 { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.2em; color: var(--red); margin-bottom: 0.75rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.35rem; }
+    .footer-col ul li a { font-size: 0.82rem; color: #aaa; text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { max-width: var(--mw); margin: 2rem auto 0; padding-top: 1.25rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; color: #888; }
+    @media (max-width: 860px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-stripe"></div>
+    <a href="index.html" class="nav-logo"><img src="logo.png" alt="Merseyside BMX Club" /></a>
+    <a href="index.html" class="nav-back">← Back to site</a>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="kicker">🏁 Race Team</div>
+      <h1>REGIONAL RACE<br>CALENDAR</h1>
+      <p>Every North Region round, with venues, directions and club links. Regional racing is the next step up from our club series, and Merseyside riders race it together as a team.</p>
+    </div>
+  </div>
+
+  <div class="dd"></div>
+
+  <!--
+    WHERE THE DATES COME FROM
+    The calendar is NOT edited here. It loads northRegion.json from mybmxseason.co.uk
+    (file: mybmxseason-website/public/northRegion.json), so one edit updates both sites
+    once mybmxseason has been pushed and rebuilt.
+
+    Each round in that file looks like:
+      { "id": 10, "round": 1, "name": "Round 1", "date": "2027-03-14", "venue": "...", "location": "...",
+        "status": "confirmed", "clubId": "...", "website": "...", "facebook": "...", "instagram": "...",
+        "address": "..." }
+    - "id" must be unique forever (mybmxseason saves riders' rounds by it), so 2027 rounds start at 10, not 1.
+    - "status": "confirmed" or "tbc" (tbc shows a DATE TBC chip).
+    - Optional extras this page uses and mybmxseason ignores:
+        "entryUrl"  link to the British Cycling entry page (shows an ENTER button until race day)
+        "resultsUrl" link to results (shows a RESULTS button after race day)
+        "notes"     a line of race team info, e.g. "Team gazebo by the start hill"
+    Seasons are worked out from the year in each date. Club Champs ("round": null) shows as an event, not a round.
+  -->
+
+  <div class="rr-sec dark" id="calendar">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">NORTH REGION</div>
+        <h2 class="sec-title">RACE CALENDAR</h2>
+        <p class="sec-lead">Rounds are hosted by clubs across the North. Click through for directions and the host club's page, which is where you'll find on-the-day details like practice times.</p>
+      </div>
+      <div id="rr-calendar"><p class="loading">Loading race dates…</p></div>
+      <noscript><div class="state"><strong>DATES NEED JAVASCRIPT</strong>See the full calendar on <a href="https://mybmxseason.co.uk/">mybmxseason.co.uk</a>.</div></noscript>
+    </div>
+  </div>
+
+  <div class="rr-sec black" id="info">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-num">RACING REGIONALS</div>
+        <h2 class="sec-title">HOW IT WORKS</h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-card reveal">
+          <h3>WHO CAN RACE</h3>
+          <p>Riders racing regionals need British Cycling membership with a race licence. If you've raced our club series and you're comfortable on the gate, you're ready to give it a go.</p>
+          <p>Not sure if your rider is ready? Ask a coach at any session.</p>
+        </div>
+        <div class="info-card reveal">
+          <h3>ENTERING</h3>
+          <p>Entries are made online through British Cycling before each round. When entries open, an <strong>ENTER</strong> button appears on that round above. Entries close before race day, so don't leave it late.</p>
+        </div>
+        <div class="info-card reveal">
+          <h3>THE RACE TEAM</h3>
+          <p>Merseyside riders race regionals as a club team. Wear club kit, come and find the team at the venue, and cheer on your teammates.</p>
+          <p>Questions about the regional or national race teams go to our Race Team Manager at <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>.</p>
+        </div>
+        <div class="info-card reveal">
+          <h3>ON THE DAY</h3>
+          <p>Check the host club's page for practice times and venue rules. Bring a full-face helmet, long sleeves, long trousers and gloves, plus food, water and layers for a long day outside.</p>
+          <p>Need kit? See our <a href="kit-guide.html">Bikes &amp; Kit Guide</a> and the <a href="shop.html">Club Shop</a>.</p>
+        </div>
+      </div>
+      <div class="tip reveal">
+        <strong>NEW TO RACING?</strong>
+        Start with our <a href="race-series.html">club race series</a> and the <a href="new-rider-guide.html">New Rider Guide</a>. Regionals are the natural next step.
+      </div>
+    </div>
+  </div>
+
+  <div class="dd"></div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="logo.png" alt="Merseyside BMX Club" /></div>
+        <div class="footer-stripe">
+          <span style="background:var(--red);"></span>
+          <span style="background:rgba(255,255,255,0.2);"></span>
+          <span style="background:var(--blue);"></span>
+          <span style="background:var(--border);"></span>
+        </div>
+        <p>Volair Leisure Centre, Knowsley Leisure and Culture Park<br>Longview Drive, Huyton, L36 6EG</p>
+        <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/share/1BL3WZYWyJ/" target="_blank" title="Facebook" aria-label="Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/merseysidebmxclub?igsh=MWo2d2ZvcGZtc2pvNA==" target="_blank" title="Instagram" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="mailto:merseysidebmx@gmail.com" title="Email" aria-label="Email">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>The Club</h4>
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#sessions">Club Sessions</a></li>
+          <li><a href="index.html#join">Join the Club</a></li>
+          <li><a href="index.html#coaches">Our Coaches</a></li>
+          <li><a href="index.html#riders">The Riders</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="shop.html">Club Shop</a></li>
+          <li><a href="race-series.html">Race Series</a></li>
+          <li><a href="regional-races.html">Regional Races</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+          <li><a href="sponsors.html">Our Sponsors</a></li>
+          <li><a href="faq.html">FAQs</a></li>
+          <li><a href="kit-guide.html">Bikes &amp; Kit Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="policies.html">Conduct &amp; Safeguarding</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="https://www.britishcycling.org.uk/club/profile/6660/knowsley-bmx-club" target="_blank">British Cycling</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Merseyside BMX Club. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Shared with mybmxseason.co.uk: edit public/northRegion.json in the mybmxseason repo, not this page.
+    const DATA_URL = 'https://mybmxseason.co.uk/northRegion.json';
+    const HOME_CLUB = 'merseyside-bmx';
+
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
+    function watchReveals(root) {
+      root.querySelectorAll('.reveal:not(.watched)').forEach((el, i) => {
+        el.classList.add('watched');
+        el.style.transitionDelay = `${(i % 3) * 0.1}s`;
+        obs.observe(el);
+      });
+    }
+    watchReveals(document);
+
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const safeUrl = u => /^https?:\/\//i.test(u || '') ? esc(u) : '';
+    const parseDate = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+    const today = (() => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; })();
+
+    function roundHtml(r, isNext) {
+      const d = parseDate(r.date);
+      const past = d < today;
+      const tbc = r.status === 'tbc';
+      const label = r.round != null ? `ROUND ${r.round}` : esc(r.name || 'EVENT').toUpperCase();
+      const chips = [];
+      if (isNext) chips.push('<span class="chip next">NEXT RACE</span>');
+      if (r.clubId === HOME_CLUB) chips.push('<span class="chip home">HOME TRACK</span>');
+      if (tbc && !past) chips.push('<span class="chip tbc">DATE TBC</span>');
+      if (past) chips.push('<span class="chip past">RACED</span>');
+
+      const links = [];
+      if (!past && safeUrl(r.entryUrl)) links.push(`<a class="rl primary" href="${safeUrl(r.entryUrl)}" target="_blank" rel="noopener">ENTER →</a>`);
+      if (past && safeUrl(r.resultsUrl)) links.push(`<a class="rl primary" href="${safeUrl(r.resultsUrl)}" target="_blank" rel="noopener">RESULTS</a>`);
+      if (r.address) links.push(`<a class="rl" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.address)}" target="_blank" rel="noopener">DIRECTIONS</a>`);
+      if (safeUrl(r.website)) links.push(`<a class="rl" href="${safeUrl(r.website)}" target="_blank" rel="noopener">CLUB WEBSITE</a>`);
+      if (safeUrl(r.facebook)) links.push(`<a class="rl" href="${safeUrl(r.facebook)}" target="_blank" rel="noopener">FACEBOOK</a>`);
+
+      return `
+        <article class="round reveal${isNext ? ' next' : ''}${past ? ' past' : ''}">
+          <div class="round-date">
+            <div class="round-day">${d.getDate()}</div>
+            <div class="round-month">${d.toLocaleDateString('en-GB', { month: 'short' }).toUpperCase()}</div>
+            <div class="round-wd">${d.toLocaleDateString('en-GB', { weekday: 'short' })}</div>
+          </div>
+          <div class="round-body">
+            <div class="round-tags"><span class="round-label">${label}</span>${chips.join('')}</div>
+            <h3 class="round-venue">${esc(r.venue)}</h3>
+            <div class="round-addr">${esc(r.address || r.location || '')}</div>
+            ${r.notes ? `<p class="round-notes">${esc(r.notes)}</p>` : ''}
+          </div>
+          ${links.length ? `<div class="round-links">${links.join('')}</div>` : ''}
+        </article>`;
+    }
+
+    function seasonHtml(year, rounds, nextKey) {
+      const numbered = rounds.filter(r => r.round != null).length;
+      const extras = rounds.length - numbered;
+      const meta = `${numbered} ROUND${numbered === 1 ? '' : 'S'}${extras ? ` + ${extras === 1 ? 'CLUB CHAMPS' : extras + ' EVENTS'}` : ''}`;
+      return `
+        <section class="season">
+          <div class="season-head reveal">
+            <h3 class="season-title">NORTH REGION ${year}</h3>
+            <span class="season-meta">${meta}</span>
+          </div>
+          <div class="rounds">${rounds.map(r => roundHtml(r, r === nextKey)).join('')}</div>
+        </section>`;
+    }
+
+    function render(data) {
+      const el = document.getElementById('rr-calendar');
+      const rounds = data.filter(r => r && /^\d{4}-\d{2}-\d{2}$/.test(r.date))
+                         .sort((a, b) => a.date.localeCompare(b.date));
+      const byYear = new Map();
+      rounds.forEach(r => {
+        const y = r.date.slice(0, 4);
+        if (!byYear.has(y)) byYear.set(y, []);
+        byYear.get(y).push(r);
+      });
+      const years = [...byYear.keys()].sort().reverse();
+      const next = rounds.find(r => parseDate(r.date) >= today);
+      // Current season: the one with the next race in it, otherwise the latest season.
+      const currentYear = next ? next.date.slice(0, 4) : years[0];
+
+      let html = '';
+      if (!next) {
+        html += `<div class="state reveal"><strong>NEXT SEASON'S DATES COMING SOON</strong>
+          The ${esc(currentYear || '')} North Region series has finished. New dates go up here as soon as they're confirmed.
+          For the race team, contact <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>.</div>`;
+      }
+      if (currentYear) html += seasonHtml(currentYear, byYear.get(currentYear), next);
+      const older = years.filter(y => y !== currentYear);
+      if (older.length) {
+        html += `<details class="archive"><summary>PREVIOUS SEASONS</summary>${older.map(y => seasonHtml(y, byYear.get(y), null)).join('')}</details>`;
+      }
+      el.innerHTML = html || '<div class="state"><strong>NO DATES YET</strong>Regional dates will appear here once confirmed.</div>';
+      watchReveals(el);
+      // <details> content starts hidden, so show its rounds straight away rather than waiting on the observer.
+      el.querySelectorAll('details .reveal').forEach(r => r.classList.add('in'));
+    }
+
+    fetch(DATA_URL, { cache: 'no-cache' })
+      .then(res => { if (!res.ok) throw new Error(res.status); return res.json(); })
+      .then(render)
+      .catch(() => {
+        document.getElementById('rr-calendar').innerHTML = `<div class="state"><strong>COULDN'T LOAD THE CALENDAR</strong>
+          Please try again shortly, or see the North Region dates on <a href="https://mybmxseason.co.uk/" target="_blank" rel="noopener">mybmxseason.co.uk</a>.</div>`;
+      });
+  </script>
+</body>
+</html>
