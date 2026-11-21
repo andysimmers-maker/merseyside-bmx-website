@@ -36,10 +36,11 @@
     .nav-back:hover { color: #fff; }
 
     /* PAGE HEADER */
-    .page-header { padding: 7rem var(--pad) 3.5rem; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--blue2) 0%, var(--blue) 55%, #12286a 100%); border-bottom: 3px solid var(--red); }
-    .page-header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 88% 15%, rgba(255,255,255,0.10), transparent 55%); pointer-events: none; }
+    /* North Region colours are black and white, so this page doesn't use the club blue. */
+    .page-header { padding: 7rem var(--pad) 3.5rem; position: relative; overflow: hidden; background: #050505; border-bottom: 3px solid #fff; }
+    .page-header::before { content: ''; position: absolute; inset: 0; background-image: conic-gradient(#fff 25%, transparent 0 50%, #fff 0 75%, transparent 0); background-size: 34px 34px; opacity: 0.07; -webkit-mask-image: linear-gradient(to left, #000 0%, transparent 65%); mask-image: linear-gradient(to left, #000 0%, transparent 65%); pointer-events: none; }
     .page-header-inner { position: relative; z-index: 1; max-width: var(--mw); margin: 0 auto; }
-    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: #ff8a8a; margin-bottom: 0.4rem; }
+    .page-header .kicker { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.3em; color: #bbb; margin-bottom: 0.4rem; }
     .page-header h1 { font-family: var(--fd); font-size: clamp(2.8rem, 6vw, 5.2rem); line-height: 0.92; color: #fff; letter-spacing: 0.02em; text-shadow: 0 2px 14px rgba(0,0,0,0.3); }
     .page-header p { font-size: 0.95rem; color: rgba(255,255,255,0.85); max-width: 620px; margin-top: 0.9rem; line-height: 1.75; }
 
@@ -61,41 +62,45 @@
     .season-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; border-bottom: 1px solid var(--border); padding-bottom: 0.6rem; margin-bottom: 1rem; }
     .season-title { font-family: var(--fd); font-size: 1.6rem; letter-spacing: 0.04em; color: #fff; line-height: 1; }
     .season-meta { font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.16em; color: #888; }
-    .rounds { display: grid; gap: 0.75rem; }
-    .round { display: grid; grid-template-columns: 92px 1fr auto; background: var(--mid); border: 1px solid var(--border); border-left: 3px solid var(--blue); }
-    .round.next { border-left-color: var(--red); box-shadow: 0 0 0 1px var(--red) inset; }
-    .round.past { opacity: 0.62; }
-    .round.past:hover { opacity: 1; }
-    .round-date { background: var(--dark); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.9rem 0.5rem; text-align: center; border-right: 1px solid var(--border); }
-    .round-day { font-family: var(--fd); font-size: 2.3rem; line-height: 0.9; color: #fff; }
-    .round-month { font-family: var(--fd); font-size: 0.95rem; letter-spacing: 0.12em; color: var(--red); }
-    .round-wd { font-size: 0.72rem; color: #888; margin-top: 0.15rem; }
-    .round-body { padding: 0.95rem 1.25rem; min-width: 0; }
-    .round-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.3rem; align-items: center; }
-    .round-label { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.18em; color: #8fb0f0; }
+    /* ROUND CARDS: white date bar, venue, icon links, then the entry bar */
+    .rounds { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+    .round { display: flex; flex-direction: column; background: var(--mid); border: 1px solid var(--border); }
+    .round.next { border-color: #fff; box-shadow: 0 0 0 1px #fff; }
+    .round-bar { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.55rem 1rem; background: #fff; color: #050505; font-family: var(--fd); }
+    .round-date { font-size: 1.35rem; letter-spacing: 0.05em; line-height: 1; }
+    .round-label { font-size: 0.85rem; letter-spacing: 0.18em; }
+    .round.past .round-bar { background: #3a3a3a; color: #ddd; }
+    .round-main { flex: 1; padding: 1rem 1rem 0.9rem; }
+    .round-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.45rem; }
+    .round-tags:empty { display: none; }
     .chip { font-family: var(--fd); font-size: 0.66rem; letter-spacing: 0.16em; padding: 0.15rem 0.55rem; border: 1px solid; line-height: 1.5; }
-    .chip.next { color: #fff; background: var(--red); border-color: var(--red); }
-    .chip.home { color: #fff; background: var(--blue); border-color: #3a64c8; }
+    .chip.next { color: #050505; background: #fff; border-color: #fff; }
+    .chip.home { color: #fff; background: var(--red); border-color: var(--red); }
     .chip.past { color: #aaa; background: var(--dark); border-color: var(--border); }
-    .chip.tbc { color: #ffcf6e; border-color: rgba(255,207,110,0.45); background: rgba(255,207,110,0.08); }
-    .round-venue { font-family: var(--fd); font-size: 1.45rem; letter-spacing: 0.03em; color: #fff; line-height: 1.05; }
-    .round-addr { font-size: 0.84rem; color: #aaa; margin-top: 0.2rem; }
-    .round-notes { font-size: 0.84rem; color: #ccc; margin-top: 0.45rem; line-height: 1.6; }
-    .round-links { display: flex; flex-direction: column; justify-content: center; gap: 0.4rem; padding: 0.9rem 1.1rem; border-left: 1px solid var(--border); min-width: 150px; }
-    .rl { display: block; font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.1em; color: #ddd; text-decoration: none; border: 1px solid var(--border); padding: 0.35rem 0.75rem; text-align: center; transition: all 0.2s; white-space: nowrap; }
-    .rl:hover { border-color: #fff; color: #fff; }
-    .rl.primary { background: var(--red); border-color: var(--red); color: #fff; }
-    .rl.primary:hover { background: var(--red2); border-color: var(--red2); }
-    @media (max-width: 680px) {
-      .round { grid-template-columns: 74px 1fr; }
-      .round-day { font-size: 1.9rem; }
-      .round-links { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; border-left: none; border-top: 1px solid var(--border); padding: 0.7rem 1rem; min-width: 0; }
-      .rl { flex: 1 1 auto; }
-    }
+    .chip.tbc { color: #fff; border-color: #fff; border-style: dashed; }
+    .round-venue { font-family: var(--fd); font-size: 1.55rem; letter-spacing: 0.03em; color: #fff; line-height: 1.02; }
+    .round.past .round-venue { color: #bbb; }
+    .round-addr { font-size: 0.84rem; color: #aaa; margin-top: 0.25rem; }
+    .round-notes { font-size: 0.84rem; color: #ddd; margin-top: 0.5rem; line-height: 1.6; padding-left: 0.6rem; border-left: 2px solid #fff; }
+    .round-icons { display: flex; gap: 0.4rem; margin-top: 0.85rem; }
+    .ico { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 1px solid var(--border); background: var(--dark); color: #ddd; transition: all 0.2s; }
+    .ico:hover, .ico:focus-visible { background: #fff; color: #050505; border-color: #fff; }
+    .ico svg { width: 17px; height: 17px; }
+    .round-entry { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; padding: 0.8rem 1rem; border-top: 1px solid var(--border); background: var(--dark); }
+    .entry-label { font-family: var(--fd); font-size: 0.68rem; letter-spacing: 0.18em; color: #999; }
+    .entry-date { font-family: var(--fd); font-size: 1.1rem; letter-spacing: 0.05em; color: #fff; line-height: 1.1; }
+    .entry-date.closed { color: #999; }
+    .btn-enter { display: inline-block; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.1em; padding: 0.55rem 1rem; background: #fff; color: #050505; text-decoration: none; border: 1px solid #fff; transition: all 0.2s; white-space: nowrap; }
+    .btn-enter:hover, .btn-enter:focus-visible { background: transparent; color: #fff; }
+    .btn-enter.ghost { background: transparent; color: #fff; border-color: var(--border); }
+    .btn-enter.ghost:hover { border-color: #fff; }
+    .entry-pending { font-family: var(--fd); font-size: 0.78rem; letter-spacing: 0.1em; color: #999; }
+    .round.past .round-entry { background: transparent; }
+    .round.past .round-entry:empty { display: none; }
 
-    .state { background: var(--mid); border: 1px solid var(--border); border-left: 3px solid var(--blue); padding: 1.1rem 1.25rem; font-size: 0.9rem; color: #ccc; line-height: 1.65; margin-top: 1.5rem; }
+    .state { background: var(--mid); border: 1px solid var(--border); border-left: 3px solid #fff; padding: 1.1rem 1.25rem; font-size: 0.9rem; color: #ccc; line-height: 1.65; margin-top: 1.5rem; }
     .state strong { display: block; font-family: var(--fd); font-size: 0.9rem; letter-spacing: 0.1em; color: #fff; margin-bottom: 0.2rem; }
-    .state a { color: #8fb0f0; }
+    .state a { color: #fff; }
     .loading { color: #888; font-size: 0.9rem; margin-top: 1.5rem; }
     details.archive { margin-top: 3rem; }
     details.archive summary { cursor: pointer; font-family: var(--fd); font-size: 1.05rem; letter-spacing: 0.08em; color: #aaa; list-style: none; padding: 0.7rem 0; border-top: 1px solid var(--border); }
@@ -107,16 +112,16 @@
     /* INFO CARDS */
     .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.75rem; }
     .info-card { background: var(--mid); border: 1px solid var(--border); border-top: 3px solid var(--red); padding: 1.4rem 1.5rem; }
-    .info-card:nth-child(even) { border-top-color: var(--blue); }
+    .info-card:nth-child(even) { border-top-color: #fff; }
     .info-card h3 { font-family: var(--fd); font-size: 1.35rem; letter-spacing: 0.04em; color: #fff; margin-bottom: 0.45rem; }
     .info-card p { font-size: 0.88rem; color: #bbb; line-height: 1.7; }
     .info-card p + p { margin-top: 0.6rem; }
-    .info-card a { color: #8fb0f0; }
+    .info-card a { color: #fff; }
     @media (max-width: 760px) { .info-grid { grid-template-columns: 1fr; } }
 
-    .tip { background: var(--mid); border-left: 3px solid var(--blue); padding: 1rem 1.25rem; margin-top: 1.75rem; font-size: 0.88rem; color: #ccc; line-height: 1.65; }
-    .tip strong { color: #7a9de8; display: block; font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.1em; margin-bottom: 0.25rem; }
-    .tip a { color: #7a9de8; }
+    .tip { background: var(--mid); border-left: 3px solid #fff; padding: 1rem 1.25rem; margin-top: 1.75rem; font-size: 0.88rem; color: #ccc; line-height: 1.65; }
+    .tip strong { color: #fff; display: block; font-family: var(--fd); font-size: 0.8rem; letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+    .tip a { color: #fff; }
 
     /* ══ FOOTER ══ */
     footer { background: #080808; border-top: 1px solid var(--border); padding: 3rem var(--pad) 1.5rem; }
@@ -152,7 +157,7 @@
     <div class="page-header-inner">
       <div class="kicker">🏁 Race Team</div>
       <h1>NORTH REGION<br>SERIES</h1>
-      <p>Every North Region round, with venues, directions and club links. Regional racing is the next step up from our club series, and Merseyside riders race it together as a team.</p>
+      <p>Every North Region round, with entry deadlines, entry links and directions. Regional racing is the next step up from our club series, and Merseyside riders race it together as a team.</p>
     </div>
   </div>
 
@@ -171,9 +176,10 @@
     - "id" must be unique forever (mybmxseason saves riders' rounds by it), so 2027 rounds start at 10, not 1.
     - "status": "confirmed" or "tbc" (tbc shows a DATE TBC chip).
     - Optional extras this page uses and mybmxseason ignores:
-        "entryUrl"  link to the British Cycling entry page (shows an ENTER button until race day)
+        "entryUrl"   the round's British Cycling entry page (shows ENTER ON BRITISH CYCLING until entries close)
+        "entryClose" entry deadline, "YYYY-MM-DD" (shows ENTRIES CLOSE with the date; DEADLINE TBC if missing)
         "resultsUrl" link to results (shows a RESULTS button after race day)
-        "notes"     a line of race team info, e.g. "Team gazebo by the start hill"
+        "notes"      a line of race team info, e.g. "Team gazebo by the start hill"
     Seasons are worked out from the year in each date. Club Champs ("round": null) shows as an event, not a round.
   -->
 
@@ -182,7 +188,7 @@
       <div class="reveal">
         <div class="sec-num">NORTH REGION</div>
         <h2 class="sec-title">RACE CALENDAR</h2>
-        <p class="sec-lead">Rounds are hosted by clubs across the North. Click through for directions and the host club's page, which is where you'll find on-the-day details like practice times.</p>
+        <p class="sec-lead">Rounds are hosted by clubs across the North. Each round shows its entry deadline and a link to enter on British Cycling. Race team details for each round are shared with riders and families before race day.</p>
       </div>
       <div id="rr-calendar"><p class="loading">Loading race dates…</p></div>
       <noscript><div class="state"><strong>DATES NEED JAVASCRIPT</strong>See the full calendar on <a href="https://mybmxseason.co.uk/">mybmxseason.co.uk</a>.</div></noscript>
@@ -203,7 +209,7 @@
         </div>
         <div class="info-card reveal">
           <h3>ENTERING</h3>
-          <p>Entries are made online through British Cycling before each round. When entries open, an <strong>ENTER</strong> button appears on that round above. Entries close before race day, so don't leave it late.</p>
+          <p>Entries are made online through the British Cycling website. Each round above shows its entry deadline, and an <strong>ENTER ON BRITISH CYCLING</strong> button once entries open. Late entries aren't accepted, so don't leave it to the last minute.</p>
         </div>
         <div class="info-card reveal">
           <h3>THE RACE TEAM</h3>
@@ -212,7 +218,7 @@
         </div>
         <div class="info-card reveal">
           <h3>ON THE DAY</h3>
-          <p>Check the host club's page for practice times and venue rules. Bring a full-face helmet, long sleeves, long trousers and gloves, plus food, water and layers for a long day outside.</p>
+          <p>Bring a full-face helmet, long sleeves, long trousers and gloves, plus food, water and layers for a long day outside. Practice times and team details for each round come from the Race Team Manager before race day.</p>
           <p>Need kit? See our <a href="kit-guide.html">Bikes &amp; Kit Guide</a> and the <a href="shop.html">Club Shop</a>.</p>
         </div>
       </div>
@@ -307,6 +313,35 @@
     const parseDate = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
     const today = (() => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; })();
 
+    const ICONS = {
+      map: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+      web: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+      facebook: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
+      instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>',
+    };
+    const shortDate = d => d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace(',', '').toUpperCase();
+    const isIsoDate = s => /^\d{4}-\d{2}-\d{2}$/.test(s || '');
+
+    function iconLink(url, icon, label) {
+      return url ? `<a class="ico" href="${url}" target="_blank" rel="noopener" aria-label="${esc(label)}" title="${esc(label)}">${ICONS[icon]}</a>` : '';
+    }
+
+    function entryHtml(r, past) {
+      if (past) {
+        return safeUrl(r.resultsUrl) ? `<span class="entry-label">RACE DAY DONE</span><a class="btn-enter ghost" href="${safeUrl(r.resultsUrl)}" target="_blank" rel="noopener">RESULTS →</a>` : '';
+      }
+      const close = isIsoDate(r.entryClose) ? parseDate(r.entryClose) : null;
+      const closed = close && close < today;
+      const deadline = close
+        ? `<div><div class="entry-label">${closed ? 'ENTRIES CLOSED' : 'ENTRIES CLOSE'}</div><div class="entry-date${closed ? ' closed' : ''}">${shortDate(close)}</div></div>`
+        : `<div><div class="entry-label">ENTRIES CLOSE</div><div class="entry-date">DEADLINE TBC</div></div>`;
+      let action;
+      if (closed) action = '';
+      else if (safeUrl(r.entryUrl)) action = `<a class="btn-enter" href="${safeUrl(r.entryUrl)}" target="_blank" rel="noopener">ENTER ON BRITISH CYCLING →</a>`;
+      else action = '<span class="entry-pending">ENTRY LINK COMING SOON</span>';
+      return deadline + action;
+    }
+
     function roundHtml(r, isNext) {
       const d = parseDate(r.date);
       const past = d < today;
@@ -318,27 +353,28 @@
       if (tbc && !past) chips.push('<span class="chip tbc">DATE TBC</span>');
       if (past) chips.push('<span class="chip past">RACED</span>');
 
-      const links = [];
-      if (!past && safeUrl(r.entryUrl)) links.push(`<a class="rl primary" href="${safeUrl(r.entryUrl)}" target="_blank" rel="noopener">ENTER →</a>`);
-      if (past && safeUrl(r.resultsUrl)) links.push(`<a class="rl primary" href="${safeUrl(r.resultsUrl)}" target="_blank" rel="noopener">RESULTS</a>`);
-      if (r.address) links.push(`<a class="rl" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.address)}" target="_blank" rel="noopener">DIRECTIONS</a>`);
-      if (safeUrl(r.website)) links.push(`<a class="rl" href="${safeUrl(r.website)}" target="_blank" rel="noopener">CLUB WEBSITE</a>`);
-      if (safeUrl(r.facebook)) links.push(`<a class="rl" href="${safeUrl(r.facebook)}" target="_blank" rel="noopener">FACEBOOK</a>`);
+      const venue = r.venue || 'Venue TBC';
+      const icons = [
+        r.address ? iconLink(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.address)}`, 'map', `Directions to ${venue}`) : '',
+        iconLink(safeUrl(r.website), 'web', `${venue} website`),
+        iconLink(safeUrl(r.facebook), 'facebook', `${venue} on Facebook`),
+        iconLink(safeUrl(r.instagram), 'instagram', `${venue} on Instagram`),
+      ].join('');
 
       return `
         <article class="round reveal${isNext ? ' next' : ''}${past ? ' past' : ''}">
-          <div class="round-date">
-            <div class="round-day">${d.getDate()}</div>
-            <div class="round-month">${d.toLocaleDateString('en-GB', { month: 'short' }).toUpperCase()}</div>
-            <div class="round-wd">${d.toLocaleDateString('en-GB', { weekday: 'short' })}</div>
+          <div class="round-bar">
+            <time class="round-date" datetime="${esc(r.date)}">${shortDate(d)}</time>
+            <span class="round-label">${label}</span>
           </div>
-          <div class="round-body">
-            <div class="round-tags"><span class="round-label">${label}</span>${chips.join('')}</div>
-            <h3 class="round-venue">${esc(r.venue)}</h3>
+          <div class="round-main">
+            <div class="round-tags">${chips.join('')}</div>
+            <h3 class="round-venue">${esc(venue)}</h3>
             <div class="round-addr">${esc(r.address || r.location || '')}</div>
             ${r.notes ? `<p class="round-notes">${esc(r.notes)}</p>` : ''}
+            ${icons ? `<div class="round-icons">${icons}</div>` : ''}
           </div>
-          ${links.length ? `<div class="round-links">${links.join('')}</div>` : ''}
+          <div class="round-entry">${entryHtml(r, past)}</div>
         </article>`;
     }
 
@@ -378,7 +414,9 @@
           For the race team, contact <a href="mailto:merseysidebmx@gmail.com">merseysidebmx@gmail.com</a>.</div>`;
       }
       if (currentYear) html += seasonHtml(currentYear, byYear.get(currentYear), next);
-      const older = years.filter(y => y !== currentYear);
+      // Seasons after the current one (dates published early) show in full; only earlier ones fold away.
+      years.filter(y => y > currentYear).reverse().forEach(y => { html += seasonHtml(y, byYear.get(y), next); });
+      const older = years.filter(y => y < currentYear);
       if (older.length) {
         html += `<details class="archive"><summary>PREVIOUS SEASONS</summary>${older.map(y => seasonHtml(y, byYear.get(y), null)).join('')}</details>`;
       }
