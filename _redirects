@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects.
+# /nrt is printed as a QR code on the NRT cabin poster, so never remove it.
+# When the NRT site gets its own domain, change the address below (keep 302).
+/nrt   https://merseyside-nrt-website.andy-simmers.workers.dev/  302
+/nrt/  https://merseyside-nrt-website.andy-simmers.workers.dev/  302
